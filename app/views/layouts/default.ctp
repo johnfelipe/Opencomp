@@ -57,10 +57,47 @@
         </div>
        
         <ul id="tabnav">
-            <li class="tab1"><a href="http://localhost/opencomp/">Tableau de bord</a></li>
-            <li class="tab2"><a href="index2.html">Tab Two</a></li>
-            <li class="tab3"><a href="index3.html">Tab Three</a></li>
-            <li class="tab4"><a href="index4.html">Tab Four</a></li>        
+            <?php
+            if($this->params['controller'] == 'pages')
+                echo '<li class="active">';
+            else
+                echo '<li class="tab1">';
+           
+            echo $this->Html->link('Tableau de bord',array(
+                    'controller'=>'pages', 
+                    'action'=>'display', 
+                    'home')); ?>
+            </li>
+            <?php
+            if($this->params['controller'] == 'pupils')
+                echo '<li class="active">';
+            else
+                echo '<li class="tab2">';
+            ?>
+                <?php echo $this->Html->link('Élèves et classes',array(
+                    'controller'=>'pupils', 
+                    'action'=>'index')); ?>
+            </li>
+            <?php
+            if($this->params['controller'] == 'competences')
+                echo '<li class="active">';
+            else
+                echo '<li class="tab3">';
+            
+            echo $this->Html->link('Référentiel de compétences',array(
+                    'controller'=>'competences', 
+                    'action'=>'index')); ?>
+            </li>
+            <?php
+            if($this->params['controller'] == 'users')
+                echo '<li class="active">';
+            else
+                echo '<li class="tab4">';
+            
+            echo $this->Html->link('Utilisateurs',array(
+                    'controller'=>'users', 
+                    'action'=>'index')); ?>
+            </li>        
         </ul>
         
         <div id="corps" class="clearfix">

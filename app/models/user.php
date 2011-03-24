@@ -91,28 +91,38 @@ class User extends AppModel{
 
         function beforeSave()
         {        
-            // On indique que passwrd correspond en fait à password.
-            $this->data[$this->alias]['password'] = $this->data[$this->alias]['passwrd'];
-
-            // Si le champ password n'est pas vide, c'est qu'il a été modifié. 
-            // Alors, on l'encrypte.
-            if(!empty($this->data[$this->alias]['password']))
+            //Si on envoie un mot de passe hâché, inutile de le hâcher à nouveau
+            if(isset($this->data[$this->alias]['passhache']))
             {
-                $this->data[$this->alias]['password'] = Security::hash($this->data[$this->alias]['password'], null, true);
+                //On indique juste que le champs passhache correspond en réalité
+                //au champs password dans la base de données.
+                $this->data[$this->alias]['password'] = $this->data[$this->alias]['passhache'];                
             }
-
-            // Si on a récupéré un champ Id du formulaire, c'est que la personne
-            // est en train d'éditer un enregistrement.
-            if (isset($this->data[$this->alias]['id']))
+            else
             {
-                // Si le champ password n'a pas été complété, on fait en sorte 
-                // de récupérer le hash à partir de la BDD.
-                if (empty($this->data[$this->alias]['password']))
-                {
-                    $utilisateur = $this->findById($this->data[$this->alias]['id']);
-                    $passcrypte = $utilisateur[$this->alias]['password'];
+                // On indique que passwrd correspond en fait à password.
+                $this->data[$this->alias]['password'] = $this->data[$this->alias]['passwrd'];
 
-                    $this->data[$this->alias]['password'] = $passcrypte;
+                // Si le champ password n'est pas vide, c'est qu'il a été modifié. 
+                // Alors, on l'encrypte.
+                if(!empty($this->data[$this->alias]['password']))
+                {
+                    $this->data[$this->alias]['password'] = Security::hash($this->data[$this->alias]['password'], null, true);
+                }
+
+                // Si on a récupéré un champ Id du formulaire, c'est que la personne
+                // est en train d'éditer un enregistrement.
+                if (isset($this->data[$this->alias]['id']))
+                {
+                    // Si le champ password n'a pas été complété, on fait en sorte 
+                    // de récupérer le hash à partir de la BDD.
+                    if (empty($this->data[$this->alias]['password']))
+                    {
+                        $utilisateur = $this->findById($this->data[$this->alias]['id']);
+                        $passcrypte = $utilisateur[$this->alias]['password'];
+
+                        $this->data[$this->alias]['password'] = $passcrypte;
+                    }
                 }
             }
             

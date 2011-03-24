@@ -26,6 +26,13 @@
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, /app/views/pages/home.ctp)...
  */
+
+// Lancer l'application 
+    if (!file_exists(CONFIGS.'database.php')) 
+    {
+        Router::connect('/', array('plugin' => 'install' ,'controller' => 'install'));
+    }
+
 	Router::connect('/', array('controller' => 'users', 'action' => 'login'));
 /**
  * ...and connect the rest of 'Pages' controller's urls.

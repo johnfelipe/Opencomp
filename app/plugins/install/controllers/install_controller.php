@@ -6,7 +6,7 @@
  * @package 	Opencomp
  * @version 	1.0
  * @author  	Fahad Ibnay Heylaal <contact@fahad19.com>
- * @author		Jean Traullé <jtraulle@gmail.com>
+ * @author	Jean Traullé <jtraulle@gmail.com>
  * @license  	http://www.opensource.org/licenses/agpl-v3 The Affero GNU General Public License
  * @link     	http://www.opencomp.fr
  */

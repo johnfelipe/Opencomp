@@ -37,7 +37,7 @@ position:relative;
 li.error
 {
    list-style-type: none;
-   background-image: url("img/cross.png");
+   background-image: url("../img/cross.png");
    background-repeat: no-repeat;
    background-position: 1% 50%;
    padding-left: 30px;
@@ -46,7 +46,7 @@ li.error
 li.terminee
 {
    list-style-type: none;
-   background-image: url("img/tick.png");
+   background-image: url("../img/tick.png");
    background-repeat: no-repeat;
    background-position: 1% 50%;
    padding-left: 25px;
@@ -58,7 +58,7 @@ li.terminee
 li.encours
 {
    list-style-type: none;
-   background-image: url("img/arrow_right.png");
+   background-image: url("../img/arrow_right.png");
    background-repeat: no-repeat;
    background-position: 1% 50%;
    padding-left: 25px;
@@ -69,7 +69,7 @@ li.encours
 li.afaire
 {
    list-style-type: none;
-   background-image: url("img/bullet_black.png");
+   background-image: url("../img/bullet_black.png");
    background-repeat: no-repeat;
    background-position: 3% 50%;
    padding-left: 25px;
@@ -89,7 +89,7 @@ li.afaire
 li.ok
 {
    list-style-type: none;
-   background-image: url("img/tick.png");
+   background-image: url("../img/tick.png");
    background-repeat: no-repeat;
    background-position: 1% 50%;
    padding-left: 30px;
@@ -139,6 +139,16 @@ font-size: 1.3em;
 
 p.bottomform
 {
+	display:block;
+	text-align:right;
+	border-top:1px solid #cacaca;
+	margin-top:30px;
+	padding-top:10px;
+}
+
+.submit
+{
+	display:block;
 	text-align:right;
 	border-top:1px solid #cacaca;
 	margin-top:30px;
@@ -154,8 +164,37 @@ font-family: Verdana,Arial,sans-serif;
 font-size: 0.70em;
 }
 
+.message {
+	border-width: 1px;
+	border-style: solid;
+	padding-left: 30px;
+	margin-top: 0px;
+	background-repeat: no-repeat;
+	background-position: 15px 8px;
+	padding-top: 9px;
+	padding-bottom: 9px;
+    margin-bottom: 10px;
+}
 
+div.input.checkbox
+{
+	margin-top:15px;
+	text-align:center;
+}
 
+.succes {
+	border-color: #739f1d;
+	background-image: url(../img/tick.png);
+	background-color: #d4f684;
+	background-position: 7px 7px;
+}
+
+.erreur{
+	border-color: #C44509;
+	background-image: url(../img/cross.png);
+	background-color: #FDCEA4;
+	background-position: 7px 7px;
+}
 
 a.bouton
 {

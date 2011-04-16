@@ -11,7 +11,7 @@
                 echo $this->Html->css('opencomp.generic');
                 echo $this->Html->css('jquery-ui-1.8.10.custom');
 		echo $this->Html->css('http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin');
-                
+
                 echo $javascript->link('jquery');
                 echo $javascript->link('jquery-ui');
 	?>
@@ -31,13 +31,13 @@
 </head>
 <body>
     <div id="wrap">
-                
-        <div id="en_tete">                
+
+        <div id="en_tete">
 
                 <?php echo $html->image('logo.png', array('alt' => 'Opencomp logo', 'class' => 'logo_entete'))?>
 
                 <div class="titre_entete">Opencomp</div>
-                <div class="description_entete">Gestion de r&eacute;sultats scolaires par navigateur<span class ="description_entete" style="font-size:x-small">et bien plus encore !</span></div>
+                <div class="description_entete"><?php echo __('Gestion de résultats scolaires par navigateur',true); ?><span class ="description_entete" style="font-size:x-small"><?php echo __('et bien plus encore !',true); ?></span></div>
 
                 <div class="info-connect_entete">
 
@@ -47,25 +47,25 @@
                             $jour = array("Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi");
                             $mois = array("","Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre");
                             $datefr = $jour[date("w")]." ".date("d")." ".$mois[date("n")]." ".date("Y");
-                            return "Nous sommes le ". $datefr;
+                            return __('Nous sommes le ',true). $datefr;
                     }
                     ?>
                     <span style="float:right;"><?php echo datefr(); ?></span><br />
-                    <div style="padding-top:5px;">Bienvenue, <?php echo $session->read('Auth.User.prenom').' '. $session->read('Auth.User.nom') ?> | <?php echo $html->link('Se déconnecter',array('controller'=>'users', 'action'=>'logout')) ?></div>
+                    <div style="padding-top:5px;"><?php echo __('Bienvenue,',true); ?> <?php echo $session->read('Auth.User.prenom').' '. $session->read('Auth.User.nom') ?> | <?php echo $html->link(__('Se déconnecter',true),array('controller'=>'users', 'action'=>'logout')) ?></div>
                 </div>
 
         </div>
-       
+
         <ul id="tabnav">
             <?php
             if($this->params['controller'] == 'pages')
                 echo '<li class="active">';
             else
                 echo '<li class="tab1">';
-           
-            echo $this->Html->link('Tableau de bord',array(
-                    'controller'=>'pages', 
-                    'action'=>'display', 
+
+            echo $this->Html->link(__('Tableau de bord',true),array(
+                    'controller'=>'pages',
+                    'action'=>'display',
                     'home')); ?>
             </li>
             <?php
@@ -74,8 +74,8 @@
             else
                 echo '<li class="tab2">';
             ?>
-                <?php echo $this->Html->link('Élèves et classes',array(
-                    'controller'=>'pupils', 
+                <?php echo $this->Html->link(__('Élèves et classes',true),array(
+                    'controller'=>'pupils',
                     'action'=>'index')); ?>
             </li>
             <?php
@@ -83,9 +83,9 @@
                 echo '<li class="active">';
             else
                 echo '<li class="tab3">';
-            
-            echo $this->Html->link('Référentiel de compétences',array(
-                    'controller'=>'competences', 
+
+            echo $this->Html->link(__('Référentiel de compétences',true),array(
+                    'controller'=>'competences',
                     'action'=>'index')); ?>
             </li>
             <?php
@@ -93,13 +93,13 @@
                 echo '<li class="active">';
             else
                 echo '<li class="tab4">';
-            
-            echo $this->Html->link('Utilisateurs',array(
-                    'controller'=>'users', 
+
+            echo $this->Html->link(__('Utilisateurs',true),array(
+                    'controller'=>'users',
                     'action'=>'index')); ?>
-            </li>        
+            </li>
         </ul>
-        
+
         <div id="corps" class="clearfix">
 
             <h2><?php echo $title_for_layout; ?></h2>
@@ -107,17 +107,17 @@
             <?php echo $this->Session->flash(); ?>
             <?php echo $this->Session->flash('auth'); ?>
             <?php echo $content_for_layout; ?>
-            
-            
+
+
         </div>
     </div>
 
     <div id="footer">
-        <p style='position:relative; top:7px; left:10px;'>Opencomp est distribué sous licence <a href ='http://www.gnu.org/licenses/agpl-3.0-standalone.html'>GNU/AGPL</a>.<br /><a href='http://zolotaya.isa-geek.com/redmine/projects/gnote'>Forge du projet Opencomp</a> - <a href='http://zolotaya.isa-geek.com/redmine/projects/gnote/issues/new'>rapporter une anomalie</a></p><div style='float:right; position:relative; bottom:18px; right:10px;'>Page générée en $tps seconde requêtes exécutées.</div>
+        <p style='position:relative; top:7px; left:10px;'><?php echo __('Opencomp est distribué sous licence',true); ?> <a href ='http://www.gnu.org/licenses/agpl-3.0-standalone.html'>GNU/AGPL</a>.<br /><a href='http://zolotaya.isa-geek.com/redmine/projects/gnote'><?php echo __('Forge du projet Opencomp',true); ?></a> - <a href='http://zolotaya.isa-geek.com/redmine/projects/gnote/issues/new'><?php echo __('rapporter une anomalie',true) ?></a></p><div style='float:right; position:relative; bottom:18px; right:10px;'><?php echo __('Page générée en',true); ?> $tps <?php echo __('seconde requêtes exécutées.',true) ?></div>
 
     </div>
-    
-	<?php //echo $this->element('sql_dump'); 
+
+	<?php //echo $this->element('sql_dump');
               echo $this->Js->writeBuffer();   ?>
 </body>
 </html>

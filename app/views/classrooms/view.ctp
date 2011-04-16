@@ -1,16 +1,16 @@
 <div class="classrooms view">
 	<dl><?php $i = 0; $class = ' class="altrow"';?>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Id'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Identifiant'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $classroom['Classroom']['id']; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Title'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Titre'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $classroom['Classroom']['title']; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Date de création'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $classroom['Classroom']['created']; ?>
 			&nbsp;
@@ -22,12 +22,12 @@
 	<ul>
 		<li><?php echo $this->Html->link(__('Editer cette classe', true), array('action' => 'edit', $classroom['Classroom']['id'])); ?> </li>
 		<li><?php echo $this->Html->link(__('Supprimer cette classe', true), array('action' => 'delete', $classroom['Classroom']['id']), null, sprintf(__('Êtes vous sûr de vouloir supprimer # %s?', true), $classroom['Classroom']['id'])); ?> </li>
-        </ul>        
+        </ul>
         <h3><?php __('Gérer les classes'); ?></h3>
 	<ul>
                 <li><?php echo $this->Html->link(__('Lister les classes', true), array('action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('Nouvelle classe', true), array('action' => 'add')); ?> </li>
-        </ul>        
+        </ul>
         <h3><?php __('Gérer les élèves'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('Lister les élèves', true), array('controller' => 'pupils', 'action' => 'index')); ?> </li>

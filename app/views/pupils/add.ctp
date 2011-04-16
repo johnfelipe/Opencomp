@@ -1,7 +1,7 @@
 <div class="pupils form">
 <?php echo $this->Form->create('Pupil');?>
 	<fieldset>
- 		<legend><?php __('Add Pupil'); ?></legend>
+ 		<legend><?php __('Ajouter des élèves'); ?></legend>
 	<?php
 		echo $this->Form->input('nom');
 		echo $this->Form->input('prenom');
@@ -16,8 +16,8 @@
 	<h3><?php __('Actions'); ?></h3>
 	<ul>
 
-		<li><?php echo $this->Html->link(__('List Pupils', true), array('action' => 'index'));?></li>
-		<li><?php echo $this->Html->link(__('List Classrooms', true), array('controller' => 'classrooms', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Classroom', true), array('controller' => 'classrooms', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('Lister les élèves', true), array('action' => 'index'));?></li>
+		<li><?php echo $this->Html->link(__('Lister les classes', true), array('controller' => 'classrooms', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('Nouvelle classe', true), array('controller' => 'classrooms', 'action' => 'add')); ?> </li>
 	</ul>
 </div>

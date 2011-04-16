@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-04-16 10:46+0000\n"
+"POT-Creation-Date: 2011-04-16 12:43+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -14,46 +14,186 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: \controllers\classrooms_controller.php:18;38
-msgid "Invalid classroom"
+#: \controllers\classrooms_controller.php:20
+msgid "Liste des classes"
 msgstr ""
 
-#: \controllers\classrooms_controller.php:31;46
-msgid "The classroom could not be saved. Please, try again."
+#: \controllers\classrooms_controller.php:26
+msgid "Affichage d'une classe"
 msgstr ""
 
-#: \controllers\classrooms_controller.php:43
-msgid "The classroom has been saved"
+#: \controllers\classrooms_controller.php:29;56
+msgid "La classe n'existe pas."
 msgstr ""
 
-#: \controllers\classrooms_controller.php:56
-msgid "Invalid id for classroom"
+#: \controllers\classrooms_controller.php:42
+msgid "La classe a été supprimée."
 msgstr ""
 
-#: \controllers\classrooms_controller.php:60
-msgid "Classroom deleted"
+#: \controllers\classrooms_controller.php:47;68;89
+msgid "La classe n'a pas pu être supprimée."
 msgstr ""
 
 #: \controllers\classrooms_controller.php:63
-msgid "Classroom was not deleted"
+msgid "La classe a été sauvegardé."
 msgstr ""
 
-#: \controllers\competences_controller.php:40
+#: \controllers\classrooms_controller.php:81
+msgid "La classe que vous souhaitez supprimer n'existe pas."
+msgstr ""
+
+#: \controllers\classrooms_controller.php:86
+msgid "La classe a été supprimé"
+msgstr ""
+
+#: \controllers\competences_controller.php:23
+#: \views\layouts\default.ctp:87
+msgid "Référentiel de compétences"
+msgstr ""
+
+#: \controllers\competences_controller.php:50
 msgid "Ajouter"
 msgstr ""
 
-#: \controllers\competences_controller.php:43
+#: \controllers\competences_controller.php:54
 #: \views\elements\competences_index.ctp:13
 #: \views\users\index.ctp:14
 msgid "Modifier"
 msgstr ""
 
-#: \controllers\competences_controller.php:46
+#: \controllers\competences_controller.php:57
 msgid "une catégorie au référentiel de compétences"
 msgstr ""
 
-#: \controllers\pupils_controller.php:18
-msgid "Invalid pupil"
+#: \controllers\competences_controller.php:67
+#: \controllers\users_controller.php:96
+msgid "Corrigez les erreurs mentionnées"
+msgstr ""
+
+#: \controllers\competences_controller.php:73
+msgid "Données enregistrées."
+msgstr ""
+
+#: \controllers\competences_controller.php:90
+msgid "La catégorie ne peut pas aller plus haut."
+msgstr ""
+
+#: \controllers\competences_controller.php:94;113
+msgid "Ordre mis à jour."
+msgstr ""
+
+#: \controllers\competences_controller.php:109
+msgid "La catégorie ne peut pas aller plus bas."
+msgstr ""
+
+#: \controllers\competences_controller.php:130
+msgid "Enregistrement introuvable."
+msgstr ""
+
+#: \controllers\competences_controller.php:135
+msgid "Données supprimées."
+msgstr ""
+
+#: \controllers\items_controller.php:20
+msgid "Ajouter/Modifier une compétence"
+msgstr ""
+
+#: \controllers\items_controller.php:43
+msgid "Cet Item a été correctement ajouté"
+msgstr ""
+
+#: \controllers\items_controller.php:48
+msgid "Veuillez corriger les erreurs mentionnées."
+msgstr ""
+
+#: \controllers\pupils_controller.php:20
+msgid "Liste des élèves"
+msgstr ""
+
+#: \controllers\pupils_controller.php:26
+msgid "Consultation d'un élève"
+msgstr ""
+
+#: \controllers\pupils_controller.php:29
+msgid "L'élève n'existe pas"
+msgstr ""
+
+#: \controllers\pupils_controller.php:37
+msgid "Ajouter un élève"
+msgstr ""
+
+#: \controllers\pupils_controller.php:43
+msgid "L'élève a été ajouté"
+msgstr ""
+
+#: \controllers\pupils_controller.php:48
+msgid "L'élève n'a pas été ajouté en raison d'une erreur interne"
+msgstr ""
+
+#: \controllers\pupils_controller.php:57
+#: \views\pupils\edit.ctp:4
+msgid "Editer un élève"
+msgstr ""
+
+#: \controllers\pupils_controller.php:60
+msgid "L'élève que vous souhaitez éditer n'existe pas"
+msgstr ""
+
+#: \controllers\pupils_controller.php:68
+msgid "Vos modifications ont été sauvegardées"
+msgstr ""
+
+#: \controllers\pupils_controller.php:73
+msgid "Vos modifications n'ont pas été sauvegardées en raison d'une erreur interne"
+msgstr ""
+
+#: \controllers\pupils_controller.php:88
+msgid "Supprimer un élève"
+msgstr ""
+
+#: \controllers\pupils_controller.php:91
+msgid "L'élève que vous souhaitez supprimer n'existe pas"
+msgstr ""
+
+#: \controllers\pupils_controller.php:96
+msgid "L'élève a été correctement supprimé"
+msgstr ""
+
+#: \controllers\pupils_controller.php:100
+msgid "L'élève n'a pas pu être supprimé en raison d'une erreur interne"
+msgstr ""
+
+#: \controllers\users_controller.php:36
+msgid "Liste des utilisateurs"
+msgstr ""
+
+#: \controllers\users_controller.php:57;89
+msgid "Modifier un utilisateur"
+msgstr ""
+
+#: \controllers\users_controller.php:61;93
+#: \views\users\index.ctp:1
+msgid "Ajouter un utilisateur"
+msgstr ""
+
+#: \controllers\users_controller.php:74
+msgid "L'utilisateur a été édité avec succès !"
+msgstr ""
+
+#: \controllers\users_controller.php:79
+msgid "L'utilisateur a été ajouté avec succès !"
+msgstr ""
+
+#: \controllers\users_controller.php:108
+msgid "Vous devez conserver au moins un administrateur pour gérer les utilisateurs !"
+msgstr ""
+
+#: \controllers\users_controller.php:114
+msgid "L'utilisateur a été correctement supprimé !"
+msgstr ""
+
+#: \controllers\users_controller.php:122
+msgid "Authentification"
 msgstr ""
 
 #: \plugins\install\controllers\install_controller.php:88
@@ -113,6 +253,7 @@ msgid "Hôte"
 msgstr ""
 
 #: \plugins\install\views\install\database.ctp:29
+#: \views\classrooms\view.ctp:3
 #: \views\users\index.ctp:12
 #: \views\users\login.ctp:4
 msgid "Identifiant"
@@ -179,14 +320,14 @@ msgid "Opencomp | Installation "
 msgstr ""
 
 #: \views\classrooms\add.ctp:4
-msgid "Add Classroom"
+msgid "Ajouter une classe"
 msgstr ""
 
 #: \views\classrooms\add.ctp:9
 #: \views\classrooms\edit.ctp:10
-#: \views\pupils\add.ctp:13
 #: \views\pupils\edit.ctp:14
-msgid "Submit"
+#: \views\users\edit.ctp:39
+msgid "Envoyer"
 msgstr ""
 
 #: \views\classrooms\add.ctp:12
@@ -202,38 +343,37 @@ msgstr ""
 
 #: \views\classrooms\add.ctp:15
 #: \views\classrooms\edit.ctp:17
+#: \views\classrooms\view.ctp:28
 #: \views\pupils\add.ctp:20
 #: \views\pupils\edit.ctp:22
 #: \views\pupils\index.ctp:53
 #: \views\pupils\view.ctp:42
-msgid "List Classrooms"
+msgid "Lister les classes"
 msgstr ""
 
 #: \views\classrooms\add.ctp:16
 #: \views\classrooms\edit.ctp:18
 #: \views\classrooms\index.ctp:45
+#: \views\classrooms\view.ctp:33
 #: \views\pupils\add.ctp:19
 #: \views\pupils\edit.ctp:21
 #: \views\pupils\view.ctp:40
-msgid "List Pupils"
+msgid "Lister les élèves"
 msgstr ""
 
 #: \views\classrooms\add.ctp:17
-#: \views\classrooms\edit.ctp:19
 #: \views\classrooms\index.ctp:46
+#: \views\classrooms\view.ctp:34
 #: \views\pupils\index.ctp:52
 #: \views\pupils\view.ctp:41
-msgid "New Pupil"
+msgid "Nouvel élève"
 msgstr ""
 
 #: \views\classrooms\edit.ctp:4
-msgid "Edit Classroom"
+msgid "Editer une classe"
 msgstr ""
 
 #: \views\classrooms\edit.ctp:16
-#: \views\classrooms\index.ctp:22
-#: \views\pupils\edit.ctp:20
-#: \views\pupils\index.ctp:30
 msgid "Delete"
 msgstr ""
 
@@ -244,50 +384,61 @@ msgstr ""
 msgid "Are you sure you want to delete # %s?"
 msgstr ""
 
+#: \views\classrooms\edit.ctp:19
+msgid "Nouvel élèves"
+msgstr ""
+
 #: \views\classrooms\index.ctp:20
+#: \views\classrooms\view.ctp:62
 #: \views\pupils\index.ctp:28
-msgid "View"
+msgid "Voir"
 msgstr ""
 
 #: \views\classrooms\index.ctp:21
+#: \views\classrooms\view.ctp:63
 #: \views\pupils\index.ctp:29
-msgid "Edit"
+#: \views\users\index.ctp:28
+msgid "Editer"
+msgstr ""
+
+#: \views\classrooms\index.ctp:22
+#: \views\classrooms\view.ctp:64
+#: \views\elements\competences_index.ctp:17
+#: \views\pupils\edit.ctp:20
+#: \views\pupils\index.ctp:30
+#: \views\users\index.ctp:15;37
+msgid "Supprimer"
 msgstr ""
 
 #: \views\classrooms\index.ctp:30
-#: \views\pupils\index.ctp:38
-msgid "Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%"
+msgid "Page %page% sur %pages%, affichage de %current% enregistrements sur un total de %count%, démarrage à l'enregistrement %start%, fin à l'enregistrement %end%"
 msgstr ""
 
 #: \views\classrooms\index.ctp:35
 #: \views\pupils\index.ctp:43
-msgid "previous"
+msgid "précédent"
 msgstr ""
 
 #: \views\classrooms\index.ctp:38
 #: \views\pupils\index.ctp:46
-msgid "next"
+msgid "suivant"
 msgstr ""
 
 #: \views\classrooms\index.ctp:44
+#: \views\classrooms\view.ctp:29
 #: \views\pupils\add.ctp:21
 #: \views\pupils\edit.ctp:23
 #: \views\pupils\index.ctp:54
 #: \views\pupils\view.ctp:43
-msgid "New Classroom"
-msgstr ""
-
-#: \views\classrooms\view.ctp:3
-#: \views\pupils\view.ctp:3
-msgid "Id"
+msgid "Nouvelle classe"
 msgstr ""
 
 #: \views\classrooms\view.ctp:8
-msgid "Title"
+msgid "Titre"
 msgstr ""
 
 #: \views\classrooms\view.ctp:13
-msgid "Created"
+msgid "Date de création"
 msgstr ""
 
 #: \views\classrooms\view.ctp:21
@@ -310,24 +461,8 @@ msgstr ""
 msgid "Gérer les classes"
 msgstr ""
 
-#: \views\classrooms\view.ctp:28
-msgid "Lister les classes"
-msgstr ""
-
-#: \views\classrooms\view.ctp:29
-msgid "Nouvelle classe"
-msgstr ""
-
 #: \views\classrooms\view.ctp:31
 msgid "Gérer les élèves"
-msgstr ""
-
-#: \views\classrooms\view.ctp:33
-msgid "Lister les élèves"
-msgstr ""
-
-#: \views\classrooms\view.ctp:34
-msgid "Nouvel élève"
 msgstr ""
 
 #: \views\classrooms\view.ctp:39
@@ -335,6 +470,7 @@ msgid "Eleves appartenant à cette classe"
 msgstr ""
 
 #: \views\classrooms\view.ctp:42
+#: \views\pupils\index.ctp:4
 #: \views\pupils\view.ctp:8
 #: \views\users\edit.ctp:11
 #: \views\users\index.ctp:11
@@ -342,33 +478,22 @@ msgid "Nom"
 msgstr ""
 
 #: \views\classrooms\view.ctp:43
+#: \views\pupils\index.ctp:5
 #: \views\users\edit.ctp:10
 #: \views\users\index.ctp:10
 msgid "Prénom"
 msgstr ""
 
 #: \views\classrooms\view.ctp:44
+#: \views\pupils\index.ctp:6
 #: \views\pupils\view.ctp:18
 msgid "Sexe"
 msgstr ""
 
 #: \views\classrooms\view.ctp:45
+#: \views\pupils\index.ctp:7
+#: \views\pupils\view.ctp:23
 msgid "Date de naissance"
-msgstr ""
-
-#: \views\classrooms\view.ctp:62
-msgid "Voir"
-msgstr ""
-
-#: \views\classrooms\view.ctp:63
-#: \views\users\index.ctp:28
-msgid "Editer"
-msgstr ""
-
-#: \views\classrooms\view.ctp:64
-#: \views\elements\competences_index.ctp:17
-#: \views\users\index.ctp:15;37
-msgid "Supprimer"
 msgstr ""
 
 #: \views\competences\edit.ctp:11
@@ -472,8 +597,68 @@ msgstr ""
 msgid "Créez le fichier : %s"
 msgstr ""
 
+#: \views\items\edit.ctp:11
+msgid "Compétence rattachée à cet Item :"
+msgstr ""
+
+#: \views\items\edit.ctp:14
+msgid "Intitulé de l'Item :"
+msgstr ""
+
 #: \views\layouts\default.ctp:6
 msgid "Opencomp | "
+msgstr ""
+
+#: \views\layouts\default.ctp:40
+msgid "Gestion de résultats scolaires par navigateur"
+msgstr ""
+
+#: \views\layouts\default.ctp:40
+msgid "et bien plus encore !"
+msgstr ""
+
+#: \views\layouts\default.ctp:50
+msgid "Nous sommes le "
+msgstr ""
+
+#: \views\layouts\default.ctp:54
+msgid "Bienvenue,"
+msgstr ""
+
+#: \views\layouts\default.ctp:54
+msgid "Se déconnecter"
+msgstr ""
+
+#: \views\layouts\default.ctp:66
+msgid "Tableau de bord"
+msgstr ""
+
+#: \views\layouts\default.ctp:77
+msgid "Élèves et classes"
+msgstr ""
+
+#: \views\layouts\default.ctp:97
+msgid "Utilisateurs"
+msgstr ""
+
+#: \views\layouts\default.ctp:116
+msgid "Opencomp est distribué sous licence"
+msgstr ""
+
+#: \views\layouts\default.ctp:116
+msgid "Forge du projet Opencomp"
+msgstr ""
+
+#: \views\layouts\default.ctp:116
+msgid "rapporter une anomalie"
+msgstr ""
+
+#: \views\layouts\default.ctp:116
+msgid "Page générée en"
+msgstr ""
+
+#: \views\layouts\default.ctp:116
+msgid "seconde requêtes exécutées."
 msgstr ""
 
 #: \views\pages\home.ctp:23
@@ -545,32 +730,40 @@ msgid "Notre but premier est de fournir un framework structuré qui permette aux
 msgstr ""
 
 #: \views\pupils\add.ctp:4
-msgid "Add Pupil"
+msgid "Ajouter des élèves"
 msgstr ""
 
-#: \views\pupils\edit.ctp:4
-#: \views\pupils\view.ctp:38
-msgid "Edit Pupil"
+#: \views\pupils\add.ctp:13
+msgid "Submit"
+msgstr ""
+
+#: \views\pupils\index.ctp:8
+#: \views\pupils\view.ctp:28
+msgid "Classe"
 msgstr ""
 
 #: \views\pupils\index.ctp:30
 msgid "Êtes vous sûr(e) de vouloir supprimer l'élève %s ?\\nCette opération ne peut pas être annulée."
 msgstr ""
 
+#: \views\pupils\index.ctp:38
+msgid "Page %page% sur %pages%, affichage de %current% enregistrements sur %count% au total, démarrage à l'enregistrement %start%, fin à l'enregistrement %end%"
+msgstr ""
+
+#: \views\pupils\view.ctp:3
+msgid "Id"
+msgstr ""
+
 #: \views\pupils\view.ctp:13
 msgid "Prenom"
 msgstr ""
 
-#: \views\pupils\view.ctp:23
-msgid "Date-de-naissance"
-msgstr ""
-
-#: \views\pupils\view.ctp:28
-msgid "Classroom"
+#: \views\pupils\view.ctp:38
+msgid "Editer cet élève"
 msgstr ""
 
 #: \views\pupils\view.ctp:39
-msgid "Delete Pupil"
+msgid "Supprimer cet élève"
 msgstr ""
 
 #: \views\users\edit.ctp:12
@@ -600,14 +793,6 @@ msgstr ""
 
 #: \views\users\edit.ctp:36
 msgid "Statut"
-msgstr ""
-
-#: \views\users\edit.ctp:39
-msgid "Envoyer"
-msgstr ""
-
-#: \views\users\index.ctp:1
-msgid "Ajouter un utilisateur"
 msgstr ""
 
 #: \views\users\index.ctp:44

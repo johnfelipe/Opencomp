@@ -1,0 +1,624 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2011-04-16 10:46+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: \controllers\classrooms_controller.php:18;38
+msgid "Invalid classroom"
+msgstr ""
+
+#: \controllers\classrooms_controller.php:31;46
+msgid "The classroom could not be saved. Please, try again."
+msgstr ""
+
+#: \controllers\classrooms_controller.php:43
+msgid "The classroom has been saved"
+msgstr ""
+
+#: \controllers\classrooms_controller.php:56
+msgid "Invalid id for classroom"
+msgstr ""
+
+#: \controllers\classrooms_controller.php:60
+msgid "Classroom deleted"
+msgstr ""
+
+#: \controllers\classrooms_controller.php:63
+msgid "Classroom was not deleted"
+msgstr ""
+
+#: \controllers\competences_controller.php:40
+msgid "Ajouter"
+msgstr ""
+
+#: \controllers\competences_controller.php:43
+#: \views\elements\competences_index.ctp:13
+#: \views\users\index.ctp:14
+msgid "Modifier"
+msgstr ""
+
+#: \controllers\competences_controller.php:46
+msgid "une catégorie au référentiel de compétences"
+msgstr ""
+
+#: \controllers\pupils_controller.php:18
+msgid "Invalid pupil"
+msgstr ""
+
+#: \plugins\install\controllers\install_controller.php:88
+msgid "L'application a déjà été installée !"
+msgstr ""
+
+#: \plugins\install\controllers\install_controller.php:104
+msgid "Vous serez prêt en un clin d'oeil !"
+msgstr ""
+
+#: \plugins\install\controllers\install_controller.php:118
+msgid "Licence Utilisateur"
+msgstr ""
+
+#: \plugins\install\controllers\install_controller.php:144
+msgid "Configuration minimale requise"
+msgstr ""
+
+#: \plugins\install\controllers\install_controller.php:160
+msgid "Connexion à la base de données"
+msgstr ""
+
+#: \plugins\install\controllers\install_controller.php:180;227
+msgid "Impossible de se connecter à la base de données."
+msgstr ""
+
+#: \plugins\install\controllers\install_controller.php:204
+msgid "Impossible de créer le fichier de configuration database.php !"
+msgstr ""
+
+#: \plugins\install\controllers\install_controller.php:217
+msgid "Step 2: Build database"
+msgstr ""
+
+#: \plugins\install\controllers\install_controller.php:278
+msgid "Fin de l'installation"
+msgstr ""
+
+#: \plugins\install\controllers\install_controller.php:285
+msgid "Installation files deleted successfully."
+msgstr ""
+
+#: \plugins\install\controllers\install_controller.php:290
+msgid "Could not delete installation files."
+msgstr ""
+
+#: \plugins\install\views\install\data.ctp:5
+msgid "Click here to build your database"
+msgstr ""
+
+#: \plugins\install\views\install\database.ctp:12
+msgid "Moteur de base de donnée"
+msgstr ""
+
+#: \plugins\install\views\install\database.ctp:28
+msgid "Hôte"
+msgstr ""
+
+#: \plugins\install\views\install\database.ctp:29
+#: \views\users\index.ctp:12
+#: \views\users\login.ctp:4
+msgid "Identifiant"
+msgstr ""
+
+#: \plugins\install\views\install\database.ctp:30
+#: \views\users\login.ctp:5
+msgid "Mot de passe"
+msgstr ""
+
+#: \plugins\install\views\install\database.ctp:31
+msgid "Nom de la base"
+msgstr ""
+
+#: \plugins\install\views\install\database.ctp:32
+msgid "Port (ne pas compléter si inconnu)"
+msgstr ""
+
+#: \plugins\install\views\install\database.ctp:34
+#: \plugins\install\views\install\licence.ctp:699
+#: \plugins\install\views\install\requirement.ctp:52
+msgid "> Suivant"
+msgstr ""
+
+#: \plugins\install\views\install\finish.ctp:21
+msgid "Click here to delete installation files"
+msgstr ""
+
+#: \plugins\install\views\install\requirement.ctp:19
+msgid "Le répertoire tmp est inscriptible."
+msgstr ""
+
+#: \plugins\install\views\install\requirement.ctp:24
+#: \views\pages\home.ctp:38
+msgid "Votre répertoire tmp N'EST PAS inscriptible."
+msgstr ""
+
+#: \plugins\install\views\install\requirement.ctp:30
+msgid "Le répertoire config est inscriptible."
+msgstr ""
+
+#: \plugins\install\views\install\requirement.ctp:35
+msgid "Le répertoire config N'EST PAS inscriptible."
+msgstr ""
+
+#: \plugins\install\views\install\requirement.ctp:41
+msgid "Version de PHP %s > 5"
+msgstr ""
+
+#: \plugins\install\views\install\requirement.ctp:46
+msgid "Version de PHP %s < 5"
+msgstr ""
+
+#: \plugins\install\views\install\requirement.ctp:57
+msgid "L'installation ne peut pas continuer tant que les prérequis n'auront pas été satisfaits !"
+msgstr ""
+
+#: \plugins\install\views\install\requirement.ctp:59
+msgid "Vérifier de nouveau"
+msgstr ""
+
+#: \plugins\install\views\layouts\install.ctp:5
+msgid "Opencomp | Installation "
+msgstr ""
+
+#: \views\classrooms\add.ctp:4
+msgid "Add Classroom"
+msgstr ""
+
+#: \views\classrooms\add.ctp:9
+#: \views\classrooms\edit.ctp:10
+#: \views\pupils\add.ctp:13
+#: \views\pupils\edit.ctp:14
+msgid "Submit"
+msgstr ""
+
+#: \views\classrooms\add.ctp:12
+#: \views\classrooms\edit.ctp:13
+#: \views\classrooms\index.ctp:6;42
+#: \views\classrooms\view.ctp:46
+#: \views\pupils\add.ctp:16
+#: \views\pupils\edit.ctp:17
+#: \views\pupils\index.ctp:9;50
+#: \views\pupils\view.ctp:36
+msgid "Actions"
+msgstr ""
+
+#: \views\classrooms\add.ctp:15
+#: \views\classrooms\edit.ctp:17
+#: \views\pupils\add.ctp:20
+#: \views\pupils\edit.ctp:22
+#: \views\pupils\index.ctp:53
+#: \views\pupils\view.ctp:42
+msgid "List Classrooms"
+msgstr ""
+
+#: \views\classrooms\add.ctp:16
+#: \views\classrooms\edit.ctp:18
+#: \views\classrooms\index.ctp:45
+#: \views\pupils\add.ctp:19
+#: \views\pupils\edit.ctp:21
+#: \views\pupils\view.ctp:40
+msgid "List Pupils"
+msgstr ""
+
+#: \views\classrooms\add.ctp:17
+#: \views\classrooms\edit.ctp:19
+#: \views\classrooms\index.ctp:46
+#: \views\pupils\index.ctp:52
+#: \views\pupils\view.ctp:41
+msgid "New Pupil"
+msgstr ""
+
+#: \views\classrooms\edit.ctp:4
+msgid "Edit Classroom"
+msgstr ""
+
+#: \views\classrooms\edit.ctp:16
+#: \views\classrooms\index.ctp:22
+#: \views\pupils\edit.ctp:20
+#: \views\pupils\index.ctp:30
+msgid "Delete"
+msgstr ""
+
+#: \views\classrooms\edit.ctp:16
+#: \views\classrooms\index.ctp:22
+#: \views\pupils\edit.ctp:20
+#: \views\pupils\view.ctp:39
+msgid "Are you sure you want to delete # %s?"
+msgstr ""
+
+#: \views\classrooms\index.ctp:20
+#: \views\pupils\index.ctp:28
+msgid "View"
+msgstr ""
+
+#: \views\classrooms\index.ctp:21
+#: \views\pupils\index.ctp:29
+msgid "Edit"
+msgstr ""
+
+#: \views\classrooms\index.ctp:30
+#: \views\pupils\index.ctp:38
+msgid "Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%"
+msgstr ""
+
+#: \views\classrooms\index.ctp:35
+#: \views\pupils\index.ctp:43
+msgid "previous"
+msgstr ""
+
+#: \views\classrooms\index.ctp:38
+#: \views\pupils\index.ctp:46
+msgid "next"
+msgstr ""
+
+#: \views\classrooms\index.ctp:44
+#: \views\pupils\add.ctp:21
+#: \views\pupils\edit.ctp:23
+#: \views\pupils\index.ctp:54
+#: \views\pupils\view.ctp:43
+msgid "New Classroom"
+msgstr ""
+
+#: \views\classrooms\view.ctp:3
+#: \views\pupils\view.ctp:3
+msgid "Id"
+msgstr ""
+
+#: \views\classrooms\view.ctp:8
+msgid "Title"
+msgstr ""
+
+#: \views\classrooms\view.ctp:13
+msgid "Created"
+msgstr ""
+
+#: \views\classrooms\view.ctp:21
+msgid "Opérations sur cette classe"
+msgstr ""
+
+#: \views\classrooms\view.ctp:23
+msgid "Editer cette classe"
+msgstr ""
+
+#: \views\classrooms\view.ctp:24
+msgid "Supprimer cette classe"
+msgstr ""
+
+#: \views\classrooms\view.ctp:24;64
+msgid "Êtes vous sûr de vouloir supprimer # %s?"
+msgstr ""
+
+#: \views\classrooms\view.ctp:26
+msgid "Gérer les classes"
+msgstr ""
+
+#: \views\classrooms\view.ctp:28
+msgid "Lister les classes"
+msgstr ""
+
+#: \views\classrooms\view.ctp:29
+msgid "Nouvelle classe"
+msgstr ""
+
+#: \views\classrooms\view.ctp:31
+msgid "Gérer les élèves"
+msgstr ""
+
+#: \views\classrooms\view.ctp:33
+msgid "Lister les élèves"
+msgstr ""
+
+#: \views\classrooms\view.ctp:34
+msgid "Nouvel élève"
+msgstr ""
+
+#: \views\classrooms\view.ctp:39
+msgid "Eleves appartenant à cette classe"
+msgstr ""
+
+#: \views\classrooms\view.ctp:42
+#: \views\pupils\view.ctp:8
+#: \views\users\edit.ctp:11
+#: \views\users\index.ctp:11
+msgid "Nom"
+msgstr ""
+
+#: \views\classrooms\view.ctp:43
+#: \views\users\edit.ctp:10
+#: \views\users\index.ctp:10
+msgid "Prénom"
+msgstr ""
+
+#: \views\classrooms\view.ctp:44
+#: \views\pupils\view.ctp:18
+msgid "Sexe"
+msgstr ""
+
+#: \views\classrooms\view.ctp:45
+msgid "Date de naissance"
+msgstr ""
+
+#: \views\classrooms\view.ctp:62
+msgid "Voir"
+msgstr ""
+
+#: \views\classrooms\view.ctp:63
+#: \views\users\index.ctp:28
+msgid "Editer"
+msgstr ""
+
+#: \views\classrooms\view.ctp:64
+#: \views\elements\competences_index.ctp:17
+#: \views\users\index.ctp:15;37
+msgid "Supprimer"
+msgstr ""
+
+#: \views\competences\edit.ctp:11
+msgid "Catégorie parente"
+msgstr ""
+
+#: \views\competences\edit.ctp:11
+msgid "Racine"
+msgstr ""
+
+#: \views\competences\edit.ctp:12
+msgid "Nom de la catégorie"
+msgstr ""
+
+#: \views\competences\edit.ctp:16
+msgid "Valider"
+msgstr ""
+
+#: \views\competences\edit.ctp:18
+msgid "Afficher la liste des catégories"
+msgstr ""
+
+#: \views\elements\competences_index.ctp:7
+msgid "Monter"
+msgstr ""
+
+#: \views\elements\competences_index.ctp:10
+msgid "Descendre"
+msgstr ""
+
+#: \views\elements\competences_index.ctp:37
+msgid "Instructions officielles"
+msgstr ""
+
+#: \views\elements\competences_index.ctp:41
+msgid "Item établissement"
+msgstr ""
+
+#: \views\elements\competences_index.ctp:45
+msgid "Item enseignant"
+msgstr ""
+
+#: \views\elements\message_attention.ctp:2
+msgid "Avertissement"
+msgstr ""
+
+#: \views\elements\message_erreur.ctp:2
+#: \views\errors\missing_action.ctp:6;10
+#: \views\errors\missing_controller.ctp:5;9
+#: \views\errors\missing_model.ctp:5;9
+#: \views\errors\missing_table.ctp:5
+#: \views\errors\missing_view.ctp:5;9
+msgid "Erreur"
+msgstr ""
+
+#: \views\elements\message_information.ctp:2
+msgid "Information"
+msgstr ""
+
+#: \views\elements\message_succes.ctp:2
+msgid "Opération effectuée"
+msgstr ""
+
+#: \views\errors\missing_action.ctp:4
+msgid "Méthode manquante dans %s"
+msgstr ""
+
+#: \views\errors\missing_action.ctp:7
+msgid "L'action %1$s n'est pas définie dans le contrôleur %2$s"
+msgstr ""
+
+#: \views\errors\missing_action.ctp:11
+msgid "Créez %1$s%2$s dans le fichier : %3$s."
+msgstr ""
+
+#: \views\errors\missing_controller.ctp:6
+msgid "%s n'a pas été trouvé."
+msgstr ""
+
+#: \views\errors\missing_controller.ctp:10
+msgid "Créez la classe %s ci-dessous dans le fichier : %s"
+msgstr ""
+
+#: \views\errors\missing_model.ctp:6
+msgid "<em>%s</em> n'a pas été trouvé."
+msgstr ""
+
+#: \views\errors\missing_model.ctp:10
+msgid "Créez la classe %s dans le fichier : %s"
+msgstr ""
+
+#: \views\errors\missing_table.ctp:6
+msgid "La table %1$s pour le modèle %2$s n'a pas été trouvée dans la base de données."
+msgstr ""
+
+#: \views\errors\missing_view.ctp:6
+msgid "La vue pour %1$s%2$s n'a pas été trouvée."
+msgstr ""
+
+#: \views\errors\missing_view.ctp:10
+msgid "Créez le fichier : %s"
+msgstr ""
+
+#: \views\layouts\default.ctp:6
+msgid "Opencomp | "
+msgstr ""
+
+#: \views\pages\home.ctp:23
+msgid "Notes de version de CakePHP %s."
+msgstr ""
+
+#: \views\pages\home.ctp:24
+msgid "Lire les notes de version"
+msgstr ""
+
+#: \views\pages\home.ctp:34
+msgid "Votre répertoire tmp est inscriptible."
+msgstr ""
+
+#: \views\pages\home.ctp:48
+msgid "Le %s est utilisé pour la mise en cache. Pour changer la configuration, modifier APP/config/core.php "
+msgstr ""
+
+#: \views\pages\home.ctp:52
+msgid "Votre cache ne fonctionne PAS. Vérifier les paramètres dans APP/config/core.php"
+msgstr ""
+
+#: \views\pages\home.ctp:62
+msgid "Votre fichier de configuration de la base de donnée est présent."
+msgstr ""
+
+#: \views\pages\home.ctp:67
+msgid "Votre fichier de configuration de la base de donnée N'EST PAS présent."
+msgstr ""
+
+#: \views\pages\home.ctp:69
+msgid "Renommez config/database.php.default vers config/database.php"
+msgstr ""
+
+#: \views\pages\home.ctp:86
+msgid "Cake est en mesure de se connecter à la base de données."
+msgstr ""
+
+#: \views\pages\home.ctp:90
+msgid "Cake N'EST PAS en mesure de se connecter à la base de données."
+msgstr ""
+
+#: \views\pages\home.ctp:97
+msgid "Pour commencer"
+msgstr ""
+
+#: \views\pages\home.ctp:101
+msgid "Documentation CakePHP 1.3"
+msgstr ""
+
+#: \views\pages\home.ctp:110
+msgid "Le tutoriel du blog en 15 minutes"
+msgstr ""
+
+#: \views\pages\home.ctp:119
+msgid "[Grafikart.fr] Un ensemble de tutoriels concernant CakePHP réalisés par un développeur Freelance"
+msgstr ""
+
+#: \views\pages\home.ctp:126
+msgid "En savoir plus à propos de Cake"
+msgstr ""
+
+#: \views\pages\home.ctp:128
+msgid "CakePHP est un framework de développement rapide pour PHP qui fournit une architecture extensible pour développer, maintenir et déployer des applications. Utilisant des motifs de conception bien connus tels MVC et ORM ainsi que le paradigme \"convention plutôt que configuration\", CakePHP réduit les coûts de développement et aide les développeurs à écrire moins de code."
+msgstr ""
+
+#: \views\pages\home.ctp:131
+msgid "Notre but premier est de fournir un framework structuré qui permette aux utilisateurs PHP de tous niveaux de développer rapidement des applications web robustes, sans perdre en flexibilité."
+msgstr ""
+
+#: \views\pupils\add.ctp:4
+msgid "Add Pupil"
+msgstr ""
+
+#: \views\pupils\edit.ctp:4
+#: \views\pupils\view.ctp:38
+msgid "Edit Pupil"
+msgstr ""
+
+#: \views\pupils\index.ctp:30
+msgid "Êtes vous sûr(e) de vouloir supprimer l'élève %s ?\\nCette opération ne peut pas être annulée."
+msgstr ""
+
+#: \views\pupils\view.ctp:13
+msgid "Prenom"
+msgstr ""
+
+#: \views\pupils\view.ctp:23
+msgid "Date-de-naissance"
+msgstr ""
+
+#: \views\pupils\view.ctp:28
+msgid "Classroom"
+msgstr ""
+
+#: \views\pupils\view.ctp:39
+msgid "Delete Pupil"
+msgstr ""
+
+#: \views\users\edit.ctp:12
+#: \views\users\index.ctp:13
+msgid "Adresse de courriel"
+msgstr ""
+
+#: \views\users\edit.ctp:13
+msgid "Nom d'utilisateur"
+msgstr ""
+
+#: \views\users\edit.ctp:25
+msgid "Pour conserver le mot de passe actuel, laissez les champs blancs"
+msgstr ""
+
+#: \views\users\edit.ctp:32
+msgid "Confirmez le mot de passe"
+msgstr ""
+
+#: \views\users\edit.ctp:35
+msgid "Enseignant"
+msgstr ""
+
+#: \views\users\edit.ctp:35
+msgid "Administrateur"
+msgstr ""
+
+#: \views\users\edit.ctp:36
+msgid "Statut"
+msgstr ""
+
+#: \views\users\edit.ctp:39
+msgid "Envoyer"
+msgstr ""
+
+#: \views\users\index.ctp:1
+msgid "Ajouter un utilisateur"
+msgstr ""
+
+#: \views\users\index.ctp:44
+msgid "Êtes-vous sûr de vouloir supprimer"
+msgstr ""
+
+#: \views\users\login.ctp:6
+msgid "Se connecter"
+msgstr ""
+
+#: \webroot\test.php:88
+msgid "Debug setting does not allow access to this url."
+msgstr ""
+

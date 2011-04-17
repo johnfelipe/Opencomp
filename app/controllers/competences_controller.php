@@ -16,7 +16,10 @@ class CompetencesController extends AppController
 	var $helpers = array ('Tree');
 
 	/**
-	 * Liste des catégories
+	 * Méthode listant l'ensemble des compétences.
+	 *
+	 * @return void
+	 * @access public
 	 */
 	function index()
     {
@@ -41,9 +44,11 @@ class CompetencesController extends AppController
 	}
 
 	/**
-	 * Ajout/édition d'une catégorie
+	 * Méthode permettant d'ajouter/éditer une catégorie.
 	 *
-	 * @param int $id Id de la catégorie
+	 * @return void
+	 * @access public
+	 * @param int $id Id de la catégorie à éditer
 	 */
 	function edit($id = null)
 	{
@@ -79,9 +84,11 @@ class CompetencesController extends AppController
 	}
 
 	/**
-	 * Monte une catégorie d'un cran
+	 * Cette méthode monte une catégorie d'un cran.
 	 *
-	 * @param int $id Id de la catégorie
+	 * @return void
+	 * @access public
+	 * @param int $id Id de la catégorie à déplacer
 	 */
 	function move_up($id = null)
 	{
@@ -98,9 +105,11 @@ class CompetencesController extends AppController
 	}
 
 	/**
-	 * Descend une catégorie d'un cran
+	 * Cette méthode descend une catégorie d'un cran.
 	 *
-	 * @param int $id Id de la catégorie
+	 * @return void
+	 * @access public
+	 * @param int $id Id de la catégorie à déplacer
 	 */
 	function move_down($id = null)
 	{
@@ -117,9 +126,11 @@ class CompetencesController extends AppController
 	}
 
 	/**
-	 * Suppression d'une catégorie
+	 * Cette méthode supprime une catégorie.
 	 *
-	 * @param int $id Id de la catégorie
+	 * @return void
+	 * @access public
+	 * @param int $id Id de la catégorie à suprrimer
 	 */
 	function delete($id = null)
 	{

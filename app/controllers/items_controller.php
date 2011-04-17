@@ -12,9 +12,13 @@
  */
 class ItemsController extends AppController
 {
-    /**
-    * Cette fonction permet d'ajouter et d'éditer un item se rattachant à une compétence
-    */
+	/**
+	 * Méthode permettant d'ajouter/éditer un item rattaché à une compétence.
+	 *
+	 * @return void
+	 * @access public
+	 * @param int $id Id de l'item à éditer (le cas échéant).
+	 */
     function edit($id = null)
     {
         $this->set('title_for_layout', __('Ajouter/Modifier une compétence',true));

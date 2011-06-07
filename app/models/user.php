@@ -2,7 +2,7 @@
 
 class User extends AppModel{
 	
-	var $name="User";
+	
 
 	var $validate = array(
 		'username' => array(
@@ -38,17 +38,18 @@ class User extends AppModel{
                 ),
                 'passwrd2' => array(
                         'rule' => 'checkPasswords',
+                        
                         'message' => 'Les mots de passe ne correspondent pas !'
                 ),
             
-                'prenom' => array(
+                'first_name' => array(
                         'rule' => array('minLength', 2),
                         'required' => true,
                         'allowEmpty' => false,
                         'message' => 'Vous devez compléter ce champs !'
                 ),
             
-                'nom' => array(
+                'name' => array(
                         'rule' => array('minLength', 2),
                         'required' => true,
                         'allowEmpty' => false,
@@ -118,8 +119,8 @@ class User extends AppModel{
                     // de récupérer le hash à partir de la BDD.
                     if (empty($this->data[$this->alias]['password']))
                     {
-                        $utilisateur = $this->findById($this->data[$this->alias]['id']);
-                        $passcrypte = $utilisateur[$this->alias]['password'];
+                        $user = $this->findById($this->data[$this->alias]['id']);
+                        $passcrypte = $user[$this->alias]['password'];
 
                         $this->data[$this->alias]['password'] = $passcrypte;
                     }

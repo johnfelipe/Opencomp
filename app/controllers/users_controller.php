@@ -12,14 +12,14 @@
  */
 class UsersController extends AppController{
 
-    var $name = 'Users';
+    
 
     var $paginate = array(
         'User' => array(
             'limit' => 10,
             'order' => array(
-                'User.nom' => 'Asc',
-                'User.prenom' => 'Asc'
+                'User.name' => 'Asc',
+                'User.first_name' => 'Asc'
             )
         )
     );
@@ -102,7 +102,7 @@ class UsersController extends AppController{
     {
         $utilisateur = $this->User->findById($id);
         $nb_admin = $this->User->find('count', array('conditions' => array('User.role' => 'admin')));
-
+        
         if ($utilisateur['User']['role'] == 'admin' && $nb_admin == 1)
         {
             $this->Session->setFlash(__('Vous devez conserver au moins un administrateur pour gérer les utilisateurs !',true), 'message_erreur');

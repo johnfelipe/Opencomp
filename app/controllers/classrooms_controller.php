@@ -13,7 +13,7 @@
 class ClassroomsController extends AppController
 {
 
-	var $name = 'Classrooms';
+	
 
 	/**
 	 * Méthode listant l'ensemble des classes existantes.

@@ -3,14 +3,14 @@
 	<fieldset>
  		<legend><?php __('Ajouter des élèves'); ?></legend>
 	<?php
-		echo $this->Form->input('nom');
-		echo $this->Form->input('prenom');
-		echo $this->Form->input('sexe');
-		echo $this->Form->input('date-de-naissance');
+		echo $this->Form->input('Nom');
+		echo $this->Form->input('Prénom');
+		echo $this->Form->input('Sexe');
+		echo $this->Form->input('Date de naissance');
 		echo $this->Form->input('classroom_id');
 	?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit', true));?>
+<?php echo $this->Form->end(__('Enregistrer', true));?>
 </div>
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>

@@ -7,8 +7,8 @@ echo '<p>'.$paginator->numbers().'</p>';
 echo '<table>';
 
 echo $html->tableHeaders(array(
-    $paginator->sort(__('Prénom',true), 'User.prenom'),
-    $paginator->sort(__('Nom',true), 'User.nom'),
+    $paginator->sort(__('Prénom',true), 'User.first_name'),
+    $paginator->sort(__('Nom',true), 'User.name'),
     $paginator->sort(__('Identifiant',true), 'User.username'),
     $paginator->sort(__('Adresse de courriel',true), 'User.email'),
     __('Modifier',true),
@@ -16,8 +16,8 @@ echo $html->tableHeaders(array(
 
 foreach ($listedesutilisateurs as $lstusr){
     
-    $prenom = $lstusr['User']['prenom'];
-    $nom = $lstusr['User']['nom'];
+    $prenom = $lstusr['User']['first_name'];
+    $nom = $lstusr['User']['name'];
     $username = $lstusr['User']['username'];
     $email = $lstusr['User']['email'];
     $id = $lstusr['User']['id'];

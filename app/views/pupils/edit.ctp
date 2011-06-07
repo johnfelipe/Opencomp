@@ -4,10 +4,10 @@
  		<legend><?php __('Editer un élève'); ?></legend>
 	<?php
 		echo $this->Form->input('id');
-		echo $this->Form->input('nom');
-		echo $this->Form->input('prenom');
+		echo $this->Form->input('name');
+		echo $this->Form->input('first_name');
 		echo $this->Form->input('sexe');
-		echo $this->Form->input('date-de-naissance');
+		echo $this->Form->input('birthday');
 		echo $this->Form->input('classroom_id');
 	?>
 	</fieldset>

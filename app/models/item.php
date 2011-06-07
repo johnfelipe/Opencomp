@@ -1,7 +1,7 @@
 <?php
 class Item extends AppModel {
     
-    var $name="Item";
+    
     var $belongsTo = array('Competence');
     
     //Avec ces deux règles de validation,
@@ -13,7 +13,7 @@ class Item extends AppModel {
                     'allowEmpty' => false,
                     'message' => 'Séléctionnez la compétence à laquelle se rattache cet item'
                 ),
-                'intitule' => array(
+                'title' => array(
                     'rule' => array('notEmpty'),
                     'required' => true,
                     'allowEmpty' => false,

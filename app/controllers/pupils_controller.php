@@ -12,7 +12,7 @@
  */
 class PupilsController extends AppController {
 
-	var $name = 'Pupils';
+	
 
 	/**
 	 * Méthode listant l'ensemble des élèves existantes.
@@ -72,6 +72,8 @@ class PupilsController extends AppController {
 	 */
 	function add()
 	{
+            
+                $this->set('title_for_layout', __('Création d\'un élève', true));
 		//Les données du formulaires ont été envoyées, on vérifie les règles
 		//de validation et, si elles sont satisfaites, on enregistre en BDD.
 		if (!empty($this->data))

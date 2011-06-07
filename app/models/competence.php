@@ -2,14 +2,14 @@
 
 class Competence extends AppModel
 {
-	var $displayField = 'libelle';
+	var $displayField = 'title';
 
 	var $hasMany = array('Item');        
 
 	var $actsAs = array('Tree');
 
 	var $validate = array(
-		'libelle' => array(
+		'title' => array(
 			'rule'       => '/\S+/',
 			'required'   => true,
 			'allowEmpty' => false,

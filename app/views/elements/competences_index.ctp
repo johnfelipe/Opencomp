@@ -2,7 +2,7 @@
 
 $id = $data['Competence']['id'];
 ?>
-<?php e($data['Competence']['libelle']); ?> 
+<?php e($data['Competence']['title']); ?> 
 <?php e($html->image('up.png', array(
             'alt' => __('Monter',true),
             'url' => array('action' => 'move_up',$id)))); ?>&nbsp;

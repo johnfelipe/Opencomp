@@ -9,7 +9,7 @@ e($form->input('id'));
 
 	<?php
 	e($form->input('parent_id', array('label' => __('Catégorie parente',true), 'empty' => __('Racine',true))));
-	e($form->input('libelle', array('label' => __('Nom de la catégorie',true), 'maxLength' => '')));
+	e($form->input('title', array('label' => __('Nom de la catégorie',true), 'maxLength' => '')));
 	?>
 </fieldset>
 

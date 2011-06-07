@@ -1,11 +1,10 @@
 <div class="pupils index">
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-			<th><?php echo $this->Paginator->sort(__('Nom',true),'nom');?></th>
-			<th><?php echo $this->Paginator->sort(__('Prénom',true),'prenom');?></th>
+			<th><?php echo $this->Paginator->sort(__('Nom',true),'name');?></th>
+			<th><?php echo $this->Paginator->sort(__('Prénom',true),'first_name');?></th>
 			<th><?php echo $this->Paginator->sort(__('Sexe',true),'sexe');?></th>
-			<th><?php echo $this->Paginator->sort(__('Date de naissance',true),'date-de-naissance');?></th>
-			<th><?php echo $this->Paginator->sort(__('Classe',true),'classroom_id');?></th>
+			<th><?php echo $this->Paginator->sort(__('Date de naissance',true),'birthday');?></th>
 			<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -17,17 +16,14 @@
 		}
 	?>
 	<tr<?php echo $class;?>>
-		<td><?php echo $pupil['Pupil']['nom']; ?>&nbsp;</td>
-		<td><?php echo $pupil['Pupil']['prenom']; ?>&nbsp;</td>
-		<td><?php echo $pupil['Pupil']['sexe']; ?>&nbsp;</td>
-		<td><?php echo $pupil['Pupil']['date-de-naissance']; ?>&nbsp;</td>
-		<td>
-			<?php echo $this->Html->link($pupil['Classroom']['title'], array('controller' => 'classrooms', 'action' => 'view', $pupil['Classroom']['id'])); ?>
-		</td>
+		<td><?php echo $pupil['Pupil']['name']; ?>&nbsp;</td>
+		<td><?php echo $pupil['Pupil']['first_name']; ?>&nbsp;</td>
+		<td><?php echo $pupil['Pupil']['sex']; ?>&nbsp;</td>
+		<td><?php echo $pupil['Pupil']['birthday']; ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('Voir', true), array('action' => 'view', $pupil['Pupil']['id'])); ?>
 			<?php echo $this->Html->link(__('Editer', true), array('action' => 'edit', $pupil['Pupil']['id'])); ?>
-			<?php echo $this->Html->link(__('Supprimer', true), array('action' => 'delete', $pupil['Pupil']['id']), null, sprintf(__('Êtes vous sûr(e) de vouloir supprimer l\'élève %s ?\nCette opération ne peut pas être annulée.', true), $pupil['Pupil']['prenom'].' '.$pupil['Pupil']['nom'])); ?>
+			<?php echo $this->Html->link(__('Supprimer', true), array('action' => 'delete', $pupil['Pupil']['id']), null, sprintf(__('Êtes vous sûr(e) de vouloir supprimer l\'élève %s ?\nCette opération ne peut pas être annulée.', true), $pupil['Pupil']['first_name'].' '.$pupil['Pupil']['name'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

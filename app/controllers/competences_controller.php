@@ -31,13 +31,13 @@ class CompetencesController extends AppController
 		$this->set(compact('categories'));
 
         $sql1 = $this->Competence->Item->find('list', array(
-        	'fields' => array('intitule', 'type', 'competence_id'),
+        	'fields' => array('title', 'type', 'competence_id'),
             'order' => array('Item.competence_id','Item.place')
             ));
         $this->set('itemsType',$sql1);
 
 		$sql2 = $this->Competence->Item->find('list', array(
-        	'fields' => array('intitule', 'id', 'competence_id'),
+        	'fields' => array('title', 'id', 'competence_id'),
             'order' => array('Item.competence_id','Item.place')
             ));
         $this->set('itemsPlace',$sql2);

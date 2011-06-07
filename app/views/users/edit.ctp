@@ -7,8 +7,8 @@ echo $form->create('User',array(
     )
 );
 
-echo $form->input('User.prenom', array('label'=>__('Prénom',true)));
-echo $form->input('User.nom', array('label'=>__('Nom',true)));
+echo $form->input('User.first_name', array('label'=>__('Prénom',true)));
+echo $form->input('User.name', array('label'=>__('Nom',true)));
 echo $form->input('User.email', array('label'=>__('Adresse de courriel',true)));
 echo $form->input('User.username', array('label'=>__('Nom d\'utilisateur',true)));
 

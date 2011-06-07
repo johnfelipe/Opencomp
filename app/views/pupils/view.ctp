@@ -7,22 +7,22 @@
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Nom'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $pupil['Pupil']['nom']; ?>
+			<?php echo $pupil['Pupil']['name']; ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Prenom'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $pupil['Pupil']['prenom']; ?>
+			<?php echo $pupil['Pupil']['first_name']; ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Sexe'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $pupil['Pupil']['sexe']; ?>
+			<?php echo $pupil['Pupil']['sex']; ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Date de naissance'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $pupil['Pupil']['date-de-naissance']; ?>
+			<?php echo $pupil['Pupil']['birthday']; ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Classe'); ?></dt>

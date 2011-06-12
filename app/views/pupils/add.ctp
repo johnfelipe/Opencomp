@@ -12,6 +12,11 @@
 	</fieldset>
 <?php echo $this->Form->end(__('Enregistrer', true));?>
 </div>
+
+
+
+
+--------------------------
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>
 	<ul>

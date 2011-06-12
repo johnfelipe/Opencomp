@@ -1,12 +1,9 @@
 <div class="academies index">
 <table cellpadding="0" cellspacing="0">
 	<tr>
-			<th><?php echo $this->Paginator->sort(__('Nom de l\'academie',true),'name');?></th>
 			<th><?php echo $this->Paginator->sort(__('Nom',true),'name');?></th>
-			
-			
-			
-                        <th class="actions"><?php __('Actions');?></th>
+			<th><?php echo $this->Paginator->sort(__('Type',true),'name');?></th>
+			<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
 	$i = 0;
@@ -17,17 +14,13 @@
 		}
 	?>
 	<tr<?php echo $class;?>>
-		<td><?php echo $a['Academie']['name']; ?>&nbsp;</td>
-		<td><?php echo $a['Academie']['id']; ?>&nbsp;</td>
-                
-                
-		<td>
-			<?php echo $this->Html->link($a['Academie']['title'], array('controller' => 'academies', 'action' => 'view', $a['Academie']['id'])); ?>
-		</td>
+		<td><?php echo $a['Academy']['name']; ?>&nbsp;</td>
+		<td><?php echo $a['Academy']['type']; ?>&nbsp;</td>                
+           
 		<td class="actions">
-			<?php echo $this->Html->link(__('Voir', true), array('action' => 'view', $a['Academie']['id'])); ?>
-			<?php echo $this->Html->link(__('Editer', true), array('action' => 'edit', $a['Academie']['id'])); ?>
-			<?php echo $this->Html->link(__('Supprimer', true), array('action' => 'delete', $a['Academie']['id']), null, sprintf(__('Êtes vous sûr(e) de vouloir supprimer l\'academie %s ?\nCette opération ne peut pas être annulée.', true), $a['Academie']['name'].' '.$a['Academie']['user_id'])); ?>
+			<?php echo $this->Html->link(__('Voir', true), array('action' => 'view', $a['Academy']['id'])); ?>
+			<?php echo $this->Html->link(__('Editer', true), array('action' => 'edit', $a['Academy']['id'])); ?>
+			<?php echo $this->Html->link(__('Supprimer', true), array('action' => 'delete', $a['Academy']['id']), null, sprintf(__('Êtes vous sûr(e) de vouloir supprimer l\'academie %s ?\nCette opération ne peut pas être annulée.', true), $a['Academy']['name'].' '.$a['Academy']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

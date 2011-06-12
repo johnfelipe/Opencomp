@@ -27,7 +27,7 @@ class InstallController extends InstallAppController
  * @var array
  * @access public
  */
-	//public $uses = null;
+	public $uses = null;
 /**
  * Aucun composants requis
  *
@@ -199,7 +199,8 @@ class InstallController extends InstallAppController
 		if($file->write($content) )
 		{
 			return $this->redirect(array('action' => 'data'));
-		} else
+		}
+		else
 		{
 			$this->Session->setFlash(__('Impossible de créer le fichier de configuration database.php !', true), 'default', array('class' => 'erreur message'));
 		}

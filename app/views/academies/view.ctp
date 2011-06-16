@@ -1,6 +1,6 @@
 <div class="academies view">
 
-<?php debug($academy); ?>    
+  
     
 <dl><?php $i = 0; $class = ' class="altrow"';?>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Id'); ?></dt>

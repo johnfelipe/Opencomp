@@ -4,9 +4,8 @@
     <?php echo $this->Html->charset(); ?>
     <title> <?php echo 'Opencomp | '.$title_for_layout; ?> </title>
     <?php
-        echo $this->Html->meta('icon');
-        //echo $this->Html->css('opencomp.generic');
-	echo $this->Html->css('cake.auth');
+    echo $this->Html->meta('icon');
+	echo $this->Html->css('opencomp.auth');
 	echo $scripts_for_layout;
     ?>
 </head>
@@ -20,10 +19,11 @@
 	</div>
 	
         <div id="baspage">
-            <p style="font-size:x-small; text-align:center; margin-top:10px; color:#777777;">Ceci est une version de développement d'Opencomp.<br />
-Elle ne dois EN AUCUN CAS être utilisée en environnement de production !</p>
+            <p style="font-size:x-small; text-align:center; margin-top:10px; color:#777777;">
+	            Ceci est une version de développement d'Opencomp.<br />
+				Elle ne dois EN AUCUN CAS être utilisée en environnement de production !
+			</p>
         </div>
     </div>
-	<?php //echo $this->element('sql_dump'); ?>
 </body>
 </html>

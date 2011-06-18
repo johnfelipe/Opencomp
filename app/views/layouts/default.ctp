@@ -6,12 +6,15 @@
 		<?php __('Opencomp | '); ?>
 		<?php echo $title_for_layout; ?>
 	</title>
+	
 	<?php
 		
 		echo $this->Html->meta('icon');
-                echo $this->Html->css('opencomp.generic');
-                echo $this->Html->css('jquery-ui-1.8.10.custom');
-		echo $this->Html->css('css3buttons');
+		
+        echo $this->Html->css('opencomp.generic');
+        echo $this->Html->css('opencomp.buttons');        
+        echo $this->Html->css('opencomp.jqueryui');
+        
 		echo $this->Html->css('http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin');
 		
 		echo $this->Html->script('jquery');

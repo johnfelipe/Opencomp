@@ -1,4 +1,4 @@
-<div id="message_erreur" class="message erreur">
+<div id="message" class="message erreur">
     <strong class="title_erreur"><?php echo __('Erreur',true); ?></strong>
   <div class="message_texte">
     <?php echo isset($message) ? $message :  NULL; ?>

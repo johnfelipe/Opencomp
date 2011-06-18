@@ -1,6 +1,16 @@
-<?php echo $html->link(__('Ajouter un utilisateur',true),array('controller'=>'users', 'action'=>'edit')); ?>
+<?php 
 
-<?php
+echo $html->link(
+    '<span class="user icon"></span>'.__('Ajouter un utilisateur',true),
+    array('controller'=>'users', 'action'=>'edit'),
+    array('class'=>'left primary button positive', 'escape' => false)
+);
+
+echo $html->link(
+    '<span class="book icon"></span>'.__('Aide',true),
+    array('controller'=>'users', 'action'=>'edit'),
+    array('class'=>'right button', 'escape' => false)
+);
 
 echo '<p>'.$paginator->numbers().'</p>';
 

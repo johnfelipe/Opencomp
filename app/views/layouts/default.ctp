@@ -7,26 +7,44 @@
 		<?php echo $title_for_layout; ?>
 	</title>
 	<?php
+		
 		echo $this->Html->meta('icon');
                 echo $this->Html->css('opencomp.generic');
                 echo $this->Html->css('jquery-ui-1.8.10.custom');
+		echo $this->Html->css('css3buttons');
 		echo $this->Html->css('http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin');
-
-                echo $javascript->link('jquery');
-                echo $javascript->link('jquery-ui');
+		
+		echo $this->Html->script('jquery');
+		echo $this->Html->script('jquery-ui');
 	?>
+    
     <script type="text/javascript">
+	
+    <?php 
+    
+    $haveMessageToDeliver = $session->read('Message.flash.message'); 
+    
+    if (isset($haveMessageToDeliver)) 
+    {
+    ?>
+	$(document).ready(function() {
+	    $( "#message" ).delay(3000).hide( 'highlight', { times:5 }, 1000);
+	});	
+    <?php
+    }
+		
+    ?>
+	
     $(function() {
-    $(".sortable").sortable({
-        placeholder: "fond",
-        update : function(){
-            var order = $(".sortable").sortable("serialize");
-            $(".maj").load("ajax.php?",order);
-        }
-    })
-    $(".sortable").disableSelection();
-
-});
+	$(".sortable").sortable({
+	    placeholder: "fond",
+	    update : function(){
+		var order = $(".sortable").sortable("serialize");
+		$(".maj").load("ajax.php?",order);
+	    }
+	})
+	$(".sortable").disableSelection();
+    });
     </script>
 </head>
 <body>
@@ -51,7 +69,7 @@
                     }
                     ?>
                     <span style="float:right;"><?php echo datefr(); ?></span><br />
-                    <div style="padding-top:5px;"><?php echo __('Bienvenue,',true); ?> <?php echo $session->read('Auth.User.prenom').' '. $session->read('Auth.User.nom') ?> | <?php echo $html->link(__('Se déconnecter',true),array('controller'=>'users', 'action'=>'logout')) ?></div>
+                    <div style="padding-top:5px;"><?php echo __('Bienvenue,',true); ?> <?php echo $session->read('Auth.User.first_name').' '. $session->read('Auth.User.name') ?> | <?php echo $html->link(__('Se déconnecter',true),array('controller'=>'users', 'action'=>'logout')) ?></div>
                 </div>
 
         </div>
@@ -103,7 +121,7 @@
         <div id="corps" class="clearfix">
 
             <h2><?php echo $title_for_layout; ?></h2>
-
+	    	    
             <?php echo $this->Session->flash(); ?>
             <?php echo $this->Session->flash('auth'); ?>
             <?php echo $content_for_layout; ?>

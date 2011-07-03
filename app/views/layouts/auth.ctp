@@ -5,8 +5,9 @@
     <title> <?php echo 'Opencomp | '.$title_for_layout; ?> </title>
     <?php
     echo $this->Html->meta('icon');
-	echo $this->Html->css('opencomp.auth');
-	echo $scripts_for_layout;
+	echo $this->Html->css('opencomp.auth'); ?>
+	<link href='http://fonts.googleapis.com/css?family=Cantarell&v1' rel='stylesheet' type='text/css'>
+	<?php echo $scripts_for_layout;
     ?>
 </head>
 <body>

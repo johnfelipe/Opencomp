@@ -90,48 +90,52 @@ input{
     margin-bottom:10px;
 }
 
+/* -> Action Button */
+
+
 form .submit input[type=submit] {
-        background-image: url('../img/button-grad.png');
-        color: #FFFFFF;
-        font-weight: bold;
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
-        font-size: 12px;
-        width:110px;
-        -moz-border-radius:30px;
-        -webkit-border-radius:30px;
-        border-radius:30px 30px 30px 30px;
-        border:1px solid white;
-        height:25px;
+    display: inline-block;
+    padding: 0 14px;
+    border: 1px solid #ccc;
+    background: #ececec url(../img/action_button-bg.png) center repeat-x;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    color: #2e3436;
+    text-shadow: 0 1px 0 #fff;
+    text-decoration: none;
+    line-height: 1.8;
+    -webkit-transition: background-position 100ms linear;
+    -moz-transition: background-position 100ms linear;
+    transition: background-position 100ms linear;
+    -moz-box-shadow: inset 0 1px 0 #fff;
+    -webkit-box-shadow: inset 0 1px 0 #fff;
+    outline: none;
+    font-family: Cantarell;
+    height:25px;
+    font-size: 14px;
+    width:40%;
+    margin-top:10px;
 }
-
 form .submit input[type=submit]:hover {
-        background-image: url('../img/button-grad.png');
-        color: #FFFFFF;
-        font-weight: bold;
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
-        font-size: 12px;
-        width:110px;
-        -moz-border-radius:30px;
-        -webkit-border-radius:30px;
-        border-radius:30px 30px 30px 30px;
-        border:1px solid #aa6600;
-        height:25px;
+    background-position: top;
+    color: #000;
 }
-
+form .submit input[type=submit]:visited {
+    color: inherit;
+}
 form .submit input[type=submit]:active {
-        background-image: url('../img/button-grad-active.png');
-        color: #FFFFFF;
-        font-weight: bold;
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
-        font-size: 12px;
-        width:110px;
-        -moz-border-radius:30px;
-        -webkit-border-radius:30px;
-        border-radius:30px 30px 30px 30px;
-        border:1px solid #aa6600;
-        height:25px;
+    -moz-box-shadow: inset 0 2px 3px rgba(0,0,0,0.4);
+    -webkit-box-shadow: inset 0 2px 3px rgba(0,0,0,0.4);
+    box-shadow: inset 0 2px 3px rgba(0,0,0,0.4);
+    background-position: bottom;
+    outline: none;
 }
 
 form .submit {
 text-align: right;
+outline: none;
 }
+
+:focus {outline:none;}
+::-moz-focus-inner {border:0;}
+

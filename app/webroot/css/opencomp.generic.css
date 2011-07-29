@@ -549,6 +549,7 @@ body > #wrap {height: auto; min-height: 100%;}
 	margin-right: auto;
 	-moz-border-radius:7px;
 	-webkit-border-radius:7px;
+	border-radius:7px;
 }
 
 /* CLEAR FIX*/

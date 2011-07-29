@@ -100,6 +100,7 @@ form .submit input[type=submit] {
     background: #ececec url(../img/action_button-bg.png) center repeat-x;
     -moz-border-radius: 15px;
     -webkit-border-radius: 15px;
+    border-radius: 15px;
     color: #2e3436;
     text-shadow: 0 1px 0 #fff;
     text-decoration: none;
@@ -109,6 +110,7 @@ form .submit input[type=submit] {
     transition: background-position 100ms linear;
     -moz-box-shadow: inset 0 1px 0 #fff;
     -webkit-box-shadow: inset 0 1px 0 #fff;
+    box-shadow: inset 0 1px 0 #fff;
     outline: none;
     font-family: Cantarell;
     height:25px;

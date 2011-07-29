@@ -15,8 +15,14 @@ class Academy extends AppModel
 		'rule' => 'isUnique',
 		'message' => 'Cette académie existe déjà, veuillez saisir un autre nom.'
 		)
+	    ),
+	'type' => array(
+	    'requis' => array(
+		'rule' => array('inList', array('0', '1')),
+		'message' => 'Vous devez sélectionner un type d\'académie.'
 	    )
-	);
+	)
+    );
 }
 
 ?>

@@ -3,7 +3,8 @@
 	<tr>
 			<th><?php echo $this->Paginator->sort(__('Nom',true),'name');?></th>
 			<th><?php echo $this->Paginator->sort(__('Type',true),'name');?></th>
-			<th class="actions"><?php __('Actions');?></th>
+			<th class="actions"><?php __('Modifier');?></th>
+			<th class="actions"><?php __('Supprimer');?></th>
 	</tr>
 	<?php
 	$i = 0;
@@ -17,10 +18,12 @@
 		<td><?php echo $a['Academy']['name']; ?>&nbsp;</td>
 		<td><?php if ($a['Academy']['type'] == 0) {echo 'Académie';} else {echo 'Sous rectorat';} ?>&nbsp;</td>                
            
-		<td class="actions">
-			<?php echo $this->Html->link(__('Voir', true), array('action' => 'view', $a['Academy']['id'])); ?>
+		<td>
+			<?php // echo $this->Html->link(__('Voir', true), array('action' => 'view', $a['Academy']['id'])); ?>
 			<?php echo $this->Html->link(__('Editer', true), array('action' => 'edit', $a['Academy']['id'])); ?>
-			<?php echo $this->Html->link(__('Supprimer', true), array('action' => 'delete', $a['Academy']['id']), null, sprintf(__('Êtes vous sûr(e) de vouloir supprimer l\'academie %s ?\nCette opération ne peut pas être annulée.', true), $a['Academy']['name'].' '.$a['Academy']['id'])); ?>
+		</td>
+		<td>
+<?php echo $this->Html->link(__('Supprimer', true), array('action' => 'delete', $a['Academy']['id']), null, sprintf(__('Êtes vous sûr(e) de vouloir supprimer l\'academie %s ?\nCette opération ne peut pas être annulée.', true), $a['Academy']['name'].' '.$a['Academy']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

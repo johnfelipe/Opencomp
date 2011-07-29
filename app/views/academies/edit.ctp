@@ -1,12 +1,12 @@
 <div class="academies form">
-<?php echo $this->Form->create('Academie');?>
+<?php echo $this->Form->create('Academy');?>
 	<fieldset>
- 		<legend><?php __('Editer une academie'); ?></legend>
+ 		<legend><?php __('Éditer une académie'); ?></legend>
 	<?php
-		echo $this->Form->input('id');
-		echo $this->Form->input('Nom');
-		echo $this->Form->input('Administrateur');
-                echo $this->Form->input('establishment_id');
+		echo $this->Form->input('name');
+		echo $form->label('type');
+		$options=array('0'=>'Académie','1'=>'Sous-rectorat');
+		echo $form->select('type',$options)	
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Enregistrer', true));?>

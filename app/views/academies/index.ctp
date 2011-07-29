@@ -15,7 +15,7 @@
 	?>
 	<tr<?php echo $class;?>>
 		<td><?php echo $a['Academy']['name']; ?>&nbsp;</td>
-		<td><?php echo $a['Academy']['type']; ?>&nbsp;</td>                
+		<td><?php if ($a['Academy']['type'] == 0) {echo 'Académie';} else {echo 'Sous rectorat';} ?>&nbsp;</td>                
            
 		<td class="actions">
 			<?php echo $this->Html->link(__('Voir', true), array('action' => 'view', $a['Academy']['id'])); ?>
@@ -33,10 +33,9 @@
 	?>	</p>
 
 	<div class="paging">
-		<?php echo $this->Paginator->prev('<< ' . __('précédent', true), array(), null, array('class'=>'disabled'));?>
-	 | 	<?php echo $this->Paginator->numbers();?>
- |
-		<?php echo $this->Paginator->next(__('suivant', true) . ' >>', array(), null, array('class' => 'disabled'));?>
+		<?php echo $this->Paginator->prev('<span class="leftarrow icon"></span>' . __('précédent', true), array('escape'=>false, 'tag'=>'button class="button left" style="padding-bottom:8px;"', 'separator'=>''), null, array('escape'=>false, 'tag'=>'button class="button left" style="padding-bottom:8px;"'));
+		echo $this->Paginator->numbers(array('tag'=>'button class="button middle" style="padding-bottom:8px;"', 'escape' => false, 'separator'=>'')); 
+		echo $this->Paginator->next(__('suivant', true) . '       <span class="rightarrow icon"></span>', array('escape'=>false, 'tag'=>'button class="button right" style="padding-bottom:8px;"'), null, array('escape'=>false, 'tag'=>'button class="button right" style="padding-bottom:8px;"'));?>
 	</div>
 </div>
 <div class="actions">

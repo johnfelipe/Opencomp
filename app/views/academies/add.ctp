@@ -5,12 +5,10 @@
  		<legend><?php __('Ajouter une Academie'); ?></legend>
 	<?php
 		echo $this->Form->input('Nom de l\'academie');
-		echo $this->Form->input('Nom de l\'administrateur');
-		echo $this->Form->input('establishment_id');
-	
-
- 
-?>
+		echo $form->label('type');
+		$options=array('0'=>'Académie','1'=>'Sous-rectorat');
+		echo $form->select('type',$options)	 
+	?>
         </fieldset>
 </div>
 <?php echo $this->Form->end(__('Enregistrer une academie', true));?>

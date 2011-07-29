@@ -48,7 +48,36 @@ class AcademiesController extends AppController
      */
     function edit($id = null)
     {
-        $this->set('title_for_layout', __('Modifier une Academie',true));   
+        $this->set('title_for_layout', __('Modifier une académie',true));  
+	
+	if (!$id && empty($this->data))
+	{
+		$this->redirect(array('action' => 'index'));
+	}
+
+	if (!empty($this->data))
+	{
+		if ($this->Academy->save($this->data))
+		{
+			$this->Session->setFlash(__('L\'académie a été sauvegardé.', true), 'message_succes');
+			$this->redirect(array('action' => 'index'));
+		}
+		else
+		{
+			$this->Session->setFlash(__('L\'académie n\'a pas pu être éditée.', true), 'message_erreur');
+		}
+	}
+
+	if (empty($this->data))
+	{
+		$this->data = $this->Academy->read(null, $id);
+
+		if(empty($this->data))
+		{
+			$this->Session->setFlash(__('L\'académie que vous souhaitez éditer n\'existe pas.', true), 'message_erreur');
+			$this->redirect(array('action' => 'index'));
+		}
+	}
     }
     
     /**

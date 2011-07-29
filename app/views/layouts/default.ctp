@@ -89,6 +89,26 @@
                     'action'=>'display',
                     'home')); ?>
             </li>
+	    <?php
+            if($this->params['controller'] == 'academies')
+                echo '<li class="active">';
+            else
+                echo '<li class="tab2">';
+            ?>
+                <?php echo $this->Html->link(__('Académies',true),array(
+                    'controller'=>'academies',
+                    'action'=>'index')); ?>
+            </li>
+	    <?php
+            if($this->params['controller'] == 'establishments')
+                echo '<li class="active">';
+            else
+                echo '<li class="tab2">';
+            ?>
+                <?php echo $this->Html->link(__('Établissements scolaires',true),array(
+                    'controller'=>'establishments',
+                    'action'=>'index')); ?>
+            </li>
             <?php
             if($this->params['controller'] == 'pupils')
                 echo '<li class="active">';

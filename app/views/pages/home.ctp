@@ -20,13 +20,16 @@ if (Configure::read() == 0):
 	$this->cakeError('error404');
 endif;
 ?>
+
 <h2><?php echo sprintf(__('Notes de version de CakePHP %s.', true), Configure::version()); ?></h2>
-<a href="http://cakephp.org/changelogs/1.3.7"><?php __('Lire les notes de version'); ?> </a>
+
+<p><a href="http://cakephp.org/changelogs/1.3.11"><?php __('Lire les notes de version'); ?> </a></p>
 <?php
 if (Configure::read() > 0):
 	Debugger::checkSecurityKeys();
 endif;
 ?>
+
 <p>
 	<?php
 		if (is_writable(TMP)):
@@ -116,14 +119,26 @@ if (isset($filePresent)):
 <p>
 	<?php
 		echo $this->Html->link(
-			__('[Grafikart.fr] Un ensemble de tutoriels concernant CakePHP réalisés par un développeur Freelance', true),
+			__('[Grafikart.fr] Un ensemble de tutoriels concernant CakePHP réalisés par Jonathan Boyer, un développeur Freelance', true),
 			'http://www.grafikart.fr/tutoriels/category/cakephp',
+			array('target' => '_blank', 'escape' => false)
+		);
+	?>
+</p>
+<p>
+	<?php
+		echo $this->Html->link(
+			__('[Creatiq.fr] Un ensemble de tutoriels concernant CakePHP réalisés par Jérémy Utreras, un développeur Freelance', true),
+			'http://www.creatiq.fr/tutoriels/category/CakePHP-7',
 			array('target' => '_blank', 'escape' => false)
 		);
 	?>
 </p>
 
 <h3><?php __('En savoir plus à propos de Cake'); ?></h3>
+<iframe src="http://cakephp.org/bake-banner" width="830" height="160" style="overflow:hidden; border:none;">
+	<p>For updates and important announcements, visit http://cakefest.org</p>
+</iframe>
 <p>
 <?php __('CakePHP est un framework de développement rapide pour PHP qui fournit une architecture extensible pour développer, maintenir et déployer des applications. Utilisant des motifs de conception bien connus tels MVC et ORM ainsi que le paradigme "convention plutôt que configuration", CakePHP réduit les coûts de développement et aide les développeurs à écrire moins de code.'); ?>
 </p>

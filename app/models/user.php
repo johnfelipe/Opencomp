@@ -2,8 +2,8 @@
 
 class User extends AppModel{
 	
+	var $displayField = array("%s %s", "{n}.User.first_name", "{n}.User.name");
 	
-
 	var $validate = array(
 		'username' => array(
 			'longueur' => array(

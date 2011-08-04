@@ -9,6 +9,7 @@
 		$options=array('0'=>'Académie','1'=>'Sous-rectorat');
 		$attributes['empty'] = false;
 		echo $form->select('type',$options,NULL,$attributes);
+		echo $this->Form->input('user_id', array('options' => $utilisateurs, 'label'=>'Responsable académique'));
 	?>
         </fieldset>
 </div>

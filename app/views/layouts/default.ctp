@@ -31,7 +31,7 @@
     {
     ?>
 	$(document).ready(function() {
-	    $( "#message" ).delay(3000).hide( 'highlight', { times:5 }, 1000);
+	    $( "#message" ).delay(10000).hide( 'highlight', { times:5 }, 1000);
 	});	
     <?php
     }

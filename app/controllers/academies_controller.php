@@ -29,8 +29,7 @@ class AcademiesController extends AppController
         'Academy' => array(
             'limit' => 20,
             'order' => array(
-                'name' => 'Asc',
-                'type' => 'Asc'
+                'Academy.name' => 'Asc'
             )
         )
     );
@@ -55,6 +54,7 @@ class AcademiesController extends AppController
      */
     function add()
     {
+<<<<<<< HEAD
         $this->set('title_for_layout', __('Ajouter une Academie', true));
 
         if (!empty($this->data)) {
@@ -72,6 +72,28 @@ class AcademiesController extends AppController
                 );
             }
         }
+=======
+        $this->set('title_for_layout', __('Ajouter une Academie',true));
+		
+		//On transmet à la vue la liste des utilisateurs.
+		$u = $this->Academy->User->find('list');
+		$this->set('utilisateurs', $u);
+	
+		if (!empty($this->data))
+		{
+			$this->Academy->create();
+			if ($this->Academy->save($this->data))
+			{
+				$this->Session->setFlash(__('L\'académie a été ajoutée.', true), 'message_succes');
+				$this->redirect(array('action' => 'index'));
+			}
+			else
+			{
+				$this->Session->setFlash(__('L\'académie n\'a pas pu être ajoutée.', true), 'message_erreur');
+			}
+		}
+        
+>>>>>>> ee605c3c860bcb484ffcfcd9e818b9fb66b954b5
     }
 
     /**

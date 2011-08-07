@@ -2,7 +2,7 @@
 <table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort(__('Nom',true),'name');?></th>
-			<th><?php echo $this->Paginator->sort(__('Type',true),'name');?></th>
+			<th><?php echo $this->Paginator->sort(__('Type',true),'type');?></th>
 			<th class="actions"><?php __('Modifier');?></th>
 			<th class="actions"><?php __('Supprimer');?></th>
 	</tr>

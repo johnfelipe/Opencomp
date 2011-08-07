@@ -3,8 +3,9 @@
 class Academy extends AppModel
 {
 
-    var $validate = array(
-	
+	var $belongsTo = 'User';
+
+    var $validate = array(	
 	//Nom de l'academie
 	'name' => array(
 	    'longueur' => array(

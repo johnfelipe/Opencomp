@@ -1,153 +1,156 @@
 <?php
 
 /**
- * Contrôleur de gestion des compétences
+  * competences_controller.php
+  * 
+  * PHP version 5
+  *
+  * @category Controller
+  * @package  Opencomp
+  * @author   Jean Traullé <jtraulle@gmail.com>
+  * @license  http://www.opensource.org/licenses/agpl-v3 The Affero GNU General Public License
+  * @link     http://www.opencomp.fr
+  */
+
+/**
+ * Contrôleur de gestion des compétences.
  *
- * @category	Controller
- * @package 	Opencomp
- * @version 	1.0
- * @author		Jean Traullé <jtraulle@gmail.com>
- * @license  	http://www.opensource.org/licenses/agpl-v3 The Affero GNU General Public License
- * @link     	http://www.opencomp.fr
+ * @category Controller
+ * @package  Opencomp
+ * @author   Jean Traullé <jtraulle@gmail.com>
+ * @license  http://www.opensource.org/licenses/agpl-v3 The Affero GNU General Public License
+ * @link     http://www.opencomp.fr
  */
 class CompetencesController extends AppController
 {
-	// Appel du Helper Tree
-	var $helpers = array ('Tree');
+    // Appel du Helper Tree
+    var $helpers = array ('Tree');
 
-	/**
-	 * Méthode listant l'ensemble des compétences.
-	 *
-	 * @return void
-	 * @access public
-	 */
-	function index()
+    /**
+     * Méthode listant l'ensemble des compétences.
+     *
+     * @return void
+     * @access public
+     */
+    function index()
     {
-    	$this->set('title_for_layout', __('Référentiel de compétences',true));
+        $this->set('title_for_layout', __('Référentiel de compétences', true));
 
-		$this->Competence->recursive = -1;
-		$categories = $this->Competence->children(false);
+        $this->Competence->recursive = -1;
+        $categories = $this->Competence->children(false);
 
-		$this->set(compact('categories'));
+        $this->set(compact('categories'));
 
         $sql1 = $this->Competence->Item->find('list', array(
-        	'fields' => array('title', 'type', 'competence_id'),
+            'fields' => array('title', 'type', 'competence_id'),
             'order' => array('Item.competence_id','Item.place')
             ));
-        $this->set('itemsType',$sql1);
+        $this->set('itemsType', $sql1);
 
-		$sql2 = $this->Competence->Item->find('list', array(
-        	'fields' => array('title', 'id', 'competence_id'),
+        $sql2 = $this->Competence->Item->find('list', array(
+            'fields' => array('title', 'id', 'competence_id'),
             'order' => array('Item.competence_id','Item.place')
             ));
-        $this->set('itemsPlace',$sql2);
-	}
+        $this->set('itemsPlace', $sql2);
+    }
 
-	/**
-	 * Méthode permettant d'ajouter/éditer une catégorie.
-	 *
-	 * @return void
-	 * @access public
-	 * @param int $id Id de la catégorie à éditer
-	 */
-	function edit($id = null)
-	{
-    	$title = __('Ajouter',true);
+    /**
+     * Méthode permettant d'ajouter/éditer une catégorie.
+     *
+     * @param int $id Id de la catégorie à éditer
+     * 
+     * @return void
+     * @access public
+     */
+    function edit($id = null)
+    {
+        $title = __('Ajouter', true);
 
-        if(!empty($this->data['Category']['id']))
-        {
-        	$title = __('Modifier',true);
-        };
+        if (!empty($this->data['Category']['id'])) {
+            $title = __('Modifier', true);
+        }
 
-      	$title .= ' '.__('une catégorie au référentiel de compétences',true);
+        $title .= ' '.__('une catégorie au référentiel de compétences', true);
 
         $this->set('title_for_layout', $title);
 
-		if(isset($this->data))
-		{
-			$this->Competence->set($this->data);
+        if (isset($this->data)) {
+            $this->Competence->set($this->data);
 
-			if (!$this->Competence->validates())
-			{
-				$this->Session->setFlash(__('Corrigez les erreurs mentionnées',true), 'message_attention');
-				return;
-			}
+            if (!$this->Competence->validates()) {
+                $this->Session->setFlash(__('Corrigez les erreurs mentionnées', true), 'message_attention');
+                return;
+            }
 
-			$this->Competence->save(null, false);
+            $this->Competence->save(null, false);
 
-			$this->Session->setFlash(__('Données enregistrées.',true), 'message_succes');
-			$this->redirect('edit');
-		}
+            $this->Session->setFlash(__('Données enregistrées.', true), 'message_succes');
+            $this->redirect('edit');
+        }
 
-		$this->data = $this->Competence->read(null, $id);
-		$this->set('parents', $this->Competence->generatetreelist());
-	}
+        $this->data = $this->Competence->read(null, $id);
+        $this->set('parents', $this->Competence->generatetreelist());
+    }
 
-	/**
-	 * Cette méthode monte une catégorie d'un cran.
-	 *
-	 * @return void
-	 * @access public
-	 * @param int $id Id de la catégorie à déplacer
-	 */
-	function move_up($id = null)
-	{
-		if(!$this->Competence->moveup($id))
-		{
-			$this->Session->setFlash(__('La catégorie ne peut pas aller plus haut.',true), 'message_erreur');
-		}
-		else
-		{
-			$this->Session->setFlash(__('Ordre mis à jour.',true), 'message_succes');
-		}
+    /**
+     * Cette méthode monte une catégorie d'un cran.
+     *
+     * @param int $id Id de la catégorie à déplacer
+     * 
+     * @return void
+     * @access public
+     */
+    function moveUp($id = null)
+    {
+        if (!$this->Competence->moveup($id)) {
+            $this->Session->setFlash(__('La catégorie ne peut pas aller plus haut.', true), 'message_erreur');
+        } else {
+            $this->Session->setFlash(__('Ordre mis à jour.', true), 'message_succes');
+        }
 
-		$this->redirect($this->referer());
-	}
+        $this->redirect($this->referer());
+    }
 
-	/**
-	 * Cette méthode descend une catégorie d'un cran.
-	 *
-	 * @return void
-	 * @access public
-	 * @param int $id Id de la catégorie à déplacer
-	 */
-	function move_down($id = null)
-	{
-		if(!$this->Competence->movedown($id))
-		{
-			$this->Session->setFlash(__('La catégorie ne peut pas aller plus bas.',true), 'message_erreur');
-		}
-		else
-		{
-			$this->Session->setFlash(__('Ordre mis à jour.',true), 'message_succes');
-		}
+    /**
+     * Cette méthode descend une catégorie d'un cran.
+     *
+     * @param int $id Id de la catégorie à déplacer
+     * 
+     * @return void
+     * @access public
+     */
+    function moveDown($id = null)
+    {
+        if (!$this->Competence->movedown($id)) {
+            $this->Session->setFlash(__('La catégorie ne peut pas aller plus bas.', true), 'message_erreur');
+        } else {
+            $this->Session->setFlash(__('Ordre mis à jour.', true), 'message_succes');
+        }
 
-		$this->redirect($this->referer());
-	}
+        $this->redirect($this->referer());
+    }
 
-	/**
-	 * Cette méthode supprime une catégorie.
-	 *
-	 * @return void
-	 * @access public
-	 * @param int $id Id de la catégorie à suprrimer
-	 */
-	function delete($id = null)
-	{
-		$this->Competence->id = $id;
+    /**
+     * Cette méthode supprime une catégorie.
+     *
+     * @param int $id Id de la catégorie à suprrimer
+     * 
+     * @return void
+     * @access public
+     */
+    function delete($id = null)
+    {
+        $this->Competence->id = $id;
 
-		if(!$this->Competence->exists())
-		{
-			$this->Session->setFlash(__('Enregistrement introuvable.',true),'message_error');
-		}
-		else
-		{
-			$this->Competence->removeFromTree($id, true);
-			$this->Session->setFlash(__('Données supprimées.',true),'message_succes');
-		}
+        if (!$this->Competence->exists()) {
+            $this->Session->setFlash(__('Enregistrement introuvable.', true), 'message_error');
+        } else {
+            $this->Competence->removeFromTree($id, true);
+            $this->Session->setFlash(__('Données supprimées.', true), 'message_succes');
+        }
 
-		$this->redirect($this->referer());
-	}
+        $this->redirect($this->referer());
+    }
 }
 
 ?>

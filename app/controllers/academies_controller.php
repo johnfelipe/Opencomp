@@ -54,46 +54,17 @@ class AcademiesController extends AppController
      */
     function add()
     {
-<<<<<<< HEAD
         $this->set('title_for_layout', __('Ajouter une Academie', true));
 
         if (!empty($this->data)) {
             $this->Academy->create();
             if ($this->Academy->save($this->data)) {
-                $this->Session->setFlash(
-                    __('L\'académie a été ajoutée.', true),
-                    'message_succes'
-                );
+                $this->Session->setFlash(__('L\'académie a été ajoutée.', true), 'message_succes');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(
-                    __('L\'académie n\'a pas pu être ajoutée.', true),
-                    'message_erreur'
-                );
+                $this->Session->setFlash(__('L\'académie n\'a pas pu être ajoutée.', true), 'message_erreur');
             }
         }
-=======
-        $this->set('title_for_layout', __('Ajouter une Academie',true));
-		
-		//On transmet à la vue la liste des utilisateurs.
-		$u = $this->Academy->User->find('list');
-		$this->set('utilisateurs', $u);
-	
-		if (!empty($this->data))
-		{
-			$this->Academy->create();
-			if ($this->Academy->save($this->data))
-			{
-				$this->Session->setFlash(__('L\'académie a été ajoutée.', true), 'message_succes');
-				$this->redirect(array('action' => 'index'));
-			}
-			else
-			{
-				$this->Session->setFlash(__('L\'académie n\'a pas pu être ajoutée.', true), 'message_erreur');
-			}
-		}
-        
->>>>>>> ee605c3c860bcb484ffcfcd9e818b9fb66b954b5
     }
 
     /**
@@ -114,16 +85,10 @@ class AcademiesController extends AppController
 
         if (!empty($this->data)) {
             if ($this->Academy->save($this->data)) {
-                $this->Session->setFlash(
-                    __('L\'académie a été sauvegardé.', true), 
-                    'message_succes'
-                );
+                $this->Session->setFlash(__('L\'académie a été sauvegardé.', true), 'message_succes');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(
-                    __('L\'académie n\'a pas pu être éditée.', true), 
-                    'message_erreur'
-                );
+                $this->Session->setFlash(__('L\'académie n\'a pas pu être éditée.', true), 'message_erreur');
             }
         }
 
@@ -131,13 +96,7 @@ class AcademiesController extends AppController
             $this->data = $this->Academy->read(null, $id);
 
             if (empty($this->data)) {
-                $this->Session->setFlash(
-                    __(
-                        'L\'académie que vous souhaitez éditer n\'existe pas.', 
-                        true
-                    ),
-                    'message_erreur'
-                );
+                $this->Session->setFlash(__('L\'académie que vous souhaitez éditer n\'existe pas.', true), 'message_erreur');
                 $this->redirect(array('action' => 'index'));
             }
         }
@@ -158,17 +117,11 @@ class AcademiesController extends AppController
         }
 
         if ($this->Academy->delete($id)) {
-            $this->Session->setFlash(
-                __('L\'académie a été supprimée.', true),
-                'message_succes'
-            );
+            $this->Session->setFlash(__('L\'académie a été supprimée.', true), 'message_succes');
             $this->redirect(array('action'=>'index'));
         }
 
-        $this->Session->setFlash(
-            __('L\'académie que vous souhaitez supprimer n\'existe pas.', true),
-            'message_erreur'
-        );
+        $this->Session->setFlash(__('L\'académie que vous souhaitez supprimer n\'existe pas.', true), 'message_erreur');
         $this->redirect(array('action' => 'index'));
     }
     
@@ -193,10 +146,7 @@ class AcademiesController extends AppController
         if (!empty($infoAcademy)) {
             $this->set('academy', $infoAcademy);
         } else {
-            $this->Session->setFlash(
-                __('L\'académie que vous souhaitez afficher n\'existe pas.', true), 
-                'message_erreur'
-            );
+            $this->Session->setFlash(__('L\'académie que vous souhaitez afficher n\'existe pas.', true), 'message_erreur');
             $this->redirect(array('action' => 'index'));
         }
     }

@@ -2,7 +2,7 @@
 
 /**
   * academy.php
-  * 
+  *
   * PHP version 5
   *
   * @category Model
@@ -29,18 +29,18 @@ class Academy extends AppModel
     var $validate = array(
         'name' => array(
             'longueur' => array(
-            'rule' => array('minLength', 3),
-            'message' => 'Taille minimum de 3 caractères'
+                'rule' => array('minLength', 3),
+                'message' => 'Taille minimum de 3 caractères'
             ),
-            'unique_create' => array(
-            'rule' => 'isUnique',
-            'message' => 'Cette académie existe déjà, veuillez saisir un autre nom.'
+            'unique' => array(
+                'rule' => 'isUnique',
+                'message' => 'Cette académie existe déjà, veuillez saisir un autre nom.'
             )
-            ),
+        ),
         'type' => array(
             'requis' => array(
-            'rule' => array('inList', array('0', '1')),
-            'message' => 'Vous devez sélectionner un type d\'académie.'
+                'rule' => array('inList', array('0', '1')),
+                'message' => 'Vous devez sélectionner un type d\'académie.'
             )
         )
     );

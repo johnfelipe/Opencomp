@@ -15,8 +15,7 @@ echo $form->input('User.username', array('label'=>__('Nom d\'utilisateur',true))
 ?>
 
 <div class="input password required">
-    <label for="UserPasswrd">Mot de passe</label>
-    <input id="UserPasswrd" type="password" name="data[User][passwrd]">
+    <label for="UserPasswrd">Mot de passe</label><input id="UserPasswrd" type="password" name="data[User][passwrd]" />
     <?php
         //Si la personne modifie actuellement un utilisateur existant,
         //on indique la marche à suivre pour ne pas modifier le mot de passe.

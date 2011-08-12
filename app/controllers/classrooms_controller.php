@@ -63,7 +63,7 @@ class ClassroomsController extends AppController
 
         //Avant d'afficher la page, on teste si $infoClasse est vide, si c'est
         //le cas, on cours-circuite l'affichage en redirigeant l'utilisateur vers
-        //la liste des classe en affichant un message d'erreur.
+        //la liste des classes en affichant un message d'erreur.
         if (!empty($infoClasse)) {
             $this->set('classroom', $infoClasse);
         } else {

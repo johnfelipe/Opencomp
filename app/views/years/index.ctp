@@ -1,6 +1,47 @@
 <div class="years index">
-<?php
+<table cellpadding="0" cellspacing="0">
+    <tr>
+            <th><?php echo $this->Paginator->sort(__('Nom',true),'year');?></th>
+            <th class="actions"><?php __('Modifier');?></th>
+            <th class="actions"><?php __('Supprimer');?></th>
+    </tr>
+    <?php
+    $i = 0;
+    foreach ($years as $y):
+        $class = null;
+        if ($i++ % 2 == 0) {
+            $class = ' class="altrow"';
+        }
+    ?>
+    <tr<?php echo $class;?>>
+        <td><?php echo $y['Year']['year']; ?>&nbsp;</td>
+        <td>
+            <?php echo $this->Html->link(__('Editer', true), array('action' => 'edit', $y['Year']['id'])); ?>
+        </td>
+        <td>
+<?php echo $this->Html->link(__('Supprimer', true), array('action' => 'delete', $y['Year']['id']), null, sprintf(__('Êtes vous sûr(e) de vouloir supprimer l\'année scolaire %s ?\nCette opération ne peut pas être annulée.', true), $y['Year']['year'].' '.$y['Year']['id'])); ?>
+        </td>
+    </tr>
+<?php endforeach; ?>
+    </table>
+    <p>
+    <?php
+    echo $this->Paginator->counter(array(
+    'format' => __('Page %page% sur %pages%, affichage de %current% enregistrements sur %count% au total, démarrage à l\'enregistrement %start%, fin à l\'enregistrement %end%', true)
+    ));
+    ?>  </p>
 
- 
-?>
+    <div class="paging">
+        <?php echo $this->Paginator->prev('<span class="leftarrow icon"></span>' . __('précédent', true), array('escape'=>false, 'tag'=>'button class="button left" style="padding-bottom:8px;"', 'separator'=>''), null, array('escape'=>false, 'tag'=>'button class="button left" style="padding-bottom:8px;"'));
+        echo $this->Paginator->numbers(array('tag'=>'button class="button middle" style="padding-bottom:8px;"', 'escape' => false, 'separator'=>''));
+        echo $this->Paginator->next(__('suivant', true) . '       <span class="rightarrow icon"></span>', array('escape'=>false, 'tag'=>'button class="button right" style="padding-bottom:8px;"'), null, array('escape'=>false, 'tag'=>'button class="button right" style="padding-bottom:8px;"'));?>
+    </div>
+</div>
+<div class="actions">
+    <h3><?php __('Actions'); ?></h3>
+    <ul>
+        <li><?php echo $this->Html->link(__('Lister les années scolaires', true), array('action' => 'index'));?></li>
+                <li><?php echo $this->Html->link(__('Nouvelle année scolaire', true), array('controller' => 'years', 'action' => 'add')); ?> </li>
+                <li><?php echo $this->Html->link(__('Supprimer une année scolaire', true), array('action' => 'delete', $this->Form->value('establishment.id')), null, sprintf(__('Êtes-vous sure de vouloir supprimer cette année scolaire # %s?', true), $this->Form->value('year.id'))); ?></li>
+    </ul>
 </div>

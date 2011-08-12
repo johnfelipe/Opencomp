@@ -2,7 +2,7 @@
 
 /**
   * year.php
-  * 
+  *
   * PHP version 5
   *
   * @category Model
@@ -23,7 +23,20 @@
  */
 class Year extends AppModel
 {
+    var $displayField = 'year';
 
+    var $validate = array(
+        'year' => array(
+            'masque' => array(
+                'rule' => '/^[0-9]{4,4}\/[0-9]{4,4}$/i',
+                'message' => 'Saisissez une année scolaire de la forme aaaa/aaaa'
+            ),
+            'unique' => array(
+                'rule' => 'isUnique',
+                'message' => 'Cette année scolaire existe déjà, veuillez saisir une année différente.'
+            )
+        )
+    );
 }
 
 ?>

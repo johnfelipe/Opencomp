@@ -2,7 +2,7 @@
 
 <?php echo $this->Form->create('Academy');?>
     <fieldset>
-        <legend><?php __('Ajouter une Academie'); ?></legend>
+        <legend><?php __('Ajouter une académie'); ?></legend>
     <?php
         echo $this->Form->input('name', array( 'label' => 'Nom de l\'académie'));
         echo $form->label('type');

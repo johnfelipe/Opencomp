@@ -6,7 +6,8 @@
         echo $this->Form->input('name');
         echo $form->label('type');
         $options=array('0'=>'Académie','1'=>'Sous-rectorat');
-        echo $form->select('type',$options)
+        echo $form->select('type',$options);
+        echo $this->Form->input('user_id', array('options' => $utilisateurs, 'label'=>'Responsable académique'));
     ?>
     </fieldset>
 <?php echo $this->Form->end(__('Enregistrer', true));?>

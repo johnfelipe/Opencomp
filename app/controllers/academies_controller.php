@@ -2,7 +2,7 @@
 
 /**
   * academies_controller.php
-  * 
+  *
   * PHP version 5
   *
   * @category Controller
@@ -24,7 +24,7 @@
  */
 class AcademiesController extends AppController
 {
-    
+
     var $paginate = array(
         'Academy' => array(
             'limit' => 20,
@@ -33,7 +33,7 @@ class AcademiesController extends AppController
             )
         )
     );
-    
+
     /**
      * Méthode listant l'ensemble des académies existantes.
      *
@@ -42,7 +42,7 @@ class AcademiesController extends AppController
      */
     function index()
     {
-        $this->set('title_for_layout', __('Liste des Academies', true));
+        $this->set('title_for_layout', __('Liste des académies', true));
         $this->set('academies', $this->paginate());
     }
 
@@ -54,7 +54,11 @@ class AcademiesController extends AppController
      */
     function add()
     {
-        $this->set('title_for_layout', __('Ajouter une Academie', true));
+        $this->set('title_for_layout', __('Ajouter une académie', true));
+
+        //On transmet à la vue la liste des utilisateurs.
+        $u = $this->Academy->User->find('list');
+        $this->set('utilisateurs', $u);
 
         if (!empty($this->data)) {
             $this->Academy->create();
@@ -72,13 +76,17 @@ class AcademiesController extends AppController
      *
      * @param int $id L'identifiant de l'académie à éditer.
      *
-     * @return void 
+     * @return void
      * @access public
      */
     function edit($id = null)
     {
-        $this->set('title_for_layout', __('Modifier une académie', true));  
-    
+        $this->set('title_for_layout', __('Modifier une académie', true));
+
+        //On transmet à la vue la liste des utilisateurs.
+        $u = $this->Academy->User->find('list');
+        $this->set('utilisateurs', $u);
+
         if (!$id && empty($this->data)) {
             $this->redirect(array('action' => 'index'));
         }
@@ -101,13 +109,13 @@ class AcademiesController extends AppController
             }
         }
     }
-    
+
     /**
      * Méthode permettant de supprimer une académie.
      *
      * @param int $id L'identifiant de l'académie à supprimer
      *
-     * @return void 
+     * @return void
      * @access public
      */
     function delete($id)
@@ -124,12 +132,12 @@ class AcademiesController extends AppController
         $this->Session->setFlash(__('L\'académie que vous souhaitez supprimer n\'existe pas.', true), 'message_erreur');
         $this->redirect(array('action' => 'index'));
     }
-    
+
     /**
      * Méthode permettant de visualiser les détails d'une académie.
      *
      * @param int $id L'identifiant de l'académie à visionner
-     * 
+     *
      * @return void
      * @access public
      */

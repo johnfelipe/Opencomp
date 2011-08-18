@@ -1,52 +1,58 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<?php echo $this->Html->charset(); ?>
-	<title>
-		<?php __('Opencomp | '); ?>
-		<?php echo $title_for_layout; ?>
-	</title>
-	
-	<?php
-		
-		echo $this->Html->meta('icon');
-		
+    <?php echo $this->Html->charset(); ?>
+    <title>
+        <?php __('Opencomp | '); ?>
+        <?php echo $title_for_layout; ?>
+    </title>
+
+    <?php
+
+        echo $this->Html->meta('icon');
+
         echo $this->Html->css('opencomp.generic');
-        echo $this->Html->css('opencomp.buttons');        
+        echo $this->Html->css('opencomp.buttons');
         echo $this->Html->css('opencomp.jqueryui');
-        
-		echo $this->Html->css('http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin');
-		
-		echo $this->Html->script('jquery');
-		echo $this->Html->script('jquery-ui');
-	?>
-    
+        echo $this->Html->css('chosen');
+
+        echo $this->Html->css('http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin');
+
+        echo $this->Html->script('jquery');
+        echo $this->Html->script('jquery-ui');
+        echo $this->Html->script('chosen.jquery.min.js');
+    ?>
+
     <script type="text/javascript">
-	
-    <?php 
-    
-    $haveMessageToDeliver = $session->read('Message.flash.message'); 
-    
-    if (isset($haveMessageToDeliver)) 
+    <?php
+
+    $haveMessageToDeliver = $session->read('Message.flash.message');
+
+    if (isset($haveMessageToDeliver))
     {
     ?>
-	$(document).ready(function() {
-	    $( "#message" ).delay(10000).hide( 'highlight', { times:5 }, 1000);
-	});	
+    $(document).ready(function() {
+        $( "#message" ).delay(10000).hide( 'highlight', { times:5 }, 1000);
+    });
     <?php
     }
-		
+
     ?>
-	
+
+
+    $(document).ready(function() {
+        $(".chzn-select").chosen();
+    });
+
     $(function() {
-	$(".sortable").sortable({
-	    placeholder: "fond",
-	    update : function(){
-		var order = $(".sortable").sortable("serialize");
-		$(".maj").load("ajax.php?",order);
-	    }
-	})
-	$(".sortable").disableSelection();
+    $(".sortable").sortable({
+        placeholder: "fond",
+        update : function(){
+        var order = $(".sortable").sortable("serialize");
+        $(".maj").load("ajax.php?",order);
+        }
+    })
+    $(".sortable").disableSelection();
     });
     </script>
 </head>
@@ -89,7 +95,7 @@
                     'action'=>'display',
                     'home')); ?>
             </li>
-	    <?php
+        <?php
             if($this->params['controller'] == 'academies')
                 echo '<li class="active">';
             else
@@ -99,7 +105,7 @@
                     'controller'=>'academies',
                     'action'=>'index')); ?>
             </li>
-	    <?php
+        <?php
             if($this->params['controller'] == 'establishments')
                 echo '<li class="active">';
             else
@@ -144,7 +150,7 @@
         <div id="corps" class="clearfix">
 
             <h2><?php echo $title_for_layout; ?></h2>
-	    	    
+
             <?php echo $this->Session->flash(); ?>
             <?php echo $this->Session->flash('auth'); ?>
             <?php echo $content_for_layout; ?>
@@ -158,7 +164,7 @@
 
     </div>
 
-	<?php //echo $this->element('sql_dump');
+    <?php //echo $this->element('sql_dump');
               echo $this->Js->writeBuffer();   ?>
 </body>
 </html>

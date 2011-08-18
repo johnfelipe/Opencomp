@@ -24,7 +24,16 @@
 class Academy extends AppModel
 {
 
-    var $belongsTo = 'User';
+    var $hasAndBelongsToMany = array(
+        'User' =>
+            array(
+                'className'              => 'User',
+                'joinTable'              => 'academies_users',
+                'foreignKey'             => 'academy_id',
+                'associationForeignKey'  => 'user_id',
+                'unique'                 => true
+            )
+    );
 
     var $validate = array(
         'name' => array(

@@ -1,4 +1,13 @@
 <div class="academies index">
+
+   <?php
+    echo $html->link(
+        '<span class="plus icon"></span>'.__('Ajouter une académie',true),
+        array('controller'=>'academies', 'action'=>'add'),
+        array('class'=>'primary button positive', 'escape' => false)
+    );
+    ?>
+<p></p>
 <table cellpadding="0" cellspacing="0">
     <tr>
             <th><?php echo $this->Paginator->sort(__('Nom',true),'name');?></th>
@@ -40,12 +49,4 @@
         echo $this->Paginator->numbers(array('tag'=>'button class="button middle" style="padding-bottom:8px;"', 'escape' => false, 'separator'=>''));
         echo $this->Paginator->next(__('suivant', true) . '       <span class="rightarrow icon"></span>', array('escape'=>false, 'tag'=>'button class="button right" style="padding-bottom:8px;"'), null, array('escape'=>false, 'tag'=>'button class="button right" style="padding-bottom:8px;"'));?>
     </div>
-</div>
-<div class="actions">
-    <h3><?php __('Actions'); ?></h3>
-    <ul>
-        <li><?php echo $this->Html->link(__('Lister les academies', true), array('action' => 'index'));?></li>
-                <li><?php echo $this->Html->link(__('Nouvelle academie', true), array('controller' => 'academies', 'action' => 'add')); ?> </li>
-                <li><?php echo $this->Html->link(__('Supprimer une academie', true), array('action' => 'delete', $this->Form->value('establishment.id')), null, sprintf(__('Etes-vous sure de vouloir supprimer cette academie # %s?', true), $this->Form->value('establishment.id'))); ?></li>
-    </ul>
 </div>

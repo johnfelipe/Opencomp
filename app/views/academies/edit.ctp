@@ -1,15 +1,18 @@
 <div class="academies form">
 <?php echo $this->Form->create('Academy');?>
-    <fieldset>
-        <legend><?php __('Éditer une académie'); ?></legend>
+<h3>Fiche de l'académie "<?php echo $this->data['Academy']['name'] ?>"</h3>
+
     <?php
-        echo $this->Form->input('name');
-        echo $form->label('type');
+        echo $this->Form->input('name', array('label'=>'Nom de l\'académie :'));
+        echo $form->label('type','Type d\'académie :');
         $options=array('0'=>'Académie','1'=>'Sous-rectorat');
-        echo $form->select('type',$options);
-        echo $this->Form->input('user_id', array('options' => $utilisateurs, 'label'=>'Responsable académique'));
+        echo $form->select('type', $options, 0, array('empty'=>false));
+        echo $this->Form->input('User', array(
+            'label'=>'Responsable(s) de l\'académie :',
+            'class'=>'chzn-select',
+            'data-placeholder'=>'Ajoutez un responsable ...',
+            'style'=>'width : 300px;'));
     ?>
-    </fieldset>
 <?php echo $this->Form->end(__('Enregistrer', true));?>
 </div>
 <div class="actions">

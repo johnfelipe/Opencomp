@@ -57,8 +57,7 @@ class AcademiesController extends AppController
         $this->set('title_for_layout', __('Ajouter une académie', true));
 
         //On transmet à la vue la liste des utilisateurs.
-        $u = $this->Academy->User->find('list');
-        $this->set('utilisateurs', $u);
+        $this->set('users', $this->Academy->User->find('list'));
 
         if (!empty($this->data)) {
             $this->Academy->create();
@@ -84,8 +83,7 @@ class AcademiesController extends AppController
         $this->set('title_for_layout', __('Modifier une académie', true));
 
         //On transmet à la vue la liste des utilisateurs.
-        $u = $this->Academy->User->find('list');
-        $this->set('utilisateurs', $u);
+        $this->set('users', $this->Academy->User->find('list'));
 
         if (!$id && empty($this->data)) {
             $this->redirect(array('action' => 'index'));

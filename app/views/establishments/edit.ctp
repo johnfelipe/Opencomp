@@ -1,5 +1,13 @@
 <div class="establishments form">
-<?php echo $this->Form->create('Establishment');?>
+
+
+<?php echo $html->link(
+    '<span class="leftarrow icon"></span>'.__('Liste des établissements',true),
+    array('controller'=>'establishments', 'action'=>'index'),
+    array('class'=>'button', 'escape' => false)
+);
+
+echo '<p></p>'.$this->Form->create('Establishment');?>
     <fieldset>
         <legend><?php __('Editer un établissement'); ?></legend>
     <?php
@@ -11,10 +19,4 @@
     ?>
     </fieldset>
 <?php echo $this->Form->end(__('Envoyer', true));?>
-</div>
-<div class="actions">
-    <h3><?php __('Actions'); ?></h3>
-    <ul>
-        <li><?php echo $this->Html->link(__('Lister les établissements', true), array('action' => 'index'));?></li>
-    </ul>
 </div>

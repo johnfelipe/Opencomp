@@ -2,7 +2,7 @@
 
 /**
   * users_controller.php
-  * 
+  *
   * PHP version 5
   *
   * @category Controller
@@ -63,7 +63,7 @@ class UsersController extends AppController
      * Méthode permettant d'ajouter/éditer un utilisateur.
      *
      * @param int $id Id de l'utilisateur à éditer
-     * 
+     *
      * @return void
      * @access public
      */
@@ -113,7 +113,7 @@ class UsersController extends AppController
      * Méthode permettant de supprimer un utilisateur.
      *
      * @param int $id Identifiant de l'utilisateur à supprimer
-     * 
+     *
      * @return void
      * @access public
      */
@@ -121,7 +121,7 @@ class UsersController extends AppController
     {
         $utilisateur = $this->User->findById($id);
         $nb_admin = $this->User->find('count', array('conditions' => array('User.role' => 'admin')));
-        
+
         if ($utilisateur['User']['role'] == 'admin' && $nb_admin == 1) {
             $this->Session->setFlash(__('Vous devez conserver au moins un administrateur pour gérer les utilisateurs !', true), 'message_erreur');
             $this->redirect('index');
@@ -135,7 +135,7 @@ class UsersController extends AppController
 
     /**
      * Cette méthode permet l'authentification automagique avec CakePHP.
-     * 
+     *
      * @return void
      * @access public
      */
@@ -152,10 +152,10 @@ class UsersController extends AppController
             $this->redirect(array('controller'=>'pages', 'action'=>'display', 'home'));
         }
     }
-    
+
     /**
      * Cette méthode permet la deconnexion automagique avec CakePHP.
-     * 
+     *
      * @return void
      * @access public
      */

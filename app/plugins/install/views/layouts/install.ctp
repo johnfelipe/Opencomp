@@ -25,6 +25,7 @@
                             <li class=<?php echo $stateStep1 ?>>Licence utilisateur</li>
                             <li class=<?php echo $stateStep2 ?>>Configuration minimale</li>
                             <li class=<?php echo $stateStep3 ?>>Connexion à la <acronym title="Base de données">BDD</acronym></li>
+                            <li class=<?php echo $stateStep32 ?>>Peuplement de la <acronym title="Base de données">BDD</acronym></li>
                             <li class=<?php echo $stateStep4 ?>>Identifiant administrateur</li>
                             <li class=<?php echo $stateStep5 ?>>Fin de l'installation</li>
                         </ul>

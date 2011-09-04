@@ -3,6 +3,7 @@ $this->set('stateStep0', 'terminee');
 $this->set('stateStep1', 'encours');
 $this->set('stateStep2', 'afaire');
 $this->set('stateStep3', 'afaire');
+$this->set('stateStep32', 'afaire');
 $this->set('stateStep4', 'afaire');
 $this->set('stateStep5', 'afaire');
 ?>

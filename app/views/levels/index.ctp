@@ -1,4 +1,26 @@
+<?php echo $this->element('listes_nav'); ?>
+
 <div class="levels index">
+
+	<div id="message_information" class="message information">
+	    <strong class="title_information"><?php echo __('Information',true); ?></strong>
+	  <div class="message_texte">
+	  	<?php echo __('Dans Opencomp, les niveaux scolaires et les classes ne correspondent pas à la même chose.', true); ?>
+	  	<br /><br />
+	  	<?php echo __('Un niveau scolaire appartient à un cycle d\'apprentissage et définit une année bien précise de la scolarité d\'un élève.', true); ?>
+	  	<br />
+	  	<?php echo __('À la différence, une classe est un groupe d\'élèves pouvant posséder plusieurs niveaux scolaires différents (exemple des classes à double niveaux).', true); ?>
+	  </div>
+	</div>
+
+	<?php
+	echo $html->link(
+	    '<span class="plus icon"></span>'.__('Ajouter un niveau scolaire',true),
+	    array('controller'=>'levels', 'action'=>'add'),
+	    array('class'=>'primary button positive', 'escape' => false)
+	);
+	?>
+
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort(__('Nom',true),'title');?></th>
@@ -34,10 +56,4 @@
  |
 		<?php echo $this->Paginator->next(__('suivant', true) . ' >>', array(), null, array('class' => 'disabled'));?>
 	</div>
-</div>
-<div class="actions">
-	<h3><?php __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Nouveau niveau', true), array('action' => 'add')); ?></li>
-	</ul>
 </div>

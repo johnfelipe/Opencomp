@@ -1,3 +1,15 @@
+<?php echo $this->element('listes_nav'); ?>
+
+<?php
+echo $html->link(
+    '<span class="plus icon"></span>'.__('Ajouter une année scolaire',true),
+    array('controller'=>'years', 'action'=>'add'),
+    array('class'=>'button positive primary', 'escape' => false)
+);
+?>
+
+<br /><br />
+
 <div class="years index">
 <table cellpadding="0" cellspacing="0">
     <tr>
@@ -36,12 +48,4 @@
         echo $this->Paginator->numbers(array('tag'=>'button class="button middle" style="padding-bottom:8px;"', 'escape' => false, 'separator'=>''));
         echo $this->Paginator->next(__('suivant', true) . '       <span class="rightarrow icon"></span>', array('escape'=>false, 'tag'=>'button class="button right" style="padding-bottom:8px;"'), null, array('escape'=>false, 'tag'=>'button class="button right" style="padding-bottom:8px;"'));?>
     </div>
-</div>
-<div class="actions">
-    <h3><?php __('Actions'); ?></h3>
-    <ul>
-        <li><?php echo $this->Html->link(__('Lister les années scolaires', true), array('action' => 'index'));?></li>
-                <li><?php echo $this->Html->link(__('Nouvelle année scolaire', true), array('controller' => 'years', 'action' => 'add')); ?> </li>
-                <li><?php echo $this->Html->link(__('Supprimer une année scolaire', true), array('action' => 'delete', $this->Form->value('establishment.id')), null, sprintf(__('Êtes-vous sure de vouloir supprimer cette année scolaire # %s?', true), $this->Form->value('year.id'))); ?></li>
-    </ul>
 </div>

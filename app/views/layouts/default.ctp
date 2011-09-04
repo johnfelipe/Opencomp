@@ -85,15 +85,40 @@
 
         <ul id="tabnav">
             <?php
-            if($this->params['controller'] == 'pages')
-                echo '<li class="active">';
-            else
-                echo '<li class="tab1">';
+            if($this->params['controller'] == 'pages') {
+                if(isset($page)) {
+                    if($page == 'home') {
+                        echo '<li class="active">'; 
+                    } else {
+                        echo '<li class="tab1">';
+                    }
+
+                }
+            } else {
+                echo '<li class="tab1">'; }
 
             echo $this->Html->link(__('Tableau de bord',true),array(
                     'controller'=>'pages',
                     'action'=>'display',
                     'home')); ?>
+            </li>
+            <?php
+            if($this->params['controller'] == 'pages') {
+                if(isset($page)) {
+                    if($page == 'listes') {
+                        echo '<li class="active">'; 
+                        } else {
+                            echo '<li class="tab1">';
+                        }
+                }
+            } else {
+                echo '<li class="tab1">'; 
+            }
+
+            echo $this->Html->link(__('Listes',true),array(
+                    'controller'=>'pages',
+                    'action'=>'display',
+                    'listes')); ?>
             </li>
         <?php
             if($this->params['controller'] == 'academies')

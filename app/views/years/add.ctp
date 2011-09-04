@@ -1,3 +1,15 @@
+<?php echo $this->element('listes_nav'); ?>
+
+<?php
+echo $html->link(
+    '<span class="leftarrow icon"></span>'.__('Liste des années scolaires',true),
+    array('controller'=>'years', 'action'=>'index'),
+    array('class'=>'button', 'escape' => false)
+);
+?>
+
+<br /><br />
+
 <div class="years form">
 
 <?php echo $this->Form->create('Year');?>
@@ -10,12 +22,4 @@
 
 <?php echo $this->Form->end(__('Ajouter', true));?>
 
-<div class="actions">
-    <h3><?php __('Actions'); ?></h3>
-    <ul>
-
-        <li><?php echo $this->Html->link(__('Lister les années scolaires', true), array('action' => 'index'));?></li>
-        <li><?php echo $this->Html->link(__('Nouvelle année scolaire', true), array('controller' => 'years', 'action' => 'add')); ?> </li>
-    </ul>
-</div>
 </div>

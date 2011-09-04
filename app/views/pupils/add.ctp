@@ -6,7 +6,8 @@
 		echo $this->Form->input('Nom');
 		echo $this->Form->input('Prénom');
 		echo $this->Form->input('Sexe');
-		echo $this->Form->input('Date de naissance');
+		echo $form->input('birthday', array( 'label' => 'Date de naissance'
+			    , 'dateFormat' => 'DMY'));
 		echo $this->Form->input('classroom_id');
 	?>
 	</fieldset>

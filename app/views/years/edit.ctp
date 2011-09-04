@@ -1,3 +1,15 @@
+<?php echo $this->element('listes_nav'); ?>
+
+<?php
+echo $html->link(
+    '<span class="leftarrow icon"></span>'.__('Liste des années scolaires',true),
+    array('controller'=>'years', 'action'=>'index'),
+    array('class'=>'button', 'escape' => false)
+);
+?>
+
+<br /><br />
+
 <div class="years form">
 <?php echo $this->Form->create('Year');?>
     <fieldset>

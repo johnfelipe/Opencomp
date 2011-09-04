@@ -1,5 +1,5 @@
 <?php 
-/* App schema generated on: 2011-07-03 23:11:29 : 1309727489*/
+/* App schema generated on: 2011-08-20 19:04:40 : 1313859880*/
 class AppSchema extends CakeSchema {
 	var $name = 'App';
 
@@ -17,17 +17,10 @@ class AppSchema extends CakeSchema {
 		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1)),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'MyISAM')
 	);
-	var $classroom_pupils = array(
+	var $academies_users = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 10, 'key' => 'primary'),
-		'classroom_id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 10),
-		'pupil_id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 10),
-		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1)),
-		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'MyISAM')
-	);
-	var $classroom_users = array(
-		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 10, 'key' => 'primary'),
+		'academy_id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 10),
 		'user_id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 10),
-		'classroom_id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 10),
 		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1)),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'MyISAM')
 	);
@@ -40,14 +33,6 @@ class AppSchema extends CakeSchema {
 		'created' => array('type' => 'date', 'null' => false, 'default' => NULL),
 		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1)),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'MyISAM')
-	);
-	var $competence_users = array(
-		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'key' => 'primary'),
-		'competence_id' => array('type' => 'integer', 'null' => false, 'default' => NULL),
-		'user_id' => array('type' => 'integer', 'null' => false, 'default' => NULL),
-		'classroom_id' => array('type' => 'integer', 'null' => false, 'default' => NULL),
-		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1)),
-		'tableParameters' => array('charset' => 'latin1', 'collate' => 'latin1_swedish_ci', 'engine' => 'InnoDB')
 	);
 	var $competences = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 10, 'key' => 'primary'),
@@ -64,13 +49,6 @@ class AppSchema extends CakeSchema {
 		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1)),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'MyISAM')
 	);
-	var $establishment_users = array(
-		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'key' => 'primary'),
-		'user_id' => array('type' => 'integer', 'null' => false, 'default' => NULL),
-		'establishment_id' => array('type' => 'integer', 'null' => false, 'default' => NULL),
-		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1)),
-		'tableParameters' => array('charset' => 'latin1', 'collate' => 'latin1_swedish_ci', 'engine' => 'InnoDB')
-	);
 	var $establishments = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 10, 'key' => 'primary'),
 		'name' => array('type' => 'string', 'null' => false, 'default' => NULL, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
@@ -82,26 +60,12 @@ class AppSchema extends CakeSchema {
 		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1)),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'MyISAM')
 	);
-	var $evaluation_items = array(
-		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 10, 'key' => 'primary'),
-		'evaluation_id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 10),
-		'item_id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 10),
-		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1)),
-		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'MyISAM')
-	);
 	var $evaluations = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 10, 'key' => 'primary'),
 		'classroom_id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 10),
 		'user_id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 10),
 		'period_id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 10),
 		'created' => array('type' => 'date', 'null' => false, 'default' => NULL),
-		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1)),
-		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'MyISAM')
-	);
-	var $item_levels = array(
-		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 10, 'key' => 'primary'),
-		'item_id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 10),
-		'level_id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 10),
 		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1)),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'MyISAM')
 	);
@@ -183,7 +147,7 @@ class AppSchema extends CakeSchema {
 	);
 	var $years = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 10, 'key' => 'primary'),
-		'year' => array('type' => 'text', 'null' => false, 'default' => NULL, 'length' => 4),
+		'year' => array('type' => 'string', 'null' => false, 'default' => NULL, 'length' => 9, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1)),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'MyISAM')
 	);

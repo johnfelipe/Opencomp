@@ -23,7 +23,7 @@
  */
 class Cycle extends AppModel
 {
-
+    var $hasMany = 'Level';
 }
 
 ?>

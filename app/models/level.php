@@ -23,6 +23,8 @@
  */
 class Level extends AppModel
 {
+    var $belongsTo = 'Cycle';
+
     var $validate = array(
         'name' => array(
             'longueur' => array(

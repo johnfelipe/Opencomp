@@ -23,7 +23,9 @@
  */
 class Period extends AppModel
 {
-
+    var $belongsTo = array(
+        'Year',
+        'Establishment');
 }
 
 ?>

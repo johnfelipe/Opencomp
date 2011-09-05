@@ -15,7 +15,7 @@ echo $html->link(
     <fieldset>
         <legend><?php __('Éditer une année scolaire'); ?></legend>
     <?php
-        echo $this->Form->input('year', array( 'label' => 'Année scolaire'));
+        echo $this->Form->input('title', array( 'label' => 'Année scolaire'));
     ?>
     </fieldset>
 <?php echo $this->Form->end(__('Enregistrer', true));?>

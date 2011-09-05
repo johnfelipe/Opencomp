@@ -13,7 +13,7 @@ echo $html->link(
 <div class="years index">
 <table cellpadding="0" cellspacing="0">
     <tr>
-            <th><?php echo $this->Paginator->sort(__('Nom',true),'year');?></th>
+            <th><?php echo $this->Paginator->sort(__('Nom',true),'title');?></th>
             <th class="actions"><?php __('Modifier');?></th>
             <th class="actions"><?php __('Supprimer');?></th>
     </tr>
@@ -26,12 +26,12 @@ echo $html->link(
         }
     ?>
     <tr<?php echo $class;?>>
-        <td><?php echo $y['Year']['year']; ?>&nbsp;</td>
+        <td><?php echo $y['Year']['title']; ?>&nbsp;</td>
         <td>
             <?php echo $this->Html->link(__('Editer', true), array('action' => 'edit', $y['Year']['id'])); ?>
         </td>
         <td>
-<?php echo $this->Html->link(__('Supprimer', true), array('action' => 'delete', $y['Year']['id']), null, sprintf(__('Êtes vous sûr(e) de vouloir supprimer l\'année scolaire %s ?\nCette opération ne peut pas être annulée.', true), $y['Year']['year'].' '.$y['Year']['id'])); ?>
+<?php echo $this->Html->link(__('Supprimer', true), array('action' => 'delete', $y['Year']['id']), null, sprintf(__('Êtes vous sûr(e) de vouloir supprimer l\'année scolaire %s ?\nCette opération ne peut pas être annulée.', true), $y['Year']['title'].' '.$y['Year']['id'])); ?>
         </td>
     </tr>
 <?php endforeach; ?>

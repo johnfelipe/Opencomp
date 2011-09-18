@@ -24,6 +24,17 @@
 class Pupil extends AppModel
 {
     var $displayField = 'name';
+
+    var $hasAndBelongsToMany = array(
+        'Classroom' =>
+            array(
+                'className'              => 'Classroom',
+                'joinTable'              => 'classrooms_pupils',
+                'foreignKey'             => 'pupil_id',
+                'associationForeignKey'  => 'classroom_id',
+                'unique'                 => true
+            )
+    );
 }
 
 ?>

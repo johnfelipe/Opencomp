@@ -2,12 +2,13 @@
 <?php echo $this->Form->create('Pupil');?>
 	<fieldset>
  		<legend><?php __('Editer un élève'); ?></legend>
-	<?php
-		echo $this->Form->input('id');
-		echo $this->Form->input('name');
-		echo $this->Form->input('first_name');
-		echo $this->Form->input('sexe');
-		echo $this->Form->input('birthday');
+<?php
+		echo $this->Form->input('Nom');
+		echo $this->Form->input('Prénom');
+		$options=array('M'=>'Masculin','F'=>'Féminin');
+		echo $form->radio('sex',$options,array( 'legend' => 'Date de naissance'));
+		echo $form->input('birthday', array( 'label' => 'Date de naissance'
+			    , 'dateFormat' => 'DMY'));
 		echo $this->Form->input('classroom_id');
 	?>
 	</fieldset>

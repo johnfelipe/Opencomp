@@ -82,6 +82,9 @@ class PupilsController extends AppController
     {
         $this->set('title_for_layout', __('Création d\'un élève', true));
         
+        //On transmet à la vue la liste des classes.
+        $this->set('classrooms', $this->Pupil->Classroom->find('list'));
+
         //Les données du formulaires ont été envoyées, on vérifie les règles
         //de validation et, si elles sont satisfaites, on enregistre en BDD.
         if (!empty($this->data)) {
@@ -105,6 +108,9 @@ class PupilsController extends AppController
      */
     function edit($id = null)
     {
+        //On transmet à la vue la liste des classes.
+        $this->set('classrooms', $this->Pupil->Classroom->find('list'));
+
         //Aucun id n'a été fourni, on redirige vers la liste des élèves
         if (!$id && empty($this->data)) {
             $this->redirect(array('action' => 'index'));

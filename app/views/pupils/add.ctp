@@ -5,7 +5,8 @@
 	<?php
 		echo $this->Form->input('Nom');
 		echo $this->Form->input('Prénom');
-		echo $this->Form->input('Sexe');
+		$options=array('M'=>'Masculin','F'=>'Féminin');
+		echo $form->radio('sex',$options,array( 'legend' => 'Date de naissance'));
 		echo $form->input('birthday', array( 'label' => 'Date de naissance'
 			    , 'dateFormat' => 'DMY'));
 		echo $this->Form->input('classroom_id');
@@ -15,9 +16,6 @@
 </div>
 
 
-
-
---------------------------
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>
 	<ul>

@@ -15,6 +15,7 @@ echo $html->link(
  		<legend><?php __('Ajouter un niveau'); ?></legend>
 	<?php
 		echo $this->Form->input('title', array( 'label' => 'Nom'));
+		echo $this->Form->input('cycle_id', array('options' => $cycles, 'label'=>'Cycle'));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Enregistrer', true));?>

@@ -45,6 +45,9 @@ class LevelsController extends AppController
      */
     function add()
     {
+        //On transmet à la vue la liste des cycles.
+        $this->set('cycles', $this->Level->Cycle->find('list'));
+
         $this->set('title_for_layout', __('Ajouter un niveau', true));
 
         if (!empty($this->data)) {
@@ -68,6 +71,9 @@ class LevelsController extends AppController
      */
     function edit($id = null)
     {
+        //On transmet à la vue la liste des cycles.
+        $this->set('cycles', $this->Level->Cycle->find('list'));
+
         if (!$id && empty($this->data)) {
             $this->redirect(array('action' => 'index'));
         }

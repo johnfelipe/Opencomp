@@ -24,6 +24,7 @@
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort(__('Nom',true),'title');?></th>
+			<th><?php echo $this->Paginator->sort(__('Cycle',true),'cycle_id');?></th>
 			<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -36,6 +37,7 @@
 	?>
 	<tr<?php echo $class;?>>
 		<td><?php echo $level['Level']['title']; ?>&nbsp;</td>
+		<td><?php echo $level['Cycle']['title']; ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('Editer', true), array('action' => 'edit', $level['Level']['id'])); ?>
 			<?php echo $this->Html->link(__('Supprimer', true), array('action' => 'delete', $level['Level']['id']), null, sprintf(__('Êtes vous sûr(e) de vouloir supprimer le niveau %s ?\nCette opération ne peut pas être annulée.', true), $level['Level']['title'])); ?>

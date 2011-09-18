@@ -16,6 +16,7 @@ echo $html->link(
  		<legend><?php __('Editer un niveau'); ?></legend>
 	<?php
 		echo $this->Form->input('title', array( 'label' => 'Nom'));
+		echo $this->Form->input('cycle_id', array('options' => $cycles, 'label'=>'Cycle'));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Envoyer', true));?>

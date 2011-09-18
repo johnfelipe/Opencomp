@@ -23,8 +23,6 @@
  */
 class Year extends AppModel
 {
-    var $displayField = 'year';
-
     var $validate = array(
         'year' => array(
             'masque' => array(

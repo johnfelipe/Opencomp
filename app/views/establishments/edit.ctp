@@ -15,6 +15,7 @@ echo '<p></p>'.$this->Form->create('Establishment');?>
         echo $this->Form->input('address', array( 'label' => 'Adresse'));
         echo $this->Form->input('postcode', array( 'label' => 'Code Postal'));
         echo $this->Form->input('town', array( 'label' => 'Ville'));
+        echo $this->Form->input('academy_id', array('options' => $academies, 'label'=>'Académie'));
         echo $this->Form->input('user_id', array('options' => $utilisateurs, 'label'=>'Directeur de l\'établissement'));
     ?>
     </fieldset>

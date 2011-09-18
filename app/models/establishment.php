@@ -23,7 +23,9 @@
  */
 class Establishment extends AppModel
 {
-    var $belongsTo = 'User';
+    var $belongsTo = array(
+      'User',
+      'Academy');
 
     var $validate = array(
         'name' => array(

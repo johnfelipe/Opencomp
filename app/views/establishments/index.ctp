@@ -5,6 +5,7 @@
             <th><?php echo $this->Paginator->sort(__('Adresse',true),'address');?></th>
             <th><?php echo $this->Paginator->sort(__('Code postal',true),'postcode');?></th>
             <th><?php echo $this->Paginator->sort(__('Ville',true),'town');?></th>
+            <th><?php echo $this->Paginator->sort(__('Académie',true),'academy_id');?></th>
             <th class="actions"><?php __('Actions');?></th>
     </tr>
     <?php
@@ -20,6 +21,7 @@
         <td><?php echo $e['Establishment']['address']; ?>&nbsp;</td>
         <td><?php echo $e['Establishment']['postcode']; ?>&nbsp;</td>
         <td><?php echo $e['Establishment']['town']; ?>&nbsp;</td>
+        <td><?php echo $e['Academy']['name']; ?>&nbsp;</td>
         <td class="actions">
             <?php echo $this->Html->link(__('Editer', true), array('action' => 'edit', $e['Establishment']['id'])); ?>
             <?php echo $this->Html->link(__('Supprimer', true), array('action' => 'delete', $e['Establishment']['id']), null, sprintf(__('Êtes vous sûr(e) de vouloir supprimer l\'établissement %s ?\nCette opération ne peut pas être annulée.', true), $e['Establishment']['name'])); ?>

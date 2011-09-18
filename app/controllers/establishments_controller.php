@@ -48,6 +48,8 @@ class EstablishmentsController extends AppController
         //On transmet à la vue la liste des utilisateurs.
         $u = $this->Establishment->User->find('list');
         $this->set('utilisateurs', $u);
+        $a = $this->Establishment->Academy->find('list');
+        $this->set('academies', $a);
 
         if (!empty($this->data)) {
             $this->Establishment->create();
@@ -75,6 +77,8 @@ class EstablishmentsController extends AppController
         //On transmet à la vue la liste des utilisateurs.
         $u = $this->Establishment->User->find('list');
         $this->set('utilisateurs', $u);
+        $a = $this->Establishment->Academy->find('list');
+        $this->set('academies', $a);
 
         if (!$id && empty($this->data)) {
             $this->redirect(array('action' => 'index'));

@@ -23,14 +23,22 @@
  */
 class Classroom extends AppModel
 {
-    var $displayField = 'title';
+    var $displayField = array("%s (%s %s - %s)", "{n}.Classroom.title", "{n}.User.first_name", "{n}.User.name", "{n}.Year.title");
+    
+    var $belongsTo = array(
+      'Year',
+      'User',
+      'Establishment');
 
-    var $hasMany = array(
-        'Pupil' => array(
-            'className' => 'Pupil',
-            'foreignKey' => 'classroom_id',
-            'dependent' => false,
-        )
+    var $hasAndBelongsToMany = array(
+        'Pupil' =>
+            array(
+                'className'              => 'Pupil',
+                'joinTable'              => 'classrooms_pupils',
+                'foreignKey'             => 'classroom_id',
+                'associationForeignKey'  => 'pupil_id',
+                'unique'                 => true
+            )
     );
 }
 

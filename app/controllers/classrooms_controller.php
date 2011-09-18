@@ -81,6 +81,17 @@ class ClassroomsController extends AppController
      */
     function add()
     {
+        //On transmet le titre à la vue.
+        $this->set('title_for_layout', __('Ajouter une classe', true));
+
+        //On transmet à la vue la liste des utilisateurs.
+        $e = $this->Classroom->Establishment->find('list');
+        $this->set('establishments', $e);
+        $y = $this->Classroom->Year->find('list');
+        $this->set('years', $y);
+        $u = $this->Classroom->User->find('list');
+        $this->set('users', $u);
+
         //Les données du formulaires ont été envoyées, on vérifie les règles
         //de validation et, si elles sont satisfaites, on enregistre en BDD.
         if (!empty($this->data)) {
@@ -104,6 +115,14 @@ class ClassroomsController extends AppController
      */
     function edit($id = null)
     {
+        //On transmet à la vue la liste des utilisateurs.
+        $e = $this->Classroom->Establishment->find('list');
+        $this->set('establishments', $e);
+        $y = $this->Classroom->Year->find('list');
+        $this->set('years', $y);
+        $u = $this->Classroom->User->find('list');
+        $this->set('users', $u);
+
         //Aucun id n'a été fourni, on redirige vers la liste des classes
         if (!$id && empty($this->data)) {
             $this->redirect(array('action' => 'index'));

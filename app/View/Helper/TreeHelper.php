@@ -221,7 +221,7 @@ class TreeHelper extends AppHelper {
             $this->__settings = array_merge($this->__settings, $elementData);
             /* Main Content */
             if ($element) {
-                $content = $view->element($element,$elementData);
+                $content = $this->element($element,$elementData);
             } elseif ($callback) {
                 list($content) = array_map($callback, array($elementData));
             } else {

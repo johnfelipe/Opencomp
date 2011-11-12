@@ -1,6 +1,6 @@
 <?php
 
-echo $tree->generate(
+echo $this->Tree->generate(
 	$categories,
 	array('element' => 'competences_index')
 ); 

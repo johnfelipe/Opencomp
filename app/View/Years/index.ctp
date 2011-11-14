@@ -13,7 +13,7 @@ echo $this->Html->link(
 <div class="years index">
 <table cellpadding="0" cellspacing="0">
     <tr>
-            <th><?php echo $this->Paginator->sort(__('Nom',true),'title');?></th>
+            <th><?php echo $this->Paginator->sort('title', __('Année scolaire'));?></th>
             <th class="actions"><?php __('Modifier');?></th>
             <th class="actions"><?php __('Supprimer');?></th>
     </tr>
@@ -39,7 +39,7 @@ echo $this->Html->link(
     <p>
 	<?php
 	echo $this->Paginator->counter(array(
-	'format' => __('Page {:page} sur {:pages}, affichage de {:current} enregistrements sur un total de {:count}, démarrage à l\'enregistrement {:start}, fin à {:end}')
+	'format' => __('Page {:page} sur {:pages}, affichage de {:current} enregistrements sur un total de {:count}, démarrage à l\'enregistrement {:start}, fin à l\'enregistrement {:end}')
 	));
 	?>	</p>
 

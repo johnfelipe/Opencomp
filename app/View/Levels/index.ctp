@@ -46,9 +46,10 @@
 <?php endforeach; ?>
 	</table>
 	<p>
+	<p>
 	<?php
 	echo $this->Paginator->counter(array(
-	'format' => __('Page %page% sur %pages%, affichage de %current% enregistrements sur %count% au total, démarrage à l\'enregistrement %start%, fin à l\'enregistrement %end%', true)
+	'format' => __('Page {:page} sur {:pages}, affichage de {:current} enregistrements sur un total de {:count}, démarrage à l\'enregistrement {:start}, fin à l\'enregistrement {:end}')
 	));
 	?>	</p>
 

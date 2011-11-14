@@ -10,8 +10,8 @@
 <p></p>
 <table cellpadding="0" cellspacing="0">
     <tr>
-            <th><?php echo $this->Paginator->sort(__('Nom',true),'name');?></th>
-            <th><?php echo $this->Paginator->sort(__('Type',true),'type');?></th>
+            <th><?php echo $this->Paginator->sort('name', __('Nom'));?></th>
+            <th><?php echo $this->Paginator->sort('type', __('Type'));?></th>
             <th class="actions"><?php __('Modifier');?></th>
             <th class="actions"><?php __('Supprimer');?></th>
     </tr>
@@ -40,9 +40,9 @@
     <p>
     <?php
     echo $this->Paginator->counter(array(
-    'format' => __('Page %page% sur %pages%, affichage de %current% enregistrements sur %count% au total, démarrage à l\'enregistrement %start%, fin à l\'enregistrement %end%', true)
+    'format' => __('Page {:page} sur {:pages}, affichage de {:current} enregistrements sur un total de {:count}, démarrage à l\'enregistrement {:start}, fin à l\'enregistrement {:end}')
     ));
-    ?>  </p>
+    ?>	</p>
 
     <div class="paging">
         <?php echo $this->Paginator->prev('<span class="leftarrow icon"></span>' . __('précédent', true), array('escape'=>false, 'tag'=>'button class="button left" style="padding-bottom:8px;"', 'separator'=>''), null, array('escape'=>false, 'tag'=>'button class="button left" style="padding-bottom:8px;"'));

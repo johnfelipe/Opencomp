@@ -60,8 +60,7 @@ class AcademiesController extends AppController
         //On transmet à la vue la liste des utilisateurs.
         $this->set('users', $this->Academy->User->find('list'));
 
-        if (!empty($this->request->data)) {
-            $this->Academy->create();
+        if ($this->request->is('academy')) {
             if ($this->Academy->save($this->request->data)) {
                 $this->Session->setFlash(__('L\'académie a été ajoutée.', true), 'message_succes');
                 $this->redirect(array('action' => 'index'));

@@ -145,20 +145,6 @@ class UsersController extends AppController
         $this->set('title_for_layout', __('Authentification', true));
         $this->layout = 'auth';
         
-        if($this->request->is('post')){
-            if($this->Auth->login()){
-                return $this->redirect($this->Auth->redirect());
-            } else {
-                $this->Session->setFlash("Login/mdp invalide");
-            }
-        }
-        // On teste l'existance de $this->Auth->user(), si la variable n'est pas vide,
-        // c'est que l'utilisateur est déjà connecté ; il n'a donc rien à faire sur la
-        // page de login et on le redirige vers un module au choix !
-        /*$user = $this->Auth->user();
-        if (isset($user)) {
-            $this->redirect(array('controller'=>'pages', 'action'=>'display', 'home'));
-        }*/
     }
 
     /**

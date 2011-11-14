@@ -24,7 +24,7 @@
 class User extends AppModel
 {
     var $displayField = array("%s %s", "{n}.User.first_name", "{n}.User.name");
-
+    
     var $hasAndBelongsToMany = array(
         'Academy' =>
             array(
@@ -102,9 +102,9 @@ class User extends AppModel
      *
      * @return boolean Vrai si les mots de passes sont identiques, faux sinon.
      */
-    function checkPasswords($data)
+    public function checkPasswords($data)
     {
-        if ($this->request->data[$this->name]['passwrd'] == $this->request->data[$this->name]['passwrd2']) {
+        if ($this->data[$this->name]['passwrd'] == $this->data[$this->name]['passwrd2']) {
             return true;
         } else {
             return false;
@@ -120,13 +120,13 @@ class User extends AppModel
      *
      * @return boolean Vrai si le nom d'utilisateur est unique, faux sinon.
      */
-    function isUniqueUpdate($data)
+    public function isUniqueUpdate($data)
     {
         return !$this->find('count',
             array(
                 'conditions' => array(
                     $data,
-                    "id != {$this->request->data[$this->alias]['id']}"
+                    "id != {$this->data['User']['id']}"
                 ),
                 'recursive' => -1
             ));
@@ -137,38 +137,38 @@ class User extends AppModel
      *
      * @return boolean Renvoie vrai pour valider l'enregistrement.
      */
-    function beforeSave()
+    /*public function beforeSave()
     {
         //Si on envoie un mot de passe hâché, inutile de le hâcher à nouveau
-        if (isset($this->request->data[$this->alias]['passhache'])) {
+        if (isset($this->data[$this->alias]['passhache'])) {
             //On indique juste que le champs passhache correspond en réalité
             //au champs password dans la base de données.
-            $this->request->data[$this->alias]['password'] = $this->request->data[$this->alias]['passhache'];
+            $this->data[$this->alias]['password'] = $this->data[$this->alias]['passhache'];
         } else {
             // On indique que passwrd correspond en fait à password.
-            $this->request->data[$this->alias]['password'] = $this->request->data[$this->alias]['passwrd'];
+            $this->data[$this->alias]['password'] = $this->data[$this->alias]['passwrd'];
 
             // Si le champ password n'est pas vide, c'est qu'il a été modifié.
             // Alors, on l'encrypte.
-            if (!empty($this->request->data[$this->alias]['password'])) {
-                $this->request->data[$this->alias]['password'] = Security::hash($this->request->data[$this->alias]['password'], null, true);
+            if (!empty($this->data[$this->alias]['password'])) {
+                $this->data[$this->alias]['password'] = Security::hash($this->data[$this->alias]['password'], null, true);
             }
 
             // Si on a récupéré un champ Id du formulaire, c'est que la personne
             // est en train d'éditer un enregistrement.
-            if (isset($this->request->data[$this->alias]['id'])) {
+            if (isset($this->data[$this->alias]['id'])) {
                 // Si le champ password n'a pas été complété, on fait en sorte
                 // de récupérer le hash à partir de la BDD.
-                if (empty($this->request->data[$this->alias]['password'])) {
-                    $user = $this->findById($this->request->data[$this->alias]['id']);
+                if (empty($this->data[$this->alias]['password'])) {
+                    $user = $this->findById($this->data[$this->alias]['id']);
                     $passcrypte = $user[$this->alias]['password'];
 
-                    $this->request->data[$this->alias]['password'] = $passcrypte;
+                    $this->data[$this->alias]['password'] = $passcrypte;
                 }
             }
         }
         return true;
-    }
+    }*/
 }
 
 ?>

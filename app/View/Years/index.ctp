@@ -31,17 +31,18 @@ echo $this->Html->link(
             <?php echo $this->Html->link(__('Editer', true), array('action' => 'edit', $y['Year']['id'])); ?>
         </td>
         <td>
-<?php echo $this->Html->link(__('Supprimer', true), array('action' => 'delete', $y['Year']['id']), null, sprintf(__('Êtes vous sûr(e) de vouloir supprimer l\'année scolaire %s ?\nCette opération ne peut pas être annulée.', true), $y['Year']['title'].' '.$y['Year']['id'])); ?>
+<?php echo $this->Html->link(__('Supprimer', true), array('action' => 'delete', $y['Year']['id']), null, __('Êtes vous sûr(e) de vouloir supprimer l\'année scolaire "%s" ?', $y['Year']['title']));; ?>
         </td>
     </tr>
 <?php endforeach; ?>
     </table>
     <p>
-    <?php
-    echo $this->Paginator->counter(array(
-    'format' => __('Page %page% sur %pages%, affichage de %current% enregistrements sur %count% au total, démarrage à l\'enregistrement %start%, fin à l\'enregistrement %end%', true)
-    ));
-    ?>  </p>
+	<?php
+	echo $this->Paginator->counter(array(
+	'format' => __('Page {:page} sur {:pages}, affichage de {:current} enregistrements sur un total de {:count}, démarrage à l\'enregistrement {:start}, fin à {:end}')
+	));
+	?>	</p>
+
 
     <div class="paging">
         <?php echo $this->Paginator->prev('<span class="leftarrow icon"></span>' . __('précédent', true), array('escape'=>false, 'tag'=>'button class="button left" style="padding-bottom:8px;"', 'separator'=>''), null, array('escape'=>false, 'tag'=>'button class="button left" style="padding-bottom:8px;"'));

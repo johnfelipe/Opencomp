@@ -12,7 +12,7 @@
 
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-			<th><?php echo $this->Paginator->sort(__('Période',true),'title');?></th>
+			<th><?php echo $this->Paginator->sort('begin', __('Période'));?></th>
 			<th><?php echo __('Année scolaire', true) ?></th>
 			<th><?php echo __('Établissement', true) ?></th>
 			<th class="actions"><?php __('Actions');?></th>

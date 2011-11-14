@@ -186,11 +186,11 @@
     </div>
 
     <div id="footer">
-        <p style='position:relative; top:7px; left:10px;'><?php echo __('Opencomp est distribué sous licence',true); ?> <a href ='http://www.gnu.org/licenses/agpl-3.0-standalone.html'>GNU/AGPL</a>.<br /><a href='http://zolotaya.isa-geek.com/redmine/projects/gnote'><?php echo __('Forge du projet Opencomp',true); ?></a> - <a href='http://zolotaya.isa-geek.com/redmine/projects/gnote/issues/new'><?php echo __('rapporter une anomalie',true) ?></a></p><div style='float:right; position:relative; bottom:18px; right:10px;'><?php echo __('Page générée en',true); ?> $tps <?php echo __('seconde requêtes exécutées.',true) ?></div>
+        <p style='position:relative; top:7px; left:10px;'><?php echo __('Opencomp est distribué sous licence',true); ?> <a href ='http://www.gnu.org/licenses/agpl-3.0-standalone.html'>GNU/AGPL</a>.<br /><a href='https://github.com/jtraulle/Opencomp'><?php echo __('Forge du projet Opencomp',true); ?></a> - <a href='https://github.com/jtraulle/Opencomp/issues'><?php echo __('rapporter une anomalie',true) ?></a></p><div style='float:right; position:relative; bottom:18px; right:10px;'><?php echo __('Page générée en',true); ?> $tps <?php echo __('seconde requêtes exécutées.',true) ?></div>
 
     </div>
 
-    <?php echo $this->element('sql_dump');
+    <?php     //echo $this->element('sql_dump'); //On affiche pas le dump_sql car DebugKit le gère très bien tout seul =)
               //echo $this->Js->writeBuffer();   ?>
 </body>
 </html>

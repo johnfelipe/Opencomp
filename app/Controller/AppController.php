@@ -4,7 +4,7 @@
 class AppController extends Controller {
         
     public $helpers = array('Session', 'Html', 'Form');
-	public $components = array('Session');
+	public $components = array('DebugKit.Toolbar','Session');
         
 
 	public function beforeFilter(){

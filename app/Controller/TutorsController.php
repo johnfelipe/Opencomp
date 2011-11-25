@@ -32,7 +32,7 @@ class TutorsController extends AppController
     */
     public function index()
     {
-        $this->set('title_for_layout', __('Liste des Tuteurs', true));
+        $this->set('title_for_layout', __('Liste des Tuteurs'));
         $this->set('tutors', $this->paginate());
     }
     
@@ -44,7 +44,7 @@ class TutorsController extends AppController
     */
     public function add()
     {
-        $this->set('title_for_layout', __('Ajouter un tuteur', true));
+        $this->set('title_for_layout', __('Ajouter un tuteur'));
     }
     
     /**
@@ -57,7 +57,7 @@ class TutorsController extends AppController
     */
     public function edit($id = null)
     {
-        $this->set('title_for_layout', __('Modifier un tuteur', true));
+        $this->set('title_for_layout', __('Modifier un tuteur'));
     }
     
     

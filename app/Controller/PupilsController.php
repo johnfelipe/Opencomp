@@ -34,7 +34,7 @@ class PupilsController extends AppController
     public function index()
     {
         $this->Pupil->recursive = 0;
-        $this->set('title_for_layout', __('Liste des élèves', true));
+        $this->set('title_for_layout', __('Liste des élèves'));
         $this->set('pupils', $this->paginate());
     }
 
@@ -49,7 +49,7 @@ class PupilsController extends AppController
     public function view($id = null)
     {
         //On transmet le titre à la vue.
-        $this->set('title_for_layout', __('Affichage d\'un élève', true));
+        $this->set('title_for_layout', __('Affichage d\'un élève'));
 
         //Si l'id de l'élève à afficher n'a pas été passé en paramètre,
         //on redirige l'utilisateur sur la liste des élèves.
@@ -68,7 +68,7 @@ class PupilsController extends AppController
         if (!empty($infoPupil)) {
             $this->set('pupil', $infoPupil);
         } else {
-            $this->Session->setFlash(__('L\'élève que vous souhaitez afficher n\'existe pas.', true), 'message_erreur');
+            $this->Session->setFlash(__('L\'élève que vous souhaitez afficher n\'existe pas.'), 'message_erreur');
             $this->redirect(array('action' => 'index'));
         }
     }
@@ -81,7 +81,7 @@ class PupilsController extends AppController
      */
     public function add()
     {
-        $this->set('title_for_layout', __('Création d\'un élève', true));
+        $this->set('title_for_layout', __('Création d\'un élève'));
         
         //On transmet à la vue la liste des classes.
         $this->set('classrooms', $this->Pupil->Classroom->find('list'));
@@ -91,10 +91,10 @@ class PupilsController extends AppController
         if (!empty($this->request->data)) {
             $this->Pupil->create();
             if ($this->Pupil->save($this->request->data)) {
-                $this->Session->setFlash(__('L\'élève a été ajoutée.', true), 'message_succes');
+                $this->Session->setFlash(__('L\'élève a été ajoutée.'), 'message_succes');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('L\'élève n\'a pas pu être ajoutée.', true), 'message_erreur');
+                $this->Session->setFlash(__('L\'élève n\'a pas pu être ajoutée.'), 'message_erreur');
             }
         }
     }
@@ -121,10 +121,10 @@ class PupilsController extends AppController
         //de validation et, si elles sont satisfaites, on enregistre en BDD.
         if (!empty($this->request->data)) {
             if ($this->Pupil->save($this->request->data)) { 
-                $this->Session->setFlash(__('L\'élève a été sauvegardé.', true), 'message_succes');
+                $this->Session->setFlash(__('L\'élève a été sauvegardé.'), 'message_succes');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('L\'élève n\'a pas pu être éditée.', true), 'message_erreur');
+                $this->Session->setFlash(__('L\'élève n\'a pas pu être éditée.'), 'message_erreur');
             }
         }
 
@@ -136,7 +136,7 @@ class PupilsController extends AppController
             $this->request->data = $this->Pupil->read(null, $id);
 
             if (empty($this->request->data)) {
-                $this->Session->setFlash(__('L\'élève que vous souhaitez éditer n\'existe pas.', true), 'message_erreur');
+                $this->Session->setFlash(__('L\'élève que vous souhaitez éditer n\'existe pas.'), 'message_erreur');
                 $this->redirect(array('action' => 'index'));
             }
         }
@@ -160,13 +160,13 @@ class PupilsController extends AppController
 
         //On supprime l'élève souhaitée et on redirige vers la liste des élèves.
         if ($this->Pupil->delete($id)) {
-            $this->Session->setFlash(__('L\'élève a été supprimée.', true), 'message_succes');
+            $this->Session->setFlash(__('L\'élève a été supprimée.'), 'message_succes');
             $this->redirect(array('action'=>'index'));
         }
 
         //Un mauvais id a été passé en paramètre, on indique que l'élève à supprimer
         //n'existe pas et on redirige vers la liste des élèves.
-        $this->Session->setFlash(__('L\'élève que vous souhaitez supprimer n\'existe pas.', true), 'message_erreur');
+        $this->Session->setFlash(__('L\'élève que vous souhaitez supprimer n\'existe pas.'), 'message_erreur');
         $this->redirect(array('action' => 'index'));
     }
 }

@@ -34,7 +34,7 @@ class ClassroomsController extends AppController
     public function index()
     {
         $this->Classroom->recursive = 0;
-        $this->set('title_for_layout', __('Liste des classes', true));
+        $this->set('title_for_layout', __('Liste des classes'));
         $this->set('classrooms', $this->paginate());
     }
 
@@ -49,7 +49,7 @@ class ClassroomsController extends AppController
     public function view($id = null)
     {
         //On transmet le titre à la vue.
-        $this->set('title_for_layout', __('Affichage d\'une classe', true));
+        $this->set('title_for_layout', __('Affichage d\'une classe'));
 
         //Si l'id de la classe à afficher n'a pas été passé en paramètre,
         //on redirige l'utilisateur sur la liste des classes.
@@ -68,7 +68,7 @@ class ClassroomsController extends AppController
         if (!empty($infoClasse)) {
             $this->set('classroom', $infoClasse);
         } else {
-            $this->Session->setFlash(__('La classe que vous souhaitez afficher n\'existe pas.', true), 'message_erreur');
+            $this->Session->setFlash(__('La classe que vous souhaitez afficher n\'existe pas.'), 'message_erreur');
             $this->redirect(array('action' => 'index'));
         }
 
@@ -83,7 +83,7 @@ class ClassroomsController extends AppController
     public function add()
     {
         //On transmet le titre à la vue.
-        $this->set('title_for_layout', __('Ajouter une classe', true));
+        $this->set('title_for_layout', __('Ajouter une classe'));
 
         //On transmet à la vue la liste des utilisateurs.
         $e = $this->Classroom->Establishment->find('list');
@@ -98,10 +98,10 @@ class ClassroomsController extends AppController
         if (!empty($this->request->data)) {
             $this->Classroom->create();
             if ($this->Classroom->save($this->request->data)) {
-                $this->Session->setFlash(__('La classe a été ajoutée.', true), 'message_succes');
+                $this->Session->setFlash(__('La classe a été ajoutée.'), 'message_succes');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('La classe n\'a pas pu être ajoutée.', true), 'message_erreur');
+                $this->Session->setFlash(__('La classe n\'a pas pu être ajoutée.'), 'message_erreur');
             }
         }
     }
@@ -133,10 +133,10 @@ class ClassroomsController extends AppController
         //de validation et, si elles sont satisfaites, on enregistre en BDD.
         if (!empty($this->request->data)) {
             if ($this->Classroom->save($this->request->data)) {
-                $this->Session->setFlash(__('La classe a été sauvegardé.', true), 'message_succes');
+                $this->Session->setFlash(__('La classe a été sauvegardé.'), 'message_succes');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('La classe n\'a pas pu être éditée.', true), 'message_erreur');
+                $this->Session->setFlash(__('La classe n\'a pas pu être éditée.'), 'message_erreur');
             }
         }
 
@@ -148,7 +148,7 @@ class ClassroomsController extends AppController
             $this->request->data = $this->Classroom->read(null, $id);
 
             if (empty($this->request->data)) {
-                $this->Session->setFlash(__('La classe que vous souhaitez éditer n\'existe pas.', true), 'message_erreur');
+                $this->Session->setFlash(__('La classe que vous souhaitez éditer n\'existe pas.'), 'message_erreur');
                 $this->redirect(array('action' => 'index'));
             }
         }
@@ -172,13 +172,13 @@ class ClassroomsController extends AppController
 
         //On supprime la classe souhaitée et on redirige vers la liste des classes.
         if ($this->Classroom->delete($id)) {
-            $this->Session->setFlash(__('La classe a été supprimée.', true), 'message_succes');
+            $this->Session->setFlash(__('La classe a été supprimée.'), 'message_succes');
             $this->redirect(array('action'=>'index'));
         }
 
         //Un mauvais id a été passé en paramètre, on indique que la classe à supprimer
         //n'existe pas et on redirige vers la liste des classes.
-        $this->Session->setFlash(__('La classe que vous souhaitez supprimer n\'existe pas.', true), 'message_erreur');
+        $this->Session->setFlash(__('La classe que vous souhaitez supprimer n\'existe pas.'), 'message_erreur');
         $this->redirect(array('action' => 'index'));
     }
 }

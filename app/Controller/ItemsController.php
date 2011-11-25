@@ -34,7 +34,7 @@ class ItemsController extends AppController
     */
     public function edit($id = null)
     {
-        $this->set('title_for_layout', __('Ajouter/Modifier une compétence', true));
+        $this->set('title_for_layout', __('Ajouter/Modifier une compétence'));
 
         // Passage de la liste des compétences à la Vue :
         $this->set('competences', $this->Item->Competence->generatetreelist(null, null, null, '......'));
@@ -55,10 +55,10 @@ class ItemsController extends AppController
             //Sauvegarde des données en base
             if ($this->Item->save($this->request->data)) {
                 //Message de confirmation et redirection
-                $this->Session->setFlash(__('Cet Item a été correctement ajouté', true), 'message_succes');
+                $this->Session->setFlash(__('Cet Item a été correctement ajouté'), 'message_succes');
                 $this->redirect(array('action' => 'edit'));
             } else {
-                $this->Session->setFlash(__('Veuillez corriger les erreurs mentionnées.', true), 'message_attention');
+                $this->Session->setFlash(__('Veuillez corriger les erreurs mentionnées.'), 'message_attention');
             }
         } else {
             //On tente de précharger le formulaire avec les informations

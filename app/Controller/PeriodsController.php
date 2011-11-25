@@ -1,6 +1,5 @@
-
 <?php
-
+App::uses('AppController', 'Controller');
 /**
   * PeriodsController.php
   * 
@@ -36,7 +35,7 @@ class PeriodsController extends AppController
     public function index()
     {
         $this->Period->recursive = 0;
-        $this->set('title_for_layout', __('Périodes scolaires', true));
+        $this->set('title_for_layout', __('Périodes scolaires'));
         $this->set('periods', $this->paginate());
     }
     
@@ -48,19 +47,19 @@ class PeriodsController extends AppController
     */
     public function add()
     {
-        $this->set('title_for_layout', __('Ajouter une période scolaire', true));
+        $this->set('title_for_layout', __('Ajouter une période scolaire'));
 
         //On transmet à la vue la liste des années et des établissements.
         $this->set('years', $this->Period->Year->find('list'));
         $this->set('establishments', $this->Period->Establishment->find('list'));
 
-        if (!empty($this->request->data)) {
+        if ($this->request->is('post')) {
             $this->Period->create();
             if ($this->Period->save($this->request->data)) {
-                $this->Session->setFlash(__('La période scolaire a été ajoutée.', true), 'message_succes');
+                $this->Session->setFlash(__('La période scolaire a été ajoutée.'), 'message_succes');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('La période scolaire n\'a pas pu être ajoutée.', true), 'message_erreur');
+                $this->Session->setFlash(__('La période scolaire n\'a pas pu être ajoutée.'), 'message_erreur');
             }
         }
     }
@@ -86,10 +85,10 @@ class PeriodsController extends AppController
 
         if (!empty($this->request->data)) {
             if ($this->Period->save($this->request->data)) {
-                $this->Session->setFlash(__('La période scolaire a été sauvegardée.', true), 'message_succes');
+                $this->Session->setFlash(__('La période scolaire a été sauvegardée.'), 'message_succes');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('Le période scolaire n\'a pas pu être éditée.', true), 'message_erreur');
+                $this->Session->setFlash(__('Le période scolaire n\'a pas pu être éditée.'), 'message_erreur');
             }
         }
 
@@ -97,7 +96,7 @@ class PeriodsController extends AppController
             $this->request->data = $this->Period->read(null, $id);
 
             if (empty($this->request->data)) {
-                $this->Session->setFlash(__('La période scolaire que vous souhaitez éditer n\'existe pas.', true), 'message_erreur');
+                $this->Session->setFlash(__('La période scolaire que vous souhaitez éditer n\'existe pas.'), 'message_erreur');
                 $this->redirect(array('action' => 'index'));
             }
         }
@@ -118,11 +117,11 @@ class PeriodsController extends AppController
         }
 
         if ($this->Period->delete($id)) {
-            $this->Session->setFlash(__('La période scolaire a été supprimée.', true), 'message_succes');
+            $this->Session->setFlash(__('La période scolaire a été supprimée.'), 'message_succes');
             $this->redirect(array('action'=>'index'));
         }
 
-        $this->Session->setFlash(__('La période que vous souhaitez supprimer n\'existe pas.', true), 'message_erreur');
+        $this->Session->setFlash(__('La période que vous souhaitez supprimer n\'existe pas.'), 'message_erreur');
         $this->redirect(array('action' => 'index'));
     }
 

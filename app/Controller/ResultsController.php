@@ -32,7 +32,7 @@ class ResultsController extends AppController
     */
     public function index()
     {
-        $this->set('title_for_layout', __('Les Résultats', true));
+        $this->set('title_for_layout', __('Les Résultats'));
         $this->set('results', $this->paginate());
     }
     
@@ -44,7 +44,7 @@ class ResultsController extends AppController
     */
     public function add()
     {
-        $this->set('title_for_layout', __('Ajouter un résultat', true));
+        $this->set('title_for_layout', __('Ajouter un résultat'));
     }
     
     /**
@@ -57,7 +57,7 @@ class ResultsController extends AppController
     */
     public function edit($id = null)
     {
-        $this->set('title_for_layout', __('Modifier un résultat', true));
+        $this->set('title_for_layout', __('Modifier un résultat'));
     }
     
     

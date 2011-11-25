@@ -34,7 +34,7 @@ class LevelsController extends AppController
     public function index()
     {
         $this->Level->recursive = 0;
-        $this->set('title_for_layout', __('Niveaux', true));
+        $this->set('title_for_layout', __('Niveaux'));
         $this->set('levels', $this->paginate());
     }
     
@@ -49,15 +49,15 @@ class LevelsController extends AppController
         //On transmet à la vue la liste des cycles.
         $this->set('cycles', $this->Level->Cycle->find('list'));
 
-        $this->set('title_for_layout', __('Ajouter un niveau', true));
+        $this->set('title_for_layout', __('Ajouter un niveau'));
 
         if (!empty($this->request->data)) {
             $this->Level->create();
             if ($this->Level->save($this->request->data)) {
-                $this->Session->setFlash(__('Le niveau a été ajouté.', true), 'message_succes');
+                $this->Session->setFlash(__('Le niveau a été ajouté.'), 'message_succes');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('Le niveau n\'a pas pu être ajouté.', true), 'message_erreur');
+                $this->Session->setFlash(__('Le niveau n\'a pas pu être ajouté.'), 'message_erreur');
             }
         }
     }
@@ -81,10 +81,10 @@ class LevelsController extends AppController
 
         if (!empty($this->request->data)) {
             if ($this->Level->save($this->request->data)) {
-                $this->Session->setFlash(__('Le niveau a été sauvegardé.', true), 'message_succes');
+                $this->Session->setFlash(__('Le niveau a été sauvegardé.'), 'message_succes');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('Le niveau n\'a pas pu être édité.', true), 'message_erreur');
+                $this->Session->setFlash(__('Le niveau n\'a pas pu être édité.'), 'message_erreur');
             }
         }
 
@@ -92,7 +92,7 @@ class LevelsController extends AppController
             $this->request->data = $this->Level->read(null, $id);
 
             if (empty($this->request->data)) {
-                $this->Session->setFlash(__('Le niveau que vous souhaitez éditer n\'existe pas.', true), 'message_erreur');
+                $this->Session->setFlash(__('Le niveau que vous souhaitez éditer n\'existe pas.'), 'message_erreur');
                 $this->redirect(array('action' => 'index'));
             }
         }
@@ -113,11 +113,11 @@ class LevelsController extends AppController
         }
 
         if ($this->Level->delete($id)) {
-            $this->Session->setFlash(__('Le niveau a été supprimée.', true), 'message_succes');
+            $this->Session->setFlash(__('Le niveau a été supprimée.'), 'message_succes');
             $this->redirect(array('action'=>'index'));
         }
 
-        $this->Session->setFlash(__('Le niveau que vous souhaitez supprimer n\'existe pas.', true), 'message_erreur');
+        $this->Session->setFlash(__('Le niveau que vous souhaitez supprimer n\'existe pas.'), 'message_erreur');
         $this->redirect(array('action' => 'index'));
     }
     

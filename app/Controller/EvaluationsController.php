@@ -32,7 +32,7 @@ class EvaluationsController extends AppController
     */
     public function index()
     {
-        $this->set('title_for_layout', __('Les Evaluations', true));
+        $this->set('title_for_layout', __('Les Evaluations'));
         $this->set('evaluations', $this->paginate());
     }
     
@@ -44,7 +44,7 @@ class EvaluationsController extends AppController
     */
     public function add()
     {
-        $this->set('title_for_layout', __('Ajouter une évaluation', true));
+        $this->set('title_for_layout', __('Ajouter une évaluation'));
     }
     
     /**
@@ -57,7 +57,7 @@ class EvaluationsController extends AppController
     */
     public function edit($id = null)
     {
-        $this->set('title_for_layout', __('Modifier une évaluation', true));
+        $this->set('title_for_layout', __('Modifier une évaluation'));
     }
     
     

@@ -35,7 +35,7 @@ class CompetencesController extends AppController
      */
     public function index()
     {
-        $this->set('title_for_layout', __('Référentiel de compétences', true));
+        $this->set('title_for_layout', __('Référentiel de compétences'));
 
         $this->Competence->recursive = -1;
         $categories = $this->Competence->children(false);
@@ -65,13 +65,13 @@ class CompetencesController extends AppController
      */
     public function edit($id = null)
     {
-        $title = __('Ajouter', true);
+        $title = __('Ajouter');
 
         if (!empty($this->request->data['Category']['id'])) {
-            $title = __('Modifier', true);
+            $title = __('Modifier');
         }
 
-        $title .= ' '.__('une catégorie au référentiel de compétences', true);
+        $title .= ' '.__('une catégorie au référentiel de compétences');
 
         $this->set('title_for_layout', $title);
 
@@ -79,13 +79,13 @@ class CompetencesController extends AppController
             $this->Competence->set($this->request->data);
 
             if (!$this->Competence->validates()) {
-                $this->Session->setFlash(__('Corrigez les erreurs mentionnées', true), 'message_attention');
+                $this->Session->setFlash(__('Corrigez les erreurs mentionnées'), 'message_attention');
                 return;
             }
 
             $this->Competence->save(null, false);
 
-            $this->Session->setFlash(__('Données enregistrées.', true), 'message_succes');
+            $this->Session->setFlash(__('Données enregistrées.'), 'message_succes');
             $this->redirect('edit');
         }
 
@@ -104,9 +104,9 @@ class CompetencesController extends AppController
     public function moveUp($id = null)
     {
         if (!$this->Competence->moveup($id)) {
-            $this->Session->setFlash(__('La catégorie ne peut pas aller plus haut.', true), 'message_erreur');
+            $this->Session->setFlash(__('La catégorie ne peut pas aller plus haut.'), 'message_erreur');
         } else {
-            $this->Session->setFlash(__('Ordre mis à jour.', true), 'message_succes');
+            $this->Session->setFlash(__('Ordre mis à jour.'), 'message_succes');
         }
 
         $this->redirect($this->referer());
@@ -123,9 +123,9 @@ class CompetencesController extends AppController
     public function moveDown($id = null)
     {
         if (!$this->Competence->movedown($id)) {
-            $this->Session->setFlash(__('La catégorie ne peut pas aller plus bas.', true), 'message_erreur');
+            $this->Session->setFlash(__('La catégorie ne peut pas aller plus bas.'), 'message_erreur');
         } else {
-            $this->Session->setFlash(__('Ordre mis à jour.', true), 'message_succes');
+            $this->Session->setFlash(__('Ordre mis à jour.'), 'message_succes');
         }
 
         $this->redirect($this->referer());
@@ -144,10 +144,10 @@ class CompetencesController extends AppController
         $this->Competence->id = $id;
 
         if (!$this->Competence->exists()) {
-            $this->Session->setFlash(__('Enregistrement introuvable.', true), 'message_error');
+            $this->Session->setFlash(__('Enregistrement introuvable.'), 'message_error');
         } else {
             $this->Competence->removeFromTree($id, true);
-            $this->Session->setFlash(__('Données supprimées.', true), 'message_succes');
+            $this->Session->setFlash(__('Données supprimées.'), 'message_succes');
         }
 
         $this->redirect($this->referer());

@@ -32,7 +32,7 @@ class YearsController extends AppController
      */
     public function index()
     {
-        $this->set('title_for_layout', __('Liste des années scolaires', true));
+        $this->set('title_for_layout', __('Liste des années scolaires'));
         $this->set('years', $this->paginate());
     }
 
@@ -44,17 +44,17 @@ class YearsController extends AppController
      */
     public function add()
     {
-        $this->set('title_for_layout', __('Création d\'une année scolaire', true));
+        $this->set('title_for_layout', __('Création d\'une année scolaire'));
 
         //Les données du formulaires ont été envoyées, on vérifie les règles
         //de validation et, si elles sont satisfaites, on enregistre en BDD.
         if (!empty($this->request->data)) {
             $this->Year->create();
             if ($this->Year->save($this->request->data)) {
-                $this->Session->setFlash(__('L\'année scolaire a été ajoutée.', true), 'message_succes');
+                $this->Session->setFlash(__('L\'année scolaire a été ajoutée.'), 'message_succes');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('L\'année scolaire n\'a pas pu être ajoutée.', true), 'message_erreur');
+                $this->Session->setFlash(__('L\'année scolaire n\'a pas pu être ajoutée.'), 'message_erreur');
             }
         }
     }
@@ -69,7 +69,7 @@ class YearsController extends AppController
      */
     public function edit($id = null)
     {
-        $this->set('title_for_layout', __('Édition d\'une année scolaire', true));
+        $this->set('title_for_layout', __('Édition d\'une année scolaire'));
 
         //Aucun id n'a été fourni, on redirige vers la liste des années scolaires.
         if (!$id && empty($this->request->data)) {
@@ -80,10 +80,10 @@ class YearsController extends AppController
         //de validation et, si elles sont satisfaites, on enregistre en BDD.
         if (!empty($this->request->data)) {
             if ($this->Year->save($this->request->data)) {
-                $this->Session->setFlash(__('L\'année scolaire a été sauvegardé.', true), 'message_succes');
+                $this->Session->setFlash(__('L\'année scolaire a été sauvegardé.'), 'message_succes');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('L\'année scolaire n\'a pas pu être éditée.', true), 'message_erreur');
+                $this->Session->setFlash(__('L\'année scolaire n\'a pas pu être éditée.'), 'message_erreur');
             }
         }
 
@@ -95,7 +95,7 @@ class YearsController extends AppController
             $this->request->data = $this->Year->read(null, $id);
 
             if (empty($this->request->data)) {
-                $this->Session->setFlash(__('L\'année scolaire que vous souhaitez éditer n\'existe pas.', true), 'message_erreur');
+                $this->Session->setFlash(__('L\'année scolaire que vous souhaitez éditer n\'existe pas.'), 'message_erreur');
                 $this->redirect(array('action' => 'index'));
             }
         }
@@ -119,13 +119,13 @@ class YearsController extends AppController
 
         //On supprime l'élève souhaitée et on redirige vers la liste des années scolaires.
         if ($this->Year->delete($id)) {
-            $this->Session->setFlash(__('L\'année scolaire a été supprimée.', true), 'message_succes');
+            $this->Session->setFlash(__('L\'année scolaire a été supprimée.'), 'message_succes');
             $this->redirect(array('action'=>'index'));
         }
 
         //Un mauvais id a été passé en paramètre, on indique que l'année scolaire à supprimer
         //n'existe pas et on redirige vers la liste des années scolaires.
-        $this->Session->setFlash(__('L\'élève que vous souhaitez supprimer n\'existe pas.', true), 'message_erreur');
+        $this->Session->setFlash(__('L\'élève que vous souhaitez supprimer n\'existe pas.'), 'message_erreur');
         $this->redirect(array('action' => 'index'));
     }
 }

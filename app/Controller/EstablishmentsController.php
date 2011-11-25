@@ -32,7 +32,7 @@ class EstablishmentsController extends AppController
     */
     public function index()
     {
-        $this->set('title_for_layout', __('Liste des établissements', true));
+        $this->set('title_for_layout', __('Liste des établissements'));
         $this->set('establishments', $this->paginate());
     }
 
@@ -44,7 +44,7 @@ class EstablishmentsController extends AppController
     */
     public function add()
     {
-        $this->set('title_for_layout', __('Ajouter un établissement', true));
+        $this->set('title_for_layout', __('Ajouter un établissement'));
 
         //On transmet à la vue la liste des utilisateurs.
         $u = $this->Establishment->User->find('list');
@@ -55,10 +55,10 @@ class EstablishmentsController extends AppController
         if (!empty($this->request->data)) {
             $this->Establishment->create();
             if ($this->Establishment->save($this->request->data)) {
-                $this->Session->setFlash(__('L\'établissement a été ajouté.', true), 'message_succes');
+                $this->Session->setFlash(__('L\'établissement a été ajouté.'), 'message_succes');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('L\'établissement n\'a pas pu être ajouté.', true), 'message_erreur');
+                $this->Session->setFlash(__('L\'établissement n\'a pas pu être ajouté.'), 'message_erreur');
             }
         }
     }
@@ -73,7 +73,7 @@ class EstablishmentsController extends AppController
     */
     public function edit($id = null)
     {
-        $this->set('title_for_layout', __('Modifier un établissement', true));
+        $this->set('title_for_layout', __('Modifier un établissement'));
 
         //On transmet à la vue la liste des utilisateurs.
         $u = $this->Establishment->User->find('list');
@@ -87,10 +87,10 @@ class EstablishmentsController extends AppController
 
         if (!empty($this->request->data)) {
             if ($this->Establishment->save($this->request->data)) {
-                $this->Session->setFlash(__('L\'établissement a été sauvegardé.', true), 'message_succes');
+                $this->Session->setFlash(__('L\'établissement a été sauvegardé.'), 'message_succes');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('L\'établissement n\'a pas pu être édité.', true), 'message_erreur');
+                $this->Session->setFlash(__('L\'établissement n\'a pas pu être édité.'), 'message_erreur');
             }
         }
 
@@ -98,7 +98,7 @@ class EstablishmentsController extends AppController
             $this->request->data = $this->Establishment->read(null, $id);
 
             if (empty($this->request->data)) {
-                $this->Session->setFlash(__('L\'établissement que vous souhaitez éditer n\'existe pas.', true), 'message_erreur');
+                $this->Session->setFlash(__('L\'établissement que vous souhaitez éditer n\'existe pas.'), 'message_erreur');
                 $this->redirect(array('action' => 'index'));
             }
         }
@@ -119,11 +119,11 @@ class EstablishmentsController extends AppController
         }
 
         if ($this->Establishment->delete($id)) {
-            $this->Session->setFlash(__('L\'établissement a été supprimé.', true), 'message_succes');
+            $this->Session->setFlash(__('L\'établissement a été supprimé.'), 'message_succes');
             $this->redirect(array('action'=>'index'));
         }
 
-        $this->Session->setFlash(__('L\'établissement que vous souhaitez supprimer n\'existe pas.', true), 'message_erreur');
+        $this->Session->setFlash(__('L\'établissement que vous souhaitez supprimer n\'existe pas.'), 'message_erreur');
         $this->redirect(array('action' => 'index'));
     }
 

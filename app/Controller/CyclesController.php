@@ -33,7 +33,7 @@ class CyclesController extends AppController
     public function index()
     {
         $this->Cycle->recursive = 0;
-        $this->set('title_for_layout', __('Cycles d\'apprentissage', true));
+        $this->set('title_for_layout', __('Cycles d\'apprentissage'));
         $this->set('cycles', $this->paginate());
     }
     
@@ -45,15 +45,15 @@ class CyclesController extends AppController
     */
     public function add()
     {
-        $this->set('title_for_layout', __('Ajouter un cycle d\'apprentissage', true));
+        $this->set('title_for_layout', __('Ajouter un cycle d\'apprentissage'));
 
         if (!empty($this->request->data)) {
             $this->Cycle->create();
             if ($this->Cycle->save($this->request->data)) {
-                $this->Session->setFlash(__('Le cycle d\'apprentissage a été ajouté.', true), 'message_succes');
+                $this->Session->setFlash(__('Le cycle d\'apprentissage a été ajouté.'), 'message_succes');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('Le cycle d\'apprentissage n\'a pas pu être ajouté.', true), 'message_erreur');
+                $this->Session->setFlash(__('Le cycle d\'apprentissage n\'a pas pu être ajouté.'), 'message_erreur');
             }
         }
     }
@@ -74,10 +74,10 @@ class CyclesController extends AppController
 
         if (!empty($this->request->data)) {
             if ($this->Cycle->save($this->request->data)) {
-                $this->Session->setFlash(__('Le cycle d\'apprentissage a été sauvegardé.', true), 'message_succes');
+                $this->Session->setFlash(__('Le cycle d\'apprentissage a été sauvegardé.'), 'message_succes');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('Le cycle d\'apprentissage n\'a pas pu être édité.', true), 'message_erreur');
+                $this->Session->setFlash(__('Le cycle d\'apprentissage n\'a pas pu être édité.'), 'message_erreur');
             }
         }
 
@@ -85,7 +85,7 @@ class CyclesController extends AppController
             $this->request->data = $this->Cycle->read(null, $id);
 
             if (empty($this->request->data)) {
-                $this->Session->setFlash(__('Le cycle d\'apprentissage que vous souhaitez éditer n\'existe pas.', true), 'message_erreur');
+                $this->Session->setFlash(__('Le cycle d\'apprentissage que vous souhaitez éditer n\'existe pas.'), 'message_erreur');
                 $this->redirect(array('action' => 'index'));
             }
         }
@@ -106,11 +106,11 @@ class CyclesController extends AppController
         }
 
         if ($this->Cycle->delete($id)) {
-            $this->Session->setFlash(__('Le cycle d\'apprentissage a été supprimé.', true), 'message_succes');
+            $this->Session->setFlash(__('Le cycle d\'apprentissage a été supprimé.'), 'message_succes');
             $this->redirect(array('action'=>'index'));
         }
 
-        $this->Session->setFlash(__('Le cycle d\'apprentissage que vous souhaitez supprimer n\'existe pas.', true), 'message_erreur');
+        $this->Session->setFlash(__('Le cycle d\'apprentissage que vous souhaitez supprimer n\'existe pas.'), 'message_erreur');
         $this->redirect(array('action' => 'index'));
     }    
 }

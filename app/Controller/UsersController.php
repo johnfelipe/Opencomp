@@ -54,7 +54,7 @@ class UsersController extends AppController
      */
     public function index()
     {
-        $this->set('title_for_layout', __('Liste des utilisateurs', true));
+        $this->set('title_for_layout', __('Liste des utilisateurs'));
         $q = $this->paginate('User');
         $this->set('listedesutilisateurs', $q);
     }
@@ -80,9 +80,9 @@ class UsersController extends AppController
             //Petite attention, on distingue la modification de l'ajout même
             //si une seule méthode effectue les deux opérations.
             if (!empty($this->request->data['User']['id'])) {
-                $this->set('title_for_layout', __('Modifier un utilisateur', true));
+                $this->set('title_for_layout', __('Modifier un utilisateur'));
             } else {
-                $this->set('title_for_layout', __('Ajouter un utilisateur', true));
+                $this->set('title_for_layout', __('Ajouter un utilisateur'));
             }
         } else {
             // Si le formulaire est rempli, on sauve les données si elles sont
@@ -90,22 +90,22 @@ class UsersController extends AppController
             // avertissement invitant les personnes à corriger leur saisie.
             if ($this->User->save($this->request->data)) {
                 if (!empty($this->request->data['User']['id'])) {
-                    $this->Session->setFlash(__('L\'utilisateur a été édité avec succès !', true), 'message_succes');
+                    $this->Session->setFlash(__('L\'utilisateur a été édité avec succès !'), 'message_succes');
                     $this->redirect('index');
                 } else {
-                    $this->Session->setFlash(__('L\'utilisateur a été ajouté avec succès !', true), 'message_succes');
+                    $this->Session->setFlash(__('L\'utilisateur a été ajouté avec succès !'), 'message_succes');
                     $this->redirect('index');
                 }
             } else {
                 //Petite attention, on distingue la modification de l'ajout même
                 //si une seule méthode effectue les deux opérations.
                 if (!empty($this->request->data['User']['id'])) {
-                    $this->set('title_for_layout', __('Modifier un utilisateur', true));
+                    $this->set('title_for_layout', __('Modifier un utilisateur'));
                 } else {
-                    $this->set('title_for_layout', __('Ajouter un utilisateur', true));
+                    $this->set('title_for_layout', __('Ajouter un utilisateur'));
                 }
 
-                $this->Session->setFlash(__('Corrigez les erreurs mentionnées', true), 'message_attention');
+                $this->Session->setFlash(__('Corrigez les erreurs mentionnées'), 'message_attention');
             }
         }
     }
@@ -124,11 +124,11 @@ class UsersController extends AppController
         $nb_admin = $this->User->find('count', array('conditions' => array('User.role' => 'admin')));
 
         if ($utilisateur['User']['role'] == 'admin' && $nb_admin == 1) {
-            $this->Session->setFlash(__('Vous devez conserver au moins un administrateur pour gérer les utilisateurs !', true), 'message_erreur');
+            $this->Session->setFlash(__('Vous devez conserver au moins un administrateur pour gérer les utilisateurs !'), 'message_erreur');
             $this->redirect('index');
         } else {
             $this->User->delete($id);
-            $this->Session->setFlash(__('L\'utilisateur a été correctement supprimé !', true), 'message_succes');
+            $this->Session->setFlash(__('L\'utilisateur a été correctement supprimé !'), 'message_succes');
             $this->redirect('index');
         }
 
@@ -142,7 +142,7 @@ class UsersController extends AppController
      */
     public function login()
     {
-        $this->set('title_for_layout', __('Authentification', true));
+        $this->set('title_for_layout', __('Authentification'));
         $this->layout = 'auth';
         
     }

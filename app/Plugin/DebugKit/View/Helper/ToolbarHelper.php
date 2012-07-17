@@ -66,8 +66,14 @@ class ToolbarHelper extends AppHelper {
 		}
 
 		parent::__construct($View, $options);
-
 	}
+
+	public function afterLayout($layoutFile) {
+		if (!$this->request->is('requested')) {
+			$this->send();
+		}
+	}
+
 /**
  * Get the name of the backend Helper
  * used to conditionally trigger toolbar output
@@ -176,6 +182,7 @@ class ToolbarHelper extends AppHelper {
 			if ($isHtml) {
 				$query['query'] = h($query['query']);
 			}
+			unset($query['params']);
 			$out['queries'][] = $query;
 		}
 		if ($options['cache']) {

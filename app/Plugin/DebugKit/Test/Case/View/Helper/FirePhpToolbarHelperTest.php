@@ -24,7 +24,7 @@ App::uses('Controller', 'Controller');
 App::uses('CakeResponse', 'Network');
 App::uses('Router', 'Routing');
 App::uses('ToolbarHelper', 'DebugKit.View/Helper');
-App::uses('FirePhpToolbar', 'DebugKit.View/Helper');
+App::uses('FirePhpToolbarHelper', 'DebugKit.View/Helper');
 require_once $path . 'Test' . DS . 'Case' . DS . 'TestFireCake.php';
 
 FireCake::getInstance('TestFireCake');
@@ -101,7 +101,7 @@ class FirePhpToolbarHelperTestCase extends CakeTestCase {
  * @return void
  */
 	public function testAfterLayout(){
-		$this->Controller->viewPath = 'posts';
+		$this->Controller->viewPath = 'Posts';
 		$request = new CakeRequest('/posts/index');
 		$request->addParams(Router::parse($request->url));
 		$request->addPaths(array(

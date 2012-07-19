@@ -16,16 +16,20 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 ?>
-<h2><?php echo $name; ?></h2>
-<p class="error">
-	<strong><?php echo __d('cake', 'Error'); ?>: </strong>
+
+<div class="alert alert-block alert-error">
+  <h2 class="alert-heading"><i class="icon-bolt"></i> <?php echo __d('cake', 'Ooops - Une erreur interne est survenue.'); ?></h4>
+<br />
+    <h3><?php echo $name; ?></h3><br />
 	<?php printf(
-		__d('cake', 'The requested address %s was not found on this server.'),
+		__d('cake', 'L\'adresse demandée %s n\'a pas été trouvée sur le serveur.'),
 		"<strong>'{$url}'</strong>"
 	); ?>
-</p>
+<br /><br />
 <?php
 if (Configure::read('debug') > 0 ):
 	echo $this->element('exception_stack_trace');
 endif;
 ?>
+
+</div>

@@ -1,0 +1,20 @@
+/* Style pour les titres de pages */
+.page-title{
+	border-bottom-width:1px;
+	border-bottom-style:solid;
+	border-bottom-color:#cacaca;
+	margin-bottom : 25px;
+}
+
+/* Style pour positionner les boutons Call to action des titres de modules */
+.ontitle{
+	float:right;
+	position: relative;
+	top: -14px;
+	margin-left:10px;
+}
+
+/* Surcharge de la classe success pour afficher en gras le texte des boutons */
+a.btn-success {
+	font-weight:bold;
+}

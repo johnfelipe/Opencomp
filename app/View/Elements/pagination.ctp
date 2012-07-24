@@ -7,7 +7,7 @@
 </p>
 
 <?php
-if($this->Paginator->counter('{:count}') > 1){
+if($this->Paginator->counter('{:pages}') > 1){
     if (!isset($modules)) {
     	$modulus = 20;
     }

@@ -9,14 +9,17 @@
     <?php
 		echo $this->Html->css('bootstrap');
 		echo $this->Html->css('bootstrap-responsive');
+		echo $this->Html->css('datepicker');
 		echo $this->Html->css('font-awesome');
 		echo $this->Html->css('../js/chosen/chosen.css');
+		echo $this->Html->css('jstree');
 		echo $this->Html->css('custom');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 	?>
+	   <script type="text/javascript" charset="utf-8" src="http://cdn.sencha.io/ext-4.1.0-gpl/ext-all.js"></script>
     
     <style>
       body {
@@ -43,9 +46,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">Opencomp <sub>βeta</sub></a>
+          <a class="brand" href="#">Opencomp <sub>αlpha</sub></a>
           <div class="nav-collapse">
             <ul class="nav">
+              <li class="active"><?php echo $this->Html->link(__('Synthèse'), '/dashboard'); ?></li>
               <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Listes <b class="caret"></b></a>
                   <ul class="dropdown-menu">
@@ -54,14 +58,12 @@
                     <li><a href="#">Écoles</a></li>
                     <li><a href="#">Classes</a></li>
                     <li><a href="#">Niveaux</a></li>
-                    <li><a href="#">Élèves</a></li>
+                    <li><?php echo $this->Html->link(__('Élèves'), '/pupils'); ?></li>
                   </ul>
               </li>  
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li><?php echo $this->Html->link(__('Utilisateurs'), '/users'); ?></li>
             </ul>
-          </div><!--/.nav-collapse -->
+          </div><!--/.nav-collapse -->           
         </div>
       </div>
     </div>
@@ -77,7 +79,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     
-    <?php echo $this->Html->script(array('jquery.js', 'chosen/chosen.jquery.min.js', 'bootstrap-dropdown.js', 'bootstrap-alert.js', 'bootstrap-transition.js', 'less-1.3.0.min.js', 'custom.js')); ?>
+    <?php echo $this->Html->script(array('jquery.js', 'chosen/chosen.jquery.min.js', 'bootstrap-dropdown.js', 'bootstrap-alert.js', 'bootstrap-modal.js', 'bootstrap-datepicker.js', 'bootstrap-tab.js', 'bootstrap-transition.js', 'less-1.3.0.min.js', 'jquery.jstree', 'custom.js')); ?>
     
     <!--
     <script src="../js/bootstrap-transition.js"></script>

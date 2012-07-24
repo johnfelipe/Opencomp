@@ -46,7 +46,7 @@ class AcademiesController extends AppController {
 	    $this->set('title_for_layout', __('Visualiser une académie'));
 		$this->Academy->id = $id;
 		if (!$this->Academy->exists()) {
-			throw new NotFoundException(__('L\'académie demandée n\'existe pas !'));
+			throw new NotFoundException(__('L\'académie demandée n\'existe pas !'), 'flash_error');
 		}
 		$this->set('academy', $this->Academy->read(null, $id));
 	}
@@ -87,7 +87,7 @@ class AcademiesController extends AppController {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Academy->save($this->request->data)) {
 				$this->Session->setFlash(__('L\'académie a été correctement mise à jour'), 'flash_success');
-				$this->redirect(array('action' => 'index'));
+				$this->redirect(array('action' => 'view', $this->data['Academy']['id']));
 			} else {
 				$this->Session->setFlash(__('Des erreurs ont été détectées durant la validation du formulaire. Veuillez corriger les erreurs mentionnées.'), 'flash_error');
 			}

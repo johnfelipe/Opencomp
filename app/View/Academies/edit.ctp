@@ -1,6 +1,6 @@
 <div class="page-title">
     <h2><?php echo __('Éditer une académie'); ?></h2>
-    <?php echo $this->Html->link('<i class="icon-arrow-left"></i> '.__('retour aux académies'), 'index', array('class' => 'ontitle btn', 'escape' => false)); ?>
+    <?php echo $this->Html->link('<i class="icon-arrow-left"></i> '.__('retour à l\'académie'), 'view/'.$this->data['Academy']['id'], array('class' => 'ontitle btn', 'escape' => false)); ?>
 </div>
 
 <?php 

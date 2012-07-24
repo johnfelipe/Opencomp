@@ -1,5 +1,8 @@
 <div class="pupils index">
-	<h1><?php echo __('Gérer les élèves'); ?></h1>
+    <div class="page-title">
+        <h2><?php echo __('Élèves'); ?></h2>
+        <?php echo $this->Html->link('<i class="icon-plus"></i> '.__('Ajouter un élève'), 'add', array('class' => 'ontitle btn btn-success', 'escape' => false)); ?>
+    </div>
 	
 	<?php
 	if($this->Paginator->sortKey()){
@@ -9,8 +12,8 @@
        echo'</div>';
 	}
 	?>
-		
-	<table class="table table-bordered table-striped">
+	
+	<table class="table table-striped">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id', $this->Utils->sorting_sign('id', $this->Paginator->sortKey(), $this->Paginator->sortDir()).'#', array('escape' => false)); ?></th>
 			<th><?php echo $this->Paginator->sort('name', $this->Utils->sorting_sign('name', $this->Paginator->sortKey(), $this->Paginator->sortDir()).__('Prénom'), array('escape' => false)); ?></th>

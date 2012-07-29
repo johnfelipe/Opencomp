@@ -10,7 +10,7 @@
 		echo $this->Form->input('state');
 		echo $this->Form->input('tutor_id');
 		echo $this->Form->input('level_id');
-		echo $this->Form->input('Classroom');
+		echo $this->Form->input('ClassroomsPupil');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>

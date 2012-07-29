@@ -49,19 +49,17 @@
           <a class="brand" href="#">Opencomp <sub>αlpha</sub></a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="active"><?php echo $this->Html->link(__('Synthèse'), '/dashboard'); ?></li>
+              <li><?php echo $this->Html->link('<i class="icon-bar-chart"></i> '.__('Synthèse'), '/dashboard', array('escape' => false)); ?></li>
               <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Listes <b class="caret"></b></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i> Listes <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li class="nav-header">Gérer les listes</li>
                     <li><?php echo $this->Html->link(__('Académies'), '/academies'); ?></li>
-                    <li><a href="#">Écoles</a></li>
-                    <li><a href="#">Classes</a></li>
-                    <li><a href="#">Niveaux</a></li>
-                    <li><?php echo $this->Html->link(__('Élèves'), '/pupils'); ?></li>
+                    <li><?php echo $this->Html->link(__('Niveaux scolaire'), '/levels'); ?></li>
                   </ul>
               </li>  
-              <li><?php echo $this->Html->link(__('Utilisateurs'), '/users'); ?></li>
+              <li><?php echo $this->Html->link('<i class="icon-user"></i> '.__('Utilisateurs'), '/users', array('escape' => false)); ?></li>
+              <li><?php echo $this->Html->link('<i class="icon-cogs"></i> '.__('Paramètres'), '/settings', array('escape' => false)); ?></li>
             </ul>
           </div><!--/.nav-collapse -->           
         </div>

@@ -29,7 +29,7 @@ class PeriodsController extends AppController {
 		if (!$this->Period->exists()) {
 			throw new NotFoundException(__('Invalid period'));
 		}
-		$this->set('period', $this->Period->read(null, $id));
+		$this->set('period', $this->Period->read(null, $id)); toto, blablz
 	}
 
 /**
@@ -41,8 +41,10 @@ class PeriodsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Period->create();
 			if ($this->Period->save($this->request->data)) {
-				$this->Session->setFlash(__('The period has been saved'));
-				$this->redirect(array('action' => 'index'));
+				$this->Session->setFlash(__('La nouvelle période a été correctement ajoutée.'), 'flash_success');
+				$this->redirect(array(
+				    'controller'    => 'establishments',
+				    'action'        => 'view', $this->request->data['Period']['establishment_id']));
 			} else {
 				$this->Session->setFlash(__('The period could not be saved. Please, try again.'));
 			}

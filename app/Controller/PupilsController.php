@@ -48,8 +48,8 @@ class PupilsController extends AppController {
 			}
 		}
 		$tutors = $this->Pupil->Tutor->find('list');
-		$levels = $this->Pupil->Level->find('list');
-		$classrooms = $this->Pupil->Classroom->find('list');
+		$levels = $this->Pupil->ClassroomsPupil->Level->find('list');
+		$classrooms = $this->Pupil->ClassroomsPupil->Classroom->find('list');
 		$this->set(compact('tutors', 'levels', 'classrooms'));
 	}
 
@@ -66,7 +66,12 @@ class PupilsController extends AppController {
 			throw new NotFoundException(__('L\'élève spécifié n\'existe pas !'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->Pupil->save($this->request->data)) {
+			$this->Pupil->ClassroomsPupil->set(array(
+			    'classroom_id' => 10,
+			    'pupil_id' => 13,
+			    'level_id' => 7
+			));
+			if ($this->Pupil->saveAll($this->request->data)) {
 				$this->Session->setFlash(__('The pupil has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -76,8 +81,8 @@ class PupilsController extends AppController {
 			$this->request->data = $this->Pupil->read(null, $id);
 		}
 		$tutors = $this->Pupil->Tutor->find('list');
-		$levels = $this->Pupil->Level->find('list');
-		$classrooms = $this->Pupil->Classroom->find('list');
+		$levels = $this->Pupil->ClassroomsPupil->Level->find('list');
+		$classrooms = $this->Pupil->ClassroomsPupil->Classroom->find('list');
 		$this->set(compact('tutors', 'levels', 'classrooms'));
 	}
 

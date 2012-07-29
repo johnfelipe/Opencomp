@@ -24,6 +24,7 @@ App::uses('AppController', 'Controller');
  */
 class EstablishmentsController extends AppController {
 
+	public $helpers = array('Time');
 
 /**
  * view method
@@ -38,7 +39,9 @@ class EstablishmentsController extends AppController {
 		if (!$this->Establishment->exists()) {
 			throw new NotFoundException(__('L\'établissement scolaire demandé n\'existe pas !'), 'flash_error');
 		}
+		$years = $this->Establishment->Period->Year->find('list');
 		$this->set('establishment', $this->Establishment->read(null, $id));
+		$this->set('years', $years);
 	}
 
 /**

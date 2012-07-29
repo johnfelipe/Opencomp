@@ -1,31 +1,34 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * Pupil Model
+ * Classroom Model
  *
- * @property Tutor $Tutor
- * @property Level $Level
- * @property Result $Result
- * @property Classroom $Classroom
+ * @property User $User
+ * @property Year $Year
+ * @property Establishment $Establishment
+ * @property CompetencesUser $CompetencesUser
+ * @property Evaluation $Evaluation
+ * @property Item $Item
+ * @property Pupil $Pupil
+ * @property User $User
  */
-class Pupil extends AppModel {
+class Classroom extends AppModel {
 
 /**
  * Display field
  *
  * @var string
  */
-	public $displayField = array("%s %s", "{n}.Pupil.first_name", "{n}.Pupil.name");
-	public $recursive = 2;
-
+	public $displayField = 'title';
+	
 /**
  * Validation rules
  *
  * @var array
  */
 	public $validate = array(
-		'name' => array(
-			'minlength' => array(
+		'title' => array(
+			'notempty' => array(
 				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
@@ -34,9 +37,9 @@ class Pupil extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'first_name' => array(
-			'minlength' => array(
-				'rule' => array('notempty'),
+		'user_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -44,9 +47,9 @@ class Pupil extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'sex' => array(
-			'inlist' => array(
-				'rule' => array('notempty'),
+		'year_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -54,27 +57,7 @@ class Pupil extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'birthday' => array(
-			'date' => array(
-				'rule' => array('date'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'state' => array(
-			'boolean' => array(
-				'rule' => array('boolean'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'tutor_id' => array(
+		'establishment_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
@@ -94,9 +77,23 @@ class Pupil extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'Tutor' => array(
-			'className' => 'Tutor',
-			'foreignKey' => 'tutor_id',
+		'User' => array(
+			'className' => 'User',
+			'foreignKey' => 'user_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'Year' => array(
+			'className' => 'Year',
+			'foreignKey' => 'year_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'Establishment' => array(
+			'className' => 'Establishment',
+			'foreignKey' => 'establishment_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -109,9 +106,9 @@ class Pupil extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'Result' => array(
-			'className' => 'Result',
-			'foreignKey' => 'pupil_id',
+		'CompetencesUser' => array(
+			'className' => 'CompetencesUser',
+			'foreignKey' => 'classroom_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
@@ -122,9 +119,22 @@ class Pupil extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
-		'ClassroomsPupil' => array(
-			'className' => 'ClassroomsPupil',
-			'foreignKey' => 'pupil_id',
+		'Evaluation' => array(
+			'className' => 'Evaluation',
+			'foreignKey' => 'classroom_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'Item' => array(
+			'className' => 'Item',
+			'foreignKey' => 'classroom_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
@@ -142,13 +152,28 @@ class Pupil extends AppModel {
  * hasAndBelongsToMany associations
  *
  * @var array
-
+ */
 	public $hasAndBelongsToMany = array(
-		'Classroom' => array(
-			'className' => 'Classroom',
+		'Pupil' => array(
+			'className' => 'Pupil',
 			'joinTable' => 'classrooms_pupils',
-			'foreignKey' => 'pupil_id',
-			'associationForeignKey' => 'classroom_id',
+			'foreignKey' => 'classroom_id',
+			'associationForeignKey' => 'pupil_id',
+			'unique' => 'keepExisting',
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'finderQuery' => '',
+			'deleteQuery' => '',
+			'insertQuery' => ''
+		),
+		'User' => array(
+			'className' => 'User',
+			'joinTable' => 'classrooms_users',
+			'foreignKey' => 'classroom_id',
+			'associationForeignKey' => 'user_id',
 			'unique' => 'keepExisting',
 			'conditions' => '',
 			'fields' => '',
@@ -160,5 +185,5 @@ class Pupil extends AppModel {
 			'insertQuery' => ''
 		)
 	);
-*/
+
 }

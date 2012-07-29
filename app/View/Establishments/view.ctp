@@ -46,32 +46,52 @@
             <h3><?php echo __('Périodes de cet établissement'); ?></h3>
             <?php echo $this->Html->link('<i class="icon-plus"></i> '.__('ajouter une période'), '#myModal', array('data-toggle' => 'modal', 'class' => 'ontitle btn btn-success', 'escape' => false)); ?>
         </div>
+        
+        <?php if (!empty($establishment['Period'])): ?>
+		<table class="table table-condensed table-striped">
+		<tr>
+			<th><?php echo __('Début de la période'); ?></th>
+			<th><?php echo __('Fin de la période'); ?></th>
+			<th><?php echo __('Année scolaire'); ?></th>
+			<th class="actions"><?php echo __('Actions'); ?></th>
+		</tr>
+		<?php
+			$i = 0;
+			foreach ($establishment['Period'] as $period): ?>
+			<tr>
+				<td><?php echo $this->Time->format("d/m/Y",$period['begin']); ?></td>
+				<td><?php echo $this->Time->format("d/m/Y",$period['end']); ?></td>
+				<td><?php echo $period['Year']['title']; ?></td>
+				<td class="actions">
+					<?php echo $this->Html->link('<i class="icon-pencil"></i> '.__('Modifier'), array('controller' => 'periods', 'action' => 'edit', $period['id']), array('escape' => false)); ?>
+				</td>
+			</tr>
+		<?php endforeach; ?>
+		</table>
+		<?php endif; ?>
     </div>
 </div>
 
-<div class="related">
-	<h3><?php echo __('Related Classrooms'); ?></h3>
+<div class="page-title">
+    <h3><?php echo __('Classes de cet établissement'); ?></h3>
+    <?php echo $this->Html->link('<i class="icon-plus"></i> '.__('ajouter une classe'), '/classrooms/add/establishment_id:'.$establishment['Establishment']['id'], array('class' => 'ontitle btn btn-success', 'escape' => false)); ?>
+</div>
+
 	<?php if (!empty($establishment['Classroom'])): ?>
-	<table cellpadding = "0" cellspacing = "0">
+	<table class='table table-striped table-condensed'>
 	<tr>
-		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('Title'); ?></th>
-		<th><?php echo __('User Id'); ?></th>
-		<th><?php echo __('Year Id'); ?></th>
-		<th><?php echo __('Establishment Id'); ?></th>
-		<th><?php echo __('Created'); ?></th>
+		<th><?php echo __('Nom de la classe'); ?></th>
+		<th><?php echo __('Enseignant titulaire'); ?></th>
+		<th><?php echo __('Année scolaire'); ?></th>
 		<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php
 		$i = 0;
 		foreach ($establishment['Classroom'] as $classroom): ?>
 		<tr>
-			<td><?php echo $classroom['id']; ?></td>
 			<td><?php echo $classroom['title']; ?></td>
-			<td><?php echo $classroom['user_id']; ?></td>
-			<td><?php echo $classroom['year_id']; ?></td>
-			<td><?php echo $classroom['establishment_id']; ?></td>
-			<td><?php echo $classroom['created']; ?></td>
+			<td><?php echo $classroom['User']['first_name'].' '.$classroom['User']['name']; ?></td>
+			<td><?php echo $classroom['Year']['title']; ?></td>
 			<td class="actions">
 				<?php echo $this->Html->link(__('View'), array('controller' => 'classrooms', 'action' => 'view', $classroom['id'])); ?>
 				<?php echo $this->Html->link(__('Edit'), array('controller' => 'classrooms', 'action' => 'edit', $classroom['id'])); ?>
@@ -80,47 +100,8 @@
 		</tr>
 	<?php endforeach; ?>
 	</table>
-<?php endif; ?>
+	<?php endif; ?>
 
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Classroom'), array('controller' => 'classrooms', 'action' => 'add')); ?> </li>
-		</ul>
-	</div>
-</div>
-
-<div class="related">
-	<h3><?php echo __('Related Periods'); ?></h3>
-	<?php if (!empty($establishment['Period'])): ?>
-	<table cellpadding = "0" cellspacing = "0">
-	<tr>
-		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('Begin'); ?></th>
-		<th><?php echo __('End'); ?></th>
-		<th><?php echo __('Year Id'); ?></th>
-		<th><?php echo __('Establishment Id'); ?></th>
-		<th class="actions"><?php echo __('Actions'); ?></th>
-	</tr>
-	<?php
-		$i = 0;
-		foreach ($establishment['Period'] as $period): ?>
-		<tr>
-			<td><?php echo $period['id']; ?></td>
-			<td><?php echo $period['begin']; ?></td>
-			<td><?php echo $period['end']; ?></td>
-			<td><?php echo $period['year_id']; ?></td>
-			<td><?php echo $period['establishment_id']; ?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View'), array('controller' => 'periods', 'action' => 'view', $period['id'])); ?>
-				<?php echo $this->Html->link(__('Edit'), array('controller' => 'periods', 'action' => 'edit', $period['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'periods', 'action' => 'delete', $period['id']), null, __('Are you sure you want to delete # %s?', $period['id'])); ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</table>
-<?php endif; ?>
-
-</div>
 
 
 
@@ -131,7 +112,8 @@
   </div>
   <div class="modal-body">
     <?php
-    echo $this->Form->create('Establishment', array(
+    echo $this->Form->create('Period', array(
+    	'url' => array('controller' => 'periods', 'action' => 'add'),
         'class' => 'form-horizontal',
         'inputDefaults' => array(
             'format' => array('before', 'label', 'between', 'input', 'error', 'after'),
@@ -147,6 +129,7 @@
         'between' => '<div class="controls"><div class="input-append date datepicker" data-date="'.date('Y-m-d').'" data-date-format="yyyy-mm-dd">',
         'after' => '<span class="add-on"><i class="icon-calendar"></i></span></div></div>',
         'class' => 'span2',
+        'type' => 'text',
         'readonly' => 'readonly',
         'label' => array(
             'text' => 'Date de début',
@@ -158,6 +141,7 @@
         'between' => '<div class="controls"><div class="input-append date datepicker" data-date="'.date('Y-m-d').'" data-date-format="yyyy-mm-dd">',
         'after' => '<span class="add-on"><i class="icon-calendar"></i></span></div></div>',
         'class' => 'span2',
+        'type' => 'text',
         'readonly' => 'readonly',
         'label' => array(
             'text' => 'Date de fin',
@@ -181,4 +165,5 @@
   <div class="modal-footer">
     <?php echo $this->Form->button('Ajouter', array('type' => 'submit', 'class' => 'btn btn-success')); ?>
   </div>
+  <?php echo $this->Form->end(); ?>
 </div>

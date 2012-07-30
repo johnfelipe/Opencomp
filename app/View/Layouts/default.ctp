@@ -49,7 +49,7 @@
           <a class="brand" href="#">Opencomp <sub>αlpha</sub></a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li><?php echo $this->Html->link('<i class="icon-bar-chart"></i> '.__('Synthèse'), '/dashboard', array('escape' => false)); ?></li>
+              <li><?php echo $this->Html->link('<i class="icon-dashboard"></i> '.__('Synthèse'), '/dashboard', array('escape' => false)); ?></li>
               <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i> Listes <b class="caret"></b></a>
                   <ul class="dropdown-menu">

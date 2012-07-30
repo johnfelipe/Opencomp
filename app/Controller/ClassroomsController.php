@@ -21,7 +21,8 @@ class ClassroomsController extends AppController {
 			throw new NotFoundException(__('The classroom_id provided does not exist !'));
 		}
 		$classroom = $this->Classroom->find('first', array(
-			'conditions' => array('Classroom.id' => $id)));
+			'conditions' => array('Classroom.id' => $id)
+		));
 		$this->set('classroom', $classroom);
 		
 		$classroompupil = $this->Classroom->ClassroomsPupil->find('all', array(
@@ -47,6 +48,18 @@ class ClassroomsController extends AppController {
 			 )
 		));
 		$this->set('ClassroomsPupil', $classroompupil);
+	}
+	
+	public function viewtests($id = null){
+		$this->set('title_for_layout', __('Visualiser une classe'));
+		$this->Classroom->id = $id;
+		if (!$this->Classroom->exists()) {
+			throw new NotFoundException(__('The classroom_id provided does not exist !'));
+		}
+		$classroom = $this->Classroom->find('first', array(
+			'conditions' => array('Classroom.id' => $id)));
+		$this->set('classroom', $classroom);
+			
 	}
 
 /**

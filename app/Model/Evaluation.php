@@ -1,18 +1,15 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * Classroom Model
+ * Evaluation Model
  *
+ * @property Classroom $Classroom
  * @property User $User
- * @property Year $Year
- * @property Establishment $Establishment
- * @property CompetencesUser $CompetencesUser
- * @property Evaluation $Evaluation
+ * @property Period $Period
+ * @property Result $Result
  * @property Item $Item
- * @property Pupil $Pupil
- * @property User $User
  */
-class Classroom extends AppModel {
+class Evaluation extends AppModel {
 
 /**
  * Display field
@@ -20,8 +17,7 @@ class Classroom extends AppModel {
  * @var string
  */
 	public $displayField = 'title';
-	public $recursive = 2;
-	
+
 /**
  * Validation rules
  *
@@ -31,6 +27,16 @@ class Classroom extends AppModel {
 		'title' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'classroom_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -48,17 +54,7 @@ class Classroom extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'year_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'establishment_id' => array(
+		'period_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
@@ -78,6 +74,13 @@ class Classroom extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
+		'Classroom' => array(
+			'className' => 'Classroom',
+			'foreignKey' => 'classroom_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
 		'User' => array(
 			'className' => 'User',
 			'foreignKey' => 'user_id',
@@ -85,16 +88,9 @@ class Classroom extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Year' => array(
-			'className' => 'Year',
-			'foreignKey' => 'year_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'Establishment' => array(
-			'className' => 'Establishment',
-			'foreignKey' => 'establishment_id',
+		'Period' => array(
+			'className' => 'Period',
+			'foreignKey' => 'period_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -107,35 +103,9 @@ class Classroom extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'CompetencesUser' => array(
-			'className' => 'CompetencesUser',
-			'foreignKey' => 'classroom_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'Evaluation' => array(
-			'className' => 'Evaluation',
-			'foreignKey' => 'classroom_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'Item' => array(
-			'className' => 'Item',
-			'foreignKey' => 'classroom_id',
+		'Result' => array(
+			'className' => 'Result',
+			'foreignKey' => 'evaluation_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
@@ -155,11 +125,11 @@ class Classroom extends AppModel {
  * @var array
  */
 	public $hasAndBelongsToMany = array(
-		'Pupil' => array(
-			'className' => 'Pupil',
-			'joinTable' => 'classrooms_pupils',
-			'foreignKey' => 'classroom_id',
-			'associationForeignKey' => 'pupil_id',
+		'Item' => array(
+			'className' => 'Item',
+			'joinTable' => 'evaluations_items',
+			'foreignKey' => 'evaluation_id',
+			'associationForeignKey' => 'item_id',
 			'unique' => 'keepExisting',
 			'conditions' => '',
 			'fields' => '',
@@ -170,11 +140,11 @@ class Classroom extends AppModel {
 			'deleteQuery' => '',
 			'insertQuery' => ''
 		),
-		'User' => array(
-			'className' => 'User',
-			'joinTable' => 'classrooms_users',
-			'foreignKey' => 'classroom_id',
-			'associationForeignKey' => 'user_id',
+		'Pupil' => array(
+			'className' => 'Pupil',
+			'joinTable' => 'evaluations_pupils',
+			'foreignKey' => 'evaluation_id',
+			'associationForeignKey' => 'pupil_id',
 			'unique' => 'keepExisting',
 			'conditions' => '',
 			'fields' => '',
@@ -186,5 +156,55 @@ class Classroom extends AppModel {
 			'insertQuery' => ''
 		)
 	);
+	
+	public function findPupilsByLevelsInClassroom($id_classroom){
+		$levels = $this->Pupil->ClassroomsPupil->Level->find('list', array(
+			'conditions' => array(
+				'ClassroomsPupil.classroom_id' => $id_classroom
+			),
+			'recursive' => -1,
+			'fields' => 'ClassroomsPupil.level_id',
+			'joins' => array(
+			    array('table' => 'classrooms_pupils',
+			        'alias' => 'ClassroomsPupil',
+			        'type' => 'LEFT',
+			        'conditions' => array(
+			            'Level.id = ClassroomsPupil.level_id',
+			        ),
+			    )
+			 )
+		));
+		
+		$pupils = $this->Pupil->ClassroomsPupil->find('all', array(
+			'conditions' => array(
+				'ClassroomsPupil.classroom_id' => $id_classroom,
+				'ClassroomsPupil.level_id' => $levels
+			),
+			'recursive' => -1,
+			'fields' => array('Pupil.id','Pupil.first_name','Pupil.name','Level.title'),
+			'joins' => array(
+			    array('table' => 'pupils',
+			        'alias' => 'Pupil',
+			        'type' => 'LEFT',
+			        'conditions' => array(
+			            'Pupil.id = ClassroomsPupil.pupil_id',
+			        ),
+			    ),
+			    array('table' => 'levels',
+			        'alias' => 'Level',
+			        'type' => 'LEFT',
+			        'conditions' => array(
+			            'Level.id = ClassroomsPupil.level_id',
+			        ),
+			    )
+			 )
+		));
+		
+		foreach($pupils as $pupil){
+			$pupilsLevels[$pupil['Level']['title']][$pupil['Pupil']['id']] = $pupil['Pupil']['first_name'].' '.$pupil['Pupil']['name'];				
+		}
+		
+		return $pupilsLevels;
+	}
 
 }

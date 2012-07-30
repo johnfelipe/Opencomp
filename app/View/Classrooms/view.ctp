@@ -72,6 +72,12 @@
     </div>
 </div>
 
+<ul class="nav nav-pills">
+  <li class="active">
+    <?php echo $this->Html->link(__('Élèves'), array('controller' => 'classrooms', 'action' => 'view', $classroom['Classroom']['id'])); ?>
+  </li>
+  <li><?php echo $this->Html->link(__('Évaluations'), array('controller' => 'classrooms', 'action' => 'viewtests', $classroom['Classroom']['id'])); ?></li>
+</ul>
 
 <div class="page-title">
     <h3><?php echo count($ClassroomsPupil).' '.__('élève(s) associé(s) à cette classe'); ?></h3>
@@ -133,49 +139,6 @@
 </div>
 <?php endif; ?>
 
-
-
-
-
-
-
-<div class="related">
-	<h3><?php echo __('Related Evaluations'); ?></h3>
-	<?php if (!empty($classroom['Evaluation'])): ?>
-	<table cellpadding = "0" cellspacing = "0">
-	<tr>
-		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('Classroom Id'); ?></th>
-		<th><?php echo __('User Id'); ?></th>
-		<th><?php echo __('Period Id'); ?></th>
-		<th><?php echo __('Created'); ?></th>
-		<th class="actions"><?php echo __('Actions'); ?></th>
-	</tr>
-	<?php
-		$i = 0;
-		foreach ($classroom['Evaluation'] as $evaluation): ?>
-		<tr>
-			<td><?php echo $evaluation['id']; ?></td>
-			<td><?php echo $evaluation['classroom_id']; ?></td>
-			<td><?php echo $evaluation['user_id']; ?></td>
-			<td><?php echo $evaluation['period_id']; ?></td>
-			<td><?php echo $evaluation['created']; ?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View'), array('controller' => 'evaluations', 'action' => 'view', $evaluation['id'])); ?>
-				<?php echo $this->Html->link(__('Edit'), array('controller' => 'evaluations', 'action' => 'edit', $evaluation['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'evaluations', 'action' => 'delete', $evaluation['id']), null, __('Are you sure you want to delete # %s?', $evaluation['id'])); ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</table>
-<?php endif; ?>
-
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Evaluation'), array('controller' => 'evaluations', 'action' => 'add')); ?> </li>
-		</ul>
-	</div>
-</div>
 <div class="related">
 	<h3><?php echo __('Related Items'); ?></h3>
 	<?php if (!empty($classroom['Item'])): ?>

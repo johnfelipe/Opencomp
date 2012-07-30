@@ -14,7 +14,7 @@ class Period extends AppModel {
  *
  * @var string
  */
-	public $displayField = 'begin';
+	public $displayField = array("du %s au %s", "{n}.Period.begin", "{n}.Period.end");
 
 /**
  * Validation rules
@@ -63,6 +63,22 @@ class Period extends AppModel {
 			),
 		),
 	);
+	
+	public function afterFind($results, $primary = false) {
+	    foreach ($results as $key => $val) {
+	        if (isset($val['Period']['begin'])) {
+	            $results[$key]['Period']['begin'] = $this->dateFormatAfterFind($val['Period']['begin']);
+	        }
+	        if (isset($val['Period']['end'])) {
+	            $results[$key]['Period']['end'] = $this->dateFormatAfterFind($val['Period']['end']);
+	        }
+	    }
+	    return $results;
+	}
+	
+	public function dateFormatAfterFind($dateString) {
+	    return date('d/m/Y', strtotime($dateString));
+	}
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 

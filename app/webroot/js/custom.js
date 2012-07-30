@@ -19,6 +19,20 @@ $(document).ready(function() {
       $('#myTab a[href="#tab1"]').tab('show');
     })
     
+     $(".selectPupils").click(function(event){
+      event.preventDefault();
+      var classe= $(event.delegateTarget).val(); 
+      $('optgroup[label='+classe+']').children().attr('selected', 'selected');
+      $("#PupilPupil").trigger("liszt:updated");
+    })
+    
+    $(".unselectPupils").click(function(event){
+      event.preventDefault();
+      var classe= $(event.delegateTarget).val(); 
+      $('optgroup[label='+classe+'] > option[selected=selected]').removeAttr('selected');
+      $("#PupilPupil").trigger("liszt:updated");
+    })    
+    
     $("#demo1").jstree({ 
         "crrm" : { 
 			"move" : {

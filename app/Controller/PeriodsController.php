@@ -29,7 +29,7 @@ class PeriodsController extends AppController {
 		if (!$this->Period->exists()) {
 			throw new NotFoundException(__('Invalid period'));
 		}
-		$this->set('period', $this->Period->read(null, $id)); toto, blablz
+		$this->set('period', $this->Period->read(null, $id));
 	}
 
 /**

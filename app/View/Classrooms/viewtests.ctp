@@ -114,7 +114,7 @@
 			<div class="btn-group">
 	          <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown"><i class="icon-cogs"></i> Actions <span class="caret"></span></button>
 	          <ul class="dropdown-menu">
-	            <li><li><?php echo $this->Html->link('<i class="icon-list"></i> '.__('Associer des items'), array('controller' => 'evaluations', 'action' => 'view', $evaluation['id']), array('escape' => false)); ?></li></li>
+	            <li><li><?php echo $this->Html->link('<i class="icon-list"></i> '.__('Associer des items'), array('controller' => 'evaluations', 'action' => 'attachitems', $evaluation['id']), array('escape' => false)); ?></li></li>
 	            <li><li><?php echo $this->Html->link('<i class="icon-bar-chart"></i> '.__('Saisir les résultats'), array('controller' => 'evaluations', 'action' => 'view', $evaluation['id']), array('escape' => false)); ?></li></li>
 	            <li class="divider"></li>
 	            <li><?php echo $this->Html->link('<i class="icon-pencil"></i> '.__('Modifier'), array('controller' => 'evaluations', 'action' => 'edit', $evaluation['id']), array('escape' => false)); ?></li>

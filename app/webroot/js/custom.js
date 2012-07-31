@@ -19,6 +19,11 @@ $(document).ready(function() {
       $('#myTab a[href="#tab1"]').tab('show');
     })
     
+    $(".jstree-toggle").click(function (e) {
+      e.preventDefault();
+      $("#demo1").jstree("toggle_node",e.delegateTarget);
+    })
+    
      $(".selectPupils").click(function(event){
       event.preventDefault();
       var classe= $(event.delegateTarget).val(); 
@@ -34,42 +39,12 @@ $(document).ready(function() {
     })    
     
     $("#demo1").jstree({ 
-        "crrm" : { 
-			"move" : {
-				"check_move" : function (m) { 
-					var p = this._get_parent(m.o);
-					if(!p) return false;
-					p = p == -1 ? this.get_container() : p;
-					if(p === m.np) return true;
-					if(p[0] && m.np[0] && p[0] === m.np[0]) return true;
-					return false;
-				}
-			}
-		},
-		"dnd" : {
-		    "drag_check" : function (data) {
-				if(data.r.attr("id") == "phtml_1") {
-					return false;
-				}
-				return { 
-					after : false, 
-					before : false, 
-					inside : true 
-				};
-			},
-			"drag_finish" : function (data) { 
-				alert("DRAG OK"); 
-			},
-		    "drop_finish" : function (data) { 
-				console.log(data.o); 
-			}
-		},
         "themes" : {
             "theme" : "apple",
             "dots" : true,
             "icons" : false
         },
-		"plugins" : [ "themes", "html_data", "crrm", "dnd" ]
+		"plugins" : [ "themes", "html_data" ]
 	});
     
 });

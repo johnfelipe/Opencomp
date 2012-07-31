@@ -15,7 +15,7 @@ class EvaluationsController extends AppController {
  * @param string $id
  * @return void
  */
-	public function view($id = null) {
+	public function attacheditems($id = null) {
 		$this->Evaluation->id = $id;
 		if (!$this->Evaluation->exists()) {
 			throw new NotFoundException(__('Invalid evaluation'));

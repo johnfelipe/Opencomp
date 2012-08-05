@@ -8,7 +8,7 @@
 
 <?php
 if($this->Paginator->counter('{:pages}') > 1){
-    if (!isset($modules)) {
+    if (!isset($modulus)) {
     	$modulus = 20;
     }
     if (!isset($model)) {

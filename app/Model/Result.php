@@ -1,0 +1,92 @@
+<?php
+App::uses('AppModel', 'Model');
+/**
+ * Result Model
+ *
+ * @property Evaluation $Evaluation
+ * @property Pupil $Pupil
+ * @property Item $Item
+ */
+class Result extends AppModel {
+
+	public $actsAs = array('Containable');
+
+/**
+ * Validation rules
+ *
+ * @var array
+ */
+	public $validate = array(
+		'evaluation_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'pupil_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'item_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'result' => array(
+			'inlist' => array(
+				'rule' => array('inlist', array('A', 'B', 'C', 'D', 'ABS')),
+				'message' => 'Your custom message here',
+				'allowEmpty' => true,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+	);
+
+	//The Associations below have been created with all possible keys, those that are not needed can be removed
+
+/**
+ * belongsTo associations
+ *
+ * @var array
+ */
+	public $belongsTo = array(
+		'Evaluation' => array(
+			'className' => 'Evaluation',
+			'foreignKey' => 'evaluation_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'Pupil' => array(
+			'className' => 'Pupil',
+			'foreignKey' => 'pupil_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'Item' => array(
+			'className' => 'Item',
+			'foreignKey' => 'item_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		)
+	);
+}

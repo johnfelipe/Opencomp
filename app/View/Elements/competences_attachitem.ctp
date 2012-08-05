@@ -18,18 +18,24 @@
 			'style' => 'color:green;'
 		)
 	);
-	if(isset($items[$id])){
+	if(!empty($data['Item'])){
 		echo '<ul>';
-		foreach($items[$id] as $item_id => $item_title){			
+		foreach($data['Item'] as $item){			
 			echo '<li>';
-			echo $this->Html->link($item_title, '#');
+			if($item['type'] == 1) 
+				echo '<span class="label label-important">EN</span>';
+			elseif($item['type'] == 2)
+				echo '<span class="label label-info">ET</span>';
+			elseif($item['type'] == 3)
+				echo '<span class="label label-success">PE</span>';
+			echo $this->Html->link($item['title'], '#');
 			echo $this->Html->link(
 				' <i class="icon-ok"></i> '.__('ajouter à l\'évaluation'), 
 				array(
 					'controller' => 'evaluationsitems', 
 					'action' => 'attachitem',
 					'evaluation_id' => $evaluation_id,
-					'item_id' => $item_id
+					'item_id' => $item['id']
 				), 
 				array(
 					'escape' => false,

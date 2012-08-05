@@ -6,9 +6,9 @@ App::uses('AppController', 'Controller');
  */
 class CompetencesController extends AppController {
 
-public $helpers = array('Tree');
+	public $helpers = array('Tree');
 
-public function attachitem() {
+	public function attachitem() {
 		
 		//On vérifie qu'un paramètre nommé classroom_id a été fourni et qu'il existe.
 		if(isset($this->request->params['named']['evaluation_id'])) {
@@ -30,11 +30,25 @@ public function attachitem() {
 		
         $stuff = $this->Competence->find('all',  
                 array('fields' => array('title', 'lft', 'rght'), 'order' => 'lft ASC')); 
-        $this->set('stuff', $stuff); 
-        
-        $items = $this->Competence->Item->find('list',  
-                array('fields' => array('id', 'title', 'competence_id'))); 
-        $this->set('items', $items); 
+        $this->set('stuff', $stuff);  
     }
+
+    public function bul() {	
+    	
+    	
+		//debug($this->Competence->getPath(6));
+		//debug($this->Competence->getPath(9));
+		//debug($this->Competence->getPath(19));
+    		
+        $stuff = $this->Competence->find('all',  
+        	array(
+            	//'conditions' => array('Competence.id' => array(6)),
+            	'fields' => array('title', 'lft', 'rght'), 
+            	'order' => 'lft ASC',
+            )
+        ); 
+        $this->set('stuff', $stuff);  
+    }
+
 
 }

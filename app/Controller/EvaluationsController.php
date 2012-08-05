@@ -22,6 +22,14 @@ class EvaluationsController extends AppController {
 		}
 		$this->set('evaluation', $this->Evaluation->read(null, $id));
 	}
+	
+	public function manageresults($id = null) {
+		$this->Evaluation->id = $id;
+		if (!$this->Evaluation->exists()) {
+			throw new NotFoundException(__('Invalid evaluation'));
+		}
+		$this->set('evaluation', $this->Evaluation->read(null, $id));
+	}
 
 /**
  * add method

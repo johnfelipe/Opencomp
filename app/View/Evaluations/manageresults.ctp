@@ -55,28 +55,32 @@
 </div>
 
 <ul class="nav nav-pills">
-  <li class="active"><?php echo $this->Html->link(__('Items évalués'), array('controller' => 'evaluations', 'action' => 'attacheditems', $evaluation['Evaluation']['id'])); ?></li>
-  <li><?php echo $this->Html->link(__('Résultats'), array('controller' => 'evaluations', 'action' => 'manageresults', $evaluation['Evaluation']['id'])); ?></li>
+  <li><?php echo $this->Html->link(__('Items évalués'), array('controller' => 'evaluations', 'action' => 'attacheditems', $evaluation['Evaluation']['id'])); ?></li>
+  <li class="active"><?php echo $this->Html->link(__('Résultats'), array('controller' => 'evaluations', 'action' => 'manageresults', $evaluation['Evaluation']['id'])); ?></li>
 </ul>
 
 <div class="page-title">
-    <h3><?php echo __('Items associés à cette évaluation'); ?></h3>
-    <?php echo $this->Html->link('<i class="icon-plus"></i> '.__('ajouter un item évalué'), '/competences/attachitem/evaluation_id:'.$evaluation['Evaluation']['id'], array('class' => 'ontitle btn btn-success', 'escape' => false)); ?>
+    <h3><?php echo __('Résultats de cette évaluation'); ?></h3>
+    <?php echo $this->Html->link('<i class="icon-magic"></i> '.__('saisie automagique'), '/results/selectpupil/evaluation_id:'.$evaluation['Evaluation']['id'], array('class' => 'ontitle btn btn-primary', 'escape' => false)); ?>
 </div>
 
-<?php if (!empty($evaluation['Item'])): ?>
+<?php if (!empty($evaluation['Pupil'])): ?>
 	<table class="table table-stripped table-condensed">
 	<tr>
-		<th><?php echo __('Libellé de l\'item évalué'); ?></th>
-		<th class="actions"><?php echo __('Action'); ?></th>
+		<th style="width:20%;"><?php echo __('Prénom'); ?></th>
+		<th style="width:20%;"><?php echo __('Nom'); ?></th>
+		<th style="width:20%;"><?php echo __('Progression de la saisie'); ?></th>
+		<th style="width:20%;"><?php echo __('Action'); ?></th>
 	</tr>
 	<?php
 		$i = 0;
-		foreach ($evaluation['Item'] as $item): ?>
+		foreach ($evaluation['Pupil'] as $pupil): ?>
 		<tr>
-			<td><?php echo $item['title']; ?></td>
+			<td><?php echo $pupil['first_name']; ?></td>
+			<td><?php echo $pupil['name']; ?></td>
+			<td style="padding-right:5%;"><div style="height:10px; margin-top:4px; margin-bottom:0px;" class="progress active"><div class="bar" style="width: 40%;"></div></div></td>
 			<td class="actions">
-				<?php echo $this->Form->postLink('<i class="icon-trash"></i> '.__('Supprimer'), array('controller' => 'evaluationsitems', 'action' => 'unlinkitem', 'item_id' => $item['id'], 'evaluation_id' => $evaluation['Evaluation']['id']), array('escape' => false), __('Êtes vous sûr(e) de vouloir dissocier cet item de cette évaluation ?', $item['id'])); ?>
+				<?php echo $this->Form->postLink('<i class="icon-pencil"></i> '.__('Compléter ou modifier la saisie'), array('controller' => 'results', 'action' => 'edit', 'pupil_id' => $pupil['id'], 'evaluation_id' => $evaluation['Evaluation']['id']), array('escape' => false)); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>

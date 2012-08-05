@@ -11,8 +11,14 @@
 
 <?php 
 
-echo $this->Form->create('EvaluationsItem', array(
+echo $this->Form->create('Item', array(
     'class' => 'form-horizontal',
+    'url' => array(
+    	'controller' => 'evaluationsitems',
+    	'action' => 'additem',
+    	'evaluation_id' => $evaluation_id,
+    	'competence_id' => $competence_id
+    ),
     'inputDefaults' => array(
         'format' => array('before', 'label', 'between', 'input', 'error', 'after'),
         'div' => array('class' => 'control-group'),
@@ -23,16 +29,27 @@ echo $this->Form->create('EvaluationsItem', array(
     )
 );
 
-echo $this->Form->input('Item.title', array(
+echo $this->Form->input('title', array(
     'label' => array(
         'text' => 'Libellé de l\'item',
         'class' => 'control-label'
     )
 )); 
 
-echo $this->Form->hidden('Item.competence_id', array('value' => $competence_id));
-echo $this->Form->hidden('Item.classroom_id', array('value' => $eval['Evaluation']['id']));
-echo $this->Form->hidden('Item.type', array('value' => 3));
+echo $this->Form->input('Level', array(
+    'class'=>'chzn-select',
+    'data-placeholder' => 'Sélectionnez un/des niveau(x) ...',
+    'style'=>'width : 220px;',
+    'label' => array(
+        'text' => 'Niveau de l\'item',
+        'class' => 'control-label'
+        )
+    )
+);
+
+echo $this->Form->hidden('competence_id', array('value' => $competence_id));
+echo $this->Form->hidden('classroom_id', array('value' => $eval['Evaluation']['id']));
+echo $this->Form->hidden('type', array('value' => 3));
     
 ?>
 

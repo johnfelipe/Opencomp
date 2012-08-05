@@ -88,6 +88,9 @@ class EvaluationsItemsController extends AppController {
 			throw new NotFoundException(__('You must provide a competence_id in order to create a new item for this test !'));
 		}
 		
+		$levels = $this->EvaluationsItem->Item->Level->find('list', array('recursive' => 0));
+		$this->set('levels', $levels);
+		
 		$eval = $this->EvaluationsItem->Evaluation->find('first', array(
 	        'conditions' => array('id' => $evaluation_id),
 	        'recursive' => -1

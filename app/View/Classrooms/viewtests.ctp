@@ -108,13 +108,13 @@
 		<td><?php echo $evaluation['title']; ?></td>
 		<td><?php echo $evaluation['User']['first_name'].' '.$evaluation['User']['name']; ?></td>
 		<td class="actions" style="padding-right:40px">
-			<div style="height:10px; margin-top:4px; margin-bottom:0px;" class="progress active""><div class="bar" style="width: 40%;"></div></div>
+			<div style="height:10px; margin-top:4px; margin-bottom:0px;" class="progress active"><div class="bar" style="width: 40%;"></div></div>
 		</td>
 		<td class="actions">
 			<div class="btn-group">
 	          <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown"><i class="icon-cogs"></i> Actions <span class="caret"></span></button>
 	          <ul class="dropdown-menu">
-	            <li><li><?php echo $this->Html->link('<i class="icon-list"></i> '.__('Associer des items'), array('controller' => 'evaluations', 'action' => 'attachitems', $evaluation['id']), array('escape' => false)); ?></li></li>
+	            <li><li><?php echo $this->Html->link('<i class="icon-list"></i> '.__('Associer des items'), array('controller' => 'evaluations', 'action' => 'attacheditems', $evaluation['id']), array('escape' => false)); ?></li></li>
 	            <li><li><?php echo $this->Html->link('<i class="icon-bar-chart"></i> '.__('Saisir les résultats'), array('controller' => 'evaluations', 'action' => 'view', $evaluation['id']), array('escape' => false)); ?></li></li>
 	            <li class="divider"></li>
 	            <li><?php echo $this->Html->link('<i class="icon-pencil"></i> '.__('Modifier'), array('controller' => 'evaluations', 'action' => 'edit', $evaluation['id']), array('escape' => false)); ?></li>

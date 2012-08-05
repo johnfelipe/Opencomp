@@ -17,6 +17,7 @@ class Evaluation extends AppModel {
  * @var string
  */
 	public $displayField = 'title';
+	public $actsAs = array('Containable');
 
 /**
  * Validation rules

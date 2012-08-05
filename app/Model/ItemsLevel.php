@@ -1,14 +1,14 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * EvaluationsItem Model
+ * ItemsLevel Model
  *
- * @property Evaluation $Evaluation
  * @property Item $Item
+ * @property Level $Level
  */
-class EvaluationsItem extends AppModel {
+class ItemsLevel extends AppModel {
 
-	public $actsAs = array('Containable');
+
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
@@ -17,16 +17,16 @@ class EvaluationsItem extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'Evaluation' => array(
-			'className' => 'Evaluation',
-			'foreignKey' => 'evaluation_id',
+		'Item' => array(
+			'className' => 'Item',
+			'foreignKey' => 'item_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
 		),
-		'Item' => array(
-			'className' => 'Item',
-			'foreignKey' => 'item_id',
+		'Level' => array(
+			'className' => 'Level',
+			'foreignKey' => 'level_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

@@ -15,7 +15,7 @@ class Competence extends AppModel {
  * @var string
  */
 	public $displayField = 'title';
-	public $actsAs = array('Tree');
+	public $actsAs = array('CustomTree', 'Containable');
 
 /**
  * Validation rules

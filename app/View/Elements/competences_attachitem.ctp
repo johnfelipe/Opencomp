@@ -23,11 +23,14 @@
 		foreach($data['Item'] as $item){			
 			echo '<li>';
 			if($item['type'] == 1) 
-				echo '<span class="label label-important">EN</span>';
+				echo '<span class="label label-important" style="margin-right:5px;">EN</span>';
 			elseif($item['type'] == 2)
-				echo '<span class="label label-info">ET</span>';
+				echo '<span class="label label-info" style="margin-right:5px;>ET</span>';
 			elseif($item['type'] == 3)
-				echo '<span class="label label-success">PE</span>';
+				echo '<span class="label label-success" style="margin-right:5px;>PE</span>';
+			foreach($item['Level'] as $level){
+				echo '<span class="label" style="margin-right:5px;">'.$level['title'].'</span>';
+			}
 			echo $this->Html->link($item['title'], '#');
 			echo $this->Html->link(
 				' <i class="icon-ok"></i> '.__('ajouter à l\'évaluation'), 

@@ -7,7 +7,7 @@ App::uses('AppController', 'Controller');
  */
 class ResultsController extends AppController {
 
-	public $helpers = array('Tree');
+	public $components = array('RequestHandler');
 
 	public function selectpupil(){
 		//On vérifie qu'un paramètre nommé evaluation_id a été fourni et qu'il existe.
@@ -85,44 +85,53 @@ class ResultsController extends AppController {
 	}
 	
 	public function bul(){
-		$items = $this->Result->find('all', array(
+	
+		if(isset($this->request->params['named']['output_type'])) {
+       		$output_type = strval($this->request->params['named']['output_type']);
+
+			if ($output_type == 'pdf') {
+				$this->set('output_type', 'pdf');
+				Configure::write('debug',0);
+				$this->response->type('pdf');
+				$this->layout = 'pdf';
+			}elseif ($output_type == 'html') {
+				$this->layout = 'pdf';
+			}else{
+				throw new NotFoundException(__('Wrong output type !'));
+			}
+			
+			$items = $this->Result->find('all', array(
 			'fields' => array('result'),
 			'contain' => array('Item.Competence.id', 'Item.title')));
 		
-		//debug($items);
-			
-		foreach($items as $tables){
-				$comp[] = $tables['Item']['competence_id'];
-		}
-		
-		$comp = array_values(array_unique($comp));
-		
-		//debug($comp);
-		
-		foreach($comp as $id_comp){
-			$search_results[] = $this->Result->Item->Competence->getPath($id_comp, array('id'));
-		}
-		
-		foreach($search_results as $result_competence){
-			foreach($result_competence as $competence){
-				$comp_to_show[] = $competence['Competence']['id'];
+			$this->set('items', $items);
+				
+			foreach($items as $item){
+					$comp[] = $item['Item']['competence_id'];
 			}
+			
+			$comp = array_values(array_unique($comp));
+			
+			//debug($comp);
+			
+			foreach($comp as $id_comp){
+				$search_results[] = $this->Result->Item->Competence->getPath($id_comp, array('id'));
+			}
+			
+			foreach($search_results as $result_competence){
+				foreach($result_competence as $competence){
+					$comp_to_show[] = $competence['Competence']['id'];
+				}
+			}
+			
+			$comp_to_show = array_values(array_unique($comp_to_show));
+	        
+	        $competences = $this->Result->Item->Competence->generateTreeListWithDepth(array('Competence.id' => $comp_to_show));
+	        $this->set('competences', $competences);
+			
+		} else {
+			throw new NotFoundException(__('You must provide an output type !'));
 		}
-		
-		$comp_to_show = array_values(array_unique($comp_to_show));
-		
-		//debug($comp_to_show);
-		
-		$stuff = $this->Result->Item->Competence->find('threaded',  
-        	array(
-        		'conditions' => array('Competence.id' => $comp_to_show),
-            	'fields' => array('title', 'lft', 'rght'), 
-            	'order' => 'lft ASC'
-            )
-        ); 
-        $this->set('stuff', $stuff); 
-        
-        debug($this->Result->Item->Competence->generateTreeList(array('Competence.id' => $comp_to_show)));
 	}
 	
 }

@@ -31,6 +31,6 @@ Pour installer Opencomp, suivez les indications suivantes :
 * Transférez le dossier sur votre serveur web
 * Assurez vous que le Module de réécriture d'URL Apache est activé sur votre serveur
 * Créer une base de donnée MySQL en important le dump SQL `structure.sql` présent à la racine du dossier téléchargé
-* Importez dans votre base de donnée les fichiers `academies_data.sql`, `cycles_levels_data.sql`, `competences_data.sql`, `items_data.sql`, `items_levels_data.sql` présent à la racine du dossier téléchargé
+* Importez dans votre base de donnée les fichiers `academies_data.sql`, `cycles_levels_data.sql`, `competences_data.sql`, `items_data.sql`, `items_levels_data.sql`, `users_data.sql` présent dans le répertoire `app/Model/Datasource/` du dossier téléchargé
 * Éditez les informations de connexion à la base de données mysql présentes dans le fichier `app\Config\database.php` (lignes 62 et suivantes).
 * Rapportez vos suggestions et avis sur [le gestionnaire de demandes du projet](https://github.com/jtraulle/Opencomp/issues/new).

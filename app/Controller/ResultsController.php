@@ -34,6 +34,8 @@ class ResultsController extends AppController {
 	}
 	
 	public function add(){
+		//@TODO tester d'abord si un résultat a été déjà saisi pour cette évaluation et cet élève.
+	
 		//On vérifie qu'un paramètre nommé evaluation_id a été fourni et qu'il existe.
 		if(isset($this->request->params['named']['evaluation_id'])) {
        		$evaluation_id = intval($this->request->params['named']['evaluation_id']);
@@ -79,8 +81,24 @@ class ResultsController extends AppController {
 	    $this->set('pupil', $pupil);
 		
 		if ($this->request->is('post')) {
-			
-			
+			foreach($this->request->data['Results'] as $k => $v){
+				$data = array(
+					'Result' => array(
+						'pupil_id' => $pupil_id,
+						'evaluation_id' => $evaluation_id,
+						'item_id' => $k,
+						'result' => $v
+					)
+				);
+				
+				$this->Result->create();
+				$this->Result->save($data);
+			}
+			$this->Session->setFlash(__('Les résultats de <code>'.$pupil['Pupil']['first_name'].' '.$pupil['Pupil']['name'].'</code> pour l\'évaluation <code>'.$eval['Evaluation']['title'].'</code> ont bien été enregistrés.'), 'flash_success');
+			$this->redirect(array(
+			    'controller'    => 'results',
+			    'action'        => 'selectpupil', 
+			    'evaluation_id' => $evaluation_id));
 		}
 	}
 	

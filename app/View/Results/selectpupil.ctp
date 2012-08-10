@@ -1,6 +1,6 @@
 <div class="page-title">
     <h2><?php echo __('<span class="flash">Flashez</span> l\'élève dont vous souhaitez saisir le résultat'); ?></h2>
-    <?php echo $this->Html->link('<i class="icon-arrow-left"></i> '.__('TODO'), '/classrooms/viewtests/', array('class' => 'ontitle btn', 'escape' => false)); ?>
+    <?php echo $this->Html->link('<i class="icon-arrow-left"></i> '.__('retour aux résultats de l\'évaluation'), '/evaluations/manageresults/'.$evaluation_id, array('class' => 'ontitle btn', 'escape' => false)); ?>
 </div>
 
 <?php

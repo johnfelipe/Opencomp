@@ -32,7 +32,12 @@ App::uses('Controller', 'Controller');
  * @link http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-    public $components = array('DebugKit.Toolbar', 'Session');
+    public $components = array('DebugKit.Toolbar', 'Session', 'Auth');
     public $helpers = array('Utils');
-
+    
+    function beforeFilter(){
+    	$this->Auth->flash['element'] = "flash_error";
+    	$this->Auth->authError = "Vous n'êtes pas autorisé à accéder à cette page !";
+	    //$this->Auth->allow();
+    }
 }

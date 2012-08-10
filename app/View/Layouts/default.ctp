@@ -50,17 +50,21 @@
           <div class="nav-collapse">
             <ul class="nav">
               <li><?php echo $this->Html->link('<i class="icon-dashboard"></i> '.__('Synthèse'), '/dashboard', array('escape' => false)); ?></li>
-              <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i> Listes <b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                    <li class="nav-header">Gérer les listes</li>
-                    <li><?php echo $this->Html->link(__('Académies'), '/academies'); ?></li>
-                    <li><?php echo $this->Html->link(__('Niveaux scolaire'), '/levels'); ?></li>
-                  </ul>
-              </li>  
+              <li><?php echo $this->Html->link('<i class="icon-list"></i> '.__('Académies'), '/academies', array('escape' => false)); ?></li>
               <li><?php echo $this->Html->link('<i class="icon-user"></i> '.__('Utilisateurs'), '/users', array('escape' => false)); ?></li>
               <li><?php echo $this->Html->link('<i class="icon-cogs"></i> '.__('Paramètres'), '/settings', array('escape' => false)); ?></li>
             </ul>
+            <ul class="nav pull-right">
+	            <li class="dropdown">
+	              <?php $first_name = $this->Session->read('Auth.User.first_name'); 
+	              		$name = $this->Session->read('Auth.User.name'); ?>
+	              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> <?php echo($first_name.' '.$name); ?> <b class="caret"></b></a>
+	              <ul class="dropdown-menu">
+	                <li><?php echo $this->Html->link('<i class="icon-edit"></i> '.__('Mon compte'), '/users/account', array('escape' => false)); ?></li>
+	                <li><?php echo $this->Html->link('<i class="icon-signout"></i> '.__('Se déconnecter'), '/users/logout', array('escape' => false)); ?></li>
+	              </ul>
+	            </li>
+	        </ul>
           </div><!--/.nav-collapse -->           
         </div>
       </div>

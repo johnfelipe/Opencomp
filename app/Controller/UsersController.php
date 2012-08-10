@@ -7,6 +7,23 @@ App::uses('AppController', 'Controller');
  */
 class UsersController extends AppController {
 
+	public function login(){
+		$this->layout = 'auth';
+		if($this->request->is('post')){
+			if($this->Auth->login()){
+				return $this->redirect($this->Auth->redirect());
+			}else{
+				$this->Session->setFlash("Votre login ou votre mot de passe ne correspond pas !", "flash_error"); 
+			}
+		}
+	}
+	
+	public function logout(){
+		$this->Auth->logout();
+		$this->Session->setFlash('Vous êtes maintenant déconnecté.','flash_success');
+		$this->redirect(array('controller' => 'users', 'action' => 'login'));
+	}
+
 /**
  * index method
  *

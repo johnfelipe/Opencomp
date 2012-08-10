@@ -28,7 +28,9 @@ class EvaluationsController extends AppController {
 		if (!$this->Evaluation->exists()) {
 			throw new NotFoundException(__('Invalid evaluation'));
 		}
-		$this->set('evaluation', $this->Evaluation->read(null, $id));
+		$this->Evaluation->contain(array('User', 'Period', 'Classroom', 'Pupil.Result', 'Item'));
+		$evaluation = $this->Evaluation->findById($id);
+		$this->set('evaluation', $evaluation);
 	}
 
 /**
@@ -37,7 +39,7 @@ class EvaluationsController extends AppController {
  * @return void
  */
 	public function add() {
-		//On v�rifie qu'un param�tre nomm� classroom_id a �t� fourni et qu'il existe.
+		//On vérifie qu'un paramètre nommé classroom_id a été fourni et qu'il existe.
 		if(isset($this->request->params['named']['classroom_id'])) {
        		$classroom_id = intval($this->request->params['named']['classroom_id']);
        		$this->set('classroom_id', $classroom_id);
@@ -52,8 +54,8 @@ class EvaluationsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Evaluation->create();
 			if ($this->Evaluation->save($this->request->data)) {
-				$this->Session->setFlash(__('The evaluation has been saved'));
-				$this->redirect(array('action' => 'index'));
+				$this->Session->setFlash(__('La nouvelle évaluation a été correctement ajoutée.'), 'flash_success');
+				$this->redirect(array('controller' => 'classrooms','action' => 'viewtests', $this->request->data['Evaluation']['classroom_id']));
 			} else {
 				$this->Session->setFlash(__('The evaluation could not be saved. Please, try again.'));
 			}
@@ -79,19 +81,21 @@ class EvaluationsController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Evaluation->save($this->request->data)) {
-				$this->Session->setFlash(__('The evaluation has been saved'));
-				$this->redirect(array('action' => 'index'));
+				$this->Session->setFlash(__('L\'évaluation a été correctement mise à jour.'), 'flash_success');
+				$this->redirect(array('controller' => 'classrooms','action' => 'viewtests', $this->request->data['Evaluation']['classroom_id']));
 			} else {
 				$this->Session->setFlash(__('The evaluation could not be saved. Please, try again.'));
 			}
 		} else {
 			$this->request->data = $this->Evaluation->read(null, $id);
+			$classroom_id = $this->request->data['Evaluation']['classroom_id'];
+			$this->set('classroom_id', $classroom_id);
 		}
-		$classrooms = $this->Evaluation->Classroom->find('list');
-		$users = $this->Evaluation->User->find('list');
-		$periods = $this->Evaluation->Period->find('list');
-		$items = $this->Evaluation->Item->find('list');
-		$this->set(compact('classrooms', 'users', 'periods', 'items'));
+		$users = $this->Evaluation->User->find('list', array('recursive' => 0));
+		$periods = $this->Evaluation->Period->find('list', array('recursive' => 0));
+		
+		$pupils = $this->Evaluation->findPupilsByLevelsInClassroom($classroom_id);
+		$this->set(compact('classrooms', 'users', 'periods', 'pupils'));
 	}
 
 /**

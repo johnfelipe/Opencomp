@@ -81,4 +81,9 @@
 		</tr>
 	<?php endforeach; ?>
 	</table>
+<?php else: ?>
+<div class="alert alert-info">
+    <i class="icon-info-sign"></i> Pour le moment, vous n'avez associé aucun item à cette évaluation.<br />
+    Vous devriez commencer par <?php echo $this->Html->link('<i class="icon-plus"></i> '.__('ajouter un item'), '/competences/attachitem/evaluation_id:'.$evaluation['Evaluation']['id'], array('class' => 'btn btn-mini btn-success', 'escape' => false)); ?> à cette évaluation.
+</div>
 <?php endif; ?>

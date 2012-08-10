@@ -108,14 +108,26 @@
 		<td><?php echo $evaluation['title']; ?></td>
 		<td><?php echo $evaluation['User']['first_name'].' '.$evaluation['User']['name']; ?></td>
 		<td class="actions" style="padding-right:40px">
-			<div style="height:10px; margin-top:4px; margin-bottom:0px;" class="progress active"><div class="bar" style="width: 40%;"></div></div>
+			<?php 
+				$total = count($evaluation['Item'])*count($evaluation['Pupil']);
+				if($total != 0){
+					$progress = (count($evaluation['Result'])*100)/$total; 
+				}else{
+					$progress = 0; 
+				}
+			?>
+			<div style="height:10px; margin-top:4px; margin-bottom:0px;" class="progress active"><div class="bar" style="font-size: 10px; vertical-align:top; width: <?php echo $progress; ?>%;"><span style="position:relative; top: -4px;"><?php if(intval($progress) > 10) echo intval($progress).'%'; ?></span></div></div>
 		</td>
 		<td class="actions">
 			<div class="btn-group">
 	          <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown"><i class="icon-cogs"></i> Actions <span class="caret"></span></button>
 	          <ul class="dropdown-menu">
 	            <li><li><?php echo $this->Html->link('<i class="icon-list"></i> '.__('Associer des items'), array('controller' => 'evaluations', 'action' => 'attacheditems', $evaluation['id']), array('escape' => false)); ?></li></li>
-	            <li><li><?php echo $this->Html->link('<i class="icon-bar-chart"></i> '.__('Saisir les résultats'), array('controller' => 'evaluations', 'action' => 'view', $evaluation['id']), array('escape' => false)); ?></li></li>
+	            <?php if($progress > 0 && count($evaluation['Item']) > 0): ?>
+	            <li><li><?php echo $this->Html->link('<i class="icon-bar-chart"></i> '.__('Poursuivre la saisie des résultats'), array('controller' => 'evaluations', 'action' => 'manageresults', $evaluation['id']), array('escape' => false)); ?></li></li>
+	            <?php elseif($progress == 0 && count($evaluation['Item']) > 0): ?>
+	            <li><li><?php echo $this->Html->link('<i class="icon-bar-chart"></i> '.__('Commencer la saisie des résultats'), array('controller' => 'evaluations', 'action' => 'manageresults', $evaluation['id']), array('escape' => false)); ?></li></li>
+	            <?php endif; ?> 
 	            <li class="divider"></li>
 	            <li><?php echo $this->Html->link('<i class="icon-pencil"></i> '.__('Modifier'), array('controller' => 'evaluations', 'action' => 'edit', $evaluation['id']), array('escape' => false)); ?></li>
 	            <li><?php echo $this->Form->postLink('<i class="icon-trash"></i> '.__('Supprimer'), array('controller' => 'evaluations', 'action' => 'delete', $evaluation['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $evaluation['id'])); ?></li>

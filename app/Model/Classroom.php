@@ -20,7 +20,7 @@ class Classroom extends AppModel {
  * @var string
  */
 	public $displayField = 'title';
-	public $recursive = 2;
+	public $actsAs = array('Containable');
 	
 /**
  * Validation rules

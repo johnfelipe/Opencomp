@@ -64,19 +64,25 @@
     <?php echo $this->Html->link('<i class="icon-plus"></i> '.__('ajouter un item évalué'), '/competences/attachitem/evaluation_id:'.$evaluation['Evaluation']['id'], array('class' => 'ontitle btn btn-success', 'escape' => false)); ?>
 </div>
 
-<?php if (!empty($evaluation['Item'])): ?>
+<?php if (!empty($items)): ?>
 	<table class="table table-stripped table-condensed">
 	<tr>
 		<th><?php echo __('Libellé de l\'item évalué'); ?></th>
+		<th class="actions"><?php echo __('Déplacer').' '; echo $this->Html->link('<i class="icon-question-sign"></i>', '#myModal', array('data-toggle' => 'modal', 'escape' => false)); ?></th>
 		<th class="actions"><?php echo __('Action'); ?></th>
 	</tr>
 	<?php
-		$i = 0;
-		foreach ($evaluation['Item'] as $item): ?>
+		$nbitems = count($items);
+		foreach ($items as $item): ?>	
 		<tr>
-			<td><?php echo $item['title']; ?></td>
+			<td><?php echo $item['Item']['title']; ?></td>
 			<td class="actions">
-				<?php echo $this->Form->postLink('<i class="icon-trash"></i> '.__('Supprimer'), array('controller' => 'evaluationsitems', 'action' => 'unlinkitem', 'item_id' => $item['id'], 'evaluation_id' => $evaluation['Evaluation']['id']), array('escape' => false), __('Êtes vous sûr(e) de vouloir dissocier cet item de cette évaluation ?', $item['id'])); ?>
+				<?php if($item['EvaluationsItem']['position'] == 1) $style = 'padding-left: 54px;'; else $style = null; ?>
+				<?php if($item['EvaluationsItem']['position'] != 1) echo $this->Html->link('<i class="icon-arrow-up"></i> '.__('Monter'), '/evaluationsitems/moveup/evaluation_id:'.$item['EvaluationsItem']['evaluation_id'].'/item_id:'.$item['EvaluationsItem']['item_id'], array('escape' => false)); ?>&nbsp;&nbsp;
+				<?php if($item['EvaluationsItem']['position'] != $nbitems) echo $this->Html->link('<i class="icon-arrow-down"></i> '.__('Descendre'), '/evaluationsitems/movedown/evaluation_id:'.$item['EvaluationsItem']['evaluation_id'].'/item_id:'.$item['EvaluationsItem']['item_id'], array('style' => $style, 'escape' => false)); ?>
+			</td>
+			<td class="actions">
+				<?php echo $this->Form->postLink('<i class="icon-trash"></i> '.__('Supprimer'), array('controller' => 'evaluationsitems', 'action' => 'unlinkitem', 'item_id' => $item['EvaluationsItem']['item_id'], 'evaluation_id' => $evaluation['Evaluation']['id']), array('escape' => false), __('Êtes vous sûr(e) de vouloir dissocier cet item de cette évaluation ?', $item['EvaluationsItem']['id'])); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
@@ -87,3 +93,16 @@
     Vous devriez commencer par <?php echo $this->Html->link('<i class="icon-plus"></i> '.__('ajouter un item'), '/competences/attachitem/evaluation_id:'.$evaluation['Evaluation']['id'], array('class' => 'btn btn-mini btn-success', 'escape' => false)); ?> à cette évaluation.
 </div>
 <?php endif; ?>
+
+<div class="modal fade hide" id="myModal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3>À propos de la fonction déplacer</h3>
+  </div>
+  <div class="modal-body">
+    <p>La fonction déplacer vous permet de modifier l'ordre dans lequel les items sont affichés dans cet écran de l'application et lors de la saisie des résultats. Vous pouvez modifier cet ordre à tout moment en cliquant sur monter où descendre.</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">J'ai bien compris</a>
+  </div>
+</div>

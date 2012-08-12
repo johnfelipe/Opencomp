@@ -43,10 +43,16 @@ class EvaluationsItemsController extends AppController {
 			    'action'        => 'attachitem', 
 			    'evaluation_id' => $evaluation_id));
 	    }else{
+	    	$lastItemPosition = $this->EvaluationsItem->find('count', array(
+		        'conditions' => array('EvaluationsItem.evaluation_id' => $evaluation_id)
+		    ));
+			$nextItemPosition = $lastItemPosition+1;
+			
 		    $data = array(
 				'EvaluationsItem' => array(
 					'evaluation_id' => $evaluation_id,
-					'item_id' => $item_id
+					'item_id' => $item_id,
+					'position' => $nextItemPosition
 				)
 			);
 			
@@ -105,13 +111,19 @@ class EvaluationsItemsController extends AppController {
 		$mypath = substr($mypath, 0, -36);
 		$this->set('path', $mypath);
 		
-		if ($this->request->is('post')) {
+		if ($this->request->is('post')) {			
+			$lastItemPosition = $this->EvaluationsItem->find('count', array(
+		        'conditions' => array('EvaluationsItem.evaluation_id' => $evaluation_id)
+		    ));
+			$nextItemPosition = $lastItemPosition+1;
+			
 			$this->EvaluationsItem->Item->create();
 			if ($this->EvaluationsItem->Item->save($this->request->data)) {
 				$data = array(
 					'EvaluationsItem' => array(
 						'evaluation_id' => $evaluation_id,
-						'item_id' => $this->EvaluationsItem->Item->id
+						'item_id' => $this->EvaluationsItem->Item->id,
+						'position' => $nextItemPosition
 					)
 				);
 				
@@ -127,6 +139,115 @@ class EvaluationsItemsController extends AppController {
 			}
 		}
 		
+	}
+	
+	public function moveup(){
+		//On vérifie qu'un paramètre nommé evaluation_id a été fourni et qu'il existe.
+		if(isset($this->request->params['named']['evaluation_id'])) {
+       		$evaluation_id = intval($this->request->params['named']['evaluation_id']);
+       		$this->set('evaluation_id', $evaluation_id);
+       		$this->EvaluationsItem->Evaluation->id = $evaluation_id;
+			if (!$this->EvaluationsItem->Evaluation->exists()) {
+				throw new NotFoundException(__('The evaluation_id provided does not exist !'));
+			}
+		} else {
+			throw new NotFoundException(__('You must provide a evaluation_id in order to attach an item to this test !'));
+		}
+		
+		//On vérifie qu'un paramètre nommé item_id a été fourni et qu'il existe.
+		if(isset($this->request->params['named']['item_id'])) {
+       		$item_id = intval($this->request->params['named']['item_id']);
+       		$this->set('item_id', $item_id);
+       		$this->EvaluationsItem->Item->id = $item_id;
+			if (!$this->EvaluationsItem->Item->exists()) {
+				throw new NotFoundException(__('The item_id provided does not exist !'));
+			}
+		} else {
+			throw new NotFoundException(__('You must provide an item_id in order to attach an item to this test !'));
+		}
+		
+		$itemToEdit = $this->EvaluationsItem->findByEvaluationIdAndItemId($evaluation_id, $item_id);
+		
+		if(empty($itemToEdit)){
+			throw new NotFoundException(__('The item_id and evaluation_id provided does not exist !'));
+		}else{
+			if($itemToEdit['EvaluationsItem']['position'] == 1){
+				$this->Session->setFlash(__('Impossible de déplacer cet item vers le haut, il est déjà à la première position !'), 'flash_error');
+				$this->redirect(array(
+			    'controller'    => 'evaluations',
+			    'action'        => 'attacheditems', $evaluation_id));
+			}else{
+				$secondItemToEdit = $this->EvaluationsItem->findByEvaluationIdAndPosition($evaluation_id, $itemToEdit['EvaluationsItem']['position']-1);
+				
+				$this->EvaluationsItem->read(null, $itemToEdit['EvaluationsItem']['id']);
+				$this->EvaluationsItem->set('position', $itemToEdit['EvaluationsItem']['position']-1);
+				$this->EvaluationsItem->save();
+				
+				$this->EvaluationsItem->read(null, $secondItemToEdit['EvaluationsItem']['id']);
+				$this->EvaluationsItem->set('position', $secondItemToEdit['EvaluationsItem']['position']+1);
+				$this->EvaluationsItem->save();
+				
+				$this->redirect(array(
+			    'controller'    => 'evaluations',
+			    'action'        => 'attacheditems', $evaluation_id));
+			}
+		}				
+	}
+	
+	public function movedown(){
+		//On vérifie qu'un paramètre nommé evaluation_id a été fourni et qu'il existe.
+		if(isset($this->request->params['named']['evaluation_id'])) {
+       		$evaluation_id = intval($this->request->params['named']['evaluation_id']);
+       		$this->set('evaluation_id', $evaluation_id);
+       		$this->EvaluationsItem->Evaluation->id = $evaluation_id;
+			if (!$this->EvaluationsItem->Evaluation->exists()) {
+				throw new NotFoundException(__('The evaluation_id provided does not exist !'));
+			}
+		} else {
+			throw new NotFoundException(__('You must provide a evaluation_id in order to attach an item to this test !'));
+		}
+		
+		//On vérifie qu'un paramètre nommé item_id a été fourni et qu'il existe.
+		if(isset($this->request->params['named']['item_id'])) {
+       		$item_id = intval($this->request->params['named']['item_id']);
+       		$this->set('item_id', $item_id);
+       		$this->EvaluationsItem->Item->id = $item_id;
+			if (!$this->EvaluationsItem->Item->exists()) {
+				throw new NotFoundException(__('The item_id provided does not exist !'));
+			}
+		} else {
+			throw new NotFoundException(__('You must provide an item_id in order to attach an item to this test !'));
+		}
+		
+		$itemToEdit = $this->EvaluationsItem->findByEvaluationIdAndItemId($evaluation_id, $item_id);
+		
+		if(empty($itemToEdit)){
+			throw new NotFoundException(__('The item_id and evaluation_id provided does not exist !'));
+		}else{
+			$lastItemPosition = $this->EvaluationsItem->find('count', array(
+		        'conditions' => array('EvaluationsItem.evaluation_id' => $evaluation_id)
+		    ));
+			if($itemToEdit['EvaluationsItem']['position'] == $lastItemPosition){
+				$this->Session->setFlash(__('Impossible de déplacer cet item vers le bas, il est déjà à la dernière position !'), 'flash_error');
+				$this->redirect(array(
+			    'controller'    => 'evaluations',
+			    'action'        => 'attacheditems', $evaluation_id));
+			}else{
+				$secondItemToEdit = $this->EvaluationsItem->findByEvaluationIdAndPosition($evaluation_id, $itemToEdit['EvaluationsItem']['position']+1);
+				
+				$this->EvaluationsItem->read(null, $itemToEdit['EvaluationsItem']['id']);
+				$this->EvaluationsItem->set('position', $itemToEdit['EvaluationsItem']['position']+1);
+				$this->EvaluationsItem->save();
+				
+				$this->EvaluationsItem->read(null, $secondItemToEdit['EvaluationsItem']['id']);
+				$this->EvaluationsItem->set('position', $secondItemToEdit['EvaluationsItem']['position']-1);
+				$this->EvaluationsItem->save();
+				
+				$this->redirect(array(
+			    'controller'    => 'evaluations',
+			    'action'        => 'attacheditems', $evaluation_id));
+			}
+		}
 	}
 	
 	public function unlinkitem(){

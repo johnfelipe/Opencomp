@@ -20,7 +20,14 @@ class EvaluationsController extends AppController {
 		if (!$this->Evaluation->exists()) {
 			throw new NotFoundException(__('Invalid evaluation'));
 		}
-		$this->set('evaluation', $this->Evaluation->read(null, $id));
+		$this->Evaluation->contain(array('User', 'Period', 'Classroom', 'Pupil.first_name', 'Pupil.name'));
+		$evaluation = $this->Evaluation->findById($id);		
+		$this->set('evaluation', $evaluation);
+		
+		$this->Evaluation->EvaluationsItem->contain(array('Item.title'));
+		$items = $this->Evaluation->EvaluationsItem->findAllByEvaluationId($id, array(), array('EvaluationsItem.position' => 'asc'));
+		$this->set('items', $items);
+		
 	}
 	
 	public function manageresults($id = null) {

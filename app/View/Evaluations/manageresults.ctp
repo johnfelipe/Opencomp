@@ -81,7 +81,7 @@
 			<td><?php echo $pupil['name']; ?></td>
 			<td style="padding-right:5%;"><div style="height:10px; margin-top:4px; margin-bottom:0px;" class="progress active"><div class="bar" style="font-size: 10px; vertical-align:top; width: <?php echo $progress; ?>%;"><span style="position:relative; top: -4px;"><?php if(intval($progress) > 10) echo intval($progress).'%'; ?></span></div></div></td>
 			<td class="actions">
-				<?php echo $this->Form->postLink('<i class="icon-pencil"></i> '.__('Compléter ou modifier la saisie'), array('controller' => 'results', 'action' => 'edit', 'pupil_id' => $pupil['id'], 'evaluation_id' => $evaluation['Evaluation']['id']), array('escape' => false)); ?>
+				<?php echo $this->Html->link('<i class="icon-pencil"></i> '.__('Compléter ou modifier la saisie'), array('controller' => 'results', 'action' => 'add', 'pupil_id' => $pupil['id'], 'evaluation_id' => $evaluation['Evaluation']['id']), array('escape' => false)); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>

@@ -116,6 +116,19 @@ class Evaluation extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
+		),
+		'EvaluationsItem' => array(
+			'className' => 'EvaluationsItem',
+			'foreignKey' => 'evaluation_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
 		)
 	);
 
@@ -157,6 +170,34 @@ class Evaluation extends AppModel {
 			'insertQuery' => ''
 		)
 	);
+	
+	public function findItemsByPosition($evaluation_id){
+		$items = $this->find('all', array(
+	        'joins' => array(
+			    array('table' => 'evaluations_items',
+			        'alias' => 'EvaluationsItem',
+			        'type' => 'LEFT',
+			        'conditions' => array(
+			            'Evaluation.id = EvaluationsItem.evaluation_id',
+			        )
+			    ),
+			    array('table' => 'items',
+			        'alias' => 'Item',
+			        'type' => 'LEFT',
+			        'conditions' => array(
+			            'EvaluationsItem.item_id = Item.id',
+			        )
+			    )
+			 ),
+			 'recursive' => -1,
+			 'fields' => array('EvaluationsItem.position','Item.title','Item.id', 'Evaluation.title'),
+			 'conditions' => array('Evaluation.id' => $evaluation_id),
+	         'order' => array('EvaluationsItem.position'),
+	    ));
+	    //debug($items);
+	    return $items;
+	
+	}
 	
 	public function findPupilsByLevelsInClassroom($id_classroom){
 		$levels = $this->Pupil->ClassroomsPupil->Level->find('list', array(

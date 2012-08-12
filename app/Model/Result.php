@@ -89,4 +89,14 @@ class Result extends AppModel {
 			'order' => ''
 		)
 	);
+	
+	public function beforeSave($options = array()){
+		$evaluation_id = $this->data['Result']['evaluation_id'];
+		$pupil_id = $this->data['Result']['pupil_id'];
+		$item_id = $this->data['Result']['item_id'];
+		
+		$this->deleteAll(array('Result.evaluation_id' => $evaluation_id, 'Result.pupil_id' => $pupil_id, 'Result.item_id' => $item_id), false);
+		
+		return true;
+	}
 }

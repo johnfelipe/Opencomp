@@ -3,7 +3,7 @@
 </div>
 
 <div class="well">
-  Vous êtes sur le point de saisir les résultats de <code><?php echo $pupil['Pupil']['first_name'].' '.$pupil['Pupil']['name']; ?></code> pour l'évaluation <code><?php echo $eval['Evaluation']['title']; ?></code>.<br /><br />
+  Vous êtes sur le point de saisir les résultats de <code><?php echo $pupil['Pupil']['first_name'].' '.$pupil['Pupil']['name']; ?></code> pour l'évaluation <code><?php echo $items[0]['Evaluation']['title']; ?></code>.<br /><br />
   <span class="flash">Flashez</span> l'ensemble des résultats en utilisant la table de codage.<br /> A la fin de la saisie, les résultats sont automatiquement sauvegardés.
 </div>
 
@@ -21,13 +21,17 @@ echo $this->Form->create('Results', array(
     )
 );
 
-foreach($eval['Item'] as $noItem => $item){
-	echo $this->Form->input($item['id'], array(
+foreach($items as $item){
+	if(!isset($results[$item['Item']['id']]))
+		$results[$item['Item']['id']] = '';
+		
+	echo $this->Form->input($item['Item']['id'], array(
 		'between' => '<div class="controls"><div class="input-prepend"><span class="add-on"><i class="icon-barcode"></i></span>',
-		'after' => "</div><p class='help-block'>".$item['title']."</p></div>",
+		'after' => "</div><p class='help-block'>".$item['Item']['title']."</p></div>",
 		'class' => 'span1 result',
+		'value' => $results[$item['Item']['id']],
 	    'label' => array(
-	        'text' => 'Résultat item '.($noItem+1),
+	        'text' => 'Résultat item '.($item['EvaluationsItem']['position']),
 	        'class' => 'control-label'
 	    )
 	));

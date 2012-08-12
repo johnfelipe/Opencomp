@@ -68,11 +68,20 @@ class ResultsController extends AppController {
 		    $this->redirect(array('controller' => 'evaluations', 'action' => 'attacheditems', $evaluation_id));
 	    }
 		
-		$this->Result->Evaluation->contain('Item');
-		$eval = $this->Result->Evaluation->find('first', array(
-	        'conditions' => array('Evaluation.id' => $evaluation_id),
-	    ));
-	    $this->set('eval', $eval);
+		$items = $this->Result->Evaluation->findItemsByPosition($evaluation_id);
+		
+		//Récupération des résultats éventuels
+		$qresults = $this->Result->findAllByEvaluationIdAndPupilId($evaluation_id, $pupil_id, array('Result.item_id', 'Result.result'));
+		if(!empty($qresults)){
+			foreach($qresults as $result){
+					$results[$result['Result']['item_id']] = $result['Result']['result'];
+			}
+		}else{
+			$results = array();
+		}
+
+	    $this->set('items', $items);
+	    $this->set('results', $results);
 	    
 	    $pupil = $this->Result->Pupil->find('first', array(
 	        'conditions' => array('id' => $pupil_id),
@@ -81,24 +90,28 @@ class ResultsController extends AppController {
 	    $this->set('pupil', $pupil);
 		
 		if ($this->request->is('post')) {
+			$i=0;
 			foreach($this->request->data['Results'] as $k => $v){
-				$data = array(
-					'Result' => array(
-						'pupil_id' => $pupil_id,
-						'evaluation_id' => $evaluation_id,
-						'item_id' => $k,
-						'result' => $v
-					)
-				);
+				$data[$i]['Result']['pupil_id'] = $pupil_id;
+				$data[$i]['Result']['evaluation_id'] = $evaluation_id;
+				$data[$i]['Result']['item_id'] = $k;
+				$data[$i]['Result']['result'] = $v;
 				
-				$this->Result->create();
-				$this->Result->save($data);
+				$i++;
 			}
-			$this->Session->setFlash(__('Les résultats de <code>'.$pupil['Pupil']['first_name'].' '.$pupil['Pupil']['name'].'</code> pour l\'évaluation <code>'.$eval['Evaluation']['title'].'</code> ont bien été enregistrés.'), 'flash_success');
-			$this->redirect(array(
-			    'controller'    => 'results',
-			    'action'        => 'selectpupil', 
-			    'evaluation_id' => $evaluation_id));
+			
+			$this->Result->create();
+			$this->Result->saveMany($data, array('validate' => 'all'));
+
+			if(count($this->Result->invalidFields()) == 0){
+				$this->Session->setFlash(__('Les résultats de <code>'.$pupil['Pupil']['first_name'].' '.$pupil['Pupil']['name'].'</code> pour l\'évaluation <code>'.$items[0]['Evaluation']['title'].'</code> ont bien été enregistrés.'), 'flash_success');
+				$this->redirect(array(
+				    'controller'    => 'results',
+				    'action'        => 'selectpupil', 
+				    'evaluation_id' => $evaluation_id));
+			}else{
+				$this->Session->setFlash(__('Les résultats de <code>'.$pupil['Pupil']['first_name'].' '.$pupil['Pupil']['name'].'</code> pour l\'évaluation <code>'.$items[0]['Evaluation']['title'].'</code> n\'ont pas pu être  enregistrés car votre saisie est incorrecte.<br />De nouveau, saisissez les résultats de l\'élève.'), 'flash_error');
+			}
 		}
 	}
 	

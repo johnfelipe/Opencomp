@@ -40,7 +40,6 @@ $(document).ready(function() {
     
     $("#demo1").jstree({ 
         "themes" : {
-            "theme" : "apple",
             "dots" : true,
             "icons" : false
         },
@@ -53,17 +52,6 @@ $(document).ready(function() {
 		var pupil_id = $(event.delegateTarget).val();
 		$(event.delegateTarget).val(pupil_id);
 		$('#ResultSelectpupilForm').submit();
-		/*if ($(event.delegateTarget).val() == 'AAA') { // Cette condition renvoie « true », le code est donc exécuté
-		    $(event.delegateTarget).val('A');
-		} else if ($(event.delegateTarget).val() == 'BBB') {
-			$(event.delegateTarget).val('B');
-		} else if ($(event.delegateTarget).val() == 'CCC') {
-			$(event.delegateTarget).val('C');
-		} else if ($(event.delegateTarget).val() == 'DDD') {
-			$(event.delegateTarget).val('D');
-		} else {
-			$(event.delegateTarget).val('Err.');
-		}*/
 	});
 	
 	$('.send').focus(function(event) {
@@ -73,17 +61,19 @@ $(document).ready(function() {
 	$('.focus').focus();
 	
 	$('.result').change(function(event) {		
-		if ($(event.delegateTarget).val() == 'AAA') { // Cette condition renvoie « true », le code est donc exécuté
+		if ($(event.delegateTarget).val() == 'AAA' || $(event.delegateTarget).val() == 'A') { // Cette condition renvoie « true », le code est donc exécuté
 		    $(event.delegateTarget).val('A');
 		    $(event.delegateTarget).css("background-color", "#e4ffcb");
-		} else if ($(event.delegateTarget).val() == 'BBB') {
+		} else if ($(event.delegateTarget).val() == 'BBB' || $(event.delegateTarget).val() == 'B') {
 			$(event.delegateTarget).val('B');
 			$(event.delegateTarget).css("background-color", "#e4ffcb");
-		} else if ($(event.delegateTarget).val() == 'CCC') {
+		} else if ($(event.delegateTarget).val() == 'CCC' || $(event.delegateTarget).val() == 'C') {
 			$(event.delegateTarget).val('C');
 			$(event.delegateTarget).css("background-color", "#e4ffcb");
-		} else if ($(event.delegateTarget).val() == 'DDD') {
+		} else if ($(event.delegateTarget).val() == 'DDD' || $(event.delegateTarget).val() == 'D') {
 			$(event.delegateTarget).val('D');
+			$(event.delegateTarget).css("background-color", "#e4ffcb");
+		} else if ($(event.delegateTarget).val() == '') {
 			$(event.delegateTarget).css("background-color", "#e4ffcb");
 		} else {
 			$(event.delegateTarget).val('Err.');

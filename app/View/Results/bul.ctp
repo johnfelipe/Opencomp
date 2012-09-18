@@ -3,37 +3,37 @@ $bulletin = '
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-		<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,600italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+		
 		<style>
-			@page { margin: 50px 46px 40px; }
-		    #footer { position: fixed; text-align: center; bottom: 30px; font: italic 500 15px "Source Sans Pro"; }
+			@page { margin: 50px 46px 45px; }
+		    #footer { position: fixed; text-align: center; bottom: 20px; font: italic 500 14px Helvetica; }
 		    #footer .page:after { content: counter(page, decimal); }
 			td { 
 				border:thin solid black; 
 				padding: 3px 3px 3px 5px;
-				font: 14px "Source Sans Pro";
+				font: 13px Helvetica;
 			} 
 
 			.niveau1{
 				margin: 25px 0 0 0;
-				font: 25px "Source Sans Pro";
+				font: 25px Helvetica;
 				border-bottom: 1px solid black;
 			}
 			.niveau2{
 				margin: 0 0 20px 0;
 				padding: 20px 0 0 0;
-				font: 20px "Source Sans Pro";
+				font: 20px Helvetica;
 				border-bottom: 1px dashed black;
 			}
 			.niveau3{
 				margin: 0 0 0 30px;
 				padding: 0 0 5px 0;
-				font: italic 500 15px "Source Sans Pro";
+				font: italic 500 15px Helvetica;
 			}
 			.niveau4{
 				margin: 0px 0 0 60px;
 				padding: 10px 0 5px 0;
-				font: italic 500 15px "Source Sans Pro";
+				font: italic 500 15px Helvetica;
 			}
 			table{
 				border-collapse:collapse;
@@ -53,7 +53,7 @@ $bulletin = '
 			}
 			.title{
 				margin: -10px 0 0 0;
-				font: italic 500 23px "Source Sans Pro";
+				font: italic 500 23px Helvetica;
 				border: 1px solid black;
 				padding: 0px 0px 3px 10px;
 			}

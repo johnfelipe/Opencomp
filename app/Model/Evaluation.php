@@ -248,5 +248,14 @@ class Evaluation extends AppModel {
 		
 		return $pupilsLevels;
 	}
+	
+	function beforeValidate($options = array()) {
+	  if (!isset($this->request->data['Pupil']['Pupil'])
+	  || empty($this->request->data['Pupil']['Pupil'])) {
+	    $this->invalidate('Pupil'); // fake validation error on Item
+	    $this->Pupil->invalidate('Pupil', 'Sélectionnez au moins un élève !');
+	  }
+	  return true;
+	}
 
 }

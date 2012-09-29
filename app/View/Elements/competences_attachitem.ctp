@@ -25,9 +25,9 @@
 			if($item['type'] == 1) 
 				echo '<span class="label label-important" style="margin-right:5px;">EN</span>';
 			elseif($item['type'] == 2)
-				echo '<span class="label label-info" style="margin-right:5px;>ET</span>';
+				echo '<span class="label label-info" style="margin-right:5px;">ET</span>';
 			elseif($item['type'] == 3)
-				echo '<span class="label label-success" style="margin-right:5px;>PE</span>';
+				echo '<span class="label label-success" style="margin-right:5px;">PE</span>';
 			foreach($item['Level'] as $level){
 				echo '<span class="label" style="margin-right:5px;">'.$level['title'].'</span>';
 			}

@@ -16,7 +16,8 @@
 		    	echo '<div class="page-title"><h4>'.$classroom['Classroom']['title'].' à '.$classroom['Establishment']['name'].'</h4></div>'; ?>
 			    <div class="row-fluid">
 			    	<div class="span6"><?php echo $this->Html->link('<i class="icon-eye-open"></i> '.__('Voir les évaluations'), array('controller' => 'classrooms', 'action' => 'viewtests', $classroom['Classroom']['id']), array('class' => 'btn btn-large', 'escape' => false)); ?></div>
-			    	<div class="span6"><?php echo $this->Html->link('<i class="icon-plus"></i> '.__('Nouvelle évaluation'), array('controller' => 'evaluations', 'action' => 'add', 'classroom_id' => $classroom['Classroom']['id']), array('class' => 'btn btn-large btn-success', 'style'=>'font-weight:normal;', 'escape' => false)); ?></div>
+			    	<div class="span6"><?php echo $this->Html->link('<i class="icon-plus"></i> '.__('Nouvelle évaluation'), array('controller' => 'evaluations', 'action' => 'add', 'classroom_id' => $classroom['Classroom']['id']), array('class' => 'btn btn-large btn-success', 'style'=>'font-weight:normal; margin-bottom:20px;', 'escape' => false)); ?></div>
+
 			    </div>
 			    
 	    	<?php endforeach;

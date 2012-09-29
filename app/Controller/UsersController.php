@@ -10,7 +10,7 @@ class UsersController extends AppController {
 	public function login(){
 		$iduser = $this->Auth->user('id');
 		if(!empty($iduser))
-			$this->redirect(array('controller' => 'academies', 'action' => 'index'));
+			$this->redirect(array('controller' => 'dashboard', 'action' => 'index'));
 			
 		$this->layout = 'auth';
 		if($this->request->is('post')){

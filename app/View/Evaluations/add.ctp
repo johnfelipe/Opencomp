@@ -65,7 +65,7 @@ echo $this->Form->input('Pupil', array(
     'after' => '<div class="help-block btn-toolbar">'.$btn_nvx_string.'</div></div>',
     'style'=>'width : 550px;',
     'label' => array(
-        'text' => 'Élèves ayant réalisé l\'évaluation',
+        'text' => 'Élèves ayant passé l\'évaluation',
         'class' => 'control-label'
         )
     )

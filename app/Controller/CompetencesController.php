@@ -28,7 +28,7 @@ class CompetencesController extends AppController {
 			throw new NotFoundException(__('You must provide a evaluation_id in order to attach an item to this test !'));
 		}
 		
-		$this->Competence->contain('Item.Level.title');
+		$this->Competence->contain('Item.Level.title', 'ChildCompetence');
         $stuff = $this->Competence->find('all',  
                 array('fields' => array('title', 'lft', 'rght'), 'order' => 'lft ASC')); 
         $this->set('stuff', $stuff);  

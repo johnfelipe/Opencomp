@@ -35,7 +35,7 @@ class EvaluationsController extends AppController {
 		if (!$this->Evaluation->exists()) {
 			throw new NotFoundException(__('Invalid evaluation'));
 		}
-		$this->Evaluation->contain(array('User', 'Period', 'Classroom', 'Pupil.Result', 'Item'));
+		$this->Evaluation->contain(array('User', 'Period', 'Classroom', 'Pupil.Result.evaluation_id = '.$id, 'Item'));
 		$evaluation = $this->Evaluation->findById($id);
 		$this->set('evaluation', $evaluation);
 	}
@@ -64,11 +64,27 @@ class EvaluationsController extends AppController {
 				$this->Session->setFlash(__('La nouvelle évaluation a été correctement ajoutée.'), 'flash_success');
 				$this->redirect(array('controller' => 'classrooms','action' => 'viewtests', $this->request->data['Evaluation']['classroom_id']));
 			} else {
-				$this->Session->setFlash(__('The evaluation could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('Des erreurs ont été détectées durant la validation du formulaire. Veuillez corriger les erreurs mentionnées.'), 'flash_error');
 			}
 		}
-		$users = $this->Evaluation->User->find('list', array('recursive' => 0));
-		$periods = $this->Evaluation->Period->find('list', array('recursive' => 0));
+		
+		$users = $this->Evaluation->User->find('list', array(
+			'recursive' => 0,
+			'conditions' => array('id' => $this->Evaluation->User->findAllUsersInClassroom($classroom_id))
+			)
+		);
+		
+		$etab = $this->Evaluation->Classroom->find('first', array(
+			'fields'=>'establishment_id',
+			'conditions'=>array(
+				'Classroom.id'=>$classroom_id
+			),
+			'recursive'=>-1
+		));
+		
+		$periods = $this->Evaluation->Period->find('list', array(
+			'conditions' => array('establishment_id' => $etab['Classroom']['establishment_id']),
+			'recursive' => 0));
 		
 		$pupils = $this->Evaluation->findPupilsByLevelsInClassroom($classroom_id);
 		$this->set(compact('classrooms', 'users', 'periods', 'pupils'));
@@ -91,7 +107,7 @@ class EvaluationsController extends AppController {
 				$this->Session->setFlash(__('L\'évaluation a été correctement mise à jour.'), 'flash_success');
 				$this->redirect(array('controller' => 'classrooms','action' => 'viewtests', $this->request->data['Evaluation']['classroom_id']));
 			} else {
-				$this->Session->setFlash(__('The evaluation could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('Des erreurs ont été détectées durant la validation du formulaire. Veuillez corriger les erreurs mentionnées.'), 'flash_error');
 			}
 		} else {
 			$this->request->data = $this->Evaluation->read(null, $id);

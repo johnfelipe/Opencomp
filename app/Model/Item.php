@@ -28,12 +28,18 @@ class Item extends AppModel {
 		'title' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
+				'message' => 'Vous devez renseigner ce champ !',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+		),
+		'Level' => array(
+				'rule' => array('multiple', array(
+		            'min' => 1
+		        )),
+		        'message' => 'Merci de choisir une, deux ou trois options'
 		),
 		'competence_id' => array(
 			'numeric' => array(
@@ -177,5 +183,14 @@ class Item extends AppModel {
 			'insertQuery' => ''
 		)
 	);
+	
+	function beforeValidate($options = array()) {
+	  if (!isset($this->request->data['Level']['Level'])
+	  || empty($this->request->data['Level']['Level'])) {
+	    $this->invalidate('Level'); // fake validation error on Item
+	    $this->Level->invalidate('Level', 'Sélectionner un niveau !');
+	  }
+	  return true;
+	}
 
 }

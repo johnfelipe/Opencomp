@@ -219,5 +219,26 @@ class User extends AppModel {
 			'insertQuery' => ''
 		)
 	);
+	
+	public function findAllUsersInClassroom($classroom_id){
+		$titulaire = $this->Classroom->find('first', array(
+			'fields' => 'user_id',
+			'recursive' => 0,
+        	'conditions' => array('Classroom.id' => $classroom_id)
+        ));
+        $intervenants = $this->ClassroomsUser->find('all', array(
+			'fields' => 'user_id',
+			'recursive' => 0,
+        	'conditions' => array('classroom_id' => $classroom_id)
+        ));
+        
+        $result[] = $titulaire['Classroom']['user_id'];
+        
+        foreach($intervenants as $info){
+	        $result[] = $info['ClassroomsUser']['user_id'];
+        }
+        
+        return($result);
+	}
 
 }

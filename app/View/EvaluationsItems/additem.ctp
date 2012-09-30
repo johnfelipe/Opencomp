@@ -48,7 +48,8 @@ echo $this->Form->input('Level', array(
 );
 
 echo $this->Form->hidden('competence_id', array('value' => $competence_id));
-echo $this->Form->hidden('classroom_id', array('value' => $eval['Evaluation']['id']));
+echo $this->Form->hidden('classroom_id', array('value' => $eval['Evaluation']['classroom_id']));
+echo $this->Form->hidden('user_id', array('value' => AuthComponent::user('id')));
 echo $this->Form->hidden('type', array('value' => 3));
     
 ?>

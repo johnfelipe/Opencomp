@@ -37,6 +37,8 @@ class EvaluationsController extends AppController {
 		}
 		$this->Evaluation->contain(array('User', 'Period', 'Classroom', 'Pupil.Result.evaluation_id = '.$id, 'Item'));
 		$evaluation = $this->Evaluation->findById($id);
+		$result = $this->Evaluation->resultsForAnEvaluation($id);
+		$this->set('resultats', $result);
 		$this->set('evaluation', $evaluation);
 	}
 

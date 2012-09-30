@@ -249,6 +249,34 @@ class Evaluation extends AppModel {
 		return $pupilsLevels;
 	}
 	
+	function resultsForAnEvaluation($id_evaluation){
+		$result = $this->Result->find('all', array(
+			'fields' => array('result', 'count(result) as nbresult'),
+			'conditions' => array(
+				'evaluation_id' => $id_evaluation
+			),
+			'group' => array('result'),
+		));
+		
+		$resultats['A'] = 0;
+		$resultats['B'] = 0;
+		$resultats['C'] = 0;
+		$resultats['D'] = 0;
+		$resultats['ABS'] = 0;
+		
+		foreach($result as $infos){
+			$resultats[$infos['Result']['result']] = intval($infos['0']['nbresult']);
+		}
+		
+		$resultats['TOT'] = $resultats['A'] + $resultats['B'] + $resultats['C'] + $resultats['D'];
+		$resultats['pourcent_A'] = round($resultats['A'] * 100 / $resultats['TOT'],1);
+		$resultats['pourcent_B'] = round($resultats['B'] * 100 / $resultats['TOT'],1);
+		$resultats['pourcent_C'] = round($resultats['C'] * 100 / $resultats['TOT'],1);
+		$resultats['pourcent_D'] = round($resultats['D'] * 100 / $resultats['TOT'],1);
+		
+		return $resultats;
+	}
+	
 	function beforeValidate($options = array()) {
 	  if (!isset($this->request->data['Pupil']['Pupil'])
 	  || empty($this->request->data['Pupil']['Pupil'])) {

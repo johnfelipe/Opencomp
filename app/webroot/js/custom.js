@@ -2,6 +2,8 @@ $(document).ready(function() {
 
     $(".alert").alert();
     
+    $('.info').tooltip();
+    
     $(".chzn-select").chosen();
     
     $('.datepicker').datepicker({

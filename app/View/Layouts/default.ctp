@@ -19,7 +19,6 @@
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 	?>
-	   <script type="text/javascript" charset="utf-8" src="http://cdn.sencha.io/ext-4.1.0-gpl/ext-all.js"></script>
     
     <style>
       body {
@@ -38,7 +37,7 @@
 
   <body>
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -53,6 +52,7 @@
               <li><?php echo $this->Html->link('<i class="icon-list"></i> '.__('Académies'), '/academies', array('escape' => false)); ?></li>
               <li><?php echo $this->Html->link('<i class="icon-user"></i> '.__('Utilisateurs'), '/users', array('escape' => false)); ?></li>
               <li><?php echo $this->Html->link('<i class="icon-cogs"></i> '.__('Paramètres'), '/settings', array('escape' => false)); ?></li>
+              <li><?php echo $this->Html->link('<i class="icon-fire"></i> '.__('Soumettre une anomalie'), 'http://projets.opencomp.fr/opencomp/issues/new', array('escape' => false, 'style'=> 'color:rgb(185, 74, 72);', 'target'=>'_blank')); ?></li>
             </ul>
             <ul class="nav pull-right">
 	            <li class="dropdown">
@@ -81,7 +81,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     
-    <?php echo $this->Html->script(array('jquery.js', 'chosen/chosen.jquery.min.js', 'bootstrap-dropdown.js', 'bootstrap-alert.js', 'bootstrap-modal.js', 'bootstrap-datepicker.js', 'bootstrap-tab.js', 'bootstrap-transition.js', 'less-1.3.0.min.js', 'jquery.jstree', 'custom.js')); ?>
+    <?php echo $this->Html->script(array('jquery.js', 'chosen/chosen.jquery.min.js', 'bootstrap-dropdown.js', 'bootstrap-alert.js', 'bootstrap-modal.js', 'bootstrap-datepicker.js', 'bootstrap-tab.js', 'bootstrap-transition.js', 'bootstrap-tooltip.js', 'less-1.3.0.min.js', 'jquery.jstree', 'custom.js')); ?>
     
     <!--
     <script src="../js/bootstrap-transition.js"></script>

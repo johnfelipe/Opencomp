@@ -4,6 +4,8 @@
 	border-bottom-style:solid;
 	border-bottom-color:#cacaca;
 	margin-bottom : 25px;
+	font-family: 'Titillium Web', sans-serif;
+	font-size: 0.8em;
 }
 
 /* Style pour positionner les boutons Call to action des titres de modules */

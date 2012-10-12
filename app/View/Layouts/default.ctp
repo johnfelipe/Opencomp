@@ -7,7 +7,7 @@
 	</title>
     
     <?php
-		echo $this->Html->css('bootstrap');
+		echo $this->Html->css('bootstrap.min');
 		echo $this->Html->css('bootstrap-responsive');
 		echo $this->Html->css('datepicker');
 		echo $this->Html->css('font-awesome');
@@ -25,6 +25,7 @@
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
       }
     </style>
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web' rel='stylesheet' type='text/css'>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -52,7 +53,7 @@
               <li><?php echo $this->Html->link('<i class="icon-list"></i> '.__('Académies'), '/academies', array('escape' => false)); ?></li>
               <li><?php echo $this->Html->link('<i class="icon-user"></i> '.__('Utilisateurs'), '/users', array('escape' => false)); ?></li>
               <li><?php echo $this->Html->link('<i class="icon-cogs"></i> '.__('Paramètres'), '/settings', array('escape' => false)); ?></li>
-              <li><?php echo $this->Html->link('<i class="icon-fire"></i> '.__('Soumettre une anomalie'), 'http://projets.opencomp.fr/opencomp/issues/new', array('escape' => false, 'style'=> 'color:rgb(185, 74, 72);', 'target'=>'_blank')); ?></li>
+              <li><button type="button" class="btn btn-danger" onclick="window.open('http://projets.opencomp.fr/opencomp/issues/new')"><i class="icon-bolt"></i> <?php echo __('Soumettre une anomalie') ?></button></li>
             </ul>
             <ul class="nav pull-right">
 	            <li class="dropdown">
@@ -81,21 +82,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     
-    <?php echo $this->Html->script(array('jquery.js', 'chosen/chosen.jquery.min.js', 'bootstrap-dropdown.js', 'bootstrap-alert.js', 'bootstrap-modal.js', 'bootstrap-datepicker.js', 'bootstrap-tab.js', 'bootstrap-transition.js', 'bootstrap-tooltip.js', 'less-1.3.0.min.js', 'jquery.jstree', 'custom.js')); ?>
-    
-    <!--
-    <script src="../js/bootstrap-transition.js"></script>
-    <script src="../js/bootstrap-alert.js"></script>
-    <script src="../js/bootstrap-modal.js"></script>
-    <script src="../js/bootstrap-scrollspy.js"></script>
-    <script src="../js/bootstrap-tab.js"></script>
-    <script src="../js/bootstrap-tooltip.js"></script>
-    <script src="../js/bootstrap-popover.js"></script>
-    <script src="../js/bootstrap-button.js"></script>
-    <script src="../js/bootstrap-collapse.js"></script>
-    <script src="../js/bootstrap-carousel.js"></script>
-    <script src="../js/bootstrap-typeahead.js"></script>
-    -->
+    <?php echo $this->Html->script(array('jquery.js', 'jquery.jstree.js', 'chosen/chosen.jquery.min.js', 'bootstrap.min.js', 'bootstrap-datepicker.js', 'custom.js')); ?>
 
   </body>
 </html>

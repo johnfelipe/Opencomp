@@ -23,6 +23,7 @@ App::uses('CakeEventListener', 'Event');
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 class ToolbarComponent extends Component implements CakeEventListener {
+
 /**
  * Settings for the Component
  *
@@ -85,6 +86,13 @@ class ToolbarComponent extends Component implements CakeEventListener {
 		'jquery' => '/debug_kit/js/jquery',
 		'libs' => '/debug_kit/js/js_debug_toolbar'
 	);
+
+/**
+ * CSS files component will be using
+ *
+ * @var array
+ */
+	public $css = array('DebugKit.debug_toolbar.css');
 
 /**
  * CacheKey used for the cache file.
@@ -309,9 +317,14 @@ class ToolbarComponent extends Component implements CakeEventListener {
 		$vars = $this->_gatherVars($controller);
 		$this->_saveState($controller, $vars);
 
+		$this->javascript = array_unique(array_merge($this->javascript, $vars['javascript']));
+		$this->css = array_unique(array_merge($this->css, $vars['css']));
+		unset($vars['javascript'], $vars['css']);
+
 		$controller->set(array(
 			'debugToolbarPanels' => $vars,
-			'debugToolbarJavascript' => $this->javascript
+			'debugToolbarJavascript' => $this->javascript,
+			'debugToolbarCss' => $this->css
 		));
 
 		$isHtml = (
@@ -376,7 +389,7 @@ class ToolbarComponent extends Component implements CakeEventListener {
  * @return array Array of all panel beforeRender()
  */
 	protected function _gatherVars(Controller $controller) {
-		$vars = array();
+		$vars = array('javascript' => array(), 'css' => array());
 		$panels = array_keys($this->panels);
 
 		foreach ($panels as $panelName) {
@@ -391,6 +404,13 @@ class ToolbarComponent extends Component implements CakeEventListener {
 			$vars[$panelName]['plugin'] = $panel->plugin;
 			$vars[$panelName]['title'] = $panel->title;
 			$vars[$panelName]['disableTimer'] = true;
+
+			if (!empty($panel->javascript)) {
+				$vars['javascript'] = array_merge($vars['javascript'], (array)$panel->javascript);
+			}
+			if (!empty($panel->css)) {
+				$vars['css'] = array_merge($vars['css'], (array)$panel->css);
+			}
 		}
 		return $vars;
 	}

@@ -22,15 +22,16 @@ Pour plus d'informations, reportez vous au fichier LICENCE de l'archive.</pre>
 Comment installer Opencomp ?
 ---------------------------
 
-<pre>Notez que ce logiciel est actuellement en développement et qu'il peut être instable voir ne pas fonctionner du tout.</pre>
+**_<pre>Notez que ce logiciel est actuellement en développement et qu'il peut être instable voir ne pas fonctionner du tout.</pre>_**
 
 Pour installer Opencomp, suivez les indications suivantes :
 
-* [Téléchargez la dernière version du script](https://github.com/jtraulle/Opencomp/zipball/experimental)
-* Décompressez le dossier
-* Transférez le dossier sur votre serveur web
-* Assurez vous que le Module de réécriture d'URL Apache est activé sur votre serveur
-* Créer une base de donnée MySQL en important le dump SQL `structure.sql` présent dans le répertoire `app/Model/Datasource/` du dossier téléchargé
-* Importez dans votre base de donnée les fichiers `academies_data.sql`, `cycles_levels_data.sql`, `competences_data.sql`, `items_data.sql`, `items_levels_data.sql`, `users_data.sql` présent dans le répertoire `app/Model/Datasource/` du dossier téléchargé
+* [Téléchargez la dernière version du script](https://github.com/jtraulle/Opencomp/zipball/experimental).
+* Décompressez le dossier.
+* Transférez le dossier sur votre serveur web.
+* Assurez vous que le Module de réécriture d'URL Apache (mod_rewrite) est activé sur votre serveur
+* Créer une base de donnée MySQL en important le dump SQL `structure.sql` présent dans le répertoire `app/Model/Datasource/` du dossier téléchargé.
+* Importez dans votre base de donnée les fichiers `academies_data.sql`, `cycles_levels_data.sql`, `competences_data.sql`, `items_data.sql`, `items_levels_data.sql`, `users_data.sql` présents dans le répertoire `app/Model/Datasource/` du dossier téléchargé.
 * Éditez les informations de connexion à la base de données mysql présentes dans le fichier `app/Config/database.php` (lignes 62 et suivantes).
-* Rapportez vos suggestions et avis sur [le gestionnaire de demandes du projet](https://github.com/jtraulle/Opencomp/issues/new).
+* Accédez à votre serveur web, les identifiants par défaut sont admin/admin.
+* Rapportez vos suggestions et avis sur [le gestionnaire de demandes du projet](http://projets.opencomp.fr/opencomp/issues/new).

@@ -7,7 +7,7 @@ App::uses('AppController', 'Controller');
  */
 class ResultsController extends AppController {
 
-	public $components = array('RequestHandler');
+	//public $components = array('RequestHandler');
 
 	public function selectpupil(){
 		//On vérifie qu'un paramètre nommé evaluation_id a été fourni et qu'il existe.

@@ -11,7 +11,7 @@ $bulletin = '
 			td { 
 				border:thin solid black; 
 				padding: 3px 3px 3px 5px;
-				font: 13px Helvetica;
+				font: 13px "Helvetica";
 			} 
 
 			.niveau1{
@@ -24,6 +24,7 @@ $bulletin = '
 				padding: 20px 0 0 0;
 				font: 20px Helvetica;
 				border-bottom: 1px dashed black;
+				page-break-after: avoid;
 			}
 			.niveau3{
 				margin: 0 0 0 30px;
@@ -61,10 +62,10 @@ $bulletin = '
 	</head>
 	<body>
 		<div id="footer">
-			<p class="page">Résultats scolaires du 1er trimestre pour &lt; Prénom &gt; &lt; Nom &gt; - Page </p>
+			<p class="page">Résultats scolaires du 1er trimestre pour '.$items[0]['Pupil']['first_name'].' '.$items[0]['Pupil']['name'].' - Page</p>
 		</div>
 		<div id="content">
-		<p class="title">Résultats scolaires du 1er trimestre pour &lt; Prénom &gt; &lt; Nom &gt;</p>';
+		<p class="title">Résultats scolaires du 1er trimestre pour '.$items[0]['Pupil']['first_name'].' '.$items[0]['Pupil']['name'].'</p>';
 
 foreach($competences as $competence){
 	if($competence['depth'] == 0){
@@ -89,7 +90,7 @@ foreach($competences as $competence){
 		
 		$itemlist = null;
 		foreach($items as $item){
-			if($item['Item']['competence_id'] == $competence['id']){
+			if($item['Item']['competence_id'] == $competence['id'] && $item['Result']['result'] != ""){
 				if($item['Result']['result'] == 'A') $color = '#eeffcc'; elseif($item['Result']['result'] == 'B') $color = '#ffffbb'; elseif($item['Result']['result'] == 'C') $color = '#ffddaa'; elseif($item['Result']['result'] == 'D') $color = '#ffbbaa'; elseif($item['Result']['result'] == 'ABS') $color = '#eeeeee';
 				$itemlist[] = '<tr><td>'.$item['Item']['title'].'</td><td style="text-align:center; background-color:'.$color.';" width="60px">'.$item['Result']['result'].'</td></tr>';	
 			}
@@ -105,7 +106,7 @@ foreach($competences as $competence){
 		$bulletin .= '<h3 class="niveau3">'.$competence['title'].'</h3>';
 		$itemlist = null;
 		foreach($items as $item){
-			if($item['Item']['competence_id'] == $competence['id']){
+			if($item['Item']['competence_id'] == $competence['id'] && $item['Result']['result'] != ""){
 				if($item['Result']['result'] == 'A') $color = '#eeffcc'; elseif($item['Result']['result'] == 'B') $color = '#ffffbb'; elseif($item['Result']['result'] == 'C') $color = '#ffddaa'; elseif($item['Result']['result'] == 'D') $color = '#ffbbaa'; elseif($item['Result']['result'] == 'ABS') $color = '#eeeeee';
 				$itemlist[] = '<tr><td>'.$item['Item']['title'].'</td><td style="text-align:center; background-color:'.$color.';" width="60px">'.$item['Result']['result'].'</td></tr>';	
 			}
@@ -121,7 +122,7 @@ foreach($competences as $competence){
 		$bulletin .= '<h3 class="niveau4">'.$competence['title'].'</h3>';
 		$itemlist = null;
 		foreach($items as $item){
-			if($item['Item']['competence_id'] == $competence['id']){
+			if($item['Item']['competence_id'] == $competence['id'] && $item['Result']['result'] != ""){
 				if($item['Result']['result'] == 'A') $color = '#eeffcc'; elseif($item['Result']['result'] == 'B') $color = '#ffffbb'; elseif($item['Result']['result'] == 'C') $color = '#ffddaa'; elseif($item['Result']['result'] == 'D') $color = '#ffbbaa'; elseif($item['Result']['result'] == 'ABS') $color = '#eeeeee';
 				$itemlist[] = '<tr><td>'.$item['Item']['title'].'</td><td style="text-align:center; background-color:'.$color.';" width="60px">'.$item['Result']['result'].'</td></tr>';	
 			}
@@ -138,14 +139,21 @@ foreach($competences as $competence){
 
 $bulletin .= "</div></body></html>";
 
-if(isset($output_type) && $output_type == 'pdf'){
+if(isset($output_type) && $output_type == 'pdf' && $output_engine == 'dompdf'){
 	App::import('Vendor','dompdf/dompdf_config_inc'); 
 
 	$dompdf = new DOMPDF();
 	$dompdf->set_paper("a4");
 	$dompdf->load_html($bulletin);
+	$bulletin = utf8_decode($bulletin);
 	$dompdf->render();
 	$dompdf->stream("sample.pdf", array('Attachment' => 0));
+}elseif(isset($output_type) && $output_type == 'pdf' && $output_engine == 'mpdf'){	
+	App::import('Vendor', 'mPDF', array('file' => 'mpdf' . DS . 'mpdf.php'));
+	$mpdf=new mPDF();
+	$mpdf->WriteHTML($bulletin);
+	$mpdf->SetFooter('Résultats scolaires du 1er trimestre pour '.$items[0]['Pupil']['first_name'].' '.$items[0]['Pupil']['name'].' - page {PAGENO}');
+	$mpdf->Output();
 }else{
 	echo $bulletin;
 }

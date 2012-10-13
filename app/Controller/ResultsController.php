@@ -7,8 +7,6 @@ App::uses('AppController', 'Controller');
  */
 class ResultsController extends AppController {
 
-	//public $components = array('RequestHandler');
-
 	public function selectpupil(){
 		//On vérifie qu'un paramètre nommé evaluation_id a été fourni et qu'il existe.
 		if(isset($this->request->params['named']['evaluation_id'])) {
@@ -117,11 +115,28 @@ class ResultsController extends AppController {
 	
 	public function bul(){
 	
-		if(isset($this->request->params['named']['output_type'])) {
-       		$output_type = strval($this->request->params['named']['output_type']);
+		if(!isset($this->request->params['named']['output_type'])) {
+       		throw new NotFoundException(__('You must provide an output type !')); 		
+       	} else {
+			$output_type = strval($this->request->params['named']['output_type']);
+		}
+		
+		if(!isset($this->request->params['named']['output_engine'])) {
+       		throw new NotFoundException(__('You must provide an output engine !')); 		
+       	} else {
+			$output_engine = strval($this->request->params['named']['output_engine']);
+		}
+		
+		if(!isset($this->request->params['named']['pupil_id']) || !is_numeric($this->request->params['named']['pupil_id'])) {
+       		throw new NotFoundException(__('You must provide pupil_id !')); 		
+       	} else {
+			$pupil =  strval($this->request->params['named']['pupil_id']);
+		}
 
 			if ($output_type == 'pdf') {
 				$this->set('output_type', 'pdf');
+				if ($output_engine == 'mpdf') $this->set('output_engine', 'mpdf');
+				if ($output_engine == 'dompdf') $this->set('output_engine', 'dompdf');
 				Configure::write('debug',0);
 				$this->response->type('pdf');
 				$this->layout = 'pdf';
@@ -132,9 +147,29 @@ class ResultsController extends AppController {
 			}
 			
 			$items = $this->Result->find('all', array(
-			'fields' => array('result'),
-			'contain' => array('Item.Competence.id', 'Item.title')));
+				'fields' => array('result'),
+				'conditions' => array(
+					'Pupil.id' => $this->request->params['named']['pupil_id'],
+					'Evaluation.period_id' => $this->request->params['named']['period_id']
+				),
+				'contain' => array(
+					'Item.Competence.id', 
+					'Item.title',
+					'Pupil.id',
+					'Pupil.name',
+					'Pupil.first_name',
+					'Evaluation.Period.id'
+				)
+			));
 		
+			if(empty($items)){
+				$this->Session->setFlash(__('Aucun résultat n\'a été saisi pour cet élève', 'flash_error'));
+				$this->redirect(array(
+				    'controller'    => 'results',
+				    'action'        => 'bul'
+				));
+			}
+				
 			$this->set('items', $items);
 				
 			foreach($items as $item){
@@ -160,9 +195,6 @@ class ResultsController extends AppController {
 	        $competences = $this->Result->Item->Competence->generateTreeListWithDepth(array('Competence.id' => $comp_to_show));
 	        $this->set('competences', $competences);
 			
-		} else {
-			throw new NotFoundException(__('You must provide an output type !'));
-		}
 	}
 	
 }

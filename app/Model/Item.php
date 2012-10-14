@@ -185,8 +185,8 @@ class Item extends AppModel {
 	);
 	
 	function beforeValidate($options = array()) {
-	  if (!isset($this->request->data['Level']['Level'])
-	  || empty($this->request->data['Level']['Level'])) {
+	  if (!isset($this->data['Level']['Level'])
+	  || empty($this->data['Level']['Level'])) {
 	    $this->invalidate('Level'); // fake validation error on Item
 	    $this->Level->invalidate('Level', 'Sélectionnez au moins un niveau !');
 	  }

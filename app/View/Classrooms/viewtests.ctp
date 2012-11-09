@@ -75,6 +75,7 @@
 <ul class="nav nav-pills">
   <li><?php echo $this->Html->link(__('Élèves'), array('controller' => 'classrooms', 'action' => 'view', $classroom['Classroom']['id'])); ?></li>
   <li class="active"><?php echo $this->Html->link(__('Évaluations'), array('controller' => 'classrooms', 'action' => 'viewtests', $classroom['Classroom']['id'])); ?></li>
+  <li><?php echo $this->Html->link(__('Bulletins'), array('controller' => 'results', 'action' => 'viewbul', $classroom['Classroom']['id'])); ?></li>
 </ul>
 
 <div class="page-title">
@@ -105,7 +106,7 @@
 	foreach ($classroom['Evaluation'] as $evaluation): ?>
 	<tr>
 		<td><?php echo '#'.$evaluation['id']; ?></td>
-		<td><?php echo $evaluation['title']; ?></td>
+		<td><?php echo $this->Html->link($evaluation['title'], array('controller' => 'evaluations', 'action' => 'attacheditems', $evaluation['id'])); ?></td>
 		<td><?php echo $evaluation['User']['first_name'].' '.$evaluation['User']['name']; ?></td>
 		<td class="actions" style="padding-right:40px">
 			<?php 

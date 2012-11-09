@@ -17,7 +17,7 @@
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
-		echo $this->fetch('script');
+		echo $this->Html->script(array('jquery.js'));
 	?>
     
     <style>
@@ -82,7 +82,10 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     
-    <?php echo $this->Html->script(array('jquery.js', 'jquery.jstree.js', 'chosen/chosen.jquery.min.js', 'bootstrap.min.js', 'bootstrap-datepicker.js', 'custom.js')); ?>
+    <?php 
+    	echo $this->Html->script(array('jquery.jstree.js', 'chosen/chosen.jquery.min.js', 'bootstrap.min.js', 'bootstrap-datepicker.js', 'custom.js')); 
+	    echo $this->fetch('script');
+    ?>
 
   </body>
 </html>

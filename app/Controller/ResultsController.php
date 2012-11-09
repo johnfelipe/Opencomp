@@ -113,6 +113,44 @@ class ResultsController extends AppController {
 		}
 	}
 	
+	public function viewbul($id = null){
+		$this->set('title_for_layout', __('Visualiser une classe'));
+		$this->loadModel('Classroom');
+		$this->Classroom->id = $id;
+		if (!$this->Classroom->exists()) {
+			throw new NotFoundException(__('The classroom_id provided does not exist !'));
+		}
+		$classroom = $this->Classroom->find('first', array(
+			'conditions' => array('Classroom.id' => $id)
+		));
+		$this->set('classroom', $classroom);
+		
+		$ReqPupils = $this->Result->find('all', array(
+			'fields' => array('pupil_id'),
+			'order' => array('name', 'first_name'),
+			'conditions' => array(
+				'Evaluation.period_id' => $this->request->params['named']['period_id'],
+				'Evaluation.classroom_id' => $id
+			),
+			'contain' => array(
+				'Pupil.id',
+				'Evaluation.Period.id',
+				'Evaluation.Classroom.id'
+			)
+		));
+		
+		foreach($ReqPupils as $pupils){
+			$pup[] = $pupils['Pupil']['id'];
+		}
+		$pup = array_values(array_unique($pup));
+		$nbpup = count($pup);
+		foreach($pup as $ind => $id){
+			$pourcent[$ind] = round((100 / $nbpup) * ($ind+1),1);
+		}
+		$tab = array('pupils' => $pup, 'pourcent' =>$pourcent, 'period_id' => $this->request->params['named']['period_id'], 'classroom_id' => $classroom['Classroom']['id']);
+		$this->set('pupils', json_encode(json_encode($tab)));
+	}
+	
 	public function bul(){
 	
 		if(!isset($this->request->params['named']['output_type'])) {
@@ -132,13 +170,23 @@ class ResultsController extends AppController {
        	} else {
 			$pupil =  strval($this->request->params['named']['pupil_id']);
 		}
+		
+		if(!isset($this->request->params['named']['classroom_id']) || !is_numeric($this->request->params['named']['classroom_id'])) {
+       		throw new NotFoundException(__('You must provide classroom_id !')); 		
+       	} else {
+			$classroom =  strval($this->request->params['named']['classroom_id']);
+		}
+		
+		$this->set('pupil_id', $pupil);
+		$this->set('classroom_id', $classroom);
+		$this->set('period_id', $this->request->params['named']['period_id']);
 
 			if ($output_type == 'pdf') {
 				$this->set('output_type', 'pdf');
 				if ($output_engine == 'mpdf') $this->set('output_engine', 'mpdf');
 				if ($output_engine == 'dompdf') $this->set('output_engine', 'dompdf');
-				Configure::write('debug',0);
-				$this->response->type('pdf');
+				//Configure::write('debug',0);
+				//$this->response->type('pdf');
 				$this->layout = 'pdf';
 			}elseif ($output_type == 'html') {
 				$this->layout = 'pdf';
@@ -149,8 +197,9 @@ class ResultsController extends AppController {
 			$items = $this->Result->find('all', array(
 				'fields' => array('result'),
 				'conditions' => array(
-					'Pupil.id' => $this->request->params['named']['pupil_id'],
-					'Evaluation.period_id' => $this->request->params['named']['period_id']
+					'Pupil.id' => $pupil,
+					'Evaluation.period_id' => $this->request->params['named']['period_id'],
+					'Evaluation.classroom_id' => $classroom
 				),
 				'contain' => array(
 					'Item.Competence.id', 
@@ -158,7 +207,8 @@ class ResultsController extends AppController {
 					'Pupil.id',
 					'Pupil.name',
 					'Pupil.first_name',
-					'Evaluation.Period.id'
+					'Evaluation.Period.id',
+					'Evaluation.Classroom.id'
 				)
 			));
 		
@@ -195,6 +245,52 @@ class ResultsController extends AppController {
 	        $competences = $this->Result->Item->Competence->generateTreeListWithDepth(array('Competence.id' => $comp_to_show));
 	        $this->set('competences', $competences);
 			
+	}
+	
+	function concat_bul(){
+		$this->layout = 'ajax';
+		//debug($this->request->data);
+	
+		App::import('Vendor','fpdf'); 
+		App::import('Vendor','fpdi'); 
+		
+		function ajouteFichier($pdf,$file)
+		{
+			$nbPage = $pdf->setSourceFile($file);
+			
+			for ($i = 1; $i <= $nbPage; $i++) {
+		        $tplidx = $pdf->ImportPage($i);
+		        $size = $pdf->getTemplatesize($tplidx);
+		        $pdf->AddPage('P', array($size['w'], $size['h']));
+		        $pdf->useTemplate($tplidx);
+		    }
+		}
+		
+		$pdf = new FPDI();
+		
+		foreach($this->request->data['pupils'] as $pupil_id){
+			ajouteFichier($pdf,"files/".$this->request->data['classroom_id']."_".$this->request->data['period_id']."_".$pupil_id.".pdf");
+		}
+		
+		$pdf->Output("files/".$this->request->data['classroom_id']."_".$this->request->data['period_id'].".pdf","F");
+		
+		foreach($this->request->data['pupils'] as $pupil_id){
+			unlink("files/".$this->request->data['classroom_id']."_".$this->request->data['period_id']."_".$pupil_id.".pdf");
+		}
+	
+	}
+	
+	function download(){
+		$this->layout = 'ajax';
+		if(!isset($this->request->params['named']['filename'])) {
+       		throw new NotFoundException(__('You must provide a filename !')); 		
+       	} else {
+			$filename = strval($this->request->params['named']['filename']);
+		}
+		
+		header('Content-disposition: attachment; filename='.$filename);
+		header('Content-type: application/pdf');
+		readfile('files/'.$filename);
 	}
 	
 }

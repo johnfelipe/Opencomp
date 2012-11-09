@@ -13,12 +13,15 @@
     	
     	<?php if(!empty($classrooms)):
 	    	foreach($classrooms as $classroom):
-		    	echo '<div class="page-title"><h4>'.$classroom['Classroom']['title'].' à '.$classroom['Establishment']['name'].'</h4></div>'; ?>
-			    <div class="row-fluid">
-			    	<div class="span6"><?php echo $this->Html->link('<i class="icon-eye-open"></i> '.__('Voir les évaluations'), array('controller' => 'classrooms', 'action' => 'viewtests', $classroom['Classroom']['id']), array('class' => 'btn btn-large', 'escape' => false)); ?></div>
-			    	<div class="span6"><?php echo $this->Html->link('<i class="icon-plus"></i> '.__('Nouvelle évaluation'), array('controller' => 'evaluations', 'action' => 'add', 'classroom_id' => $classroom['Classroom']['id']), array('class' => 'btn btn-large btn-success', 'style'=>'font-weight:normal; margin-bottom:20px;', 'escape' => false)); ?></div>
-
+		    	echo '<div class="well"><h4 style=\'font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;\'>'.$classroom['Classroom']['title'].' à '.$classroom['Establishment']['name'].'</h4>'; ?>
+		    	<div class="row-fluid">
+			    	<div class="span6"><?php echo $this->Html->link('<i class="icon-user"></i> '.__('Voir les élèves'), array('controller' => 'classrooms', 'action' => 'view', $classroom['Classroom']['id']), array('class' => 'btn btn-large btn-block', 'escape' => false)); ?></div>
+			    	<div class="span6"><?php echo $this->Html->link('<i class="icon-cog"></i> '.__('Générer bulletins'), array('controller' => 'results', 'action' => 'viewbul', $classroom['Classroom']['id']), array('class' => 'btn btn-large btn-block', 'style'=>'font-weight:normal; margin-bottom:10px;', 'escape' => false)); ?></div>
 			    </div>
+			    <div class="row-fluid">
+			    	<div class="span6"><?php echo $this->Html->link('<i class="icon-eye-open"></i> '.__('Voir les évaluations'), array('controller' => 'evaluations', 'action' => 'add', 'classroom_id' =>$classroom['Classroom']['id']), array('class' => 'btn btn-large btn-block', 'escape' => false)); ?></div>
+			    	<div class="span6"><?php echo $this->Html->link('<i class="icon-plus"></i> '.__('Nouvelle évaluation'), array('controller' => 'evaluations', 'action' => 'add', 'classroom_id' => $classroom['Classroom']['id']), array('class' => 'btn btn-large btn-block btn-success', 'style'=>'font-weight:normal; margin-bottom:20px;', 'escape' => false)); ?></div>
+			    </div></div>
 			    
 	    	<?php endforeach;
     	endif; ?>    

@@ -13,11 +13,16 @@ $bulletin = '
 				padding: 3px 3px 3px 5px;
 				font: 13px "Helvetica";
 			} 
-
+			th {
+				padding: 0 0 5px 0;
+				font: italic 500 15px Helvetica;
+				text-align: left;
+			}
 			.niveau1{
 				margin: 25px 0 0 0;
 				font: 25px Helvetica;
 				border-bottom: 1px solid black;
+				page-break-after: avoid;
 			}
 			.niveau2{
 				margin: 0 0 20px 0;
@@ -79,11 +84,11 @@ foreach($competences as $competence){
 			}
 		}
 		if(isset($itemlist)){
-			$bulletin .= '<table>';
+			$bulletin .= '<table><tbody>';
 			foreach($itemlist as $libitem){
 				$bulletin .= $libitem;
 			}
-			$bulletin .= '</table>';
+			$bulletin .= '</tbody></table>';
 		}
 	}elseif($competence['depth'] == 1){
 		$bulletin .= '<h2 class="niveau2">'.$competence['title'].'</h2>';
@@ -96,14 +101,13 @@ foreach($competences as $competence){
 			}
 		}
 		if(isset($itemlist)){
-			$bulletin .= '<table class="tabniv2">';
+			$bulletin .= '<table class="tabniv2"><tbody>';
 			foreach($itemlist as $libitem){
 				$bulletin .= $libitem;
 			}
-			$bulletin .= '</table>';
+			$bulletin .= '</tbody></table>';
 		}
 	}elseif($competence['depth'] == 2){
-		$bulletin .= '<h3 class="niveau3">'.$competence['title'].'</h3>';
 		$itemlist = null;
 		foreach($items as $item){
 			if($item['Item']['competence_id'] == $competence['id'] && $item['Result']['result'] != ""){
@@ -112,14 +116,14 @@ foreach($competences as $competence){
 			}
 		}
 		if(isset($itemlist)){
-			$bulletin .= '<table class="tabniv3">';
+			$bulletin .= '<table class="tabniv3"><tbody>';
+			$bulletin .= '<thead><tr><th colspan="2">'.$competence['title'].'</th></tr></thead>';
 			foreach($itemlist as $libitem){
 				$bulletin .= $libitem;
 			}
-			$bulletin .= '</table>';
+			$bulletin .= '</tbody></table>';
 		}
 	}elseif($competence['depth'] == 3){
-		$bulletin .= '<h3 class="niveau4">'.$competence['title'].'</h3>';
 		$itemlist = null;
 		foreach($items as $item){
 			if($item['Item']['competence_id'] == $competence['id'] && $item['Result']['result'] != ""){
@@ -128,11 +132,12 @@ foreach($competences as $competence){
 			}
 		}
 		if(isset($itemlist)){
-			$bulletin .= '<table class="tabniv4">';
+			$bulletin .= '<table class="tabniv4"><tbody>';
+			$bulletin .= '<thead><tr><th colspan="2">'.$competence['title'].'</th></tr></thead>';
 			foreach($itemlist as $libitem){
 				$bulletin .= $libitem;
 			}
-			$bulletin .= '</table>';
+			$bulletin .= '</tbody></table>';
 		}
 	}
 }
@@ -147,7 +152,15 @@ if(isset($output_type) && $output_type == 'pdf' && $output_engine == 'dompdf'){
 	$dompdf->load_html($bulletin);
 	$bulletin = utf8_decode($bulletin);
 	$dompdf->render();
-	$dompdf->stream("sample.pdf", array('Attachment' => 0));
+	if($dompdf->get_canvas()->get_page_count() % 2 == 1){
+		$dompdf->get_canvas()->new_page();
+	}
+	//$dompdf->stream("sample.pdf", array('Attachment' => 0));
+	$pdfoutput = $dompdf->output(); 
+	$filename = "files/".$classroom_id."_".$period_id."_".$pupil_id.".pdf";
+	$fp = fopen($filename, "a"); 
+	fwrite($fp, $pdfoutput); 
+	fclose($fp); 
 }elseif(isset($output_type) && $output_type == 'pdf' && $output_engine == 'mpdf'){	
 	App::import('Vendor', 'mPDF', array('file' => 'mpdf' . DS . 'mpdf.php'));
 	$mpdf=new mPDF();

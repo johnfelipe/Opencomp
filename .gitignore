@@ -1,6 +1,9 @@
 debug.log
 error.log
 database.php
+app/tmp/cache/cake_toolbar_cache*
+app/tmp/cache/models/myapp_cake*
+app/tmp/cache/persistent/myapp_cake*
 .project
 .PHPEditProject
 Opencomp.esproj

@@ -1,10 +1,11 @@
 <?php
 $bulletin = '
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 	<head>
-		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 		
-		<style>
+		<style type="text/css">
 			@page { margin: 50px 46px 45px; }
 		    #footer { position: fixed; text-align: center; bottom: 20px; font: italic 500 14px Helvetica; }
 		    #footer .page:after { content: counter(page, decimal); }
@@ -19,7 +20,7 @@ $bulletin = '
 				text-align: left;
 			}
 			.niveau1{
-				margin: 25px 0 0 0;
+				padding-top: 25px;
 				font: 25px Helvetica;
 				border-bottom: 1px solid black;
 				page-break-after: avoid;
@@ -116,8 +117,8 @@ foreach($competences as $competence){
 			}
 		}
 		if(isset($itemlist)){
-			$bulletin .= '<table class="tabniv3"><tbody>';
-			$bulletin .= '<thead><tr><th colspan="2">'.$competence['title'].'</th></tr></thead>';
+			$bulletin .= '<table class="tabniv3">';
+			$bulletin .= '<thead><tr><th colspan="2">'.$competence['title'].'</th></tr></thead><tbody>';
 			foreach($itemlist as $libitem){
 				$bulletin .= $libitem;
 			}

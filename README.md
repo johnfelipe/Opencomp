@@ -26,7 +26,7 @@ Comment installer Opencomp ?
 
 Pour installer Opencomp, suivez les indications suivantes :
 
-* [Téléchargez la dernière version du script](https://github.com/jtraulle/Opencomp/zipball/experimental).
+* [Téléchargez la dernière version du script](https://github.com/jtraulle/Opencomp/archive/devel.zip).
 * Décompressez le dossier.
 * Transférez le dossier sur votre serveur web.
 * Assurez vous que le Module de réécriture d'URL Apache (mod_rewrite) est activé sur votre serveur

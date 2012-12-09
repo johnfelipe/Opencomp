@@ -64,7 +64,7 @@ class EvaluationsController extends AppController {
 			$this->Evaluation->create();
 			if ($this->Evaluation->save($this->request->data)) {
 				$this->Session->setFlash(__('La nouvelle évaluation a été correctement ajoutée.'), 'flash_success');
-				$this->redirect(array('controller' => 'classrooms','action' => 'viewtests', $this->request->data['Evaluation']['classroom_id']));
+				$this->redirect(array('controller' => 'evaluations','action' => 'attacheditems', $this->Evaluation->id));
 			} else {
 				$this->Session->setFlash(__('Des erreurs ont été détectées durant la validation du formulaire. Veuillez corriger les erreurs mentionnées.'), 'flash_error');
 			}
@@ -155,11 +155,17 @@ class EvaluationsController extends AppController {
 		if (!$this->Evaluation->exists()) {
 			throw new NotFoundException(__('Invalid evaluation'));
 		}
+		$classroom_id = $this->Evaluation->read('Evaluation.classroom_id', $id);
 		if ($this->Evaluation->delete()) {
-			$this->Session->setFlash(__('Evaluation deleted'));
-			$this->redirect(array('action' => 'index'));
+			$this->Session->setFlash(__("L'évaluation a été correctement supprimée"), 'flash_success');
+			$this->redirect(array(
+			    'controller'    => 'classrooms',
+			    'action'        => 'viewtests',
+			    $classroom_id['Evaluation']['classroom_id']));
 		}
-		$this->Session->setFlash(__('Evaluation was not deleted'));
-		$this->redirect(array('action' => 'index'));
+		$this->Session->setFlash(__("L'évaluation n'a pas pu être supprimée en raison d'une erreur interne"), 'flash_error');
+		$this->redirect(array(
+		    'controller'    => 'classrooms',
+		    'action'        => 'viewtests'));
 	}
 }

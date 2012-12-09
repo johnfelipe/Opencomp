@@ -99,19 +99,16 @@
 	    </div>
 	</div>
 
-	<div class="span8">
-		<div class="alert alert-error">
-		  <h4 style='margin-bottom:10px;'><i class="icon-pushpin"></i><strong> Des éléments nécessitent votre attention !</strong></h4>
-		  <ul>
 		<?php
 		foreach ($classroom['Evaluation'] as $evaluation): ?>
 		
 		<?php 
 			$total = count($evaluation['Item'])*count($evaluation['Pupil']);
 			$results = count($evaluation['Result']);
+			$lines = array();
 			if($total != $results){
-				echo '<li style="line-height:23px;">Saisie des résultats incomplète pour <code>'.$evaluation['title'].'</code>';
-				echo $this->Html->link('<i class="icon-magic"></i>Corriger', 
+				$line = '<li style="line-height:23px;">Saisie des résultats incomplète pour <code>'.$evaluation['title'].'</code>';
+				$line .= $this->Html->link('<i class="icon-magic"></i>Corriger', 
 	    		array(
 		    		'controller' => 'evaluations', 
 		    		'action' => 'manageresults', 
@@ -121,11 +118,27 @@
 	    			'style' => 'float:right; ',
 	    			'escape' => false
 	    		));
-				echo '</li>';
+				$line .= '</li>';
+				$lines[] = $line;
 			}
-		?>
-		
-		<?php endforeach; ?></ul></div>
+		endforeach; ?>
+		<?php if(count($lines) > 0): ?>
+		<div class="span8">
+		<div class="alert alert-error">
+		  <h4 style='margin-bottom:10px;'><i class="icon-pushpin"></i><strong> Des éléments nécessitent votre attention !</strong></h4>
+		  <ul>
+		  	<?php foreach($lines as $line){
+			  	echo $line;
+		  	}
+		  	?>
+		  </ul>
+		</div>
+		<?php else: ?>
+		<div class="span8">
+		<div class="alert alert-success">
+		  <p class="lead" style="margin-bottom:0px;"><i class="icon-ok"></i> Tous les vérifications automatiques ont réussi ;)</p>
+		</div>
+		<?php endif; ?>
 	</div>
 </div>	
 

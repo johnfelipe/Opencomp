@@ -56,9 +56,10 @@ class ClassroomsController extends AppController {
 		if (!$this->Classroom->exists()) {
 			throw new NotFoundException(__('The classroom_id provided does not exist !'));
 		}
-		$this->Classroom->contain(array('Evaluation.User', 'Evaluation.Result', 'Evaluation.Pupil', 'Evaluation.Item', 'User', 'Establishment', 'Year'));
+		$this->Classroom->contain(array('Evaluation.created DESC', 'Evaluation.User', 'Evaluation.Result', 'Evaluation.Pupil', 'Evaluation.Item', 'User', 'Establishment', 'Year'));
 		$classroom = $this->Classroom->find('first', array(
-			'conditions' => array('Classroom.id' => $id)));
+			'conditions' => array('Classroom.id' => $id)
+		));
 		$this->set('classroom', $classroom);
 			
 	}

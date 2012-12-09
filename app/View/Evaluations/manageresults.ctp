@@ -30,7 +30,7 @@
 				</dd>
 				<dt><?php echo __('Période'); ?></dt>
 				<dd>
-					<?php echo $this->Html->link($evaluation['Period']['begin'], array('controller' => 'periods', 'action' => 'view', $evaluation['Period']['id'])); ?>
+					<?php echo $this->Html->link($evaluation['Period']['wellnamed'], array('controller' => 'periods', 'action' => 'view', $evaluation['Period']['id'])); ?>
 					&nbsp;
 				</dd>
 				<dt><?php echo __('Résultats globaux'); ?></dt>

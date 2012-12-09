@@ -15,6 +15,10 @@ class Period extends AppModel {
  * @var string
  */
 	public $displayField = array("du %s au %s", "{n}.Period.begin", "{n}.Period.end");
+	
+	public $virtualFields = array(
+    'wellnamed' => 'CONCAT("du ",DATE_FORMAT(Period.begin, "%e/%m/%Y"), " au ", DATE_FORMAT(Period.end, "%e/%m/%Y"))'
+);
 
 /**
  * Validation rules

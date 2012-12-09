@@ -3,7 +3,7 @@ $bulletin = '
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 	<head>
-		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 		
 		<style type="text/css">
 			@page { margin: 50px 46px 45px; }
@@ -151,14 +151,13 @@ if(isset($output_type) && $output_type == 'pdf' && $output_engine == 'dompdf'){
 	$dompdf = new DOMPDF();
 	$dompdf->set_paper("a4");
 	$dompdf->load_html($bulletin);
-	$bulletin = utf8_decode($bulletin);
 	$dompdf->render();
 	if($dompdf->get_canvas()->get_page_count() % 2 == 1){
 		$dompdf->get_canvas()->new_page();
 	}
 	//$dompdf->stream("sample.pdf", array('Attachment' => 0));
 	$pdfoutput = $dompdf->output(); 
-	$filename = "files/".$classroom_id."_".$period_id."_".$pupil_id.".pdf";
+	$filename = "files/".$classroom_id."_".str_replace(',','',$period_id)."_".$pupil_id.".pdf";
 	$fp = fopen($filename, "a"); 
 	fwrite($fp, $pdfoutput); 
 	fclose($fp); 

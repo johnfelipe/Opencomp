@@ -93,7 +93,7 @@
     		$("#progress").html(tab.pourcent[i]+"%");
     		$.ajax({ 
 			    type: "GET",
-			    url: "/Opencomp/results/bul/output_type:pdf/output_engine:dompdf/pupil_id:"+tab.pupils[i]+"/period_id:4/classroom_id:13", 
+			    url: "/Opencomp/results/bul/output_type:pdf/output_engine:dompdf/pupil_id:"+tab.pupils[i]+"/period_id:"+tab.period_id+"/classroom_id:"+tab.classroom_id, 
 			    error: function() { 
 			      $("#progress").addClass('bar-danger');
 			      $("#progress").css('width','100%');
@@ -112,7 +112,7 @@
 			    complete: function(){
 			    	$("#bar").removeClass('progress-striped active');
 			    	$("#progress").addClass('bar-success');
-			    	$("#progress").html("<a style='color:white;' href='../../download/filename:"+tab.classroom_id+"_"+tab.period_id+".pdf'>Cliquez pour télécharger le fichier généré</a>");
+			    	$("#progress").html("<a style='color:white;' href='../../download/filename:"+tab.classroom_id+"_"+tab.period_id.replace(",","")+".pdf'>Cliquez pour télécharger le fichier généré</a>");
 			    } 
 			});
 		}    	

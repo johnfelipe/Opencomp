@@ -198,7 +198,7 @@ class ResultsController extends AppController {
 				'fields' => array('result'),
 				'conditions' => array(
 					'Pupil.id' => $pupil,
-					'Evaluation.period_id' => $this->request->params['named']['period_id'],
+					'Evaluation.period_id' => explode(',',$this->request->params['named']['period_id']),
 					'Evaluation.classroom_id' => $classroom
 				),
 				'contain' => array(
@@ -269,13 +269,13 @@ class ResultsController extends AppController {
 		$pdf = new FPDI();
 		
 		foreach($this->request->data['pupils'] as $pupil_id){
-			ajouteFichier($pdf,"files/".$this->request->data['classroom_id']."_".$this->request->data['period_id']."_".$pupil_id.".pdf");
+			ajouteFichier($pdf,"files/".$this->request->data['classroom_id']."_".str_replace(',','',$this->request->data['period_id'])."_".$pupil_id.".pdf");
 		}
 		
-		$pdf->Output("files/".$this->request->data['classroom_id']."_".$this->request->data['period_id'].".pdf","F");
+		$pdf->Output("files/".$this->request->data['classroom_id']."_".str_replace(',','',$this->request->data['period_id']).".pdf","F");
 		
 		foreach($this->request->data['pupils'] as $pupil_id){
-			unlink("files/".$this->request->data['classroom_id']."_".$this->request->data['period_id']."_".$pupil_id.".pdf");
+			unlink("files/".$this->request->data['classroom_id']."_".str_replace(',','',$this->request->data['period_id'])."_".$pupil_id.".pdf");
 		}
 	
 	}

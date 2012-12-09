@@ -87,17 +87,24 @@
 	var tab = $.parseJSON(<?php echo $pupils; ?>);
 	
 	function ajaxcall(i){
+		$("#progress").removeClass('bar-success bar-danger');
     	if (i < tab.pupils.length) {
     		$("#progress").css({"width":tab.pourcent[i]+"%"});
     		$("#progress").html(tab.pourcent[i]+"%");
     		$.ajax({ 
 			    type: "GET",
 			    url: "/Opencomp/results/bul/output_type:pdf/output_engine:dompdf/pupil_id:"+tab.pupils[i]+"/period_id:4/classroom_id:13", 
-			    complete: function() { 
+			    error: function() { 
+			      $("#progress").addClass('bar-danger');
+			      $("#progress").css('width','100%');
+			      $("#progress").html("<p style='color:white;'>Ooops ! Une erreur est survenue lors de la génération :'(</p>");
+			    }, 
+			    success: function() { 
 			      ajaxcall(i + 1);	
 			    } 
 			}); 
 		}else{
+			$("#bar").addClass('progress-striped active');
 			$.ajax({ 
 			    type: "POST",
 			    url: "/Opencomp/results/concat_bul",
@@ -115,7 +122,7 @@
 
 <div class="row">
 	<div class="span12">
-		<div id="bar" class="progress progress-striped active">
+		<div id="bar" class="progress">
 		  <div id="progress" class="bar" style="width: 0%;"></div>
 		</div>
 	</div>

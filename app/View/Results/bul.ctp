@@ -68,7 +68,7 @@ $bulletin = '
 	</head>
 	<body>
 		<div id="footer">
-			<p class="page">Résultats scolaires du 1er trimestre pour '.$items[0]['Pupil']['first_name'].' '.$items[0]['Pupil']['name'].' - Page</p>
+			<p class="page">Résultats scolaires du 1er trimestre pour '.$items[0]['Pupil']['first_name'].' '.$items[0]['Pupil']['name'].' - Page </p>
 		</div>
 		<div id="content">
 		<p class="title">Résultats scolaires du 1er trimestre pour '.$items[0]['Pupil']['first_name'].' '.$items[0]['Pupil']['name'].'</p>';

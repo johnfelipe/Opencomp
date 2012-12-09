@@ -59,8 +59,8 @@
 			$i = 0;
 			foreach ($establishment['Period'] as $period): ?>
 			<tr>
-				<td><?php echo $this->Time->format("d/m/Y",$period['begin']); ?></td>
-				<td><?php echo $this->Time->format("d/m/Y",$period['end']); ?></td>
+				<td><?php echo $period['begin']; ?></td>
+				<td><?php echo $period['end']; ?></td>
 				<td><?php echo $period['Year']['title']; ?></td>
 				<td class="actions">
 					<?php echo $this->Html->link('<i class="icon-pencil"></i> '.__('Modifier'), array('controller' => 'periods', 'action' => 'edit', $period['id']), array('escape' => false)); ?>

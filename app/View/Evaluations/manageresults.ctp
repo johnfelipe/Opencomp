@@ -36,10 +36,10 @@
 				<dt><?php echo __('Résultats globaux'); ?></dt>
 				<dd>
 					 <div class="progress" style="margin-bottom:0px;">
-					  <div class="info bar bar-success" rel="tooltip" data-placement="bottom" title="<?php echo $resultats['pourcent_A'] ?>% des items acquis <br /> <?php echo $resultats['A'] ?> A sur <?php echo $resultats['TOT'] ?> items évalués au total" style="width: <?php echo $resultats['pourcent_A'] ?>%;"></div>
-					  <div class="info bar" rel="tooltip" data-placement="bottom" title="<?php echo $resultats['pourcent_B'] ?>% des items à renforcer <br /><?php echo $resultats['B'] ?> B sur <?php echo $resultats['TOT'] ?> items évalués au total" style="width: <?php echo $resultats['pourcent_B'] ?>%;"></div>
-					  <div class="info bar bar-warning" rel="tooltip" data-placement="bottom" title="<?php echo $resultats['pourcent_C'] ?>% des items en cours d'acquisition <br /><?php echo $resultats['C'] ?> C sur <?php echo $resultats['TOT'] ?> items évalués au total" style="width: <?php echo $resultats['pourcent_C'] ?>%;"></div>
-					  <div class="info bar bar-danger" rel="tooltip" data-placement="bottom" title="<?php echo $resultats['pourcent_D'] ?>% des items non acquis <br /><?php echo $resultats['D'] ?> D sur <?php echo $resultats['TOT'] ?> items évalués au total" style="width: <?php echo $resultats['pourcent_D'] ?>%;"></div>
+					  <div class="info bar bar-success" rel="tooltip" data-placement="bottom" title="<?php echo number_format($resultats['pourcent_A'],1) ?>% des items acquis <br /> <?php echo $resultats['A'] ?> A sur <?php echo $resultats['TOT'] ?> items évalués au total" style="width: <?php echo $resultats['pourcent_A'] ?>%;"></div>
+					  <div class="info bar" rel="tooltip" data-placement="bottom" title="<?php echo number_format($resultats['pourcent_B'],1) ?>% des items à renforcer <br /><?php echo $resultats['B'] ?> B sur <?php echo $resultats['TOT'] ?> items évalués au total" style="width: <?php echo $resultats['pourcent_B'] ?>%;"></div>
+					  <div class="info bar bar-warning" rel="tooltip" data-placement="bottom" title="<?php echo number_format($resultats['pourcent_C'],1) ?>% des items en cours d'acquisition <br /><?php echo $resultats['C'] ?> C sur <?php echo $resultats['TOT'] ?> items évalués au total" style="width: <?php echo $resultats['pourcent_C'] ?>%;"></div>
+					  <div class="info bar bar-danger" rel="tooltip" data-placement="bottom" title="<?php echo number_format($resultats['pourcent_D'],1) ?>% des items non acquis <br /><?php echo $resultats['D'] ?> D sur <?php echo $resultats['TOT'] ?> items évalués au total" style="width: <?php echo $resultats['pourcent_D'] ?>%;"></div>
 					</div> 
 				</dd>
            	</dl>

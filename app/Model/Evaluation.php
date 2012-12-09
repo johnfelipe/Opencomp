@@ -270,10 +270,10 @@ class Evaluation extends AppModel {
 		
 		$resultats['TOT'] = $resultats['A'] + $resultats['B'] + $resultats['C'] + $resultats['D'];
 		if($resultats['TOT'] != 0){
-			$resultats['pourcent_A'] = round($resultats['A'] * 100 / $resultats['TOT'],1);
-			$resultats['pourcent_B'] = round($resultats['B'] * 100 / $resultats['TOT'],1);
-			$resultats['pourcent_C'] = round($resultats['C'] * 100 / $resultats['TOT'],1);
-			$resultats['pourcent_D'] = round($resultats['D'] * 100 / $resultats['TOT'],1);
+			$resultats['pourcent_A'] = $resultats['A'] * 100 / $resultats['TOT'];
+			$resultats['pourcent_B'] = $resultats['B'] * 100 / $resultats['TOT'];
+			$resultats['pourcent_C'] = $resultats['C'] * 100 / $resultats['TOT'];
+			$resultats['pourcent_D'] = $resultats['D'] * 100 / $resultats['TOT'];
 			
 			return $resultats;
 		}else{

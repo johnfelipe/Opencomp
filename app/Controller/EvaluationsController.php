@@ -116,8 +116,24 @@ class EvaluationsController extends AppController {
 			$classroom_id = $this->request->data['Evaluation']['classroom_id'];
 			$this->set('classroom_id', $classroom_id);
 		}
-		$users = $this->Evaluation->User->find('list', array('recursive' => 0));
-		$periods = $this->Evaluation->Period->find('list', array('recursive' => 0));
+	
+		$users = $this->Evaluation->User->find('list', array(
+			'recursive' => 0,
+			'conditions' => array('id' => $this->Evaluation->User->findAllUsersInClassroom($classroom_id))
+			)
+		);
+		
+		$etab = $this->Evaluation->Classroom->find('first', array(
+			'fields'=>'establishment_id',
+			'conditions'=>array(
+				'Classroom.id'=>$classroom_id
+			),
+			'recursive'=>-1
+		));
+		
+		$periods = $this->Evaluation->Period->find('list', array(
+			'conditions' => array('establishment_id' => $etab['Classroom']['establishment_id']),
+			'recursive' => 0));
 		
 		$pupils = $this->Evaluation->findPupilsByLevelsInClassroom($classroom_id);
 		$this->set(compact('classrooms', 'users', 'periods', 'pupils'));

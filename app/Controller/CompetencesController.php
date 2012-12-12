@@ -33,6 +33,17 @@ class CompetencesController extends AppController {
                 array('fields' => array('title', 'lft', 'rght'), 'order' => 'lft ASC')); 
         $this->set('stuff', $stuff);  
     }
+    
+    public function attachunrateditem() {
+	    if($this->request->is('post') && is_numeric($this->request->data['Classroom']['period_id'])){
+		    $this->Competence->contain('Item.Level.title', 'ChildCompetence');
+	        $stuff = $this->Competence->find('all',  
+	                array('fields' => array('title', 'lft', 'rght'), 'order' => 'lft ASC')); 
+	        $this->set('stuff2', $stuff);  
+	    }else{
+		    throw new NotFoundException(__('Missing or invalid arguments !'));
+	    }
+	}
 
     public function bul() {	
     	

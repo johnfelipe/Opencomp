@@ -56,11 +56,30 @@ class ClassroomsController extends AppController {
 		if (!$this->Classroom->exists()) {
 			throw new NotFoundException(__('The classroom_id provided does not exist !'));
 		}
-		$this->Classroom->contain(array('Evaluation.created DESC', 'Evaluation.User', 'Evaluation.Result', 'Evaluation.Pupil', 'Evaluation.Item', 'User', 'Establishment', 'Year'));
+		$this->Classroom->contain(array('Evaluation.created DESC', 'Evaluation.unrated=0', 'Evaluation.User', 'Evaluation.Result', 'Evaluation.Pupil', 'Evaluation.Item', 'User', 'Establishment', 'Year'));
 		$classroom = $this->Classroom->find('first', array(
 			'conditions' => array('Classroom.id' => $id)
 		));
 		$this->set('classroom', $classroom);
+			
+	}
+	
+	public function viewunrateditems($id = null){
+		$this->set('title_for_layout', __('Visualiser une classe'));
+		$this->Classroom->id = $id;
+		if (!$this->Classroom->exists()) {
+			throw new NotFoundException(__('The classroom_id provided does not exist !'));
+		}
+		$this->Classroom->contain(array('Evaluation.created DESC', 'Evaluation.unrated=1', 'Evaluation.Item', 'Evaluation.Period', 'User', 'Establishment', 'Year'));
+		$classroom = $this->Classroom->find('first', array(
+			'conditions' => array('Classroom.id' => $id)
+		));
+		$this->set('classroom', $classroom);
+		
+		$periods = $this->Classroom->Evaluation->Period->find('list', array(
+			'conditions' => array('establishment_id' => $classroom['Classroom']['establishment_id']),
+			'recursive' => 0));
+		$this->set('periods', $periods);
 			
 	}
 

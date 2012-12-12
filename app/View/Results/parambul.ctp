@@ -69,74 +69,37 @@
 	    </div>
 		<?php endif; ?>
         
-    </div>
+    </div>  
 </div>
 
 <ul class="nav nav-pills">
-  <li class="active">
-    <?php echo $this->Html->link(__('Élèves'), array('controller' => 'classrooms', 'action' => 'view', $classroom['Classroom']['id'])); ?>
-  </li>
+  <li><?php echo $this->Html->link(__('Élèves'), array('controller' => 'classrooms', 'action' => 'view', $classroom['Classroom']['id'])); ?></li>
   <li><?php echo $this->Html->link(__('Évaluations'), array('controller' => 'classrooms', 'action' => 'viewtests', $classroom['Classroom']['id'])); ?></li>
   <li><?php echo $this->Html->link(__('Items non évalués'), array('controller' => 'classrooms', 'action' => 'viewunrateditems', $classroom['Classroom']['id'])); ?></li>
-  <li><?php echo $this->Html->link(__('Bulletins'), array('controller' => 'results', 'action' => 'parambul', $classroom['Classroom']['id'])); ?></li>
+  <li class="active"><?php echo $this->Html->link(__('Bulletins'), array('controller' => 'results', 'action' => 'parambul', $classroom['Classroom']['id'])); ?></li>
 </ul>
 
 <div class="page-title">
-    <h3><?php echo count($ClassroomsPupil).' '.__('élève(s) associé(s) à cette classe'); ?></h3>
-    <?php echo $this->Html->link('<i class="icon-plus"></i> '.__('ajouter un élève'), '/classroomspupils/add/classroom_id:'.$classroom['Classroom']['id'], array('class' => 'ontitle btn btn-success', 'escape' => false)); ?>
-    <?php echo $this->Html->link('<i class="icon-arrow-down"></i> '.__('importer'), '/classroomspupils/import/classroom_id:'.$classroom['Classroom']['id'], array('class' => 'ontitle btn', 'escape' => false)); ?>
+    <h3><?php echo __('Générer les bulletins de cette classe'); ?></h3>
 </div>
-<?php if (!empty($ClassroomsPupil)): ?>
-<table class="table table-striped table-condensed">
-<tr>
-	<th><?php echo __('Prénom'); ?></th>
-	<th><?php echo __('Nom'); ?></th>
-	<th><?php echo __('Sexe'); ?></th>
-	<th><?php echo __('Date de naissance'); ?></th>
-	<th><?php echo __('Niveau scolaire'); ?></th>
-	<th class="actions"><?php echo __('Actions'); ?></th>
-</tr>
+
 <?php
-	$i = 0;
-	foreach ($ClassroomsPupil as $pupil): ?>
-	<tr>
-		<td><?php echo $pupil['Pupil']['first_name']; ?></td>
-		<td><?php echo $pupil['Pupil']['name']; ?></td>
-		<td><?php if($pupil['Pupil']['sex'] == 'M') echo 'Masculin'; else echo 'Féminin'; ?></td>
-		<td><?php echo $this->Time->format("d/m/Y",$pupil['Pupil']['birthday']); ?></td>
-		<td><?php echo $pupil['Level']['title']; ?></td>
-		<td class="actions">
-		<?php 
-			echo $this->Html->link(
-				'<i class="icon-pencil"></i> Modifier', 
-				array(
-					'controller' => 'classroomspupils', 
-					'action' => 'edit', 
-					'classroom_id' => $classroom['Classroom']['id'], 
-					$pupil['Pupil']['id']
-				), 
-				array('escape' => false)
-			); 
-		?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<?php 
-			echo $this->Html->link(
-				'<i class="icon-trash"></i> Supprimer', 
-				array(
-					'controller' => 'classroomspupils', 
-					'action' => 'unlink', 
-					'classroom_id' => $classroom['Classroom']['id'], 
-					$pupil['Pupil']['id']
-				), 
-				array('escape' => false),
-				__('Êtes vous réellement sûr(e) de vouloir supprimer %s de cette classe ?', $pupil['Pupil']['first_name'].' '.$pupil['Pupil']['name'])
-			); 
-		 ?>
-		</td>
-	</tr>
-<?php endforeach; ?>
-</table>
-<?php else: ?>
-<div class="alert alert-info">
-	<i class="icon-info-sign"></i> Cette classe ne comporte encore aucun élève associé.<br />Vous pouvez ajouter des élèves manuellement (bouton vert à droite) ou les importer depuis une classe de l'année précédente.
-</div>
-<?php endif; ?>
+echo $this->Form->create(null, array(
+		    'url' => array('controller' => 'results', 'action' => 'parambul', $classroom['Classroom']['id'])
+		));
+		echo $this->Form->label('period_id', 'Periode(s) associée(s)');
+		echo $this->Form->select('period_id', $periods,
+		    array(
+		    	'multiple' => 'checkbox', 'required'
+		    )
+		);
+		echo $this->Form->error('Result.period_id'); 
+		$options = array(
+			'class' => 'btn btn-large btn-primary',
+		    'label' => __('Générer'),
+		    'escape' => false,
+		    'div' => false
+		);
+		echo $this->Form->end($options);
+?>
+

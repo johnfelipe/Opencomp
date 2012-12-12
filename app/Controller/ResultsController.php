@@ -113,6 +113,42 @@ class ResultsController extends AppController {
 		}
 	}
 	
+	public function parambul($id = null){
+		$this->set('title_for_layout', __('Visualiser une classe'));
+		$this->loadModel('Classroom');
+		$this->Classroom->id = $id;
+		if (!$this->Classroom->exists()) {
+			throw new NotFoundException(__('The classroom_id provided does not exist !'));
+		}
+		$classroom = $this->Classroom->find('first', array(
+			'conditions' => array('Classroom.id' => $id)
+		));
+		$this->set('classroom', $classroom);
+		
+		$periods = $this->Result->Evaluation->Period->find('list', array(
+			'conditions' => array('establishment_id' => $classroom['Classroom']['establishment_id']),
+			'recursive' => 0));
+		$this->set('periods', $periods);
+		
+		if($this->request->is('post')){
+		
+			$this->Result->validate['period_id']['multiple'] = array(
+		        'rule' => array('multiple', array('min' => 1)),
+		        'message' => 'Please select one, two or three options'			
+		    );
+		    			
+			$this->Result->set($this->request->data);
+			
+			if ($this->Result->validates()) {
+			    $this->redirect(array(
+				    'controller'    => 'results',
+				    'action'        => 'viewbul', 
+				    $id,
+				    'period_id' => implode(',', $this->data['Result']['period_id'])));
+			}
+		}
+	}
+	
 	public function viewbul($id = null){
 		$this->set('title_for_layout', __('Visualiser une classe'));
 		$this->loadModel('Classroom');
@@ -125,30 +161,31 @@ class ResultsController extends AppController {
 		));
 		$this->set('classroom', $classroom);
 		
-		$ReqPupils = $this->Result->find('all', array(
-			'fields' => array('pupil_id'),
-			'order' => array('name', 'first_name'),
-			'conditions' => array(
-				'Evaluation.period_id' => $this->request->params['named']['period_id'],
-				'Evaluation.classroom_id' => $id
-			),
-			'contain' => array(
-				'Pupil.id',
-				'Evaluation.Period.id',
-				'Evaluation.Classroom.id'
-			)
-		));
-		
-		foreach($ReqPupils as $pupils){
-			$pup[] = $pupils['Pupil']['id'];
-		}
-		$pup = array_values(array_unique($pup));
-		$nbpup = count($pup);
-		foreach($pup as $ind => $id){
-			$pourcent[$ind] = round((100 / $nbpup) * ($ind+1),1);
-		}
-		$tab = array('pupils' => $pup, 'pourcent' =>$pourcent, 'period_id' => $this->request->params['named']['period_id'], 'classroom_id' => $classroom['Classroom']['id']);
-		$this->set('pupils', json_encode(json_encode($tab)));
+
+			$ReqPupils = $this->Result->find('all', array(
+				'fields' => array('pupil_id'),
+				'order' => array('name', 'first_name'),
+				'conditions' => array(
+					'Evaluation.period_id' => $this->request->params['named']['period_id'],
+					'Evaluation.classroom_id' => $id
+				),
+				'contain' => array(
+					'Pupil.id',
+					'Evaluation.Period.id',
+					'Evaluation.Classroom.id'
+				)
+			));
+			
+			foreach($ReqPupils as $pupils){
+				$pup[] = $pupils['Pupil']['id'];
+			}
+			$pup = array_values(array_unique($pup));
+			$nbpup = count($pup);
+			foreach($pup as $ind => $id){
+				$pourcent[$ind] = round((100 / $nbpup) * ($ind+1),1);
+			}
+			$tab = array('pupils' => $pup, 'pourcent' =>$pourcent, 'period_id' => $this->request->params['named']['period_id'], 'classroom_id' => $classroom['Classroom']['id']);
+			$this->set('pupils', json_encode(json_encode($tab)));		
 	}
 	
 	public function bul(){

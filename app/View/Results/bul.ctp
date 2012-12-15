@@ -6,9 +6,33 @@ $bulletin = '
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 		
 		<style type="text/css">
-			@page { margin: 50px 46px 45px; }
+			html, body, div, span, applet, object, iframe,
+			h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+			a, abbr, acronym, address, big, cite, code,
+			del, dfn, em, img, ins, kbd, q, s, samp,
+			small, strike, strong, sub, sup, tt, var,
+			b, u, i, center,
+			dl, dt, dd, ol, ul, li,
+			fieldset, form, label, legend,
+			table, caption, tbody, tfoot, thead, tr, th, td,
+			article, aside, canvas, details, embed, 
+			figure, figcaption, footer, header, hgroup, 
+			menu, nav, output, ruby, section, summary,
+			time, mark, audio, video {
+				margin: 0;
+				padding: 0;
+				border: 0;
+				font-size: 100%;
+				font: inherit;
+				vertical-align: baseline;
+			}
+			@page { margin: 0; }
 		    #footer { position: fixed; text-align: center; bottom: 20px; font: italic 500 14px Helvetica; }
 		    #footer .page:after { content: counter(page, decimal); }
+			body {
+				width: 694px;
+				padding: 50px;
+			}
 			td { 
 				border:thin solid black; 
 				padding: 3px 3px 3px 5px;
@@ -20,10 +44,11 @@ $bulletin = '
 				text-align: left;
 			}
 			.niveau1{
-				padding-top: 25px;
 				font: 25px Helvetica;
 				border-bottom: 1px solid black;
+				padding-top: 30px;
 				page-break-after: avoid;
+				page-break-before: avoid;
 			}
 			.niveau2{
 				margin: 0 0 20px 0;
@@ -49,17 +74,19 @@ $bulletin = '
 			}
 			.tabniv2{
 				margin: 0px 0px 0px 0px;
+				page-break-before: avoid;
 			}
 			.tabniv3{
 				margin: 0px 0px 15px 23px;
-				width: 694px;
+				width: 674px;
+				page-break-before: avoid;
 			}
 			.tabniv4{
 				margin: 0px 0px 15px 45px;
 				width: 685px;
+				page-break-before: avoid;
 			}
 			.title{
-				margin: -10px 0 0 0;
 				font: italic 500 23px Helvetica;
 				border: 1px solid black;
 				padding: 0px 0px 3px 10px;
@@ -80,7 +107,11 @@ foreach($competences as $competence){
 		$itemlist = null;
 		foreach($items as $item){
 			if($item['Item']['competence_id'] == $competence['id']){
-				if($item['Result']['result'] == 'A') $color = '#eeffcc'; elseif($item['Result']['result'] == 'B') $color = '#ffffbb'; elseif($item['Result']['result'] == 'C') $color = '#ffddaa'; elseif($item['Result']['result'] == 'D') $color = '#ffbbaa'; elseif($item['Result']['result'] == 'ABS') $color = '#eeeeee';
+				if($item['Result']['result'] == 'A') $color = '#eeffcc'; 
+				elseif($item['Result']['result'] == 'B') $color = '#ffffbb'; 
+				elseif($item['Result']['result'] == 'C') $color = '#ffddaa'; 
+				elseif($item['Result']['result'] == 'D') $color = '#ffbbaa'; 
+				elseif($item['Result']['result'] == 'ABS') $color = '#eeeeee';
 				$itemlist[] = '<tr><td>'.$item['Item']['title'].'</td><td style="text-align:center; background-color:'.$color.';" width="60px">'.$item['Result']['result'].'</td></tr>';	
 			}
 		}
@@ -97,7 +128,11 @@ foreach($competences as $competence){
 		$itemlist = null;
 		foreach($items as $item){
 			if($item['Item']['competence_id'] == $competence['id'] && $item['Result']['result'] != ""){
-				if($item['Result']['result'] == 'A') $color = '#eeffcc'; elseif($item['Result']['result'] == 'B') $color = '#ffffbb'; elseif($item['Result']['result'] == 'C') $color = '#ffddaa'; elseif($item['Result']['result'] == 'D') $color = '#ffbbaa'; elseif($item['Result']['result'] == 'ABS') $color = '#eeeeee';
+				if($item['Result']['result'] == 'A') $color = '#eeffcc'; 
+				elseif($item['Result']['result'] == 'B') $color = '#ffffbb'; 
+				elseif($item['Result']['result'] == 'C') $color = '#ffddaa'; 
+				elseif($item['Result']['result'] == 'D') $color = '#ffbbaa'; 
+				elseif($item['Result']['result'] == 'ABS') $color = '#eeeeee';
 				$itemlist[] = '<tr><td>'.$item['Item']['title'].'</td><td style="text-align:center; background-color:'.$color.';" width="60px">'.$item['Result']['result'].'</td></tr>';	
 			}
 		}
@@ -112,7 +147,11 @@ foreach($competences as $competence){
 		$itemlist = null;
 		foreach($items as $item){
 			if($item['Item']['competence_id'] == $competence['id'] && $item['Result']['result'] != ""){
-				if($item['Result']['result'] == 'A') $color = '#eeffcc'; elseif($item['Result']['result'] == 'B') $color = '#ffffbb'; elseif($item['Result']['result'] == 'C') $color = '#ffddaa'; elseif($item['Result']['result'] == 'D') $color = '#ffbbaa'; elseif($item['Result']['result'] == 'ABS') $color = '#eeeeee';
+				if($item['Result']['result'] == 'A') $color = '#eeffcc'; 
+				elseif($item['Result']['result'] == 'B') $color = '#ffffbb'; 
+				elseif($item['Result']['result'] == 'C') $color = '#ffddaa'; 
+				elseif($item['Result']['result'] == 'D') $color = '#ffbbaa'; 
+				elseif($item['Result']['result'] == 'ABS') $color = '#eeeeee';
 				$itemlist[] = '<tr><td>'.$item['Item']['title'].'</td><td style="text-align:center; background-color:'.$color.';" width="60px">'.$item['Result']['result'].'</td></tr>';	
 			}
 		}

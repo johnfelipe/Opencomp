@@ -84,16 +84,20 @@
     <?php echo $this->Html->link('<i class="icon-plus"></i> '.__('ajouter une évaluation'), '/evaluations/add/classroom_id:'.$classroom['Classroom']['id'], array('class' => 'ontitle btn btn-success', 'escape' => false)); ?>
     <div class="btn-group ontitle">
 	  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-	    <i class="icon-filter"></i> Filtrer
+	    <i class="icon-filter"></i> Modifier le filtre
 	    <span class="caret"></span>
 	  </a>
 	  <ul class="dropdown-menu">
 	    <li><?php echo $this->Html->link('<i class="icon-reorder"></i> '.__('afficher toutes les périodes'), '/classrooms/viewtests/'.$classroom['Classroom']['id'].'/periods:all', array('escape' => false)); ?></li>
+	    <li><?php echo $this->Html->link('<i class="icon-reorder"></i> '.__('afficher la période courante'), '/classrooms/viewtests/'.$classroom['Classroom']['id'], array('escape' => false)); ?></li>
 	  </ul>
 	</div>
 </div>
 
 <?php if (!empty($classroom['Evaluation'])): ?>
+<div class="alert alert-info">
+	<i class="icon-lightbulb"></i> &nbsp; Seules les évaluations de la période courante sont listées, pour visualiser la totalité des évaluations, vous pouvez modifier le filtre.
+</div>
 <table class="table table-striped table-condensed">
 <tr>
 	<th><?php echo __('Identifiant'); ?></th>

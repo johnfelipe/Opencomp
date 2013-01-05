@@ -13,12 +13,12 @@ class Period extends AppModel {
  * Display field
  *
  * @var string
- */
-	public $displayField = array("du %s au %s", "{n}.Period.begin", "{n}.Period.end");
-	
+ */	
 	public $virtualFields = array(
-    'wellnamed' => 'CONCAT("du ",DATE_FORMAT(Period.begin, "%e/%m/%Y"), " au ", DATE_FORMAT(Period.end, "%e/%m/%Y"))'
-);
+    	'wellnamed' => 'CONCAT("du ",DATE_FORMAT(Period.begin, "%e/%m/%Y"), " au ", DATE_FORMAT(Period.end, "%e/%m/%Y"))'
+    );
+    
+    public $displayField = 'wellnamed';
 
 /**
  * Validation rules
@@ -67,22 +67,6 @@ class Period extends AppModel {
 			),
 		),
 	);
-	
-	public function afterFind($results, $primary = false) {
-	    foreach ($results as $key => $val) {
-	        if (isset($val['Period']['begin'])) {
-	            $results[$key]['Period']['begin'] = $this->dateFormatAfterFind($val['Period']['begin']);
-	        }
-	        if (isset($val['Period']['end'])) {
-	            $results[$key]['Period']['end'] = $this->dateFormatAfterFind($val['Period']['end']);
-	        }
-	    }
-	    return $results;
-	}
-	
-	public function dateFormatAfterFind($dateString) {
-	    return date('d/m/Y', strtotime($dateString));
-	}
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 

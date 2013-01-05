@@ -84,12 +84,16 @@ class EvaluationsController extends AppController {
 			'recursive'=>-1
 		));
 		
+		$this->Evaluation->Classroom->contain(array('Establishment.current_period_id'));
+		$current_period = $this->Evaluation->Classroom->findById($classroom_id, 'Establishment.current_period_id');
+		$current_period = $current_period['Establishment']['current_period_id'];
+		
 		$periods = $this->Evaluation->Period->find('list', array(
 			'conditions' => array('establishment_id' => $etab['Classroom']['establishment_id']),
 			'recursive' => 0));
 		
 		$pupils = $this->Evaluation->findPupilsByLevelsInClassroom($classroom_id);
-		$this->set(compact('classrooms', 'users', 'periods', 'pupils'));
+		$this->set(compact('classrooms', 'users', 'periods', 'pupils', 'current_period'));
 	}
 
 /**

@@ -5,24 +5,12 @@
 
 <?php
 
-echo $this->Form->create('Evaluation', array(
-    'class' => 'form-horizontal',
-    'inputDefaults' => array(
-        'format' => array('before', 'label', 'between', 'input', 'error', 'after'),
-        'div' => array('class' => 'control-group'),
-        'between' => '<div class="controls">',
-        'after' => '</div>',
-        'error' => array('attributes' => array('wrap' => 'span', 'class' => 'help-inline'))
-        )
-    )
-);
+echo $this->Form->create('Evaluation', array('class' => 'form-horizontal'));
 
 echo $this->Form->input('title', array(
-    'label' => array(
-        'text' => 'Titre de l\'évaluation',
-        'class' => 'control-label'
+    'label' => 'Titre de l\'évaluation'
     )
-));
+);
 
 echo $this->Form->hidden('classroom_id', array('value' => $classroom_id));
 
@@ -39,6 +27,8 @@ echo $this->Form->input('user_id', array(
 echo $this->Form->input('period_id', array(
     'class'=>'chzn-select',
     'style'=>'width : 220px;',
+    'default'=>$current_period,
+    'after' => '<span style="font-style: italic; margin-top:10px; margin-bottom:20px;" class="help-block"><i class="icon-lightbulb"></i> '.__("La période courante de l'établissement a été automatiquement sélectionnée.").'</span>',
     'label' => array(
         'text' => 'Période associée',
         'class' => 'control-label'
@@ -62,7 +52,7 @@ foreach($btn_nvx as $btn)
 echo $this->Form->input('Pupil', array(
     'class'=>'chzn-select',
     'data-placeholder' => 'Cliquez ici ou sur les boutons de niveaux pour ajouter des élèves.',
-    'after' => '<div class="help-block btn-toolbar">'.$btn_nvx_string.'</div></div>',
+    'after' => '<div class="help-block btn-toolbar">'.$btn_nvx_string.'</div>',
     'style'=>'width : 550px;',
     'label' => array(
         'text' => 'Élèves ayant passé l\'évaluation',
@@ -76,7 +66,10 @@ echo $this->Form->input('Pupil', array(
 ?>
 
 <div class="form-actions">
-     <?php echo $this->Form->button('Enregistrer cette évaluation', array('type' => 'submit', 'class' => 'btn btn-primary')); ?>        
+    <?php echo $this->Form->submit('Enregistrer cette évaluation', array(
+        'div' => false,
+        'class' => 'btn btn-primary',
+    )); ?>
 </div>
 
-
+<?php echo $this->Form->end(); ?>

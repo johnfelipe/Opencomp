@@ -56,7 +56,39 @@ class ClassroomsController extends AppController {
 		if (!$this->Classroom->exists()) {
 			throw new NotFoundException(__('The classroom_id provided does not exist !'));
 		}
-		$this->Classroom->contain(array('Evaluation.created DESC', 'Evaluation.unrated=0', 'Evaluation.User', 'Evaluation.Result', 'Evaluation.Pupil', 'Evaluation.Item', 'User', 'Establishment', 'Year'));
+		
+		$this->Classroom->contain(array('Establishment.current_period_id'));
+		$current_period = $this->Classroom->findById($id, 'Establishment.current_period_id');
+		$current_period = $current_period['Establishment']['current_period_id'];
+		
+		if(isset($this->request->params['named']['periods']) && $this->request->params['named']['periods'] == 'all') {
+			$this->Classroom->contain(array(
+				'Evaluation.created DESC', 
+				'Evaluation.unrated=0', 
+				'Evaluation.User', 
+				'Evaluation.Result', 
+				'Evaluation.Pupil', 
+				'Evaluation.Item', 
+				'User', 
+				'Establishment', 
+				'Year'
+			));
+		}else{
+			$this->Classroom->contain(array(
+				'Evaluation.created DESC', 
+				'Evaluation.period_id='.$current_period, 
+				'Evaluation.unrated=0', 
+				'Evaluation.User', 
+				'Evaluation.Result', 
+				'Evaluation.Pupil', 
+				'Evaluation.Item', 
+				'User', 
+				'Establishment', 
+				'Year'
+			));
+		}
+		
+		
 		$classroom = $this->Classroom->find('first', array(
 			'conditions' => array('Classroom.id' => $id)
 		));

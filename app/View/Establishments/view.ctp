@@ -48,19 +48,19 @@
         </div>
         
         <?php if (!empty($establishment['Period'])): ?>
+        <p><?php echo $this->Html->link('<i class="icon-pencil"></i> '.__('Modifier la période courante'), 'setDefaultPeriod/'.$establishment['Establishment']['id'], array('escape' => false)); ?></p>
 		<table class="table table-condensed table-striped">
 		<tr>
-			<th><?php echo __('Début de la période'); ?></th>
-			<th><?php echo __('Fin de la période'); ?></th>
+			<th><?php echo __('Période'); ?></th>
 			<th><?php echo __('Année scolaire'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 		</tr>
 		<?php
 			$i = 0;
-			foreach ($establishment['Period'] as $period): ?>
-			<tr>
-				<td><?php echo $period['begin']; ?></td>
-				<td><?php echo $period['end']; ?></td>
+			foreach ($establishment['Period'] as $period):
+				$startTableLine = ($period['id'] == $establishment['Establishment']['current_period_id']) ? '<tr class="info">' : '<tr>';
+			echo $startTableLine; ?> 
+				<td><?php echo $period['wellnamed']; ?></td>
 				<td><?php echo $period['Year']['title']; ?></td>
 				<td class="actions">
 					<?php echo $this->Html->link('<i class="icon-pencil"></i> '.__('Modifier'), array('controller' => 'periods', 'action' => 'edit', $period['id']), array('escape' => false)); ?>
@@ -118,19 +118,16 @@
         'inputDefaults' => array(
             'format' => array('before', 'label', 'between', 'input', 'error', 'after'),
             'div' => array('class' => 'control-group'),
-            'between' => '<div class="controls">',
-            'after' => '</div>',
             'error' => array('attributes' => array('wrap' => 'span', 'class' => 'help-inline'))
             )
         )
     );
     
     echo $this->Form->input('begin', array(
-        'between' => '<div class="controls"><div class="input-append date datepicker" data-date="'.date('Y-m-d').'" data-date-format="yyyy-mm-dd">',
-        'after' => '<span class="add-on"><i class="icon-calendar"></i></span></div></div>',
-        'class' => 'span2',
+        'class' => 'span2 startdate',
         'type' => 'text',
         'readonly' => 'readonly',
+        'prepend' => array('<i class="icon-calendar"></i>'),
         'label' => array(
             'text' => 'Date de début',
             'class' => 'control-label'
@@ -138,11 +135,10 @@
     )); 
     
     echo $this->Form->input('end', array(
-        'between' => '<div class="controls"><div class="input-append date datepicker" data-date="'.date('Y-m-d').'" data-date-format="yyyy-mm-dd">',
-        'after' => '<span class="add-on"><i class="icon-calendar"></i></span></div></div>',
-        'class' => 'span2',
+        'class' => 'span2 startdate',
         'type' => 'text',
         'readonly' => 'readonly',
+        'prepend' => array('<i class="icon-calendar"></i>'),
         'label' => array(
             'text' => 'Date de fin',
             'class' => 'control-label'

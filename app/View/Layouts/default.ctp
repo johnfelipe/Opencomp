@@ -53,7 +53,7 @@
               <li><?php echo $this->Html->link('<i class="icon-list"></i> '.__('Académies'), '/academies', array('escape' => false)); ?></li>
               <li><?php echo $this->Html->link('<i class="icon-user"></i> '.__('Utilisateurs'), '/users', array('escape' => false)); ?></li>
               <li><?php echo $this->Html->link('<i class="icon-cogs"></i> '.__('Paramètres'), '/settings', array('escape' => false)); ?></li>
-              <li><button type="button" class="btn btn-danger" onclick="window.open('http://projets.opencomp.fr/opencomp/issues/new')"><i class="icon-bolt"></i> <?php echo __('Soumettre une anomalie') ?></button></li>
+              <li><button type="button" class="btn btn-danger" onclick="window.open('http://traulle.homelinux.org/projets/thebuggenie/opencomp/issues/new')"><i class="icon-bolt"></i> <?php echo __('Soumettre une anomalie') ?></button></li>
             </ul>
             <ul class="nav pull-right">
 	            <li class="dropdown">
@@ -83,7 +83,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     
     <?php 
-    	echo $this->Html->script(array('jquery.jstree.js', 'chosen/chosen.jquery.min.js', 'bootstrap.min.js', 'bootstrap-datepicker.js', 'custom.js')); 
+    	echo $this->Html->script(array('jquery.jstree.js', 'chosen/chosen.jquery.min.js', 'bootstrap.min.js', 'bootstrap-datepicker.js', 'bootstrap-datepicker.fr.js', 'custom.js')); 
 	    echo $this->fetch('script');
     ?>
 

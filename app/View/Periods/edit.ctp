@@ -4,8 +4,8 @@
 		<legend><?php echo __('Edit Period'); ?></legend>
 	<?php
 		echo $this->Form->input('id');
-		echo $this->Form->input('begin');
-		echo $this->Form->input('end');
+		echo $this->Form->input('begin', array('dateFormat' => 'DMY'));
+		echo $this->Form->input('end', array('dateFormat' => 'DMY'));
 		echo $this->Form->input('year_id');
 		echo $this->Form->input('establishment_id');
 	?>

@@ -34,4 +34,4 @@ Pour installer Opencomp, suivez les indications suivantes :
 * Importez dans votre base de donnée les fichiers `academies_data.sql`, `cycles_levels_data.sql`, `competences_data.sql`, `items_data.sql`, `items_levels_data.sql`, `users_data.sql` présents dans le répertoire `app/Model/Datasource/` du dossier téléchargé.
 * Éditez les informations de connexion à la base de données mysql présentes dans le fichier `app/Config/database.php` (lignes 62 et suivantes).
 * Accédez à votre serveur web, les identifiants par défaut sont admin/admin.
-* Rapportez vos suggestions et avis sur [le gestionnaire de demandes du projet](http://projets.opencomp.fr/opencomp/issues/new).
+* Rapportez vos suggestions et avis sur [le gestionnaire de demandes du projet](http://vulcain.traulle.net/projets/opencomp/issues/new).

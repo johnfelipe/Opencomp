@@ -58,8 +58,7 @@
 	    		<?php echo $this->Html->link('<i class="icon-cog"></i> '.__('Générer bulletins'), 
 	    		array(
 		    		'controller' => 'results', 
-		    		'action' => 'viewbul', 
-		    		'period_id' => 4,
+		    		'action' => 'parambul', 
 		    		$classroom['Classroom']['id']
 	    		), 
 	    		array(

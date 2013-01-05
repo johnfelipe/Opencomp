@@ -33,11 +33,17 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
     public $components = array('DebugKit.Toolbar', 'Session', 'Auth');
-    public $helpers = array('Utils');
+    public $helpers = array(
+    	'Utils',
+    	'Html' => array('className' => 'TwitterBootstrap.BootstrapHtml'),
+        'Form' => array('className' => 'TwitterBootstrap.BootstrapForm'),
+        'Paginator' => array('className' => 'TwitterBootstrap.BootstrapPaginator')
+    );
     
     function beforeFilter(){
     	$this->Auth->flash['element'] = "flash_error";
     	$this->Auth->authError = "Vous n'êtes pas autorisé à accéder à cette page !";
-	    //$this->Auth->allow();
+    	
+    	//throw new ForbiddenException('Could not find that post');
     }
 }

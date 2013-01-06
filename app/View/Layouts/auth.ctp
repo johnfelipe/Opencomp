@@ -5,8 +5,7 @@
     <title> <?php echo 'Opencomp | '.$title_for_layout; ?> </title>
     <?php
     echo $this->Html->meta('icon');
-	echo $this->Html->css('opencomp.auth'); 
-	echo $this->Html->css('font-awesome'); ?>
+	echo $this->Html->css('opencomp.auth'); ?>
 	<link href='http://fonts.googleapis.com/css?family=Cantarell&v1' rel='stylesheet' type='text/css'>
 	<?php echo $scripts_for_layout;
     ?>
@@ -18,7 +17,7 @@
             <?php echo $this->Session->flash(); ?>
             <?php echo $this->Session->flash('auth'); ?>
             <?php echo $content_for_layout; ?>
-	</div>
+        </div>
 	
         <div id="baspage">
             <p style="font-size:x-small; text-align:center; margin-top:10px; color:#777777;">
@@ -27,6 +26,5 @@
 			</p>
         </div>
     </div>
-    <?php echo $this->Html->script(array('jquery.js', 'chosen/chosen.jquery.min.js', 'bootstrap-dropdown.js', 'bootstrap-alert.js', 'bootstrap-modal.js', 'bootstrap-datepicker.js', 'bootstrap-tab.js', 'bootstrap-transition.js', 'less-1.3.0.min.js', 'jquery.jstree', 'custom.js')); ?>
 </body>
 </html>

@@ -93,7 +93,7 @@ input{
 /* -> Action Button */
 
 
-form .submit input[type=submit] {
+button[type=submit] {
     display: inline-block;
     padding: 0 14px;
     border: 1px solid #ccc;
@@ -117,25 +117,22 @@ form .submit input[type=submit] {
     font-size: 14px;
     width:40%;
     margin-top:10px;
+    outline: none;
+    float:right;
 }
-form .submit input[type=submit]:hover {
+button[type=submit]:hover {
     background-position: top;
     color: #000;
 }
-form .submit input[type=submit]:visited {
+button[type=submit]:visited {
     color: inherit;
 }
-form .submit input[type=submit]:active {
+button[type=submit]:active {
     -moz-box-shadow: inset 0 2px 3px rgba(0,0,0,0.4);
     -webkit-box-shadow: inset 0 2px 3px rgba(0,0,0,0.4);
     box-shadow: inset 0 2px 3px rgba(0,0,0,0.4);
     background-position: bottom;
     outline: none;
-}
-
-form .submit {
-text-align: right;
-outline: none;
 }
 
 :focus {outline:none;}

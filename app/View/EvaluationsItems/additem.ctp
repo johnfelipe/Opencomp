@@ -30,6 +30,7 @@ echo $this->Form->create('Item', array(
 );
 
 echo $this->Form->input('title', array(
+	'type' => 'textarea',
     'label' => array(
         'text' => 'Libellé de l\'item',
         'class' => 'control-label'

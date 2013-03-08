@@ -5,17 +5,7 @@
 
 <?php 
 
-echo $this->Form->create('Classroom', array(
-    'class' => 'form-horizontal',
-    'inputDefaults' => array(
-        'format' => array('before', 'label', 'between', 'input', 'error', 'after'),
-        'div' => array('class' => 'control-group'),
-        'between' => '<div class="controls">',
-        'after' => '</div>',
-        'error' => array('attributes' => array('wrap' => 'span', 'class' => 'help-inline'))
-        )
-    )
-);
+echo $this->Form->create('Classroom', array('class' => 'form-horizontal'));
 
 echo $this->Form->input('Pupil.first_name', array(
     'label' => array(
@@ -41,21 +31,20 @@ echo $this->Form->input('Pupil.sex', array(
 )); 
 
 echo $this->Form->input('Pupil.birthday', array(
-    'between' => '<div class="controls"><div class="input-append date datepicker" data-date="'.date('Y-m-d').'" data-date-format="yyyy-mm-dd">',
-    'after' => '<span class="add-on"><i class="icon-calendar"></i></span></div></div>',
-    'class' => 'span2',
-    'type' => 'text',
-    //'readonly' => 'readonly',
-    'label' => array(
-        'text' => 'Date de naissance',
-        'class' => 'control-label'
-    )
+        'class' => 'span2 startdate',
+        'type' => 'text',
+        'readonly' => 'readonly',
+        'prepend' => array('<i class="icon-calendar"></i>'),
+        'label' => array(
+            'text' => 'Date de naissance',
+            'class' => 'control-label'
+        )
 )); 
 
 echo $this->Form->hidden('ClassroomsPupil.classroom_id', array('value' => $classroom_id));
 
 echo $this->Form->input('ClassroomsPupil.level_id', array(
-	'after' => '<p class="help-block">'.__("Opencomp vous demande de spécifier un niveau pour chaque élève car certaines classes peuvent comporter des élèves de niveaux différents.").'</p></div>',
+	'after' => '<p class="help-block">'.__("Opencomp vous demande de spécifier un niveau pour chaque élève car certaines classes peuvent comporter des élèves de niveaux différents.").'</p>',
     'label' => array(
         'text' => 'Niveau scolaire',
         'class' => 'control-label'

@@ -1,7 +1,7 @@
 <div class="page-title">
     <h2><?php echo __('Visualiser un établissement'); ?></h2>
     <?php echo $this->Html->link('<i class="icon-pencil"></i> '.__('modifier'), 'edit/'.$establishment['Establishment']['id'], array('class' => 'ontitle btn btn-primary', 'escape' => false)); ?>
-    <?php echo $this->Html->link('<i class="icon-arrow-left"></i> '.__('académie de l\'établissement'), 'index', array('class' => 'ontitle btn', 'escape' => false)); ?>
+    <?php echo $this->Html->link('<i class="icon-arrow-left"></i> '.__('académie de l\'établissement'), array('controller' => 'academies', 'action' => 'view', $establishment['Academy']['id']), array('class' => 'ontitle btn', 'escape' => false)); ?>
 </div>
 
 <div class="row">

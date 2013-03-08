@@ -85,20 +85,23 @@
 
 <?php
 echo $this->Form->create(null, array(
-		    'url' => array('controller' => 'results', 'action' => 'parambul', $classroom['Classroom']['id'])
+		    'url' => array('controller' => 'results', 'action' => 'parambul', $classroom['Classroom']['id']),
+		    'class' => 'form-horizontal',
 		));
-		echo $this->Form->label('period_id', 'Periode(s) associée(s)');
-		echo $this->Form->select('period_id', $periods,
-		    array(
-		    	'multiple' => 'checkbox', 'required'
-		    )
-		);
+		
+		echo $this->Form->input('period_id', array(
+	    	'type' => 'select',
+	    	'multiple' => 'checkbox', 
+	    	'options' => $periods,
+	    	'label' => 'Période(s) à générer ?'
+	    ));
+		
+		
 		echo $this->Form->error('Result.period_id'); 
+		
 		$options = array(
 			'class' => 'btn btn-large btn-primary',
-		    'label' => __('Générer'),
-		    'escape' => false,
-		    'div' => false
+		    'label' => __('Générer')
 		);
 		echo $this->Form->end($options);
 ?>

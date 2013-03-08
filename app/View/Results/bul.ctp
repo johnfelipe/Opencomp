@@ -27,7 +27,7 @@ $bulletin = '
 				vertical-align: baseline;
 			}
 			@page { margin: 0; }
-		    #footer { position: fixed; text-align: center; bottom: 20px; font: italic 500 14px Helvetica; }
+		    #footer { position: fixed; text-align: center; bottom: 20px; height: 30px; font: italic 500 14px Helvetica; }
 		    #footer .page:after { content: counter(page, decimal); }
 			body {
 				width: 694px;
@@ -48,14 +48,12 @@ $bulletin = '
 				border-bottom: 1px solid black;
 				padding-top: 30px;
 				page-break-after: avoid;
-				page-break-before: avoid;
 			}
 			.niveau2{
 				margin: 0 0 20px 0;
 				padding: 20px 0 0 0;
 				font: 20px Helvetica;
 				border-bottom: 1px dashed black;
-				page-break-after: avoid;
 			}
 			.niveau3{
 				margin: 0 0 0 30px;
@@ -74,17 +72,14 @@ $bulletin = '
 			}
 			.tabniv2{
 				margin: 0px 0px 0px 0px;
-				page-break-before: avoid;
 			}
 			.tabniv3{
 				margin: 0px 0px 15px 23px;
-				width: 674px;
-				page-break-before: avoid;
+				width: 685px;
 			}
 			.tabniv4{
 				margin: 0px 0px 15px 45px;
 				width: 685px;
-				page-break-before: avoid;
 			}
 			.title{
 				font: italic 500 23px Helvetica;
@@ -101,7 +96,7 @@ $bulletin = '
 		<p class="title">Résultats scolaires du 1er trimestre pour '.$items[0]['Pupil']['first_name'].' '.$items[0]['Pupil']['name'].'</p>';
 
 foreach($competences as $competence){
-	if($competence['depth'] == 0){
+	if($competence['depth'] == 0){	
 		$bulletin .= '<h1 class="niveau1">'.$competence['title'].'</h1>';
 		
 		$itemlist = null;
@@ -112,10 +107,15 @@ foreach($competences as $competence){
 				elseif($item['Result']['result'] == 'C') $color = '#ffddaa'; 
 				elseif($item['Result']['result'] == 'D') $color = '#ffbbaa'; 
 				elseif($item['Result']['result'] == 'ABS') $color = '#eeeeee';
+				elseif($item['Result']['result'] == 'X'){
+					$color = '#ffffff';
+					$item['Result']['result'] = $this->Html->image('tick.png', array('fullBase' => true));
+				}
 				$itemlist[] = '<tr><td>'.$item['Item']['title'].'</td><td style="text-align:center; background-color:'.$color.';" width="60px">'.$item['Result']['result'].'</td></tr>';	
 			}
 		}
 		if(isset($itemlist)){
+			$bulletin .= '<div style="margin-bottom:30px;"></div>';
 			$bulletin .= '<table><tbody>';
 			foreach($itemlist as $libitem){
 				$bulletin .= $libitem;
@@ -123,6 +123,8 @@ foreach($competences as $competence){
 			$bulletin .= '</tbody></table>';
 		}
 	}elseif($competence['depth'] == 1){
+		if($competence['title'] == "Histoire de l'art")
+				$bulletin .= '<div style="page-break-after: always;"></div>';
 		$bulletin .= '<h2 class="niveau2">'.$competence['title'].'</h2>';
 		
 		$itemlist = null;
@@ -133,6 +135,10 @@ foreach($competences as $competence){
 				elseif($item['Result']['result'] == 'C') $color = '#ffddaa'; 
 				elseif($item['Result']['result'] == 'D') $color = '#ffbbaa'; 
 				elseif($item['Result']['result'] == 'ABS') $color = '#eeeeee';
+				elseif($item['Result']['result'] == 'X'){
+					$color = '#ffffff';
+					$item['Result']['result'] = $this->Html->image('tick.png', array('fullBase' => true));
+				}
 				$itemlist[] = '<tr><td>'.$item['Item']['title'].'</td><td style="text-align:center; background-color:'.$color.';" width="60px">'.$item['Result']['result'].'</td></tr>';	
 			}
 		}
@@ -152,6 +158,10 @@ foreach($competences as $competence){
 				elseif($item['Result']['result'] == 'C') $color = '#ffddaa'; 
 				elseif($item['Result']['result'] == 'D') $color = '#ffbbaa'; 
 				elseif($item['Result']['result'] == 'ABS') $color = '#eeeeee';
+				elseif($item['Result']['result'] == 'X'){
+					$color = '#ffffff';
+					$item['Result']['result'] = $this->Html->image('tick.png', array('fullBase' => true));
+				}
 				$itemlist[] = '<tr><td>'.$item['Item']['title'].'</td><td style="text-align:center; background-color:'.$color.';" width="60px">'.$item['Result']['result'].'</td></tr>';	
 			}
 		}

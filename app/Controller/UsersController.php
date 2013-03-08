@@ -8,6 +8,7 @@ App::uses('AppController', 'Controller');
 class UsersController extends AppController {
 
 	public function login(){
+		$this->set('title_for_layout', __('Identification requise'));
 		$iduser = $this->Auth->user('id');
 		if(!empty($iduser))
 			$this->redirect(array('controller' => 'dashboard', 'action' => 'index'));

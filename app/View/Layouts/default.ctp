@@ -50,12 +50,14 @@
           <div class="nav-collapse">
             <ul class="nav">
               <li><?php echo $this->Html->link('<i class="icon-dashboard"></i> '.__('Synthèse'), '/dashboard', array('escape' => false)); ?></li>
-              <li><?php echo $this->Html->link('<i class="icon-list"></i> '.__('Académies'), '/academies', array('escape' => false)); ?></li>
+              <li><?php echo $this->Html->link('<i class="icon-list"></i> '.__('Académies, établissements et classes'), '/academies', array('escape' => false)); ?></li>
               <li><?php echo $this->Html->link('<i class="icon-user"></i> '.__('Utilisateurs'), '/users', array('escape' => false)); ?></li>
               <li><?php echo $this->Html->link('<i class="icon-cogs"></i> '.__('Paramètres'), '/settings', array('escape' => false)); ?></li>
-              <li><button type="button" class="btn btn-danger" onclick="window.open('http://traulle.homelinux.org/projets/thebuggenie/opencomp/issues/new')"><i class="icon-bolt"></i> <?php echo __('Soumettre une anomalie') ?></button></li>
+              <li><a href="#" style="color:#F45192;" onclick="window.open('http://traulle.homelinux.org/projets/thebuggenie/opencomp/issues/new')"><i class="icon-bolt"></i> <?php echo __('Soumettre une anomalie') ?></a></li>
             </ul>
             <ul class="nav pull-right">
+            	<li><?php echo $this->Html->link('<i class="icon-signout"></i> '.__('Sauvegarder et quitter'), '/settings/save', array('escape' => false, 'style'=>'color:#A8BE68;')); ?></li>
+              	<!--
 	            <li class="dropdown">
 	              <?php $first_name = $this->Session->read('Auth.User.first_name'); 
 	              		$name = $this->Session->read('Auth.User.name'); ?>
@@ -65,6 +67,7 @@
 	                <li><?php echo $this->Html->link('<i class="icon-signout"></i> '.__('Se déconnecter'), '/users/logout', array('escape' => false)); ?></li>
 	              </ul>
 	            </li>
+	            -->
 	        </ul>
           </div><!--/.nav-collapse -->           
         </div>

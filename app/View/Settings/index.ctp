@@ -6,15 +6,7 @@
 
 echo $this->Form->create('Settings', array(
     'class' => 'form-horizontal',
-    'inputDefaults' => array(
-        'format' => array('before', 'label', 'between', 'input', 'error', 'after'),
-        'div' => array('class' => 'control-group'),
-        'between' => '<div class="controls">',
-        'after' => '</div>',
-        'error' => array('attributes' => array('wrap' => 'span', 'class' => 'help-inline'))
-        )
-    )
-);
+));
 
 echo $this->Form->input('Setting.currentYear', array(
 	'type' => 'select',
@@ -22,8 +14,7 @@ echo $this->Form->input('Setting.currentYear', array(
     'options' => $years,
     'selected' => $currentYear,
     'label' => array(
-        'text' => 'Année scolaire courante',
-        'class' => 'control-label'
+        'text' => 'Année scolaire courante'
     )
 )); 
 
@@ -33,9 +24,33 @@ echo $this->Form->input('Setting.lastYear', array(
     'options' => $years,
     'selected' => $lastYear,
     'label' => array(
-        'text' => 'Année scolaire précédente',
-        'class' => 'control-label'
+        'text' => 'Année scolaire précédente'
     )
+)); 
+
+echo $this->Form->input('Setting.saveOnExit', array(
+	'type' => 'select',
+    'options' => array(1 => 'Oui', 0 => 'Non'),
+    'selected' => $saveOnExit,
+    'label' => array(
+        'text' => 'Copie de sauvegarde lors de la déconnexion'
+    )
+)); 
+
+echo $this->Form->input('Setting.pathMysqldump', array(
+    'label' => array(
+        'text' => 'Chemin exécutable mysqldump',
+    ),
+    'class' => 'input-xxlarge',
+    'value' => $pathMysqldump
+)); 
+
+echo $this->Form->input('Setting.pathBackup', array(
+    'label' => array(
+        'text' => 'Répertoire de sauvegarde',
+    ),
+    'class' => 'input-xxlarge',
+    'value' => $pathBackup
 )); 
 
 ?>

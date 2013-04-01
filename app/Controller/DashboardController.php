@@ -8,7 +8,7 @@ class DashboardController extends AppController {
 		
 		$this->loadModel('Classroom');
 		
-		$this->Classroom->contain(array('Evaluation.Result', 'Evaluation.Item', 'Evaluation.Pupil', 'Establishment'));
+		$this->Classroom->contain(array('Evaluation.unrated=0', 'Evaluation.Result', 'Evaluation.Item', 'Evaluation.Pupil', 'Establishment'));
 		$classrooms = $this->Classroom->findAllByUserId($this->Auth->user('id'));
 		$this->set('classrooms', $classrooms);
 	}

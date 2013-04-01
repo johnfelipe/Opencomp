@@ -99,12 +99,12 @@
 	</div>
 
 		<?php
+		$lines = array();
 		foreach ($classroom['Evaluation'] as $evaluation): ?>
 		
 		<?php 
 			$total = count($evaluation['Item'])*count($evaluation['Pupil']);
 			$results = count($evaluation['Result']);
-			$lines = array();
 			if($total != $results){
 				$line = '<li style="line-height:23px;">Saisie des résultats incomplète pour <code>'.$evaluation['title'].'</code>';
 				$line .= $this->Html->link('<i class="icon-magic"></i>Corriger', 
@@ -120,7 +120,7 @@
 				$line .= '</li>';
 				$lines[] = $line;
 			}
-		endforeach; ?>
+		endforeach;?>
 		<?php if(count($lines) > 0): ?>
 		<div class="span8">
 		<div class="alert alert-error">

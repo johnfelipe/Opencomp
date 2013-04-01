@@ -48,7 +48,7 @@
         </div>
         
         <?php if (!empty($establishment['Period'])): ?>
-        <p><?php echo $this->Html->link('<i class="icon-pencil"></i> '.__('Modifier la période courante'), 'setDefaultPeriod/'.$establishment['Establishment']['id'], array('escape' => false)); ?></p>
+        <p><?php echo $this->Html->link('<i class="icon-pencil"></i> '.__('Modifier la période courante'), '#defaultPeriod', array('data-toggle' => 'modal', 'escape' => false)); ?></p>
 		<table class="table table-condensed table-striped">
 		<tr>
 			<th><?php echo __('Période'); ?></th>
@@ -162,4 +162,48 @@
     <?php echo $this->Form->button('Ajouter', array('type' => 'submit', 'class' => 'btn btn-success')); ?>
   </div>
   <?php echo $this->Form->end(); ?>
+</div>
+
+<div class="modal fade hide" id="defaultPeriod">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h3><?php echo __('Modifier la période courante de l\'établissement'); ?></h3>
+    </div>
+    <div class="modal-body">
+        <?php
+        echo $this->Form->create('Establishment', array(
+                'url' => array('controller' => 'establishments', 'action' => 'setDefaultPeriod'),
+                'class' => 'form-horizontal',
+                'inputDefaults' => array(
+                    'format' => array('before', 'label', 'between', 'input', 'error', 'after'),
+                    'div' => array('class' => 'control-group'),
+                    'error' => array('attributes' => array('wrap' => 'span', 'class' => 'help-inline'))
+                )
+            )
+        );
+
+        foreach($establishment['Period'] as $period)
+        {
+            $tabperiods[$period['id']] = $period['wellnamed'];
+        }
+
+        echo $this->Form->input('current_period_id', array(
+                'options' => $tabperiods,
+                'value' => $establishment['Establishment']['current_period_id'],
+                'label' => array(
+                    'text' => 'Période courante',
+                    'class' => 'control-label'
+                )
+            )
+        );
+
+        echo $this->Form->hidden('establishment_id', array('value' => $establishment['Establishment']['id']));
+
+        ?>
+
+    </div>
+    <div class="modal-footer">
+        <?php echo $this->Form->button('Modifier', array('type' => 'submit', 'class' => 'btn btn-primary')); ?>
+    </div>
+    <?php echo $this->Form->end(); ?>
 </div>

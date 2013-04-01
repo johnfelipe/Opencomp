@@ -127,4 +127,20 @@ class EstablishmentsController extends AppController {
 		$this->Session->setFlash(__('L\'établissement scolaire n\'a pas pu être supprimé'), 'flash_error');
 		$this->redirect(array('action' => 'index'));
 	}
+
+    public function setDefaultPeriod() {
+        if (!$this->request->is('post')) {
+            throw new MethodNotAllowedException();
+        }
+        $this->Establishment->id = $this->request->data['Establishment']['establishment_id'];
+        if (!$this->Establishment->exists()) {
+            throw new NotFoundException(__('L\'établissement scolaire demandé n\'existe pas !'), 'flash_error');
+        }
+        $this->Establishment->read(null, $this->request->data['Establishment']['establishment_id']);
+        $this->Establishment->set('current_period_id', $this->request->data['Establishment']['current_period_id']);
+        $this->Establishment->save();
+
+        $this->Session->setFlash(__('La période courante de l\'établissement a bien été modifiée.'), 'flash_success');
+        $this->redirect(array('action' => 'view', $this->request->data['Establishment']['establishment_id']));
+    }
 }

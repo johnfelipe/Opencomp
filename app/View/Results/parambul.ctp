@@ -96,9 +96,6 @@ echo $this->Form->create(null, array(
 	    	'label' => 'Période(s) à générer ?'
 	    ));
 		
-		
-		echo $this->Form->error('Result.period_id'); 
-		
 		$options = array(
 			'class' => 'btn btn-large btn-primary',
 		    'label' => __('Générer')

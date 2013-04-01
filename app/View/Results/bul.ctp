@@ -27,6 +27,18 @@ $bulletin = '
 				vertical-align: baseline;
 			}
 			@page { margin: 0; }
+			#copyright { 
+				-webkit-transform: rotate(270deg); 
+				-moz-transform: rotate(270deg); 
+				-ms-transform: rotate(270deg);
+				position: fixed; 
+				bottom:60px;
+				left: 694px;
+				width:60px;
+				margin-left:60px;
+				font: 500 8px Helvetica;
+				color:#cacaca;
+			}
 		    #footer { position: fixed; text-align: center; bottom: 20px; height: 30px; font: italic 500 14px Helvetica; }
 		    #footer .page:after { content: counter(page, decimal); }
 			body {
@@ -89,6 +101,7 @@ $bulletin = '
 		</style>
 	</head>
 	<body>
+		<div id="copyright">Opencomp system v 1.0</div>
 		<div id="footer">
 			<p class="page">Résultats scolaires du 1er trimestre pour '.$items[0]['Pupil']['first_name'].' '.$items[0]['Pupil']['name'].' - Page </p>
 		</div>

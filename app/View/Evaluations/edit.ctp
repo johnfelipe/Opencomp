@@ -1,20 +1,12 @@
 <div class="page-title">
     <h2><?php echo __('Modifier une évaluation'); ?></h2>
-    <?php echo $this->Html->link('<i class="icon-arrow-left"></i> '.__('retour à la classe'), '/classrooms/viewtests/'.$classroom_id, array('class' => 'ontitle btn', 'escape' => false)); ?>
+    <?php echo $this->Html->link('<i class="icon-remove"></i> '.__('annuler modification'), '/classrooms/evaluations/attacheditems/'.$evaluation_id, array('class' => 'ontitle btn btn-danger', 'escape' => false)); ?>
 </div>
 
 <?php
 
 echo $this->Form->create('Evaluation', array(
-    'class' => 'form-horizontal',
-    'inputDefaults' => array(
-        'format' => array('before', 'label', 'between', 'input', 'error', 'after'),
-        'div' => array('class' => 'control-group'),
-        'between' => '<div class="controls">',
-        'after' => '</div>',
-        'error' => array('attributes' => array('wrap' => 'span', 'class' => 'help-inline'))
-        )
-    )
+    'class' => 'form-horizontal')
 );
 
 echo $this->Form->input('id');
@@ -64,7 +56,7 @@ foreach($btn_nvx as $btn)
 echo $this->Form->input('Pupil', array(
     'class'=>'chzn-select',
     'data-placeholder' => 'Cliquez ici ou sur les boutons de niveaux pour ajouter des élèves.',
-    'after' => '<div class="help-block btn-toolbar">'.$btn_nvx_string.'</div></div>',
+    'after' => '<div class="help-block btn-toolbar">'.$btn_nvx_string.'</div>',
     'style'=>'width : 550px;',
     'label' => array(
         'text' => 'Élèves ayant réalisé l\'évaluation',
@@ -80,4 +72,3 @@ echo $this->Form->input('Pupil', array(
 <div class="form-actions">
      <?php echo $this->Form->button('Enregistrer cette évaluation', array('type' => 'submit', 'class' => 'btn btn-primary')); ?>        
 </div>
-

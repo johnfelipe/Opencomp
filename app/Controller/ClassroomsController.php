@@ -114,6 +114,25 @@ class ClassroomsController extends AppController {
 		$this->set('periods', $periods);
 			
 	}
+	
+	public function viewreports($id = null) {
+		$this->set('title_for_layout', __('Bulletins d\'une classe'));
+		$this->Classroom->id = $id;
+		if (!$this->Classroom->exists()) {
+			throw new NotFoundException(__('The classroom_id provided does not exist !'));
+		}
+		$this->Classroom->contain(array('User', 'Establishment', 'Year', 'Report'));
+		$classroom = $this->Classroom->find('first', array(
+			'conditions' => array('Classroom.id' => $id)
+		));
+		
+		$this->set('classroom', $classroom);
+		
+		$periods = $this->Classroom->Evaluation->Period->find('list', array(
+			'conditions' => array('establishment_id' => $classroom['Classroom']['establishment_id']),
+			'recursive' => 0));
+		$this->set('periods', $periods);
+	}
 
 /**
  * add method

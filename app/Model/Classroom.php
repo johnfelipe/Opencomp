@@ -133,6 +133,19 @@ class Classroom extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
+		'Report' => array(
+			'className' => 'Report',
+			'foreignKey' => 'classroom_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
 		'Item' => array(
 			'className' => 'Item',
 			'foreignKey' => 'classroom_id',

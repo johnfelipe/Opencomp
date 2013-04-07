@@ -37,7 +37,6 @@ $bulletin = '
 				width:60px;
 				margin-left:60px;
 				font: 500 8px Helvetica;
-				color:#cacaca;
 			}
 		    #footer { position: fixed; text-align: center; bottom: 20px; height: 30px; font: italic 500 14px Helvetica; }
 		    #footer .page:after { content: counter(page, decimal); }
@@ -73,8 +72,8 @@ $bulletin = '
 				font: italic 500 15px Helvetica;
 			}
 			.niveau4{
-				margin: 0px 0 0 60px;
-				padding: 10px 0 5px 0;
+				margin: 10px 0 0 60px;
+				padding: 0 0 5px 0;
 				font: italic 500 15px Helvetica;
 			}
 			table{
@@ -90,8 +89,8 @@ $bulletin = '
 				width: 685px;
 			}
 			.tabniv4{
-				margin: 0px 0px 15px 45px;
-				width: 685px;
+				margin: 0px 0px 15px 46px;
+				width: 678px;
 			}
 			.title{
 				font: italic 500 23px Helvetica;
@@ -103,10 +102,10 @@ $bulletin = '
 	<body>
 		<div id="copyright">Opencomp system v 1.0</div>
 		<div id="footer">
-			<p class="page">Résultats scolaires du 1er trimestre pour '.$items[0]['Pupil']['first_name'].' '.$items[0]['Pupil']['name'].' - Page </p>
+			<p class="page">Résultats scolaires du 2nd trimestre pour '.$items[0]['Pupil']['first_name'].' '.$items[0]['Pupil']['name'].' - Page </p>
 		</div>
 		<div id="content">
-		<p class="title">Résultats scolaires du 1er trimestre pour '.$items[0]['Pupil']['first_name'].' '.$items[0]['Pupil']['name'].'</p>';
+		<p class="title">Résultats scolaires du 2nd trimestre pour '.$items[0]['Pupil']['first_name'].' '.$items[0]['Pupil']['name'].'</p>';
 
 foreach($competences as $competence){
 	if($competence['depth'] == 0){	
@@ -128,7 +127,7 @@ foreach($competences as $competence){
 			}
 		}
 		if(isset($itemlist)){
-			$bulletin .= '<div style="margin-bottom:30px;"></div>';
+			$bulletin .= '<div style="margin-top:30px;"></div>';
 			$bulletin .= '<table><tbody>';
 			foreach($itemlist as $libitem){
 				$bulletin .= $libitem;
@@ -136,8 +135,8 @@ foreach($competences as $competence){
 			$bulletin .= '</tbody></table>';
 		}
 	}elseif($competence['depth'] == 1){
-		if($competence['title'] == "Histoire de l'art")
-				$bulletin .= '<div style="page-break-after: always;"></div>';
+		//if($competence['title'] == "Histoire de l'art")
+		//		$bulletin .= '<div style="page-break-after: always;"></div>';
 		$bulletin .= '<h2 class="niveau2">'.$competence['title'].'</h2>';
 		
 		$itemlist = null;

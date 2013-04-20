@@ -1,4 +1,16 @@
 <?php
+
+//Formatage de l'entête personnalisée
+$header = $report['Report']['header'];
+$header = str_replace("#PRENOM#", $items[0]['Pupil']['first_name'], $header);
+$header = str_replace("#NOM#", $items[0]['Pupil']['name'], $header);
+
+//Formatage du pied de page personnalisé
+$footer = $report['Report']['footer'];
+$footer = str_replace("#PRENOM#", $items[0]['Pupil']['first_name'], $footer);
+$footer = str_replace("#NOM#", $items[0]['Pupil']['name'], $footer);
+
+//Début du template du bulletin
 $bulletin = '
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
@@ -102,13 +114,17 @@ $bulletin = '
 	<body>
 		<div id="copyright">Opencomp system v 1.0</div>
 		<div id="footer">
-			<p class="page">Résultats scolaires du 2nd trimestre pour '.$items[0]['Pupil']['first_name'].' '.$items[0]['Pupil']['name'].' - Page </p>
+			<p class="page">'.$footer.' </p>
 		</div>
 		<div id="content">
-		<p class="title">Résultats scolaires du 2nd trimestre pour '.$items[0]['Pupil']['first_name'].' '.$items[0]['Pupil']['name'].'</p>';
+		<p class="title">'.$header.'</p>';
 
+//On parcours l'ensemble des compétences à afficher sur le bulletin
 foreach($competences as $competence){
 	if($competence['depth'] == 0){	
+		if(in_array($competence['id'], $report['Report']['page_break']))
+			$bulletin .= '<div style="page-break-after: always;"></div>';
+			
 		$bulletin .= '<h1 class="niveau1">'.$competence['title'].'</h1>';
 		
 		$itemlist = null;
@@ -135,8 +151,8 @@ foreach($competences as $competence){
 			$bulletin .= '</tbody></table>';
 		}
 	}elseif($competence['depth'] == 1){
-		//if($competence['title'] == "Histoire de l'art")
-		//		$bulletin .= '<div style="page-break-after: always;"></div>';
+		if(in_array($competence['id'], $report['Report']['page_break']))
+				$bulletin .= '<div style="page-break-after: always;"></div>';
 		$bulletin .= '<h2 class="niveau2">'.$competence['title'].'</h2>';
 		
 		$itemlist = null;
@@ -178,6 +194,8 @@ foreach($competences as $competence){
 			}
 		}
 		if(isset($itemlist)){
+			if(in_array($competence['id'], $report['Report']['page_break']))
+				$bulletin .= '<div style="page-break-after: always;"></div>';
 			$bulletin .= '<table class="tabniv3">';
 			$bulletin .= '<thead><tr><th colspan="2">'.$competence['title'].'</th></tr></thead><tbody>';
 			foreach($itemlist as $libitem){
@@ -194,6 +212,8 @@ foreach($competences as $competence){
 			}
 		}
 		if(isset($itemlist)){
+			if(in_array($competence['id'], $report['Report']['page_break']))
+				$bulletin .= '<div style="page-break-after: always;"></div>';
 			$bulletin .= '<table class="tabniv4"><tbody>';
 			$bulletin .= '<thead><tr><th colspan="2">'.$competence['title'].'</th></tr></thead>';
 			foreach($itemlist as $libitem){
@@ -206,28 +226,26 @@ foreach($competences as $competence){
 
 $bulletin .= "</div></body></html>";
 
-if(isset($output_type) && $output_type == 'pdf' && $output_engine == 'dompdf'){
+if(isset($output_type) && $output_type == 'pdf'){
 	App::import('Vendor','dompdf/dompdf_config_inc'); 
 
 	$dompdf = new DOMPDF();
 	$dompdf->set_paper("a4");
 	$dompdf->load_html($bulletin);
 	$dompdf->render();
-	if($dompdf->get_canvas()->get_page_count() % 2 == 1){
-		$dompdf->get_canvas()->new_page();
-	}
-	//$dompdf->stream("sample.pdf", array('Attachment' => 0));
+	
+	//Si l'utilisateur a demandé l'impression recto/verso
+	//on ajoute automatiquement des pages blanche si le bulletin
+	//ne comporte pas un nombre pair de pages ;)
+	if($report['Report']['duplex_printing'])
+		if($dompdf->get_canvas()->get_page_count() % 2 == 1)
+			$dompdf->get_canvas()->new_page();
+			
 	$pdfoutput = $dompdf->output(); 
 	$filename = "files/".$classroom_id."_".str_replace(',','',$period_id)."_".$pupil_id.".pdf";
 	$fp = fopen($filename, "a"); 
 	fwrite($fp, $pdfoutput); 
 	fclose($fp); 
-}elseif(isset($output_type) && $output_type == 'pdf' && $output_engine == 'mpdf'){	
-	App::import('Vendor', 'mPDF', array('file' => 'mpdf' . DS . 'mpdf.php'));
-	$mpdf=new mPDF();
-	$mpdf->WriteHTML($bulletin);
-	$mpdf->SetFooter('Résultats scolaires du 1er trimestre pour '.$items[0]['Pupil']['first_name'].' '.$items[0]['Pupil']['name'].' - page {PAGENO}');
-	$mpdf->Output();
 }else{
 	echo $bulletin;
 }

@@ -113,79 +113,49 @@ class ResultsController extends AppController {
 		}
 	}
 	
-	public function parambul($id = null){
+	public function viewbul($id = null){	
 		$this->set('title_for_layout', __('Visualiser une classe'));
-		$this->loadModel('Classroom');
-		$this->Classroom->id = $id;
-		if (!$this->Classroom->exists()) {
-			throw new NotFoundException(__('The classroom_id provided does not exist !'));
+		
+		//On charge le modèle report et on récupère les infos du bulletin à générer.
+		$this->loadModel('Report');
+		$this->Report->id = $id;
+		if (!$this->Report->exists()) {
+			throw new NotFoundException(__('The report_id provided does not exist !'));
 		}
-		$classroom = $this->Classroom->find('first', array(
-			'conditions' => array('Classroom.id' => $id)
+		$report = $this->Report->find('first', array(
+			'conditions' => array('Report.id' => $id)
 		));
+		$this->set('report', $report);
+		
+		$classroom = $this->Report->Classroom->find('first', array(
+			'conditions' => array('Classroom.id' => $report['Classroom']['id'])
+		));		
 		$this->set('classroom', $classroom);
-		
-		$periods = $this->Result->Evaluation->Period->find('list', array(
-			'conditions' => array('establishment_id' => $classroom['Classroom']['establishment_id']),
-			'recursive' => 0));
-		$this->set('periods', $periods);
-		
-		if($this->request->is('post')){
-		
-			$this->Result->validate['period_id']['multiple'] = array(
-		        'rule' => array('multiple', array('min' => 1)),
-		        'message' => 'Please select one, two or three options'			
-		    );
-		    			
-			$this->Result->set($this->request->data);
-			
-			if ($this->Result->validates()) {
-			    $this->redirect(array(
-				    'controller'    => 'results',
-				    'action'        => 'viewbul', 
-				    $id,
-				    'period_id' => implode(',', $this->data['Result']['period_id'])));
-			}
-		}
-	}
-	
-	public function viewbul($id = null){
-		$this->set('title_for_layout', __('Visualiser une classe'));
-		$this->loadModel('Classroom');
-		$this->Classroom->id = $id;
-		if (!$this->Classroom->exists()) {
-			throw new NotFoundException(__('The classroom_id provided does not exist !'));
-		}
-		$classroom = $this->Classroom->find('first', array(
-			'conditions' => array('Classroom.id' => $id)
-		));
-		$this->set('classroom', $classroom);
-		
 
-			$ReqPupils = $this->Result->find('all', array(
-				'fields' => array('pupil_id'),
-				'order' => array('name', 'first_name'),
-				'conditions' => array(
-					'Evaluation.period_id' => $this->request->params['named']['period_id'],
-					'Evaluation.classroom_id' => $id
-				),
-				'contain' => array(
-					'Pupil.id',
-					'Evaluation.Period.id',
-					'Evaluation.Classroom.id'
-				)
-			));
-			
-			foreach($ReqPupils as $pupils){
-				$pup[] = $pupils['Pupil']['id'];
-			}
-			$pup = array_values(array_unique($pup));
-			$nbpup = count($pup);
-			foreach($pup as $ind => $id){
-				$pourcent[$ind] = round((100 / $nbpup) * ($ind+1),1);
-			}
-			$tab = array('pupils' => $pup, 'pourcent' =>$pourcent, 'period_id' => $this->request->params['named']['period_id'], 'classroom_id' => $classroom['Classroom']['id']);
-			$this->set('pupils', json_encode(json_encode($tab)));		
+		$ReqPupils = $this->Result->find('all', array(
+			'fields' => array('pupil_id'),
+			'order' => array('name', 'first_name'),
+			'conditions' => array(
+				'Evaluation.period_id' => $report['Report']['period_id'],
+				'Evaluation.classroom_id' => $report['Classroom']['id']
+			),
+			'contain' => array(
+				'Pupil.id',
+				'Evaluation.Period.id',
+				'Evaluation.Classroom.id'
+			)
+		));
+		
+		foreach($ReqPupils as $pupils){
+			$pup[] = $pupils['Pupil']['id'];
+		}
+		$pup = array_values(array_unique($pup));
+		$nbpup = count($pup);
+		foreach($pup as $ind => $id){
+			$pourcent[$ind] = round((100 / $nbpup) * ($ind+1),1);
+		}
+		$tab = array('pupils' => $pup, 'pourcent' => $pourcent, 'report_id' => $report['Report']['id'], 'period_id' => implode(",",$report['Report']['period_id']), 'classroom_id' => $report['Classroom']['id']);
+		$this->set('pupils', json_encode(json_encode($tab)));		
 	}
 	
 	public function bul(){
@@ -196,92 +166,93 @@ class ResultsController extends AppController {
 			$output_type = strval($this->request->params['named']['output_type']);
 		}
 		
-		if(!isset($this->request->params['named']['output_engine'])) {
-       		throw new NotFoundException(__('You must provide an output engine !')); 		
-       	} else {
-			$output_engine = strval($this->request->params['named']['output_engine']);
-		}
-		
 		if(!isset($this->request->params['named']['pupil_id']) || !is_numeric($this->request->params['named']['pupil_id'])) {
        		throw new NotFoundException(__('You must provide pupil_id !')); 		
        	} else {
-			$pupil =  strval($this->request->params['named']['pupil_id']);
+			$pupil =  intval($this->request->params['named']['pupil_id']);
 		}
 		
-		if(!isset($this->request->params['named']['classroom_id']) || !is_numeric($this->request->params['named']['classroom_id'])) {
-       		throw new NotFoundException(__('You must provide classroom_id !')); 		
+		if(!isset($this->request->params['named']['report_id']) || !is_numeric($this->request->params['named']['report_id'])) {
+       		throw new NotFoundException(__('You must provide report_id !')); 		
        	} else {
-			$classroom =  strval($this->request->params['named']['classroom_id']);
+			$report_id =  intval($this->request->params['named']['report_id']);
 		}
 		
 		$this->set('pupil_id', $pupil);
-		$this->set('classroom_id', $classroom);
-		$this->set('period_id', $this->request->params['named']['period_id']);
-
-			if ($output_type == 'pdf') {
-				$this->set('output_type', 'pdf');
-				if ($output_engine == 'mpdf') $this->set('output_engine', 'mpdf');
-				if ($output_engine == 'dompdf') $this->set('output_engine', 'dompdf');
-				//Configure::write('debug',0);
-				//$this->response->type('pdf');
-				$this->layout = 'pdf';
-			}elseif ($output_type == 'html') {
-				$this->layout = 'pdf';
-			}else{
-				throw new NotFoundException(__('Wrong output type !'));
-			}
-			
-			$items = $this->Result->find('all', array(
-				'fields' => array('result'),
-				'conditions' => array(
-					'Pupil.id' => $pupil,
-					'Evaluation.period_id' => explode(',',$this->request->params['named']['period_id']),
-					'Evaluation.classroom_id' => $classroom
-				),
-				'contain' => array(
-					'Item.Competence.id', 
-					'Item.title',
-					'Pupil.id',
-					'Pupil.name',
-					'Pupil.first_name',
-					'Evaluation.Period.id',
-					'Evaluation.Classroom.id'
-				)
-			));
 		
-			if(empty($items)){
-				$this->Session->setFlash(__('Aucun résultat n\'a été saisi pour cet élève', 'flash_error'));
-				$this->redirect(array(
-				    'controller'    => 'results',
-				    'action'        => 'bul'
-				));
+		$this->loadModel('Report');
+		$this->Report->id = $report_id;
+		if(!$this->Report->exists()) {
+			throw new NotFoundException(__('The report_id provided does not exist !'));
+		}
+		$report = $this->Report->find('first', array(
+			'conditions' => array('Report.id' => $report_id)
+		));
+		
+		$this->set('classroom_id', $report['Classroom']['id']);
+		$this->set('period_id', implode(",",$report['Report']['period_id']));
+		
+		$this->set('report', $report);
+
+		if ($output_type == 'pdf') {
+			$this->set('output_type', 'pdf');
+			//Configure::write('debug',0);
+			//$this->response->type('pdf');
+			$this->layout = 'pdf';
+		}elseif ($output_type == 'html') {
+			$this->layout = 'pdf';
+		}else{
+			throw new NotFoundException(__('Wrong output type !'));
+		}
+		
+		$items = $this->Result->find('all', array(
+			'fields' => array('result'),
+			'conditions' => array(
+				'Pupil.id' => $pupil,
+				'Evaluation.period_id' => $report['Report']['period_id'],
+				'Evaluation.classroom_id' => $report['Classroom']['id']
+			),
+			'contain' => array(
+				'Item.Competence.id', 
+				'Item.title',
+				'Pupil.id',
+				'Pupil.name',
+				'Pupil.first_name',
+				'Evaluation.Period.id',
+				'Evaluation.Classroom.id'
+			)
+		));
+	
+		if(empty($items)){
+			$this->Session->setFlash(__('Aucun résultat n\'a été saisi pour cet élève', 'flash_error'));
+			$this->redirect(array(
+			    'controller'    => 'results',
+			    'action'        => 'bul'
+			));
+		}
+			
+		$this->set('items', $items);
+			
+		foreach($items as $item){
+				$comp[] = $item['Item']['competence_id'];
+		}
+		
+		$comp = array_values(array_unique($comp));
+		
+		foreach($comp as $id_comp){
+			$search_results[] = $this->Result->Item->Competence->getPath($id_comp, array('id'));
+		}
+		
+		foreach($search_results as $result_competence){
+			foreach($result_competence as $competence){
+				$comp_to_show[] = $competence['Competence']['id'];
 			}
-				
-			$this->set('items', $items);
-				
-			foreach($items as $item){
-					$comp[] = $item['Item']['competence_id'];
-			}
-			
-			$comp = array_values(array_unique($comp));
-			
-			//debug($comp);
-			
-			foreach($comp as $id_comp){
-				$search_results[] = $this->Result->Item->Competence->getPath($id_comp, array('id'));
-			}
-			
-			foreach($search_results as $result_competence){
-				foreach($result_competence as $competence){
-					$comp_to_show[] = $competence['Competence']['id'];
-				}
-			}
-			
-			$comp_to_show = array_values(array_unique($comp_to_show));
-	        
-	        $competences = $this->Result->Item->Competence->generateTreeListWithDepth(array('Competence.id' => $comp_to_show));
-	        $this->set('competences', $competences);
-			
+		}
+		
+		$comp_to_show = array_values(array_unique($comp_to_show));
+        
+        $competences = $this->Result->Item->Competence->generateTreeListWithDepth(array('Competence.id' => $comp_to_show));
+        $this->set('competences', $competences);
 	}
 	
 	function concat_bul(){

@@ -28,7 +28,7 @@ class ReportsController extends AppController {
 		} else {
 			$this->request->data = $this->Report->read(null, $id);
 			
-			$classroom_id = $this->request->data['Report']['classroom_id'];
+			$classroom_id = $this->request->data['Classroom']['id'];
 			$this->set('report_id', $id);
 			$this->set('classroom_id', $classroom_id);
 		}
@@ -36,7 +36,9 @@ class ReportsController extends AppController {
 		$this->loadModel('Competence');
 		$competences = $this->Competence->generateTreeList(null, null, null, '',-1);
 		
-		$this->loadModel('Classroom',$classroom_id);
+		$this->loadModel('Classroom');
+		$this->Classroom->recursive = 0;
+		$this->Classroom->id = $classroom_id;
 		$classroom = $this->Classroom->read();
 		
 		$this->loadModel('Period');

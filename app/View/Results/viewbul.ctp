@@ -76,12 +76,12 @@
   <li><?php echo $this->Html->link(__('Élèves'), array('controller' => 'classrooms', 'action' => 'view', $classroom['Classroom']['id'])); ?></li>
   <li><?php echo $this->Html->link(__('Évaluations'), array('controller' => 'classrooms', 'action' => 'viewtests', $classroom['Classroom']['id'])); ?></li>
   <li><?php echo $this->Html->link(__('Items non évalués'), array('controller' => 'classrooms', 'action' => 'viewunrateditems', $classroom['Classroom']['id'])); ?></li>
-  <li class="active"><?php echo $this->Html->link(__('Bulletins'), array('controller' => 'results', 'action' => 'parambul', $classroom['Classroom']['id'])); ?></li>
+  <li class="active"><?php echo $this->Html->link(__('Bulletins'), array('controller' => 'classrooms', 'action' => 'viewreports', $classroom['Classroom']['id'])); ?></li>
 </ul>
 
 <div class="page-title">
-    <h3><?php echo __('Générer les bulletins de cette classe'); ?></h3>
-	    <?php echo $this->Html->link('<i class="icon-magic"></i> '.__('Tout générer'), '#', array('class' => 'ontitle btn btn-primary', 'escape' => false, 'onclick' => 'ajaxcall(0)')); ?>
+    <h3><?php echo __('Génération de').' "'.$report['Report']['title'].'" '.__('en cours ...'); ?></h3>
+	    <?php //echo $this->Html->link('<i class="icon-magic"></i> '.__('Tout générer'), '#', array('class' => 'ontitle btn btn-primary', 'escape' => false, 'onclick' => 'ajaxcall(0)')); ?>
 </div>
 
 <script type="text/javascript">
@@ -94,7 +94,7 @@
     		$("#progress").html(tab.pourcent[i]+"%");
     		$.ajax({ 
 			    type: "GET",
-			    url: "/Opencomp/results/bul/output_type:pdf/output_engine:dompdf/pupil_id:"+tab.pupils[i]+"/period_id:"+tab.period_id+"/classroom_id:"+tab.classroom_id, 
+			    url: "/Opencomp/results/bul/output_type:pdf/output_engine:dompdf/pupil_id:"+tab.pupils[i]+"/report_id:"+tab.report_id, 
 			    error: function() { 
 			      $("#progress").addClass('bar-danger');
 			      $("#progress").css('width','100%');
@@ -113,7 +113,8 @@
 			    complete: function(){
 			    	$("#bar").removeClass('progress-striped active');
 			    	$("#progress").addClass('bar-success');
-			    	$("#progress").html("<a style='color:white;' href='../../download/filename:"+tab.classroom_id+"_"+tab.period_id.replace(",","")+".pdf'>Cliquez pour télécharger le fichier généré</a>");
+			    	$("#progress").html("<a style='color:white;' href='../download/filename:"+tab.classroom_id+"_"+tab.period_id.replace(",","")+".pdf'>Si le téléchargement n'a pas démarré automatiquement, cliquez ici pour télécharger le fichier généré.</a>");
+			    	window.location.href = "../download/filename:"+tab.classroom_id+"_"+tab.period_id.replace(",","")+".pdf";
 			    } 
 			});
 		}    	

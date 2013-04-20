@@ -20,7 +20,7 @@ echo $this->Form->input('title', array(
 ));
 
 echo $this->Form->input('period_id', array(
-			'error' => array('escape' => false, 'multiple' => '<i class="icon-warning-sign"></i> '.__('Vous devez sélectionner au moins une période !')),
+			'error' => array('multiple' => __('Vous devez sélectionner au moins une période !')),
 	    	'type' => 'select',
 	    	'multiple' => 'checkbox', 
 	    	'options' => $periods,

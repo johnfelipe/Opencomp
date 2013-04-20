@@ -51,6 +51,18 @@ class Report extends AppModel {
 			),
 		),
 	);
+	
+	public $belongsTo = array(
+			'Classroom' => array(
+			'className' => 'Classroom',
+			'foreignKey' => 'classroom_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+	);
+	
+	
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	

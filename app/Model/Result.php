@@ -49,7 +49,7 @@ class Result extends AppModel {
 		),
 		'result' => array(
 			'inlist' => array(
-				'rule' => array('inlist', array('A', 'B', 'C', 'D', 'ABS')),
+				'rule' => array('inlist', array('A', 'B', 'C', 'D', 'ABS', 'NE')),
 				'message' => 'Your custom message here',
 				'allowEmpty' => true,
 				//'required' => false,

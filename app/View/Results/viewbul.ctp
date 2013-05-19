@@ -94,7 +94,7 @@
     		$("#progress").html(tab.pourcent[i]+"%");
     		$.ajax({ 
 			    type: "GET",
-			    url: "/Opencomp/results/bul/output_type:pdf/output_engine:dompdf/pupil_id:"+tab.pupils[i]+"/report_id:"+tab.report_id, 
+			    url: "<?php echo $this->Html->url(array('controller' => 'results', 'action' => 'bul'), true); ?>/output_type:pdf/output_engine:dompdf/pupil_id:"+tab.pupils[i]+"/report_id:"+tab.report_id, 
 			    error: function() { 
 			      $("#progress").addClass('bar-danger');
 			      $("#progress").css('width','100%');
@@ -125,6 +125,8 @@
 	});
 	    	
 </script>
+
+<h3 style="text-align:center; margin-bottom:20px; font-family: 'Titillium Web', sans-serif;">Laissez la magie <i class="icon-magic"></i> opérer et allez boire un café <i class="icon-coffee"></i></h3>
 
 <div class="row">
 	<div class="span12">

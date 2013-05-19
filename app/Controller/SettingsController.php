@@ -101,8 +101,7 @@ class SettingsController extends AppController {
 			
 			$pathMysqldump = $this->Setting->find('first', array('conditions' => array('Setting.key' => 'pathMysqldump')));
 		    $pathBackup = $this->Setting->find('first', array('conditions' => array('Setting.key' => 'pathBackup')));
-		
-			shell_exec($pathMysqldump['Setting']['value']." -u ".$dsc['login']." -p".$dsc['password']." -h ".$dsc['host']." ".$dsc['database']." | gzip -c -9 > ".$pathBackup['Setting']['value']."/ocmp_".date("m_d_Y").".sql.gz");
+			shell_exec($pathMysqldump['Setting']['value']." -u ".$dsc['login']." -p".$dsc['password']." -h ".$dsc['host']." ".$dsc['database']." | gzip -c -9 > ".$pathBackup['Setting']['value']."/ocmp_".date("d_m_Y__H_i_s").".sql.gz");
 			$this->redirect(array('controller'=>'users','action'=> 'logout'));	
 		}
 		

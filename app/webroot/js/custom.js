@@ -76,6 +76,9 @@ $(document).ready(function() {
 		} else if ($(event.delegateTarget).val() == 'DDD' || $(event.delegateTarget).val() == 'D') {
 			$(event.delegateTarget).val('D');
 			$(event.delegateTarget).css("background-color", "#e4ffcb");
+		} else if ($(event.delegateTarget).val() == 'NEV' || $(event.delegateTarget).val() == 'NE') {
+			$(event.delegateTarget).val('NE');
+			$(event.delegateTarget).css("background-color", "#e4ffcb");
 		} else if ($(event.delegateTarget).val() == '') {
 			$(event.delegateTarget).css("background-color", "#e4ffcb");
 		} else {

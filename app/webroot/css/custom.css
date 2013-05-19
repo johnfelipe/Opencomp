@@ -112,3 +112,7 @@ a.btn-success {
 .modal-open .modal,.btn:focus{
     outline:none!important;
 }​
+
+.help-inline .error-message{
+	font-weight: bold !important;
+}

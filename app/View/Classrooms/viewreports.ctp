@@ -81,7 +81,7 @@
 
 <div class="page-title">
     <h3><?php echo __('Bulletins de la classe'); ?></h3>
-    <?php echo $this->Html->link('<i class="icon-plus"></i> '.__('créer un bulletin'), '#myModal', array(
+    <?php echo $this->Html->link('<i class="icon-plus"></i> '.__('créer un bulletin'), array('controller'=>'reports','action'=>'add','classroom_id'=>$classroom['Classroom']['id']), array(
     'class' => 'ontitle btn btn-success', 
     'data-toggle' => 'modal',
     'escape' => false
@@ -113,7 +113,18 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			<?php echo $this->Html->link('<i class="icon-pencil"></i> '.__('Modifier'), array('controller' => 'reports', 'action' => 'edit', $report['id']), array('escape' => false)); ?>
 			&nbsp;&nbsp;&nbsp;&nbsp;
-			<?php echo $this->Html->link('<i class="icon-trash"></i> '.__('Supprimer'), array('controller' => 'results', 'action' => 'viewbul', $report['id']), array('escape' => false)); ?>
+            <?php
+            echo $this->Form->postLink(
+                '<i class="icon-trash"></i> Supprimer',
+                array(
+                    'controller' => 'reports',
+                    'action' => 'delete',
+                    $report['id']
+                ),
+                array('escape' => false),
+                __('Êtes vous réellement sûr(e) de vouloir supprimer %s ?', $report['title'])
+            );
+            ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

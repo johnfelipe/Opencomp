@@ -75,8 +75,10 @@ class Report extends AppModel {
 	}
 	
 	public function afterFind($results, $primary = false){
-		$results[0]['Report']['period_id'] = explode(",",$results[0]['Report']['period_id']);
-		$results[0]['Report']['page_break'] = explode(",",$results[0]['Report']['page_break']);
+        if(isset($results[0]['Report']['period_id']))
+            $results[0]['Report']['period_id'] = explode(",",$results[0]['Report']['period_id']);
+		if(isset($results[0]['Report']['page_break']))
+        $results[0]['Report']['page_break'] = explode(",",$results[0]['Report']['page_break']);
 		
 		return $results;
 	}

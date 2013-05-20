@@ -55,10 +55,10 @@
     			)); ?>
     		</div>		    	
 	    	<div class="span6">
-	    		<?php echo $this->Html->link('<i class="icon-cog"></i> '.__('Générer bulletins'), 
+	    		<?php echo $this->Html->link('<i class="icon-file-alt"></i> '.__('Voir les bulletins'),
 	    		array(
-		    		'controller' => 'results', 
-		    		'action' => 'parambul', 
+		    		'controller' => 'classrooms',
+		    		'action' => 'viewreports',
 		    		$classroom['Classroom']['id']
 	    		), 
 	    		array(

@@ -14,7 +14,7 @@
 echo $this->Form->create('Item', array(
     'class' => 'form-horizontal',
     'url' => array(
-    	'controller' => 'evaluationsitems',
+    	'controller' => 'evaluationsItems',
     	'action' => 'additem',
     	'evaluation_id' => $evaluation_id,
     	'competence_id' => $competence_id

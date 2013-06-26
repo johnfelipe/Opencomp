@@ -15,6 +15,7 @@ $bulletin = '
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 	<head>
+		<title>Bulletin élève</title>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 		
 		<style type="text/css">
@@ -139,7 +140,7 @@ foreach($competences as $competence){
 					$color = '#ffffff';
 					$item['Result']['result'] = $this->Html->image('tick.png', array('fullBase' => true));
 				}
-				$itemlist[] = '<tr><td>'.$item['Item']['title'].'</td><td style="text-align:center; background-color:'.$color.';" width="60px">'.$item['Result']['result'].'</td></tr>';	
+				$itemlist[] = '<tr><td>'.$item['Item']['title'].'</td><td style="text-align:center; background-color:'.$color.';width:60px;">'.$item['Result']['result'].'</td></tr>';	
 			}
 		}
 		if(isset($itemlist)){
@@ -167,7 +168,7 @@ foreach($competences as $competence){
 					$color = '#ffffff';
 					$item['Result']['result'] = $this->Html->image('tick.png', array('fullBase' => true));
 				}
-				$itemlist[] = '<tr><td>'.$item['Item']['title'].'</td><td style="text-align:center; background-color:'.$color.';" width="60px">'.$item['Result']['result'].'</td></tr>';	
+				$itemlist[] = '<tr><td>'.$item['Item']['title'].'</td><td style="text-align:center; background-color:'.$color.';width:60px;">'.$item['Result']['result'].'</td></tr>';	
 			}
 		}
 		if(isset($itemlist)){
@@ -190,7 +191,7 @@ foreach($competences as $competence){
 					$color = '#ffffff';
 					$item['Result']['result'] = $this->Html->image('tick.png', array('fullBase' => true));
 				}
-				$itemlist[] = '<tr><td>'.$item['Item']['title'].'</td><td style="text-align:center; background-color:'.$color.';" width="60px">'.$item['Result']['result'].'</td></tr>';	
+				$itemlist[] = '<tr><td>'.$item['Item']['title'].'</td><td style="text-align:center; background-color:'.$color.';width:60px;">'.$item['Result']['result'].'</td></tr>';	
 			}
 		}
 		if(isset($itemlist)){
@@ -208,14 +209,14 @@ foreach($competences as $competence){
 		foreach($items as $item){
 			if($item['Item']['competence_id'] == $competence['id'] && $item['Result']['result'] != ""){
 				if($item['Result']['result'] == 'A') $color = '#eeffcc'; elseif($item['Result']['result'] == 'B') $color = '#ffffbb'; elseif($item['Result']['result'] == 'C') $color = '#ffddaa'; elseif($item['Result']['result'] == 'D') $color = '#ffbbaa'; elseif($item['Result']['result'] == 'ABS') $color = '#eeeeee';
-				$itemlist[] = '<tr><td>'.$item['Item']['title'].'</td><td style="text-align:center; background-color:'.$color.';" width="60px">'.$item['Result']['result'].'</td></tr>';	
+				$itemlist[] = '<tr><td>'.$item['Item']['title'].'</td><td style="text-align:center; background-color:'.$color.';width:60px;">'.$item['Result']['result'].'</td></tr>';	
 			}
 		}
 		if(isset($itemlist)){
 			if(in_array($competence['id'], $report['Report']['page_break']))
 				$bulletin .= '<div style="page-break-after: always;"></div>';
-			$bulletin .= '<table class="tabniv4"><tbody>';
-			$bulletin .= '<thead><tr><th colspan="2">'.$competence['title'].'</th></tr></thead>';
+			$bulletin .= '<table class="tabniv4">';
+			$bulletin .= '<thead><tr><th colspan="2">'.$competence['title'].'</th></tr></thead><tbody>';
 			foreach($itemlist as $libitem){
 				$bulletin .= $libitem;
 			}

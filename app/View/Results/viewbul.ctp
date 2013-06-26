@@ -108,7 +108,7 @@
 			$("#bar").addClass('progress-striped active');
 			$.ajax({ 
 			    type: "POST",
-			    url: "/Opencomp/results/concat_bul",
+			    url: "<?php echo $this->Html->url(array('controller' => 'results', 'action' => 'concat_bul'), true); ?>",
 			    data: tab,
 			    complete: function(){
 			    	$("#bar").removeClass('progress-striped active');

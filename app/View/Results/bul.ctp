@@ -138,7 +138,7 @@ foreach($competences as $competence){
 				elseif($item['Result']['result'] == 'ABS') $color = '#eeeeee';
 				elseif($item['Result']['result'] == 'X'){
 					$color = '#ffffff';
-					$item['Result']['result'] = $this->Html->image('tick.png', array('fullBase' => true));
+					$item['Result']['result'] = '<img src="'.WWW_ROOT.'img/tick.png" alt="tick" />';
 				}
 				$itemlist[] = '<tr><td>'.$item['Item']['title'].'</td><td style="text-align:center; background-color:'.$color.';width:60px;">'.$item['Result']['result'].'</td></tr>';	
 			}
@@ -166,7 +166,7 @@ foreach($competences as $competence){
 				elseif($item['Result']['result'] == 'ABS') $color = '#eeeeee';
 				elseif($item['Result']['result'] == 'X'){
 					$color = '#ffffff';
-					$item['Result']['result'] = $this->Html->image('tick.png', array('fullBase' => true));
+					$item['Result']['result'] = '<img src="'.WWW_ROOT.'img/tick.png" alt="tick" />';
 				}
 				$itemlist[] = '<tr><td>'.$item['Item']['title'].'</td><td style="text-align:center; background-color:'.$color.';width:60px;">'.$item['Result']['result'].'</td></tr>';	
 			}
@@ -189,7 +189,7 @@ foreach($competences as $competence){
 				elseif($item['Result']['result'] == 'ABS') $color = '#eeeeee';
 				elseif($item['Result']['result'] == 'X'){
 					$color = '#ffffff';
-					$item['Result']['result'] = $this->Html->image('tick.png', array('fullBase' => true));
+					$item['Result']['result'] = '<img src="'.WWW_ROOT.'img/tick.png" alt="tick" />';
 				}
 				$itemlist[] = '<tr><td>'.$item['Item']['title'].'</td><td style="text-align:center; background-color:'.$color.';width:60px;">'.$item['Result']['result'].'</td></tr>';	
 			}

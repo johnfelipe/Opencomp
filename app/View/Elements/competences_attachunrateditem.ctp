@@ -8,7 +8,7 @@
 	echo $this->Html->link(
 		' <i class="icon-plus"></i> '.__('nouvel item'), 
 		array(
-			'controller' => 'evaluationsitems', 
+			'controller' => 'evaluationsItems', 
 			'action' => 'addunrateditem',
 			'competence_id' => $id,
 			'classroom_id' => $this->data['Classroom']['classroom_id'],
@@ -36,7 +36,7 @@
 			echo $this->Html->link(
 				' <i class="icon-ok"></i> '.__('choisir'), 
 				array(
-					'controller' => 'evaluationsitems', 
+					'controller' => 'evaluationsItems', 
 					'action' => 'attachunrateditem',
 					'item_id' => $item['id']
 				), 

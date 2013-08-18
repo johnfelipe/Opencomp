@@ -15,11 +15,42 @@ class UsersController extends AppController {
 			
 		$this->layout = 'auth';
 		if($this->request->is('post')){
-			if($this->Auth->login()){
-				return $this->redirect($this->Auth->redirect());
+			$user = $this->User->find('first', array(
+		        'conditions' => array(
+		        	'User.username' => $this->request->data['User']['username'],
+		        	'User.password' => $this->Auth->password($this->request->data['User']['password'])
+		        ),
+		        'recursive' => -1
+		    ));
+
+			if(isset($user) && !empty($user)){
+				if(isset($user['User']['yubikeyID']) && !empty($user['User']['yubikeyID'])){
+					if($user['User']['yubikeyID'] == substr($this->request->data['User']['yubikeyOTP'], 0, 12)){
+						 App::import('Vendor','yubico/yubico');
+						 $this->loadModel('Setting');
+						 $otp = $this->request->data['User']['yubikeyOTP'];
+
+						 $clientID = $this->Setting->find('first', array('conditions' => array('Setting.key' => 'yubikeyClientID')));
+						 $secret = $this->Setting->find('first', array('conditions' => array('Setting.key' => 'yubikeySecretKey')));
+						 
+						 $yubi = new Auth_Yubico($clientID['Setting']['value'], $secret['Setting']['value']);
+						 $yubiauth = @$yubi->verify($otp);
+						  if ($yubiauth === TRUE) {
+						  	$this->Auth->login();
+							return $this->redirect($this->Auth->redirect());
+						  } else {
+						    $this->Session->setFlash("YubikeyOTP invalide !", "flash_error");
+						  }
+					}else{
+						$this->Session->setFlash("YubikeyID invalide !", "flash_error");
+					}
+				}else{
+					$this->Auth->login();
+					return $this->redirect($this->Auth->redirect());
+				}
 			}else{
 				$this->Session->setFlash("Votre login ou votre mot de passe ne correspond pas !", "flash_error"); 
-			}
+			}				
 		}
 	}
 	

@@ -7,26 +7,9 @@
 
 echo $this->Form->create('User', array(
     'class' => 'form-horizontal',
-    'inputDefaults' => array(
-        'format' => array('before', 'label', 'between', 'input', 'error', 'after'),
-        'div' => array('class' => 'control-group'),
-        'between' => '<div class="controls">',
-        'after' => '</div>',
-        'error' => array('attributes' => array('wrap' => 'span', 'class' => 'help-inline'))
-        )
     )
 );
 
-?>
-
-<div class="tabbable">
-  <ul id="myTab" class="nav nav-tabs">
-    <li class="active"><a href="#tab1" data-toggle="tab">Informations personnelles</a></li>
-    <li><a href="#tab2" data-toggle="tab">Affectations</a></li>
-  </ul>
-  <div class="tab-content">
-    <div class="tab-pane active fade in" id="tab1">
-    <?php
         echo $this->Form->input('id');
         echo $this->Form->input('username', array(
             'label' => array(
@@ -52,14 +35,14 @@ echo $this->Form->create('User', array(
                 'class' => 'control-label'
             )
         ));
-    ?>
-    
-        <div class="form-actions">
-             <?php echo $this->Form->button('définir les affectations <i class="icon-arrow-right"></i>', array('class' => 'btn btn-primary tab2')); ?>        
-        </div>
-    </div>
-    <div class="tab-pane fade in" id="tab2">
-      <?php
+        
+        echo $this->Form->input('yubikeyID', array(
+            'label' => array(
+                'text' => 'YubikeyID',
+                'class' => 'control-label'
+            )
+        ));
+
         echo $this->Form->input('role', array(
             'type' => 'select',
             'options' => array('0'=>'Enseignant','1'=>'Directeur', '2'=>'Responsable académique', '3'=>'Superviseur'),
@@ -101,13 +84,9 @@ echo $this->Form->create('User', array(
             )
         );
       ?>
-      
+     
       <div class="form-actions">
-         <?php echo $this->Form->button('<i class="icon-arrow-left"></i> informations personnelles', array('type' => 'submit', 'class' => 'btn tab1')); ?> 
          <?php echo $this->Form->button('<i class="icon-hdd"></i> Enregistrer les modifications', array('type' => 'submit', 'class' => 'btn btn-primary')); ?>        
       </div>
-    </div>
-  </div>
-</div>
 
 <?php echo $this->Form->end(); ?>

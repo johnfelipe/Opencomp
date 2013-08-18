@@ -259,8 +259,8 @@ class ResultsController extends AppController {
 		$this->layout = 'ajax';
 		//debug($this->request->data);
 	
-		App::import('Vendor','fpdf'); 
-		App::import('Vendor','fpdi'); 
+		App::import('Vendor','fpdi/fpdf'); 
+		App::import('Vendor','fpdi/fpdi'); 
 		
 		function ajouteFichier($pdf,$file)
 		{
@@ -299,6 +299,7 @@ class ResultsController extends AppController {
 		header('Content-disposition: attachment; filename='.$filename);
 		header('Content-type: application/pdf');
 		readfile('files/'.$filename);
+		unlink('files/'.$filename);
 	}
 	
 }

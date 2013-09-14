@@ -170,13 +170,15 @@ class ClassroomsController extends AppController {
 		    $this->set('establishment_id', $this->request->params['named']['establishment_id']);
         else
             $this->set('establishment_id', null);
-		
-		$users = $this->Classroom->User->find('list');
-		$years = $this->Classroom->Year->find('list');
+
+        $this->loadModel('Setting');
+        $currentYear = $this->Setting->find('first', array('conditions' => array('Setting.key' => 'currentYear')));
+        $current_year = $currentYear['Setting']['value'];
+
 		$establishments = $this->Classroom->Establishment->find('list');
 		$pupils = $this->Classroom->Pupil->find('list');
 		$users = $this->Classroom->User->find('list');
-		$this->set(compact('users', 'years', 'establishments', 'pupils', 'users'));
+		$this->set(compact('users', 'years', 'establishments', 'pupils', 'current_year'));
 	}
 
 /**

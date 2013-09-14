@@ -32,12 +32,7 @@ echo $this->Form->input('user_id', array(
     )
 )); 
 
-echo $this->Form->input('year_id', array(
-    'label' => array(
-        'text' => 'Année scolaire',
-        'class' => 'control-label'
-    )
-)); 
+echo $this->Form->hidden('year_id', array('value' => $current_year));
 
 echo $this->Form->input('establishment_id', array(
 	'class'=>'chzn-select',

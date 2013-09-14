@@ -16,7 +16,7 @@ class Establishment extends AppModel {
  * @var string
  */
 	public $displayField = 'name';
-	public $recursive = 2;
+    public $actsAs = array('Containable');
 
 /**
  * Validation rules

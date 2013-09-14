@@ -39,9 +39,30 @@ class EstablishmentsController extends AppController {
 		if (!$this->Establishment->exists()) {
 			throw new NotFoundException(__('L\'établissement scolaire demandé n\'existe pas !'), 'flash_error');
 		}
-		$years = $this->Establishment->Period->Year->find('list');
-		$this->set('establishment', $this->Establishment->read(null, $id));
-		$this->set('years', $years);
+
+        $this->loadModel('Setting');
+        $currentYear = $this->Setting->find('first', array('conditions' => array('Setting.key' => 'currentYear')));
+
+        //On récupère l'établissement, les classes et les périodes correspondant à l'année courante.
+        $establishment = $this->Establishment->find('first',
+            array(
+                'conditions' => array('Establishment.id' => $id),
+                'contain' => array(
+                    'User',
+                    'Academy',
+                    'Period' => array(
+                        'conditions' => array('Period.year_id =' => $currentYear['Setting']['value'])),
+                    'Period.Year',
+                    'Classroom' => array(
+                        'conditions' => array('Classroom.year_id =' => $currentYear['Setting']['value'])),
+                    'Classroom.User',
+                    'Classroom.Year'
+                )
+            )
+        );
+
+		$this->set('establishment', $establishment);
+		$this->set('current_year', $currentYear['Setting']['value']);
 	}
 
 /**

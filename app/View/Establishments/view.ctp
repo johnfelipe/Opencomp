@@ -145,14 +145,7 @@
         )
     ));  
     
-    echo $this->Form->input('year_id', array(
-        'label' => array(
-            'text' => 'Année scolaire',
-            'class' => 'control-label'
-            )
-        )
-    );
-    
+    echo $this->Form->hidden('year_id', array('value' => $current_year));
     echo $this->Form->hidden('establishment_id', array('value' => $establishment['Establishment']['id']));
     
     ?>

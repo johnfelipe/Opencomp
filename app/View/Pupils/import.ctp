@@ -13,7 +13,7 @@ $to = $this->Html->url(array(
 
 <form method="post" id="target" action="<?php echo $to ?>" enctype="multipart/form-data">
     <input type="hidden" name="MAX_FILE_SIZE" value="2097152">
-    <span class="btn fileinput-button">
+    <span class="btn file fileinput-button">
         <i class="icon-cloud-upload"></i>
         <span>Sélectionnez l'export .csv BE1D</span>
         <!-- The file input field used as target for the file upload widget -->

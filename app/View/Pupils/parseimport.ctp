@@ -4,7 +4,7 @@
 
 <div class="alert alert-info">
     En cas de données incohérentes, assurez vous d'avoir un fichier .csv provenant bien de BE1D.</br>
-    Pour plus d'informations sur les imports .csv, consultez la base de connaissances à l'adresse <a target="_blank" href="http://kb.opencomp.fr">http://kb.opencomp.fr</a>
+    Pour plus d'informations sur les imports .csv, consultez la base de connaissances à l'adresse <a target="_blank" href="http://kb.opencomp.fr">http://kb.opencomp.fr/index.php?solution_id=1003</a>
 </div>
 
 <table class="table">

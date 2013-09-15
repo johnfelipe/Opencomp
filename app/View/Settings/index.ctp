@@ -53,6 +53,23 @@ echo $this->Form->input('Setting.pathBackup', array(
     'value' => $pathBackup
 )); 
 
+echo $this->Form->input('Setting.yubikeyClientId', array(
+    'label' => array(
+        'text' => 'Yubikey ClientID',
+    ),
+    'class' => 'input-small',
+    'helpBlock' => __('Vous pouvez obtenir une clé d\'API Yubikey sur le site ').'<a target="blank" href="https://upgrade.yubico.com/getapikey/">https://upgrade.yubico.com/getapikey/</a>',
+    'value' => $yubikeyClientId
+)); 
+
+echo $this->Form->input('Setting.yubikeySecretKey', array(
+    'label' => array(
+        'text' => 'Yubikey Secret Key',
+    ),
+    'class' => 'input',
+    'value' => $yubikeySecretKey
+)); 
+
 ?>
 
 <div class="form-actions">

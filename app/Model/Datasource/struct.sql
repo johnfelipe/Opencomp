@@ -337,6 +337,7 @@ CREATE TABLE `users` (
   `email` varchar(80) DEFAULT NULL,
   `role` varchar(50) NOT NULL,
   `created` datetime NOT NULL,
+  `yubikeyID` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=40 ;
 

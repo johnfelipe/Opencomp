@@ -18,6 +18,8 @@ class SettingsController extends AppController {
 	    $pathMysqldump = $this->Setting->find('first', array('conditions' => array('Setting.key' => 'pathMysqldump')));
 	    $pathBackup = $this->Setting->find('first', array('conditions' => array('Setting.key' => 'pathBackup')));
 	    $saveOnExit = $this->Setting->find('first', array('conditions' => array('Setting.key' => 'saveOnExit')));
+	    $yubikeyClientId = $this->Setting->find('first', array('conditions' => array('Setting.key' => 'yubikeyClientID')));
+	    $yubikeySecretKey = $this->Setting->find('first', array('conditions' => array('Setting.key' => 'yubikeySecretKey')));
 	    
 	    if(empty($currentYear))
 			$this->set('currentYear', null);
@@ -44,6 +46,16 @@ class SettingsController extends AppController {
 			$this->set('pathBackup', null);
 		else
 			$this->set('pathBackup', $pathBackup['Setting']['value']);
+			
+		if(empty($yubikeyClientId))
+			$this->set('yubikeyClientId', null);
+		else
+			$this->set('yubikeyClientId', $yubikeyClientId['Setting']['value']);
+			
+		if(empty($yubikeySecretKey))
+			$this->set('yubikeySecretKey', null);
+		else
+			$this->set('yubikeySecretKey', $yubikeySecretKey['Setting']['value']);
 	
 		if ($this->request->is('post') || $this->request->is('put')) {
 		    
@@ -84,6 +96,14 @@ class SettingsController extends AppController {
 				$this->Setting->read(null, $pathBackup['Setting']['id']);
 				$this->Setting->set(array('value' => $this->data['Setting']['pathBackup']));
 				$this->Setting->save();
+				
+				$this->Setting->read(null, $yubikeyClientId['Setting']['id']);
+				$this->Setting->set(array('value' => $this->data['Setting']['yubikeyClientId']));
+				$this->Setting->save();
+				
+				$this->Setting->read(null, $yubikeySecretKey['Setting']['id']);
+				$this->Setting->set(array('value' => $this->data['Setting']['yubikeySecretKey']));
+				$this->Setting->save();		
 				
 				$this->Session->setFlash(__('Les paramètres ont été correctement mis à jour.'), 'flash_success');
 				$this->redirect(array('action'=> 'index'));

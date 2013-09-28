@@ -10,7 +10,9 @@
         "pear-cakephp/cakephp": ">=2.4.0",
 		"cakephp/debug_kit": "2.2.*",
 		"twbs/bootstrap": "v2.3.2",
-		"slywalker/twitter_bootstrap": "dev-master"
+		"slywalker/twitter_bootstrap": "dev-master",
+		"zendframework/zendpdf": "2.0.*@dev",
+		"dompdf/dompdf": "dev-master"
     },
     "config": {
         "vendor-dir": "Vendor/"

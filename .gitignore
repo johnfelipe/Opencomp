@@ -12,4 +12,7 @@ app/webroot/files
 app/Vendor/pear-pear.cakephp.org/
 app/Vendor/twbs
 app/Vendor/composer
+app/Vendor/dompdf
+app/Vendor/phenx
+app/Vendor/zendframework
 app/Vendor/bin

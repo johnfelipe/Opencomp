@@ -258,29 +258,23 @@ class ResultsController extends AppController {
 	function concat_bul(){
 		$this->layout = 'ajax';
 		//debug($this->request->data);
-	
-		App::import('Vendor','fpdi/fpdf'); 
-		App::import('Vendor','fpdi/fpdi'); 
-		
-		function ajouteFichier($pdf,$file)
-		{
-			$nbPage = $pdf->setSourceFile($file);
-			
-			for ($i = 1; $i <= $nbPage; $i++) {
-		        $tplidx = $pdf->ImportPage($i);
-		        $size = $pdf->getTemplatesize($tplidx);
-		        $pdf->AddPage('P', array($size['w'], $size['h']));
-		        $pdf->useTemplate($tplidx);
-		    }
-		}
-		
-		$pdf = new FPDI();
-		
+				
+		$pdfMerged = new ZendPdf\PdfDocument();
+
 		foreach($this->request->data['pupils'] as $pupil_id){
-			ajouteFichier($pdf,"files/".$this->request->data['classroom_id']."_".str_replace(',','',$this->request->data['period_id'])."_".$pupil_id.".pdf");
+	      
+	      // Load PDF Document
+	      $OldPdf = ZendPdf\PdfDocument::load("files/".$this->request->data['classroom_id']."_".str_replace(',','',$this->request->data['period_id'])."_".$pupil_id.".pdf");
+	
+	      // Clone each page and add to merged PDF
+	      for($i=0; $i<sizeof($OldPdf->pages); ++$i){
+		         $page = clone $OldPdf->pages[$i];
+		         $pdfMerged->pages[] = $page;
+		      }
 		}
-		
-		$pdf->Output("files/".$this->request->data['classroom_id']."_".str_replace(',','',$this->request->data['period_id']).".pdf","F");
+	   
+		// Save changes to PDF
+	   	$pdfMerged->save("files/".$this->request->data['classroom_id']."_".str_replace(',','',$this->request->data['period_id']).".pdf");
 		
 		foreach($this->request->data['pupils'] as $pupil_id){
 			unlink("files/".$this->request->data['classroom_id']."_".str_replace(',','',$this->request->data['period_id'])."_".$pupil_id.".pdf");

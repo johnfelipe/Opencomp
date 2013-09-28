@@ -15,7 +15,7 @@ $bulletin = '
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 	<head>
-		<title>Bulletin élève</title>
+		<title>Report</title>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 		
 		<style type="text/css">
@@ -228,13 +228,14 @@ foreach($competences as $competence){
 $bulletin .= "</div></body></html>";
 
 if(isset($output_type) && $output_type == 'pdf'){
-	App::import('Vendor','dompdf/dompdf_config_inc'); 
+	define('DOMPDF_ENABLE_AUTOLOAD', false);
+	App::import('Vendor', 'Dompdf', array('file' => 'dompdf' . DS . 'dompdf' . DS . 'dompdf_config.inc.php'));
 
 	$dompdf = new DOMPDF();
 	$dompdf->set_paper("a4");
 	$dompdf->load_html($bulletin);
 	$dompdf->render();
-	
+
 	//Si l'utilisateur a demandé l'impression recto/verso
 	//on ajoute automatiquement des pages blanche si le bulletin
 	//ne comporte pas un nombre pair de pages ;)

@@ -1,0 +1,50 @@
+<?php
+    $id = $data['Lpcnode']['id'];
+?>
+
+<a href="#" id="<?php echo $id; ?>" class="jstree-toggle" style="color:grey;"><?php echo($data['Lpcnode']['title']); ?> </a>
+
+<?php if(AuthComponent::user('role') === 'admin'){
+	echo $this->Html->link(
+		'<i class="icon-arrow-up"></i>', 
+		array(
+			'controller' => 'lpcnodes', 
+			'action' => 'moveup',
+			$id
+		), 
+		array(
+			'escape' => false,
+			'style' => 'color:grey;'
+		)
+	);
+	echo $this->Html->link(
+		' <i class="icon-arrow-down"></i>', 
+		array(
+			'controller' => 'lpcnodes', 
+			'action' => 'movedown',
+			$id
+		), 
+		array(
+			'escape' => false,
+			'style' => 'color:grey;'
+		)
+	);
+}
+?>
+
+<?php if(AuthComponent::user('role') === 'admin'){
+	echo '<ul><li>';
+	echo $this->Html->link(
+		' <i class="icon-plus"></i> '.__('créer une nouvelle compétence dans ').$data['Lpcnode']['title'], 
+		array(
+			'controller' => 'lpcnodes', 
+			'action' => 'add',
+			$id
+		), 
+		array(
+			'escape' => false,
+			'style' => 'color:green;'
+		)
+	);
+	echo '</li></ul>';
+} ?>

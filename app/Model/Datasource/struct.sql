@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Mar 31 Juillet 2012 à 23:06
+-- Généré le: Mar 13 Octobre 2013 à 21:19
 -- Version du serveur: 5.5.25
 -- Version de PHP: 5.4.4
 
@@ -97,6 +97,22 @@ CREATE TABLE `competences` (
   `title` varchar(150) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=90 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `lpcnodes`
+--
+
+CREATE TABLE `lpcnodes` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `parent_id` int(10) unsigned DEFAULT NULL,
+  `lft` int(10) unsigned NOT NULL,
+  `rght` int(10) unsigned NOT NULL,
+  `title` varchar(255) NOT NULL DEFAULT '',
+  `code` varchar(10) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=217 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 

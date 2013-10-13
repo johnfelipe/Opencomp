@@ -10,9 +10,11 @@ Opencomp.esproj/
 app/webroot/files
 .idea/
 app/Vendor/pear-pear.cakephp.org/
+app/Vendor/autoload.php
 app/Vendor/twbs
 app/Vendor/composer
 app/Vendor/dompdf
 app/Vendor/phenx
 app/Vendor/zendframework
 app/Vendor/bin
+app/Plugin

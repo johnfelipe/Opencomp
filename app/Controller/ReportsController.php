@@ -43,10 +43,13 @@ class ReportsController extends AppController {
         $this->Classroom->recursive = 0;
         $this->Classroom->id = $classroom_id;
         $classroom = $this->Classroom->read();
+        
+        $this->loadModel('Setting');
+        $currentYear = $this->Setting->find('first', array('conditions' => array('Setting.key' => 'currentYear')));
 
         $this->loadModel('Period');
         $periods = $this->Period->find('list', array(
-            'conditions' => array('establishment_id' => $classroom['Classroom']['establishment_id']),
+            'conditions' => array('establishment_id' => $classroom['Classroom']['establishment_id'], 'year_id' => $currentYear['Setting']['value']),
             'recursive' => 0));
 
         $this->set(compact('classrooms', 'users', 'periods', 'pupils', 'competences'));
@@ -92,10 +95,13 @@ class ReportsController extends AppController {
 		$this->Classroom->id = $classroom_id;
 		$classroom = $this->Classroom->read();
 		
+		$this->loadModel('Setting');
+        $currentYear = $this->Setting->find('first', array('conditions' => array('Setting.key' => 'currentYear')));
+		
 		$this->loadModel('Period');
 		$periods = $this->Period->find('list', array(
-			'conditions' => array('establishment_id' => $classroom['Classroom']['establishment_id']),
-			'recursive' => 0));
+			'conditions' => array('establishment_id' => $classroom['Classroom']['establishment_id'], 'year_id' => $currentYear['Setting']['value']),
+            'recursive' => 0));
 
 		$this->set(compact('classrooms', 'users', 'periods', 'pupils', 'competences'));
 	}

@@ -101,6 +101,7 @@ class PupilsController extends AppController {
                         $this->redirect(array('controller' => 'pupils', 'action' => 'import', 'classroom_id' => $classroom_id));
                     }else{
                         move_uploaded_file($_FILES['files']['tmp_name'][0],WWW_ROOT.'files/import_be1d_'.$classroom_id.'.csv');
+                        $this->redirect(array('controller' => 'pupils', 'action' => 'parseimport', 'classroom_id' => $classroom_id));
                     }
                 }
             }

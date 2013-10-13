@@ -8,6 +8,57 @@ class CompetencesController extends AppController {
 
 	public $helpers = array('Tree');
 
+	public function add($id = null) {
+		$this->set('title_for_layout', __('Ajouter une compétence au référentiel'));
+		if ($this->request->is('post')) {
+			$this->Competence->create();
+			if ($this->Competence->save($this->request->data)) {
+				$this->Session->setFlash(__('La nouvelle compétence a été correctement ajoutée'), 'flash_success');
+				$this->redirect(array('action' => 'add', $this->request->data['Competence']['parent_id']));
+			} else {
+				$this->Session->setFlash(__('Des erreurs ont été détectées durant la validation du formulaire. Veuillez corriger les erreurs mentionnées.'), 'flash_error');
+			}
+		}
+		
+		//On passe le paramètre à la vue
+		if(isset($id) && is_numeric($id))
+			$this->set('idcomp', $id);
+		
+		//Récupération des ids des catégories existantes	
+		$competenceids = $this->Competence->generateTreeList(null, null, null, "");
+		$this->set('cid', $competenceids);
+	}
+	
+	public function moveup($id = null) {
+	    $this->Competence->id = $id;
+	    if (!$this->Competence->exists()) {
+	       throw new NotFoundException(__('Cette compétence n\'existe pas ;)'));
+	    }
+
+	    $this->Competence->moveUp($this->Competence->id, 1);
+	    $this->redirect(array('action' => 'index'));
+	}
+	
+	public function movedown($id = null) {
+	    $this->Competence->id = $id;
+	    if (!$this->Competence->exists()) {
+	       throw new NotFoundException(__('Cette compétence n\'existe pas ;)'));
+	    }
+
+	    $this->Competence->moveDown($this->Competence->id, 1);
+	    $this->redirect(array('action' => 'index'));
+	}
+	
+	public function deleteNode($id = null) {
+	    $this->Competence->id = $id;
+	    if (!$this->Competence->exists()) {
+	       throw new NotFoundException(__('Cette compétence n\'existe pas ;)'));
+	    }
+
+		$this->Competence->delete();
+	    $this->redirect(array('action' => 'index'));
+	}
+	
 	public function attachitem() {
 		
 		//On vérifie qu'un paramètre nommé classroom_id a été fourni et qu'il existe.
@@ -28,7 +79,7 @@ class CompetencesController extends AppController {
 			throw new NotFoundException(__('You must provide a evaluation_id in order to attach an item to this test !'));
 		}
 		
-		$this->Competence->contain('Item.Level.title', 'ChildCompetence');
+		$this->Competence->contain('Item.Level.title', 'Item.user_id = '.AuthComponent::user('id').' OR Item.type = 1 OR Item.type = 2', 'ChildCompetence');
         $stuff = $this->Competence->find('all',  
                 array('fields' => array('title', 'lft', 'rght'), 'order' => 'lft ASC')); 
         $this->set('stuff', $stuff);  
@@ -45,16 +96,10 @@ class CompetencesController extends AppController {
 	    }
 	}
 
-    public function bul() {	
-    	
-    	
-		//debug($this->Competence->getPath(6));
-		//debug($this->Competence->getPath(9));
-		//debug($this->Competence->getPath(19));
-    		
+    public function index() {	
+    	$this->set('title_for_layout', __('Référentiel de compétences'));	
         $stuff = $this->Competence->find('all',  
         	array(
-            	//'conditions' => array('Competence.id' => array(6)),
             	'fields' => array('title', 'lft', 'rght'), 
             	'order' => 'lft ASC',
             )

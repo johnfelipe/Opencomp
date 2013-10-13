@@ -1,19 +1,12 @@
 <div class="page-title">
     <h2><?php echo __('Ajouter un établissement'); ?></h2>
-    <?php echo $this->Html->link('<i class="icon-arrow-left"></i> '.__('retour aux établissements'), 'index', array('class' => 'ontitle btn', 'escape' => false)); ?>
+    <?php echo $this->Html->link('<i class="icon-arrow-left"></i> '.__('retour'), 'javascript:history.go(-1)', array('class' => 'ontitle btn', 'escape' => false, 'onclick'=>'javascript:history.go(-1)')); ?>
 </div>
 
 <?php 
 
 echo $this->Form->create('Establishment', array(
-    'class' => 'form-horizontal',
-    'inputDefaults' => array(
-        'format' => array('before', 'label', 'between', 'input', 'error', 'after'),
-        'div' => array('class' => 'control-group'),
-        'between' => '<div class="controls">',
-        'after' => '</div>',
-        'error' => array('attributes' => array('wrap' => 'span', 'class' => 'help-inline'))
-        )
+    'class' => 'form-horizontal'
     )
 );
 

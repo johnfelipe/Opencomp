@@ -71,7 +71,10 @@
 <?php if (!empty($evaluation['Item'])): ?>
 	<div class="page-title">
 	    <h3><?php echo __('Résultats de cette évaluation'); ?></h3>
-	    <?php echo $this->Html->link('<i class="icon-magic"></i> '.__('saisie automagique'), '/results/selectpupil/evaluation_id:'.$evaluation['Evaluation']['id'], array('class' => 'ontitle btn btn-primary', 'escape' => false)); ?>
+        <div class="btn-group ontitle">
+	    <?php echo $this->Html->link('<i class="icon-keyboard"></i> '.__('saisie manuelle'), '/results/selectpupilmanual/evaluation_id:'.$evaluation['Evaluation']['id'], array('class' => 'btn ', 'escape' => false)); ?>
+        <?php echo $this->Html->link('<i class="icon-magic"></i> '.__('saisie automagique'), '/results/selectpupil/evaluation_id:'.$evaluation['Evaluation']['id'], array('class' => 'btn btn-primary', 'escape' => false)); ?>
+        </div>
 	</div>
 	<table class="table table-stripped table-condensed">
 	<tr>

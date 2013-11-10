@@ -30,6 +30,41 @@ class ResultsController extends AppController {
 			}
 		}
 	}
+
+    public function selectpupilmanual(){
+        //On vérifie qu'un paramètre nommé evaluation_id a été fourni et qu'il existe.
+        if(isset($this->request->params['named']['evaluation_id'])) {
+            $evaluation_id = intval($this->request->params['named']['evaluation_id']);
+            $this->set('evaluation_id', $evaluation_id);
+            $this->Result->Evaluation->id = $evaluation_id;
+            if (!$this->Result->Evaluation->exists()) {
+                throw new NotFoundException(__('The evaluation_id provided does not exist !'));
+            }
+        } else {
+            throw new NotFoundException(__('You must provide a evaluation_id in order to enter results for items !'));
+        }
+
+        if ($this->request->is('post')) {
+            $pupil_id = intval($this->request->data['Result']['pupil_id']);
+            $this->Result->Pupil->id = $pupil_id;
+            if (!$this->Result->Pupil->exists()) {
+                $this->Session->setFlash(__('Le code barre élève que vous avez flashé est inconnu !'), 'flash_error');
+            } else {
+                $this->redirect(array('action' => 'add', 'evaluation_id' => $evaluation_id, 'pupil_id' => $pupil_id,'manual' => 'true'));
+            }
+        }
+
+        //On récupère le champs virtuel de Pupil et on le redéclare dans EvaluationsPupil
+        $this->Result->Evaluation->EvaluationsPupil->virtualFields['wellnamed'] = $this->Result->Evaluation->EvaluationsPupil->Pupil->virtualFields['wellnamed'];
+
+        $pupils = $this->Result->Evaluation->EvaluationsPupil->find('list', array(
+            'fields' => array('EvaluationsPupil.pupil_id', 'wellnamed'),
+            'conditions' => array('evaluation_id =' => $evaluation_id),
+            'recursive' => 0
+        ));
+
+        $this->set('pupils', $pupils);
+    }
 	
 	public function add(){
 		//@TODO tester d'abord si un résultat a été déjà saisi pour cette évaluation et cet élève.
@@ -45,6 +80,10 @@ class ResultsController extends AppController {
 		} else {
 			throw new NotFoundException(__('You must provide a evaluation_id in order to enter results for items !'));
 		}
+
+        if(isset($this->request->params['named']['manual']) && $this->request->params['named']['manual'] == true) {
+            $this->set('manual', 'manual');
+        }
 		
 		if(isset($this->request->params['named']['pupil_id'])) {
        		$pupil_id = intval($this->request->params['named']['pupil_id']);
@@ -103,10 +142,19 @@ class ResultsController extends AppController {
 
 			if(count($this->Result->invalidFields()) == 0){
 				$this->Session->setFlash(__('Les résultats de <code>'.$pupil['Pupil']['first_name'].' '.$pupil['Pupil']['name'].'</code> pour l\'évaluation <code>'.$items[0]['Evaluation']['title'].'</code> ont bien été enregistrés.'), 'flash_success');
-				$this->redirect(array(
-				    'controller'    => 'results',
-				    'action'        => 'selectpupil', 
-				    'evaluation_id' => $evaluation_id));
+                if(isset($this->request->params['named']['manual']) && $this->request->params['named']['manual'] == true) {
+                    $this->redirect(array(
+                            'controller'    => 'results',
+                            'action'        => 'selectpupilmanual',
+                            'evaluation_id' => $evaluation_id)
+                    );
+                }else{
+                    $this->redirect(array(
+                        'controller'    => 'results',
+                        'action'        => 'selectpupil',
+                        'evaluation_id' => $evaluation_id)
+                    );
+                }
 			}else{
 				$this->Session->setFlash(__('Les résultats de <code>'.$pupil['Pupil']['first_name'].' '.$pupil['Pupil']['name'].'</code> pour l\'évaluation <code>'.$items[0]['Evaluation']['title'].'</code> n\'ont pas pu être  enregistrés car votre saisie est incorrecte.<br />De nouveau, saisissez les résultats de l\'élève.'), 'flash_error');
 			}

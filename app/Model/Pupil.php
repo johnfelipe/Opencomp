@@ -15,7 +15,11 @@ class Pupil extends AppModel {
  *
  * @var string
  */
-	public $displayField = array("%s %s", "{n}.Pupil.first_name", "{n}.Pupil.name");
+    public $virtualFields = array(
+        'wellnamed' => 'CONCAT(Pupil.first_name, " ", Pupil.name)'
+    );
+    public $displayField = 'wellnamed';
+
 	public $recursive = 2;
 
 /**

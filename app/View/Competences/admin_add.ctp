@@ -1,19 +1,29 @@
 <div class="page-title">
     <h2><?php echo __('Ajouter une compétence à l\'arbre'); ?></h2>
     
-    <?php echo $this->Html->link('<i class="icon-ok"></i> '.__('J\'ai terminé la saisie'), 'index', array('class' => 'ontitle btn btn-success', 'escape' => false)); ?>
+    <?php echo $this->Html->link('<i class="icon-ok"></i> '.__('J\'ai terminé la saisie'), array('admin'=>false,'action'=>'index'), array('class' => 'ontitle btn btn-success', 'escape' => false)); ?>
 </div>
 
 <?php
 
-echo $this->Form->create('Competence', array(
-	'url' => array(
-    	'controller' => 'competences',
-    	'action' => 'add',
-    	$idcomp
-    ),
-	'class' => 'form-horizontal'
-));
+if(isset($idcomp)){
+    echo $this->Form->create('Competence', array(
+        'url' => array(
+            'controller' => 'competences',
+            'action' => 'add',
+            $idcomp
+        ),
+        'class' => 'form-horizontal'
+    ));
+}else{
+    echo $this->Form->create('Competence', array(
+        'url' => array(
+            'controller' => 'competences',
+            'action' => 'add'
+        ),
+        'class' => 'form-horizontal'
+    ));
+}
 
 echo $this->Form->input('title', array(
     'label' => array('text' => 'Nom de la compétence')

@@ -18,6 +18,7 @@
 	echo $this->Html->link(
 		' <i class="icon-plus"></i> '.__('créer une nouvelle compétence à la racine de l\'arbre'), 
 		array(
+            'admin'=> true,
 			'controller' => 'competences', 
 			'action' => 'add'
 		), 

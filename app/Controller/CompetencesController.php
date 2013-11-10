@@ -8,7 +8,7 @@ class CompetencesController extends AppController {
 
 	public $helpers = array('Tree');
 
-	public function add($id = null) {
+	public function admin_add($id = null) {
 		$this->set('title_for_layout', __('Ajouter une compétence au référentiel'));
 		if ($this->request->is('post')) {
 			$this->Competence->create();
@@ -29,7 +29,7 @@ class CompetencesController extends AppController {
 		$this->set('cid', $competenceids);
 	}
 	
-	public function moveup($id = null) {
+	public function admin_moveup($id = null) {
 	    $this->Competence->id = $id;
 	    if (!$this->Competence->exists()) {
 	       throw new NotFoundException(__('Cette compétence n\'existe pas ;)'));
@@ -39,7 +39,7 @@ class CompetencesController extends AppController {
 	    $this->redirect(array('action' => 'index'));
 	}
 	
-	public function movedown($id = null) {
+	public function admin_movedown($id = null) {
 	    $this->Competence->id = $id;
 	    if (!$this->Competence->exists()) {
 	       throw new NotFoundException(__('Cette compétence n\'existe pas ;)'));
@@ -49,7 +49,7 @@ class CompetencesController extends AppController {
 	    $this->redirect(array('action' => 'index'));
 	}
 	
-	public function deleteNode($id = null) {
+	public function admin_deleteNode($id = null) {
 	    $this->Competence->id = $id;
 	    if (!$this->Competence->exists()) {
 	       throw new NotFoundException(__('Cette compétence n\'existe pas ;)'));

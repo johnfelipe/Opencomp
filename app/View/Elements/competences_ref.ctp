@@ -8,6 +8,7 @@
 	echo $this->Html->link(
 		'<i class="icon-arrow-up"></i>', 
 		array(
+            'admin'=> true,
 			'controller' => 'competences', 
 			'action' => 'moveup',
 			$id
@@ -21,6 +22,7 @@
 	echo $this->Html->link(
 		' <i class="icon-arrow-down"></i>', 
 		array(
+            'admin'=> true,
 			'controller' => 'competences', 
 			'action' => 'movedown',
 			$id
@@ -38,6 +40,7 @@
 	echo $this->Html->link(
 		' <i class="icon-plus"></i> '.__('créer une nouvelle compétence dans ').$data['Competence']['title'], 
 		array(
+            'admin'=> true,
 			'controller' => 'competences', 
 			'action' => 'add',
 			$id

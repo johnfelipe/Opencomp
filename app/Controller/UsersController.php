@@ -72,6 +72,7 @@ class UsersController extends AppController {
  * @return void
  */
 	public function admin_index() {
+        $this->set('title_for_layout', __('Liste des utilisateurs'));
 		$this->User->recursive = 0;
 		$this->set('users', $this->paginate());
 	}
@@ -84,7 +85,7 @@ class UsersController extends AppController {
  * @return void
  */
 	public function view($id = null) {
-	    $this->set('title_for_layout', __('Liste des utilisateurs'));
+	    $this->set('title_for_layout', __('Détail d\'utilisateur'));
 		$this->User->id = $id;
 		if (!$this->User->exists()) {
 			throw new NotFoundException(__('L\'utilisateur demandé n\'existe pas !'));

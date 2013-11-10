@@ -9,8 +9,8 @@
     "require": {
         "pear-cakephp/cakephp": ">=2.4.0",
 		"cakephp/debug_kit": "2.2.*",
-		"twbs/bootstrap": "v2.3.2",
-		"slywalker/twitter_bootstrap": "dev-master",
+		"twitter/bootstrap": "v3.0.2",
+		"slywalker/boost_cake": "*",
 		"zendframework/zendpdf": "2.0.*@dev",
 		"dompdf/dompdf": "dev-master"
     },

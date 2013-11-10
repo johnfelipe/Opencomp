@@ -2,7 +2,7 @@
     <div class="page-title">
         <h2><?php echo __('Visualiser une académie'); ?></h2>
         <?php echo $this->Html->link('<i class="icon-pencil"></i> '.__('modifier'), 'edit/'.$academy['Academy']['id'], array('class' => 'ontitle btn btn-primary', 'escape' => false)); ?>
-        <?php echo $this->Html->link('<i class="icon-arrow-left"></i> '.__('lister les académies'), 'index', array('class' => 'ontitle btn', 'escape' => false)); ?>
+        <?php echo $this->Html->link('<i class="icon-arrow-left"></i> '.__('lister les académies'), 'index', array('class' => 'ontitle btn btn-default', 'escape' => false)); ?>
     </div>
     
 	<dl class="dl-horizontal">
@@ -18,7 +18,7 @@
 </div>
 
 <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
         <div class="page-title">
             <h3><?php echo __('Gestionnaire(s) de cette académie'); ?></h3>
         </div>    
@@ -50,7 +50,7 @@
             Vous pouvez associer un utilisateur existant à cette académie en la <?php echo $this->Html->link(__('modifiant'), 'edit/'.$academy['Academy']['id']); ?>.
         </div>   
     </div>
-    <div class="span6">
+    <div class="col-md-6">
         <div class="page-title">
             <h3><?php echo __('Établissement(s) de cette académie'); ?></h3>
             <?php echo $this->Html->link('<i class="icon-plus"></i> '.__('ajouter un établissement'), '/establishments/add/academy_id:'.$academy['Academy']['id'], array('class' => 'ontitle btn btn-success', 'escape' => false)); ?>
@@ -72,8 +72,8 @@
         			<td><?php echo $establishment['postcode']; ?></td>
         			<td><?php echo $establishment['town']; ?></td>
         			<td class="actions">
-        			     <?php echo $this->Html->link('<i class="icon-eye-open"></i> '.__('Voir'), array('controller' => 'establishments', 'action' => 'view', 'headmaster'=>true, $establishment['id']), array('escape' => false)); ?> &nbsp;
-        			     <?php echo $this->Html->link('<i class="icon-pencil"></i> '.__('Éditer'), array('controller' => 'establishments', 'action' => 'edit', 'headmaster'=>true, $establishment['id']), array('escape' => false)); ?>
+        			     <?php echo $this->Html->link('<i class="icon-eye-open"></i> '.__('Voir'), array('controller' => 'establishments', 'action' => 'view', 'admin'=>false, $establishment['id']), array('escape' => false)); ?> &nbsp;
+        			     <?php echo $this->Html->link('<i class="icon-pencil"></i> '.__('Éditer'), array('controller' => 'establishments', 'action' => 'edit', 'admin'=>false, $establishment['id']), array('escape' => false)); ?>
         			</td>
         		</tr>
         	<?php endforeach; ?>

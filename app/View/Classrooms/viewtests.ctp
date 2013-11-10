@@ -1,11 +1,11 @@
 <div class="page-title">
     <h2><?php echo __('Visualiser une classe'); ?></h2>
     <?php echo $this->Html->link('<i class="icon-pencil"></i> '.__('modifier'), 'edit/'.$classroom['Classroom']['id'], array('class' => 'ontitle btn btn-primary', 'escape' => false)); ?>
-    <?php echo $this->Html->link('<i class="icon-arrow-left"></i> '.__('établissement de la classe'), '/establishments/view/'.$classroom['Establishment']['id'], array('class' => 'ontitle btn', 'escape' => false)); ?>
+    <?php echo $this->Html->link('<i class="icon-arrow-left"></i> '.__('établissement de la classe'), '/establishments/view/'.$classroom['Establishment']['id'], array('class' => 'ontitle btn btn-default', 'escape' => false)); ?>
 </div>
 
 <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
         <div class="well">
         	<dl class="dl-horizontal">
         		<dt><?php echo __('Nom de la classe'); ?></dt>
@@ -31,7 +31,7 @@
            	</dl>
         </div>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
         <div class="page-title">
             <h3><?php echo __('Intervenants de cette classe'); ?></h3>
         </div>
@@ -83,7 +83,7 @@
     <h3><?php echo count($classroom['Evaluation']).' '.__('évaluation(s) associée(s) à cette classe'); ?></h3>
     <?php echo $this->Html->link('<i class="icon-plus"></i> '.__('ajouter une évaluation'), '/evaluations/add/classroom_id:'.$classroom['Classroom']['id'], array('class' => 'ontitle btn btn-success', 'escape' => false)); ?>
     <div class="btn-group ontitle">
-	  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+	  <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#">
 	    <i class="icon-filter"></i> Modifier le filtre
 	    <span class="caret"></span>
 	  </a>
@@ -126,7 +126,7 @@
 		</td>
 		<td class="actions">
 			<div class="btn-group">
-	          <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown"><i class="icon-cogs"></i> Actions <span class="caret"></span></button>
+	          <button class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown"><i class="icon-cogs"></i> Actions <span class="caret"></span></button>
 	          <ul class="dropdown-menu">
 	            <li><li><?php echo $this->Html->link('<i class="icon-list"></i> '.__('Associer des items'), array('controller' => 'evaluations', 'action' => 'attacheditems', $evaluation['id']), array('escape' => false)); ?></li></li>
 	            <?php if($progress > 0 && count($evaluation['Item']) > 0): ?>

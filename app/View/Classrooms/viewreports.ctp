@@ -1,11 +1,11 @@
 <div class="page-title">
     <h2><?php echo __('Visualiser une classe'); ?></h2>
     <?php echo $this->Html->link('<i class="icon-pencil"></i> '.__('modifier'), 'edit/'.$classroom['Classroom']['id'], array('class' => 'ontitle btn btn-primary', 'escape' => false)); ?>
-    <?php echo $this->Html->link('<i class="icon-arrow-left"></i> '.__('établissement de la classe'), '/establishments/view/'.$classroom['Establishment']['id'], array('class' => 'ontitle btn', 'escape' => false)); ?>
+    <?php echo $this->Html->link('<i class="icon-arrow-left"></i> '.__('établissement de la classe'), '/establishments/view/'.$classroom['Establishment']['id'], array('class' => 'ontitle btn btn-default', 'escape' => false)); ?>
 </div>
 
 <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
         <div class="well">
         	<dl class="dl-horizontal">
         		<dt><?php echo __('Nom de la classe'); ?></dt>
@@ -31,7 +31,7 @@
            	</dl>
         </div>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
         <div class="page-title">
             <h3><?php echo __('Intervenants de cette classe'); ?></h3>
         </div>

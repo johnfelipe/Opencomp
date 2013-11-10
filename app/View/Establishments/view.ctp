@@ -1,12 +1,12 @@
 <div class="page-title">
     <h2><?php echo __('Visualiser un établissement'); ?></h2>
     <?php echo $this->Html->link('<i class="icon-pencil"></i> '.__('modifier'), 'edit/'.$establishment['Establishment']['id'], array('class' => 'ontitle btn btn-primary', 'escape' => false)); ?>
-    <?php echo $this->Html->link('<i class="icon-arrow-left"></i> '.__('académie de l\'établissement'), array('admin'=>true,'controller' => 'academies', 'action' => 'view', $establishment['Academy']['id']), array('class' => 'ontitle btn', 'escape' => false)); ?>
+    <?php echo $this->Html->link('<i class="icon-arrow-left"></i> '.__('académie de l\'établissement'), array('admin'=>true,'controller' => 'academies', 'action' => 'view', $establishment['Academy']['id']), array('class' => 'ontitle btn btn-default', 'escape' => false)); ?>
 </div>
 
 <div class="row">
-    <div class="span6">
-        <div class="well">
+    <div class="col-md-6">
+        <div class="well" style="margin-top:30px;">
         	<dl class="dl-horizontal">
         		<dt><?php echo __('Nom de l\'école'); ?></dt>
         		<dd>
@@ -41,10 +41,10 @@
         	</dl>
         </div>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
         <div class="page-title">
             <h3><?php echo __('Périodes de cet établissement'); ?></h3>
-            <?php echo $this->Html->link('<i class="icon-plus"></i> '.__('ajouter une période'), '#myModal', array('data-toggle' => 'modal', 'class' => 'ontitle btn btn-success', 'escape' => false)); ?>
+            <?php echo $this->Html->link('<i class="icon-plus"></i> '.__('ajouter une période'), '#addPeriod', array('data-toggle' => 'modal', 'class' => 'ontitle btn btn-success', 'escape' => false)); ?>
         </div>
         
         <?php if (!empty($establishment['Period'])): ?>
@@ -58,7 +58,7 @@
 		<?php
 			$i = 0;
 			foreach ($establishment['Period'] as $period):
-				$startTableLine = ($period['id'] == $establishment['Establishment']['current_period_id']) ? '<tr class="info">' : '<tr>';
+				$startTableLine = ($period['id'] == $establishment['Establishment']['current_period_id']) ? '<tr class="warning">' : '<tr>';
 			echo $startTableLine; ?> 
 				<td><?php echo $period['wellnamed']; ?></td>
 				<td><?php echo $period['Year']['title']; ?></td>
@@ -77,126 +77,135 @@
     <?php echo $this->Html->link('<i class="icon-plus"></i> '.__('ajouter une classe'), '/classrooms/add/establishment_id:'.$establishment['Establishment']['id'], array('class' => 'ontitle btn btn-success', 'escape' => false)); ?>
 </div>
 
-	<?php if (!empty($establishment['Classroom'])): ?>
-	<table class='table table-striped table-condensed'>
-	<tr>
-		<th><?php echo __('Nom de la classe'); ?></th>
-		<th><?php echo __('Enseignant titulaire'); ?></th>
-		<th><?php echo __('Année scolaire'); ?></th>
-		<th class="actions"><?php echo __('Actions'); ?></th>
-	</tr>
-	<?php
-		$i = 0;
-		foreach ($establishment['Classroom'] as $classroom): ?>
-		<tr>
-			<td><?php echo $classroom['title']; ?></td>
-			<td><?php echo $classroom['User']['first_name'].' '.$classroom['User']['name']; ?></td>
-			<td><?php echo $classroom['Year']['title']; ?></td>
-			<td class="actions">
-				<?php echo $this->Html->link('<i class="icon-eye-open"></i> '.__('Voir'), array('controller' => 'classrooms', 'action' => 'view', $classroom['id']), array('escape'=>false)); ?>&nbsp;&nbsp;&nbsp;
-				<?php echo $this->Html->link('<i class="icon-pencil"></i> '.__('Modifier'), array('controller' => 'classrooms', 'action' => 'edit', $classroom['id']), array('escape'=>false)); ?>&nbsp;&nbsp;&nbsp;
-				<?php echo $this->Form->postLink('<i class="icon-trash"></i> '.__('Supprimer'), array('controller' => 'classrooms', 'action' => 'delete', $classroom['id']), array('escape'=>false), __('Are you sure you want to delete # %s?', $classroom['id'])); ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</table>
-	<?php endif; ?>
+<?php if (!empty($establishment['Classroom'])): ?>
+<table class='table table-striped table-condensed'>
+<tr>
+    <th><?php echo __('Nom de la classe'); ?></th>
+    <th><?php echo __('Enseignant titulaire'); ?></th>
+    <th><?php echo __('Année scolaire'); ?></th>
+    <th class="actions"><?php echo __('Actions'); ?></th>
+</tr>
+<?php
+    $i = 0;
+    foreach ($establishment['Classroom'] as $classroom): ?>
+    <tr>
+        <td><?php echo $classroom['title']; ?></td>
+        <td><?php echo $classroom['User']['first_name'].' '.$classroom['User']['name']; ?></td>
+        <td><?php echo $classroom['Year']['title']; ?></td>
+        <td class="actions">
+            <?php echo $this->Html->link('<i class="icon-eye-open"></i> '.__('Voir'), array('controller' => 'classrooms', 'action' => 'view', $classroom['id']), array('escape'=>false)); ?>&nbsp;&nbsp;&nbsp;
+            <?php echo $this->Html->link('<i class="icon-pencil"></i> '.__('Modifier'), array('controller' => 'classrooms', 'action' => 'edit', $classroom['id']), array('escape'=>false)); ?>&nbsp;&nbsp;&nbsp;
+            <?php echo $this->Form->postLink('<i class="icon-trash"></i> '.__('Supprimer'), array('controller' => 'classrooms', 'action' => 'delete', $classroom['id']), array('escape'=>false), __('Are you sure you want to delete # %s?', $classroom['id'])); ?>
+        </td>
+    </tr>
+<?php endforeach; ?>
+</table>
+<?php endif; ?>
 
-
-
-
-<div class="modal fade hide" id="myModal">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">×</button>
-    <h3><?php echo __('Ajouter une période à cet établissement'); ?></h3>
-  </div>
-  <div class="modal-body">
-    <?php
-    echo $this->Form->create('Period', array(
-    	'url' => array('controller' => 'periods', 'action' => 'add'),
-        'class' => 'form-horizontal',
-        'inputDefaults' => array(
-            'format' => array('before', 'label', 'between', 'input', 'error', 'after'),
-            'div' => array('class' => 'control-group'),
-            'error' => array('attributes' => array('wrap' => 'span', 'class' => 'help-inline'))
-            )
-        )
-    );
-    
-    echo $this->Form->input('begin', array(
-        'class' => 'span2 startdate',
-        'type' => 'text',
-        'readonly' => 'readonly',
-        'prepend' => array('<i class="icon-calendar"></i>'),
-        'label' => array(
-            'text' => 'Date de début',
-            'class' => 'control-label'
-        )
-    )); 
-    
-    echo $this->Form->input('end', array(
-        'class' => 'span2 startdate',
-        'type' => 'text',
-        'readonly' => 'readonly',
-        'prepend' => array('<i class="icon-calendar"></i>'),
-        'label' => array(
-            'text' => 'Date de fin',
-            'class' => 'control-label'
-        )
-    ));  
-    
-    echo $this->Form->hidden('year_id', array('value' => $current_year));
-    echo $this->Form->hidden('establishment_id', array('value' => $establishment['Establishment']['id']));
-    
-    ?>
-    
-  </div>
-  <div class="modal-footer">
-    <?php echo $this->Form->button('Ajouter', array('type' => 'submit', 'class' => 'btn btn-success')); ?>
-  </div>
-  <?php echo $this->Form->end(); ?>
-</div>
-
-<div class="modal fade hide" id="defaultPeriod">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">×</button>
-        <h3><?php echo __('Modifier la période courante de l\'établissement'); ?></h3>
-    </div>
-    <div class="modal-body">
-        <?php
-        echo $this->Form->create('Establishment', array(
-                'url' => array('controller' => 'establishments', 'action' => 'setDefaultPeriod'),
-                'class' => 'form-horizontal',
+<!-- Modal addPeriod -->
+<div class="modal fade" id="addPeriod" tabindex="-1" role="dialog" aria-labelledby="addPeriodLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <?php
+            echo $this->Form->create('Period', array(
+                'url' => array('controller' => 'periods', 'action' => 'add'),
                 'inputDefaults' => array(
-                    'format' => array('before', 'label', 'between', 'input', 'error', 'after'),
-                    'div' => array('class' => 'control-group'),
-                    'error' => array('attributes' => array('wrap' => 'span', 'class' => 'help-inline'))
-                )
-            )
-        );
+                    'div' => 'form-group',
+                    'label' => array(
+                        'class' => 'col col-md-3 control-label'
+                    ),
+                    'readonly'=>'readonly',
+                    'beforeInput' => '<div class="input-group">',
+                    'afterInput' => '<span class="input-group-addon"><i class="icon-calendar"></i></span></div>',
+                    'wrapInput' => 'col col-md-4',
+                    'class' => 'form-control startdate'
+                ),
+                'class' => 'form-horizontal'
+            ));
+            ?>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="addPeriodLabel"><?php echo __('Ajouter une période à cet établissement'); ?></h4>
+            </div>
+            <div class="modal-body">
+                <?php
+                echo $this->Form->input('begin', array(
+                    'type' => 'text',
+                    'label' => array(
+                        'text' => 'Date de début'
+                    )
+                ));
 
-        foreach($establishment['Period'] as $period)
-        {
-            $tabperiods[$period['id']] = $period['wellnamed'];
-        }
+                echo $this->Form->input('end', array(
+                    'type' => 'text',
+                    'prepend' => array('<i class="icon-calendar"></i>'),
+                    'label' => array(
+                        'text' => 'Date de fin'
+                    )
+                ));
 
-        echo $this->Form->input('current_period_id', array(
-                'options' => $tabperiods,
-                'value' => $establishment['Establishment']['current_period_id'],
-                'label' => array(
-                    'text' => 'Période courante',
-                    'class' => 'control-label'
-                )
-            )
-        );
+                echo $this->Form->hidden('year_id', array('value' => $current_year));
+                echo $this->Form->hidden('establishment_id', array('value' => $establishment['Establishment']['id']));
 
-        echo $this->Form->hidden('establishment_id', array('value' => $establishment['Establishment']['id']));
+                ?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <?php echo $this->Form->button('Ajouter', array('type' => 'submit', 'class' => 'btn btn-success')); ?>
+            </div>
+        <?php echo $this->Form->end(); ?>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
-        ?>
+<!-- Modal defaultPeriod -->
+<div class="modal fade" id="defaultPeriod" tabindex="-1" role="dialog" aria-labelledby="defaultPeriodLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <?php
+            echo $this->Form->create('Establishment', array(
+                'url' => array('controller' => 'establishments', 'action' => 'setDefaultPeriod'),
+                'inputDefaults' => array(
+                    'div' => 'form-group',
+                    'label' => array(
+                        'class' => 'col col-md-3 control-label'
+                    ),
+                    'wrapInput' => 'col col-md-6',
+                    'class' => 'form-control'
+                ),
+                'class' => 'form-horizontal'
+            ));
+            ?>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="defaultPeriodLabel"><?php echo __('Modifier la période courante de l\'établissement'); ?></h4>
+            </div>
+            <div class="modal-body">
+                <?php
 
-    </div>
-    <div class="modal-footer">
-        <?php echo $this->Form->button('Modifier', array('type' => 'submit', 'class' => 'btn btn-primary')); ?>
-    </div>
-    <?php echo $this->Form->end(); ?>
-</div>
+                foreach($establishment['Period'] as $period)
+                {
+                    $tabperiods[$period['id']] = $period['wellnamed'];
+                }
+
+                echo $this->Form->input('current_period_id', array(
+                        'options' => $tabperiods,
+                        'value' => $establishment['Establishment']['current_period_id'],
+                        'label' => array(
+                            'text' => 'Période courante'
+                        )
+                    )
+                );
+
+                echo $this->Form->hidden('establishment_id', array('value' => $establishment['Establishment']['id']));
+
+                ?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <?php echo $this->Form->button('Modifier', array('type'=>'submit','class' => 'btn btn-primary')); ?>
+            </div>
+            <?php echo $this->Form->end(); ?>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

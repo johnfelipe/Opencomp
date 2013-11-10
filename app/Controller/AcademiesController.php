@@ -42,7 +42,7 @@ class AcademiesController extends AppController {
  * @param string $id
  * @return void
  */
-	public function admin_view($id = null) {
+	public function view($id = null) {
 	    $this->set('title_for_layout', __('Visualiser une académie'));
 		$this->Academy->id = $id;
 		if (!$this->Academy->exists()) {

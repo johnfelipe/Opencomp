@@ -5,7 +5,7 @@
     </div>
     
     <div class="row">
-        <div class="span6">
+        <div class="col-md-6">
     
         	<table class="table table-striped table-condensed">
             	<tr>
@@ -19,13 +19,15 @@
             		<td><?php echo h($academy['Academy']['name']); ?></td>
             		<td><?php if ($academy['Academy']['type'] == 0) {echo 'Académie';} else {echo 'Sous rectorat';} ?></td>
             		<td class="actions">
-            		    <?php echo $this->Html->link('<button class="btn btn-mini"><i class="icon-eye-open"></i> '.__('Voir').'</button>', array('action' => 'view', $academy['Academy']['id']), array('escape' => false)); ?>
+            		    <?php echo $this->Html->link('<button class="btn btn-default btn-xs"><i class="icon-eye-open"></i> '.__('Voir').'</button>', array('action' => 'view', $academy['Academy']['id']), array('escape' => false)); ?>
             		</td>
             	</tr>
         	<?php endforeach; ?>
         	</table>
-        	
-        	<?php echo $this->element('pagination'); ?>
+
+            <?php echo $this->Paginator->pagination(array(
+                'ul' => 'pagination'
+            )); ?>
         	
         </div>
     </div>

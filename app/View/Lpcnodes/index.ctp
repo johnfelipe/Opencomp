@@ -1,11 +1,9 @@
 <div class="page-title">
     <h2><?php echo __('Livret Personnel de Compétences').' <small>Basé sur le socle commun de connaissances et de compétences</small>'; ?></h2>
-    <div class="btn-toolbar">
-		<div class="btn-group ontitle">
-			<?php echo $this->Html->link('<i class="icon-resize-full"></i> '.__('Déplier l\'arbre'), '#', array('class' => 'btn', 'escape' => false, 'onclick' => "$('#demo1').jstree('open_all', -1, true);")); ?>
-			<?php echo $this->Html->link('<i class="icon-resize-small"></i> '.__('Replier l\'arbre'), '#', array('class' => 'btn', 'escape' => false, 'onclick' => "$('#demo1').jstree('close_all', -1, true);")); ?>
-		</div>
-	</div>
+    <div class="btn-group ontitle">
+        <?php echo $this->Html->link('<i class="icon-resize-full"></i> '.__('Déplier l\'arbre'), '#', array('class' => 'btn btn-default', 'escape' => false, 'onclick' => "$('#demo1').jstree('open_all', -1, true);")); ?>
+        <?php echo $this->Html->link('<i class="icon-resize-small"></i> '.__('Replier l\'arbre'), '#', array('class' => 'btn btn-default', 'escape' => false, 'onclick' => "$('#demo1').jstree('close_all', -1, true);")); ?>
+    </div>
 </div>
 
 <?php if(AuthComponent::user('role') !== 'admin'){ ?>

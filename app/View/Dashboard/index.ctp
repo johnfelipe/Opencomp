@@ -3,29 +3,29 @@
 </div>
 
 <div class="row-fluid">
-    <div class="span4">
+    <div class="col-md-4">
     	<div class="well">
 	    	<?php echo $this->Html->image('logo-opencomp.png', array('style' => 'height:100px; float: left;','alt' => 'Logo Opencomp')); ?>
 	    	<div style="margin-top:25px; margin-bottom:20px;">Vous trouverez dans cette page l'essentiel pour vous permettre de démarrer rapidement avec Opencomp !</div>
     	</div>
     </div>
-    <div class="span2">
-    	<div class="well" style="height:105px;">
+    <div class="col-md-2">
+    	<div class="well" style="height:136px;">
 	    	<?php echo $this->Html->image('logo-opencomp.png', array('style' => 'height:100px; opacity:0.04; margin-left:15px; float: left;','alt' => 'Logo Opencomp')); ?>
     	</div>
     </div>
-    <div class="span2">
-    	<div class="well" style="height:105px;">
+    <div class="col-md-2">
+    	<div class="well" style="height:136px;">
 	    	<?php echo $this->Html->image('logo-opencomp.png', array('style' => 'height:100px; opacity:0.06; margin-left:15px; float: left;','alt' => 'Logo Opencomp')); ?>
     	</div>
     </div>
-    <div class="span2">
-    	<div class="well" style="height:105px;">
+    <div class="col-md-2">
+    	<div class="well" style="height:136px;">
 	    	<?php echo $this->Html->image('logo-opencomp.png', array('style' => 'height:100px; opacity:0.08; margin-left:15px; float: left;','alt' => 'Logo Opencomp')); ?>
     	</div>
     </div>
-    <div class="span2">
-    	<div class="well" style="height:105px;">
+    <div class="col-md-2">
+    	<div class="well" style="height:136px;">
 	    	<?php echo $this->Html->image('logo-opencomp.png', array('style' => 'height:100px; opacity:0.1; margin-left:15px; float: left;','alt' => 'Logo Opencomp')); ?>
     	</div>
     </div>
@@ -34,15 +34,15 @@
 <?php if(!empty($classrooms)):
 	foreach($classrooms as $classroom): ?>
 
-<div class="row-fluid page-title">
-	<h3 style='font-family: "Titillium Web",Helvetica,Arial,sans-serif;'>
+<div class="page-title">
+	<h3>
     	<?php echo $classroom['Classroom']['title'] ?> à <?php echo $classroom['Establishment']['name'] ?>
     </h3>
 </div>
-<div class="row-fluid">
-	<div class="span4">		   	
-    	<div class="row-fluid">
-	    	<div class="span6">
+<div class="row">
+	<div class="col-md-4">
+    	<div class="row">
+	    	<div class="col-md-6">
 	    		<?php echo $this->Html->link('<i class="icon-user"></i> '.__('Voir les élèves'), 
 	    		array(
     				'controller' => 'classrooms', 
@@ -50,11 +50,11 @@
     				$classroom['Classroom']['id']
     			), 
     			array(
-    				'class' => 'btn btn-large btn-block', 
+    				'class' => 'btn btn-default btn-large btn-block',
     				'escape' => false
     			)); ?>
     		</div>		    	
-	    	<div class="span6">
+	    	<div class="col-md-6">
 	    		<?php echo $this->Html->link('<i class="icon-file-alt"></i> '.__('Voir les bulletins'),
 	    		array(
 		    		'controller' => 'classrooms',
@@ -62,14 +62,14 @@
 		    		$classroom['Classroom']['id']
 	    		), 
 	    		array(
-		    		'class' => 'btn btn-large btn-block', 
+		    		'class' => 'btn btn-default btn-large btn-block',
 		    		'style'=>'font-weight:normal; margin-bottom:10px;', 
 		    		'escape' => false
 	    		)); ?>
 	    	</div>
 	    </div>		    
-	    <div class="row-fluid">
-	    	<div class="span6">
+	    <div class="row">
+	    	<div class="col-md-6">
 	    		<?php echo $this->Html->link('<i class="icon-eye-open"></i> '.__('Voir les évaluations'), 
 	    		array(
 		    		'controller' => 'classrooms', 
@@ -77,12 +77,12 @@
 		    		$classroom['Classroom']['id']
 	    		), 
 	    		array(
-		    		'class' => 'btn btn-large btn-block', 
+		    		'class' => 'btn btn-default btn-large btn-block',
 		    		'escape' => false
 	    		)); ?>
 	    	</div>
 	    	
-	    	<div class="span6">
+	    	<div class="col-md-6">
 		    	<?php echo $this->Html->link('<i class="icon-plus"></i> '.__('Nouvelle évaluation'), 
 		    	array(
 			    	'controller' => 'evaluations', 
@@ -122,8 +122,8 @@
 			}
 		endforeach;?>
 		<?php if(count($lines) > 0): ?>
-		<div class="span8">
-		<div class="alert alert-error">
+		<div class="col-md-8">
+		<div class="alert-danger alert">
 		  <h4 style='margin-bottom:10px;'><i class="icon-pushpin"></i><strong> Des éléments nécessitent votre attention !</strong></h4>
 		  <ul>
 		  	<?php foreach($lines as $line){
@@ -133,7 +133,7 @@
 		  </ul>
 		</div>
 		<?php else: ?>
-		<div class="span8">
+		<div class="col-md-8">
 		<div class="alert alert-success">
 		  <p class="lead" style="margin-bottom:0px;"><i class="icon-ok"></i> Tous les vérifications automatiques ont réussi ;)</p>
 		</div>

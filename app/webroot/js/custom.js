@@ -9,7 +9,8 @@ $(document).ready(function() {
     $('.startdate').datepicker({
         weekStart: 1,
         format: 'yyyy-mm-dd',
-        language: 'fr'
+        language: 'fr-FR',
+        autoclose: true
     })
     
     $(".tab2").click(function (e) {

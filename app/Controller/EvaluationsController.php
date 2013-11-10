@@ -7,6 +7,52 @@ App::uses('AppController', 'Controller');
  */
 class EvaluationsController extends AppController {
 
+    /**
+     * Fonction permettant de déterminer les droits d'accès à une évaluation
+     *
+     * @param null $user
+     * @return bool
+     */
+    public function isAuthorized($user = null) {
+        if(isset($this->request['pass'][0])){
+            //$this->request['pass'][0] correspond a l'id de l'évaluation passé
+            $this->Evaluation->id = $this->request['pass'][0];
+
+            //Vérification de l'existance de l'évaluation avant de continuer
+            if ($this->Evaluation->exists()) {
+                //L'administrateur a toujours accès
+                if($user['role'] === 'admin'){
+                    return true;
+                }else{
+                    //On désactive la récupération des enregistrements associés
+                    //et on charge les informations de l'évaluation courante.
+                    $this->Evaluation->recursive = -1;
+                    $current_record = $this->Evaluation->read(array('classroom_id','user_id'));
+
+                    //Classe pour lesquelles l'utilisateur courant est titulaire
+                    $classrooms_manager = $this->Session->read('Authorized')['classrooms_manager'];
+
+                    //Si l'utilisateur est propriétaire de l'évaluation ou s'il est titulaire de la classe
+                    //dans laquelle l'évaluation a été créé, alors on donne l'autorisation d'accès.
+                    if( ($current_record['Evaluation']['user_id'] == $user['id']) ||
+                        in_array($current_record['Evaluation']['classroom_id'],$classrooms_manager) ){
+                        return true;
+                    }
+                }
+            }
+        }else{
+            //Si on a fourni le paramètre classroom_id
+            if(isset($this->request->params['named']['classroom_id'])) {
+                $classroom_id = intval($this->request->params['named']['classroom_id']);
+                $this->Evaluation->Classroom->id = $classroom_id;
+                $classrooms = $this->Session->read('Authorized')['classrooms'];
+                if ($this->Evaluation->Classroom->exists() && in_array($classroom_id,$classrooms)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
 /**
  * view method
@@ -17,9 +63,6 @@ class EvaluationsController extends AppController {
  */
 	public function attacheditems($id = null) {
 		$this->Evaluation->id = $id;
-		if (!$this->Evaluation->exists()) {
-			throw new NotFoundException(__('Invalid evaluation'));
-		}
 		$this->Evaluation->contain(array('User', 'Period', 'Classroom', 'Pupil.first_name', 'Pupil.name'));
 		$evaluation = $this->Evaluation->findById($id);		
 		$this->set('evaluation', $evaluation);
@@ -32,9 +75,6 @@ class EvaluationsController extends AppController {
 	
 	public function manageresults($id = null) {
 		$this->Evaluation->id = $id;
-		if (!$this->Evaluation->exists()) {
-			throw new NotFoundException(__('Invalid evaluation'));
-		}
 		$this->Evaluation->contain(array('User', 'Period', 'Classroom', 'Pupil.Result.evaluation_id = '.$id, 'Item'));
 		$evaluation = $this->Evaluation->findById($id);
 		$result = $this->Evaluation->resultsForAnEvaluation($id);
@@ -48,18 +88,11 @@ class EvaluationsController extends AppController {
  * @return void
  */
 	public function add() {
-		//On vérifie qu'un paramètre nommé classroom_id a été fourni et qu'il existe.
-		if(isset($this->request->params['named']['classroom_id'])) {
-       		$classroom_id = intval($this->request->params['named']['classroom_id']);
-       		$this->set('classroom_id', $classroom_id);
-       		$this->Evaluation->Classroom->id = $classroom_id;
-			if (!$this->Evaluation->Classroom->exists()) {
-				throw new NotFoundException(__('The classroom_id provided does not exist !'));
-			}
-		} else {
-			throw new NotFoundException(__('You must provide a classroom_id in order to add a test to this classroom !'));
-		}
-		
+
+        $classroom_id = intval($this->request->params['named']['classroom_id']);
+        $this->Evaluation->Classroom->id = $classroom_id;
+        $this->set('classroom_id', intval($classroom_id));
+
 		if ($this->request->is('post')) {
 			$this->Evaluation->create();
 			if ($this->Evaluation->save($this->request->data)) {
@@ -105,9 +138,6 @@ class EvaluationsController extends AppController {
  */
 	public function edit($id = null) {
 		$this->Evaluation->id = $id;
-		if (!$this->Evaluation->exists()) {
-			throw new NotFoundException(__('Invalid evaluation'));
-		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Evaluation->save($this->request->data)) {
 				$this->Session->setFlash(__('L\'évaluation a été correctement mise à jour.'), 'flash_success');
@@ -157,9 +187,6 @@ class EvaluationsController extends AppController {
 			throw new MethodNotAllowedException();
 		}
 		$this->Evaluation->id = $id;
-		if (!$this->Evaluation->exists()) {
-			throw new NotFoundException(__('Invalid evaluation'));
-		}
 		$classroom_id = $this->Evaluation->read('Evaluation.classroom_id', $id);
 		if ($this->Evaluation->delete()) {
 			$this->Session->setFlash(__("L'évaluation a été correctement supprimée"), 'flash_success');

@@ -7,6 +7,41 @@ App::uses('AppController', 'Controller');
  */
 class ClassroomsController extends AppController {
 
+    /**
+     * Fonction permettant de déterminer les droits d'accès à une classe
+     *
+     * @param null $user
+     * @return bool
+     */
+    public function isAuthorized($user = null) {
+        if(isset($this->request['pass'][0])){
+            //Vérification de l'existance de la classe
+            $this->Classroom->id = $this->request['pass'][0];
+            if (!$this->Classroom->exists()) {
+                return false;
+            //L'administrateur a toujours accès
+            }elseif($user['role'] === 'admin'){
+                return true;
+            }else{
+                //La classe courante est elle dans les classe pour lesquelle l'accès est autorisé à l'utilisateur ?
+                return in_array($this->Classroom->id, $this->Session->read('Authorized')['classrooms']);
+            }
+        }else{
+            //Si on a fourni le paramètre establishment_id
+            if(isset($this->request->params['named']['establishment_id'])) {
+                $establishment_id = intval($this->request->params['named']['establishment_id']);
+                $this->Classroom->Establishment->id = $establishment_id;
+
+                if ($this->Classroom->Establishment->exists()) {
+                    $current_record = $this->Classroom->Establishment->read(array('user_id'));
+                    if( ($current_record['Establishment']['user_id'] == $user['id']) || ($user['role'] === 'admin') )
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
+
 /**
  * view method
  *
@@ -17,9 +52,6 @@ class ClassroomsController extends AppController {
 	public function view($id = null) {
 		$this->set('title_for_layout', __('Visualiser une classe'));
 		$this->Classroom->id = $id;
-		if (!$this->Classroom->exists()) {
-			throw new NotFoundException(__('The classroom_id provided does not exist !'));
-		}
 		$classroom = $this->Classroom->find('first', array(
 			'conditions' => array('Classroom.id' => $id)
 		));
@@ -53,10 +85,7 @@ class ClassroomsController extends AppController {
 	public function viewtests($id = null){
 		$this->set('title_for_layout', __('Visualiser une classe'));
 		$this->Classroom->id = $id;
-		if (!$this->Classroom->exists()) {
-			throw new NotFoundException(__('The classroom_id provided does not exist !'));
-		}
-		
+
 		$this->Classroom->contain(array('Establishment.current_period_id'));
 		$current_period = $this->Classroom->findById($id, 'Establishment.current_period_id');
 		$current_period = $current_period['Establishment']['current_period_id'];
@@ -111,9 +140,7 @@ class ClassroomsController extends AppController {
 	public function viewunrateditems($id = null){
 		$this->set('title_for_layout', __('Visualiser une classe'));
 		$this->Classroom->id = $id;
-		if (!$this->Classroom->exists()) {
-			throw new NotFoundException(__('The classroom_id provided does not exist !'));
-		}
+
 		$this->Classroom->contain(array('Evaluation.created DESC', 'Evaluation.unrated=1', 'Evaluation.Item', 'Evaluation.Period', 'User', 'Establishment', 'Year'));
 		$classroom = $this->Classroom->find('first', array(
 			'conditions' => array('Classroom.id' => $id)
@@ -130,9 +157,7 @@ class ClassroomsController extends AppController {
 	public function viewreports($id = null) {
 		$this->set('title_for_layout', __('Bulletins d\'une classe'));
 		$this->Classroom->id = $id;
-		if (!$this->Classroom->exists()) {
-			throw new NotFoundException(__('The classroom_id provided does not exist !'));
-		}
+
 		$this->Classroom->contain(array('User', 'Establishment', 'Year', 'Report'));
 		$classroom = $this->Classroom->find('first', array(
 			'conditions' => array('Classroom.id' => $id)
@@ -191,9 +216,7 @@ class ClassroomsController extends AppController {
 	public function edit($id = null) {
 		$this->set('title_for_layout', __('Modifier une classe'));
 		$this->Classroom->id = $id;
-		if (!$this->Classroom->exists()) {
-			throw new NotFoundException(__('The classroom_id provided does not exist !'));
-		}
+
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Classroom->save($this->request->data)) {
 				$this->Session->setFlash(__('La classe a été correctement mise à jour'), 'falsh_success');
@@ -227,9 +250,7 @@ class ClassroomsController extends AppController {
 			throw new MethodNotAllowedException();
 		}
 		$this->Classroom->id = $id;
-		if (!$this->Classroom->exists()) {
-			throw new NotFoundException(__('The classroom_id provided does not exist !'));
-		}
+
 		if ($this->Classroom->delete()) {
 			$this->Session->setFlash(__('Classroom deleted'));
 			$this->redirect(array('action' => 'index'));

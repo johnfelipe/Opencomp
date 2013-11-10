@@ -240,5 +240,32 @@ class User extends AppModel {
         
         return($result);
 	}
+	
+	public function findAuthorizedClasses($user_id){
+		$result['classrooms'] = array();
+
+        $titulaire = $this->Classroom->find('all', array(
+			'fields' => 'id',
+			'recursive' => 0,
+			'conditions' => array('Classroom.user_id' => $user_id)
+		));
+		
+		foreach($titulaire as $info){
+		    $result['classrooms'][] = $info['Classroom']['id'];
+            $result['classrooms_manager'][] = $info['Classroom']['id'];
+		}
+		
+		$intervenants = $this->ClassroomsUser->find('all', array(
+			'fields' => 'classroom_id',
+			'recursive' => 0,
+			'conditions' => array('user_id' => $user_id)
+		));
+		
+		foreach($intervenants as $info){
+		    $result['classrooms'][] = $info['ClassroomsUser']['classroom_id'];
+		}
+
+		return $result;
+	}
 
 }

@@ -60,8 +60,8 @@
         	<table class="table table-striped table-condensed">
         	<tr>
         		<th><?php echo __('Nom de l\'établissement'); ?></th>
-        		<th><?php echo __('Postcode'); ?></th>
-        		<th><?php echo __('Town'); ?></th>
+        		<th><?php echo __('Code postal'); ?></th>
+        		<th><?php echo __('Ville'); ?></th>
         		<th class="actions"><?php echo __('Actions'); ?></th>
         	</tr>
         	<?php
@@ -72,8 +72,8 @@
         			<td><?php echo $establishment['postcode']; ?></td>
         			<td><?php echo $establishment['town']; ?></td>
         			<td class="actions">
-        			     <?php echo $this->Html->link('<i class="icon-eye-open"></i> '.__('Voir'), array('controller' => 'establishments', 'action' => 'view', $establishment['id']), array('escape' => false)); ?> &nbsp;
-        			     <?php echo $this->Html->link('<i class="icon-pencil"></i> '.__('Éditer'), array('controller' => 'establishments', 'action' => 'edit', $establishment['id']), array('escape' => false)); ?>
+        			     <?php echo $this->Html->link('<i class="icon-eye-open"></i> '.__('Voir'), array('controller' => 'establishments', 'action' => 'view', 'headmaster'=>true, $establishment['id']), array('escape' => false)); ?> &nbsp;
+        			     <?php echo $this->Html->link('<i class="icon-pencil"></i> '.__('Éditer'), array('controller' => 'establishments', 'action' => 'edit', 'headmaster'=>true, $establishment['id']), array('escape' => false)); ?>
         			</td>
         		</tr>
         	<?php endforeach; ?>

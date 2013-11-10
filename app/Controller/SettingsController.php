@@ -7,7 +7,7 @@ App::uses('AppController', 'Controller');
  */
 class SettingsController extends AppController {
 
-	public function index(){
+	public function admin_index(){
 	
 		$this->loadModel('Year');	
 		$years = $this->Year->find('list');

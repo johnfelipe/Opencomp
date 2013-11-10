@@ -32,7 +32,13 @@ App::uses('Controller', 'Controller');
  * @link http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-    public $components = array('DebugKit.Toolbar', 'Session', 'Auth');
+    public $components = array(
+    	'DebugKit.Toolbar', 
+    	'Session', 
+    	'Auth' => array(
+    		'authorize' => 'Controller'
+    	)
+    );
     public $helpers = array(
     	'Utils',
     	'Html' => array('className' => 'TwitterBootstrap.BootstrapHtml'),
@@ -40,7 +46,23 @@ class AppController extends Controller {
         'Paginator' => array('className' => 'TwitterBootstrap.BootstrapPaginator')
     );
     
-    function beforeFilter(){
+    public function isAuthorized($user = null) {
+        // Chacun des utilisateur enregistré peut accéder aux fonctions publiques
+        if (empty($this->request->params['admin']))
+       	{
+            return true;
+        }
+
+        // Seulement les administrateurs peuvent accéder aux fonctions d'administration
+        if (isset($this->request->params['admin'])) {
+            return (bool)($user['role'] === 'admin');
+        }
+
+        // Par défaut n'autorise pas
+        return false;
+    }
+    
+    public function beforeFilter(){
     	$this->Auth->flash['element'] = "flash_error";
     	$this->Auth->authError = "Vous n'êtes pas autorisé à accéder à cette page !";
     	

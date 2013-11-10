@@ -31,7 +31,7 @@ class LpcnodesController extends AppController {
         $this->set('stuff', $stuff); 
 	}
 
-	public function moveup($id = null) {
+	public function admin_moveup($id = null) {
 	    $this->Lpcnode->id = $id;
 	    if (!$this->Lpcnode->exists()) {
 	       throw new NotFoundException(__('Ce noeud n\'existe pas ;)'));
@@ -41,7 +41,7 @@ class LpcnodesController extends AppController {
 	    $this->redirect(array('action' => 'index'));
 	}
 	
-	public function movedown($id = null) {
+	public function admin_movedown($id = null) {
 	    $this->Lpcnode->id = $id;
 	    if (!$this->Lpcnode->exists()) {
 	       throw new NotFoundException(__('Ce noeud n\'existe pas ;)'));
@@ -51,7 +51,7 @@ class LpcnodesController extends AppController {
 	    $this->redirect(array('action' => 'index'));
 	}
 	
-	public function deleteNode($id = null) {
+	public function admin_deleteNode($id = null) {
 	    $this->Lpcnode->id = $id;
 	    if (!$this->Lpcnode->exists()) {
 	       throw new NotFoundException(__('Ce noeud n\'existe pas ;)'));
@@ -66,7 +66,7 @@ class LpcnodesController extends AppController {
  *
  * @return void
  */
-	public function add($id = null) {
+	public function admin_add($id = null) {
 		$this->set('title_for_layout', __('Ajouter un noeud au Livret Personnel de Compétences'));
 		if ($this->request->is('post')) {
 			$this->Lpcnode->create();
@@ -87,18 +87,6 @@ class LpcnodesController extends AppController {
 		
 		//Récupération des ids des catégories existantes	
 		$competenceids = $this->Lpcnode->generateTreeList(null, null, null, "");
-		/*foreach ($competenceids as $key => $value) {
-		    $models = $this->Lpcnode->getPath($key);
-		    $path = '';
-		    foreach ($models as $model) {
-		        $path .= $model['Lpcnode']['title'] . ' > ';
-			}
-		    $path = substr($path, 0, strlen($path) - 3); // strip of last ' > '
-		    $competenceids[$key] = $path;
-		}	*/	
 		$this->set('cid', $competenceids);
-		
 	}
-
-
 }

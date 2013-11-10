@@ -37,6 +37,7 @@ class UsersController extends AppController {
 						 $yubiauth = @$yubi->verify($otp);
 						  if ($yubiauth === TRUE) {
 						  	$this->Auth->login();
+                            $this->setAuthorizedClassroomsId();
 							return $this->redirect($this->Auth->redirect());
 						  } else {
 						    $this->Session->setFlash("YubikeyOTP invalide !", "flash_error");
@@ -46,12 +47,17 @@ class UsersController extends AppController {
 					}
 				}else{
 					$this->Auth->login();
+                    $this->setAuthorizedClassroomsId();
 					return $this->redirect($this->Auth->redirect());
 				}
 			}else{
 				$this->Session->setFlash("Votre login ou votre mot de passe ne correspond pas !", "flash_error"); 
 			}				
 		}
+	}
+	
+	public function setAuthorizedClassroomsId(){
+        $this->Session->write('Authorized',$this->User->findAuthorizedClasses($this->Auth->user('id')));
 	}
 	
 	public function logout(){
@@ -65,7 +71,7 @@ class UsersController extends AppController {
  *
  * @return void
  */
-	public function index() {
+	public function admin_index() {
 		$this->User->recursive = 0;
 		$this->set('users', $this->paginate());
 	}
@@ -91,7 +97,7 @@ class UsersController extends AppController {
  *
  * @return void
  */
-	public function add() {
+	public function admin_add() {
 	    $this->set('title_for_layout', __('Ajouter un utilisateur'));
 		if ($this->request->is('post')) {
 			$this->User->create();
@@ -116,7 +122,7 @@ class UsersController extends AppController {
  * @param string $id
  * @return void
  */	
-	public function edit($id = null) {
+	public function admin_edit($id = null) {
 	    $this->set('title_for_layout', __('Modifier un utilisateur'));
 		$this->User->id = $id;
 		if (!$this->User->exists()) {
@@ -147,7 +153,7 @@ class UsersController extends AppController {
  * @param string $id
  * @return void
  */
-	public function delete($id = null) {
+	public function admin_delete($id = null) {
 		if (!$this->request->is('post')) {
 			throw new MethodNotAllowedException();
 		}

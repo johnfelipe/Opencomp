@@ -8,6 +8,7 @@
 	echo $this->Html->link(
 		'<i class="icon-arrow-up"></i>', 
 		array(
+            'admin' => true,
 			'controller' => 'lpcnodes', 
 			'action' => 'moveup',
 			$id
@@ -20,6 +21,7 @@
 	echo $this->Html->link(
 		' <i class="icon-arrow-down"></i>', 
 		array(
+            'admin' => true,
 			'controller' => 'lpcnodes', 
 			'action' => 'movedown',
 			$id
@@ -37,6 +39,7 @@
 	echo $this->Html->link(
 		' <i class="icon-plus"></i> '.__('créer une nouvelle compétence dans ').$data['Lpcnode']['title'], 
 		array(
+            'admin' => true,
 			'controller' => 'lpcnodes', 
 			'action' => 'add',
 			$id

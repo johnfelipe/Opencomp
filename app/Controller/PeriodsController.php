@@ -8,31 +8,6 @@ App::uses('AppController', 'Controller');
 class PeriodsController extends AppController {
 
 /**
- * index method
- *
- * @return void
- */
-	public function index() {
-		$this->Period->recursive = 0;
-		$this->set('periods', $this->paginate());
-	}
-
-/**
- * view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function view($id = null) {
-		$this->Period->id = $id;
-		if (!$this->Period->exists()) {
-			throw new NotFoundException(__('Invalid period'));
-		}
-		$this->set('period', $this->Period->read(null, $id));
-	}
-
-/**
  * add method
  *
  * @return void

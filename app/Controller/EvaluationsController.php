@@ -43,6 +43,9 @@ class EvaluationsController extends AppController {
         }else{
             //Si on a fourni le paramètre classroom_id
             if(isset($this->request->params['named']['classroom_id'])) {
+                if($user['role'] === 'admin'){
+                    return true;
+                }
                 $classroom_id = intval($this->request->params['named']['classroom_id']);
                 $this->Evaluation->Classroom->id = $classroom_id;
                 $classrooms = $this->Session->read('Authorized')['classrooms'];
@@ -62,6 +65,8 @@ class EvaluationsController extends AppController {
  * @return void
  */
 	public function attacheditems($id = null) {
+        $this->set('title_for_layout', __('Détails d\'une évaluation'));
+
 		$this->Evaluation->id = $id;
 		$this->Evaluation->contain(array('User', 'Period', 'Classroom', 'Pupil.first_name', 'Pupil.name'));
 		$evaluation = $this->Evaluation->findById($id);		
@@ -88,6 +93,7 @@ class EvaluationsController extends AppController {
  * @return void
  */
 	public function add() {
+        $this->set('title_for_layout', __('Ajouter une évaluation'));
 
         $classroom_id = intval($this->request->params['named']['classroom_id']);
         $this->Evaluation->Classroom->id = $classroom_id;
@@ -120,9 +126,15 @@ class EvaluationsController extends AppController {
 		$this->Evaluation->Classroom->contain(array('Establishment.current_period_id'));
 		$current_period = $this->Evaluation->Classroom->findById($classroom_id, 'Establishment.current_period_id');
 		$current_period = $current_period['Establishment']['current_period_id'];
+
+        $this->loadModel('Setting');
+        $currentYear = $this->Setting->find('first', array('conditions' => array('Setting.key' => 'currentYear')));
 		
 		$periods = $this->Evaluation->Period->find('list', array(
-			'conditions' => array('establishment_id' => $etab['Classroom']['establishment_id']),
+			'conditions' => array(
+                'establishment_id' => $etab['Classroom']['establishment_id'],
+                'year_id' => $currentYear['Setting']['value'],
+            ),
 			'recursive' => 0));
 		
 		$pupils = $this->Evaluation->findPupilsByLevelsInClassroom($classroom_id);
@@ -137,6 +149,8 @@ class EvaluationsController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
+        $this->set('title_for_layout', __('Modifier une évaluation'));
+
 		$this->Evaluation->id = $id;
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Evaluation->save($this->request->data)) {

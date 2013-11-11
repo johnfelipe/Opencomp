@@ -193,10 +193,16 @@ class ResultsController extends AppController {
 				'Evaluation.Classroom.id'
 			)
 		));
-		
+
 		foreach($ReqPupils as $pupils){
 			$pup[] = $pupils['Pupil']['id'];
 		}
+
+        if(!isset($pup)){
+            $this->Session->setFlash(__('Aucun résultat saisi pour la/les période(s) configurée(s). Génération annulée !'), 'flash_error');
+            $this->redirect(array('controller' => 'classrooms', 'action' => 'viewreports', $report['Classroom']['id']));
+        }
+
 		$pup = array_values(array_unique($pup));
 		$nbpup = count($pup);
 		foreach($pup as $ind => $id){

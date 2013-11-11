@@ -4,28 +4,28 @@
 
 <div class="row-fluid">
     <div class="col-md-4">
-    	<div class="well">
+    	<div class="well" style="height:157px;">
 	    	<?php echo $this->Html->image('logo-opencomp.png', array('style' => 'height:100px; float: left;','alt' => 'Logo Opencomp')); ?>
 	    	<div style="margin-top:25px; margin-bottom:20px;">Vous trouverez dans cette page l'essentiel pour vous permettre de démarrer rapidement avec Opencomp !</div>
     	</div>
     </div>
     <div class="col-md-2">
-    	<div class="well" style="height:136px;">
+    	<div class="well" style="height:157px;">
 	    	<?php echo $this->Html->image('logo-opencomp.png', array('style' => 'height:100px; opacity:0.04; margin-left:15px; float: left;','alt' => 'Logo Opencomp')); ?>
     	</div>
     </div>
     <div class="col-md-2">
-    	<div class="well" style="height:136px;">
+    	<div class="well" style="height:157px;">
 	    	<?php echo $this->Html->image('logo-opencomp.png', array('style' => 'height:100px; opacity:0.06; margin-left:15px; float: left;','alt' => 'Logo Opencomp')); ?>
     	</div>
     </div>
     <div class="col-md-2">
-    	<div class="well" style="height:136px;">
+    	<div class="well" style="height:157px;">
 	    	<?php echo $this->Html->image('logo-opencomp.png', array('style' => 'height:100px; opacity:0.08; margin-left:15px; float: left;','alt' => 'Logo Opencomp')); ?>
     	</div>
     </div>
     <div class="col-md-2">
-    	<div class="well" style="height:136px;">
+    	<div class="well" style="height:157px;">
 	    	<?php echo $this->Html->image('logo-opencomp.png', array('style' => 'height:100px; opacity:0.1; margin-left:15px; float: left;','alt' => 'Logo Opencomp')); ?>
     	</div>
     </div>

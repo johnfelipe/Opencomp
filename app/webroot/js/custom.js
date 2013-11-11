@@ -32,14 +32,14 @@ $(document).ready(function() {
       event.preventDefault();
       var classe= $(event.delegateTarget).val(); 
       $('optgroup[label='+classe+']').children().attr('selected', 'selected');
-      $("#PupilPupil").trigger("liszt:updated");
+      $("#PupilPupil").trigger("chosen:updated");
     })
     
     $(".unselectPupils").click(function(event){
       event.preventDefault();
       var classe= $(event.delegateTarget).val(); 
       $('optgroup[label='+classe+'] > option[selected=selected]').removeAttr('selected');
-      $("#PupilPupil").trigger("liszt:updated");
+      $("#PupilPupil").trigger("chosen:updated");
     })
     
     $("#demo1").jstree({ 

@@ -8,6 +8,7 @@ app/tmp/cache/persistent/myapp_cake*
 .PHPEditProject
 Opencomp.esproj/
 app/webroot/files
+app/composer.phar
 .idea/
 app/Vendor/*
 app/Plugin

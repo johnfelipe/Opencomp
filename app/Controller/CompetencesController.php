@@ -60,7 +60,8 @@ class CompetencesController extends AppController {
 	}
 	
 	public function attachitem() {
-		
+        $this->set('title_for_layout', __('Associer un item à une évaluation'));
+
 		//On vérifie qu'un paramètre nommé classroom_id a été fourni et qu'il existe.
 		if(isset($this->request->params['named']['evaluation_id'])) {
        		$evaluation_id = intval($this->request->params['named']['evaluation_id']);
@@ -86,6 +87,8 @@ class CompetencesController extends AppController {
     }
     
     public function attachunrateditem() {
+        $this->set('title_for_layout', __('Associer un item à une évaluation'));
+
 	    if($this->request->is('post') && is_numeric($this->request->data['Classroom']['period_id'])){
 		    $this->Competence->contain('Item.Level.title', 'ChildCompetence');
 	        $stuff = $this->Competence->find('all',  

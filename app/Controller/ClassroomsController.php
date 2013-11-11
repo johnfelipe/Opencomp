@@ -86,6 +86,9 @@ class ClassroomsController extends AppController {
 		$this->set('title_for_layout', __('Visualiser une classe'));
 		$this->Classroom->id = $id;
 
+        if(isset($this->request->params['named']['periods']) && $this->request->params['named']['periods'] == 'all')
+            $this->set('all', 'all');
+
 		$this->Classroom->contain(array('Establishment.current_period_id'));
 		$current_period = $this->Classroom->findById($id, 'Establishment.current_period_id');
 		$current_period = $current_period['Establishment']['current_period_id'];
@@ -146,9 +149,15 @@ class ClassroomsController extends AppController {
 			'conditions' => array('Classroom.id' => $id)
 		));
 		$this->set('classroom', $classroom);
+
+        $this->loadModel('Setting');
+        $currentYear = $this->Setting->find('first', array('conditions' => array('Setting.key' => 'currentYear')));
 		
 		$periods = $this->Classroom->Evaluation->Period->find('list', array(
-			'conditions' => array('establishment_id' => $classroom['Classroom']['establishment_id']),
+			'conditions' => array(
+                'establishment_id' => $classroom['Classroom']['establishment_id'],
+                'year_id' => $currentYear['Setting']['value']
+            ),
 			'recursive' => 0));
 		$this->set('periods', $periods);
 			
@@ -219,7 +228,7 @@ class ClassroomsController extends AppController {
 
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Classroom->save($this->request->data)) {
-				$this->Session->setFlash(__('La classe a été correctement mise à jour'), 'falsh_success');
+				$this->Session->setFlash(__('La classe a été correctement mise à jour'), 'flash_success');
 				$this->redirect(array(
 				    'controller'    => 'classrooms',
 				    'action'        => 'view', $this->request->data['Classroom']['id']));

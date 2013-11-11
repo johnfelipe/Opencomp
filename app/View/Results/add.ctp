@@ -16,7 +16,17 @@
     </div>
 <?php endif;
 
-echo $this->Form->create('Results', array('class' => 'form-horizontal'));
+echo $this->Form->create('Results', array(
+    'inputDefaults' => array(
+        'div' => 'form-group',
+        'label' => array(
+            'class' => 'col col-md-2 control-label'
+        ),
+        'wrapInput' => 'col col-md-3',
+        'class' => 'form-control'
+    ),
+    'class' => 'form-horizontal'
+));
 
 
 foreach($items as $item){
@@ -25,25 +35,27 @@ foreach($items as $item){
 
     if(isset($manual)):
         echo $this->Form->input($item['Item']['id'], array(
-            'prepend' => '<i class="icon-keyboard"></i>',
-            'helpBlock' => $item['Item']['title'],
-            'class' => 'span1 result',
+            'wrapInput' => 'col col-md-2',
+            'beforeInput' => '<div class="input-group"><span class="input-group-addon"><i class="icon-keyboard"></i></span>',
+            'afterInput' => '</div>',
+            'after' => '<div class="help-block">'.$item['Item']['title'].'</div>',
+            'class' => 'form-control result',
             'value' => $results[$item['Item']['id']],
             'label' => array(
-                'text' => 'Résultat item '.($item['EvaluationsItem']['position']),
-                'class' => 'control-label'
+                'text' => 'Résultat item '.($item['EvaluationsItem']['position'])
             )
         ));
     else:
         echo $this->Form->input($item['Item']['id'], array(
-        'prepend' => '<i class="icon-barcode"></i>',
-        'helpBlock' => $item['Item']['title'],
-        'class' => 'span1 result',
-        'value' => $results[$item['Item']['id']],
-        'label' => array(
-        'text' => 'Résultat item '.($item['EvaluationsItem']['position']),
-        'class' => 'control-label'
-        )
+            'wrapInput' => 'col col-md-2',
+            'beforeInput' => '<div class="input-group"><span class="input-group-addon"><i class="icon-barcode"></i></span>',
+            'afterInput' => '</div>',
+            'after' => '<div class="help-block">'.$item['Item']['title'].'</div>',
+            'class' => 'form-control result',
+            'value' => $results[$item['Item']['id']],
+            'label' => array(
+                'text' => 'Résultat item '.($item['EvaluationsItem']['position'])
+            )
         ));
     endif;
 }

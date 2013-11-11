@@ -5,15 +5,26 @@
 
 <?php
 
-echo $this->Form->create('Result', array('class' => 'form-horizontal'));
+echo $this->Form->create('Result', array(
+    'inputDefaults' => array(
+        'div' => 'form-group',
+        'label' => array(
+            'class' => 'col col-md-2 control-label'
+        ),
+        'wrapInput' => 'col col-md-3',
+        'class' => 'form-control'
+    ),
+    'class' => 'form-horizontal'
+));
 
 echo $this->Form->input('pupil_id', array(
-	'prepend' => '<i class="icon-barcode"></i>',
-	'class' => 'span1 send',
+    'beforeInput' => '<div class="input-group"><span class="input-group-addon"><i class="icon-barcode"></i></span>',
+    'afterInput' => '</div>',
+	'class' => 'form-control send',
+    'wrapInput' => 'col col-md-2',
 	'type' => 'text',
     'label' => array(
-        'text' => 'Code barre élève',
-        'class' => 'control-label'
+        'text' => 'Code barre élève'
     )
 ));
 

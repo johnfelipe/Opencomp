@@ -5,25 +5,34 @@
 
 <?php
 
-echo $this->Form->create('Result', array('class' => 'form-horizontal'));
+echo $this->Form->create('Result', array(
+    'inputDefaults' => array(
+        'div' => 'form-group',
+        'label' => array(
+            'class' => 'col col-md-2 control-label'
+        ),
+        'wrapInput' => 'col col-md-3',
+        'class' => 'form-control'
+    ),
+    'class' => 'form-horizontal'
+));
 
 echo $this->Form->input('pupil_id', array(
-        'class'=>'chzn-select send',
+        'class'=>'chzn-select form-control send',
         'data-placeholder' => 'Sélectionnez un élève',
-        'style'=>'width : 220px;',
         'label' => array(
-            'text' => 'Élève',
-            'class' => 'control-label'
+            'text' => 'Élève'
         )
     )
 );
 
 ?>
 
-<div class="form-actions">
-     <?php echo $this->Form->button('Saisir le résultat', array('type' => 'submit', 'class' => 'btn btn-primary')); ?>
+<div class="form-group">
+    <?php echo $this->Form->submit('Saisir le résultat', array(
+        'div' => 'col col-md-9 col-md-offset-2',
+        'class' => 'btn btn-primary'
+    )); ?>
 </div>
 
-<?php
-echo $this->Form->end();
-?>
+<?php echo $this->Form->end(); ?>

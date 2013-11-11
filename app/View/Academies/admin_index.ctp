@@ -19,7 +19,7 @@
             		<td><?php echo h($academy['Academy']['name']); ?></td>
             		<td><?php if ($academy['Academy']['type'] == 0) {echo 'Académie';} else {echo 'Sous rectorat';} ?></td>
             		<td class="actions">
-            		    <?php echo $this->Html->link('<button class="btn btn-default btn-xs"><i class="icon-eye-open"></i> '.__('Voir').'</button>', array('action' => 'view', $academy['Academy']['id']), array('escape' => false)); ?>
+            		    <?php echo $this->Html->link('<button class="btn btn-default btn-xs"><i class="icon-eye-open"></i> '.__('Voir').'</button>', array('admin'=>false,'action' => 'view', $academy['Academy']['id']), array('escape' => false)); ?>
             		</td>
             	</tr>
         	<?php endforeach; ?>

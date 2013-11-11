@@ -1,76 +1,4 @@
-<div class="page-title">
-    <h2><?php echo __('Visualiser une classe'); ?></h2>
-    <?php echo $this->Html->link('<i class="icon-pencil"></i> '.__('modifier'), 'edit/'.$classroom['Classroom']['id'], array('class' => 'ontitle btn btn-primary', 'escape' => false)); ?>
-    <?php echo $this->Html->link('<i class="icon-arrow-left"></i> '.__('établissement de la classe'), '/establishments/view/'.$classroom['Establishment']['id'], array('class' => 'ontitle btn btn-default', 'escape' => false)); ?>
-</div>
-
-<div class="row">
-    <div class="col-md-6">
-        <div class="well">
-        	<dl class="dl-horizontal">
-        		<dt><?php echo __('Nom de la classe'); ?></dt>
-        		<dd>
-        			<?php echo h($classroom['Classroom']['title']); ?>
-        			&nbsp;
-        		</dd>
-        		<dt><?php echo __('Enseignant titulaire'); ?></dt>
-        		<dd>
-        			<?php echo $this->Html->link('<i class="icon-user"></i> '.$classroom['User']['first_name'].' '.$classroom['User']['name'], array('controller' => 'users', 'action' => 'view', $classroom['User']['id']), array('escape' => false)); ?>
-        			&nbsp;
-        		</dd>
-        		<dt><?php echo __('Établissement'); ?></dt>
-        		<dd>
-        			<?php echo $this->Html->link('<i class="icon-home"></i> '.$classroom['Establishment']['name'], array('controller' => 'establishments', 'action' => 'view', $classroom['Establishment']['id']), array('escape' => false)); ?>
-        			&nbsp;
-        		</dd>
-        		<dt><?php echo __('Année scolaire'); ?></dt>
-        		<dd>
-        			<?php echo h($classroom['Year']['title']); ?>
-        			&nbsp;
-        		</dd>
-           	</dl>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="page-title">
-            <h3><?php echo __('Intervenants de cette classe'); ?></h3>
-        </div>
-        
-        <?php if (!empty($classroom['User'][1])): ?>
-		<table class="table table-striped table-condensed">
-		<tr>
-			<th><?php echo __('Identifiant'); ?></th>
-			<th><?php echo __('Prénom'); ?></th>
-			<th><?php echo __('Nom'); ?></th>
-			<th><?php echo __('Rôle'); ?></th>
-			<th class="actions"><?php echo __('Actions'); ?></th>
-		</tr>
-		<?php
-			$i = 0;
-			foreach ($classroom['User'] as $user): 
-			if(is_array($user)): ?>		
-				<tr>
-					<td><?php echo $user['username']; ?></td>
-					<td><?php echo $user['first_name']; ?></td>
-					<td><?php echo $user['name']; ?></td>
-					<td><?php echo $user['role']; ?></td>
-					<td class="actions">
-						<?php echo $this->Html->link(__('View'), array('controller' => 'users', 'action' => 'view', $user['id'])); ?>
-						<?php echo $this->Html->link(__('Edit'), array('controller' => 'users', 'action' => 'edit', $user['id'])); ?>
-						<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'users', 'action' => 'delete', $user['id']), null, __('Are you sure you want to delete # %s?', $user['id'])); ?>
-					</td>
-				</tr>
-			<?php endif; ?>
-		<?php endforeach; ?>
-		</table>
-		<?php else: ?>
-		<div class="alert alert-info">
-	    	<i class="icon-info-sign"></i> Vous pouvez associer un utilisateur existant à cette classe en la <a href="/Opencomp/classrooms/edit/<?php echo $classroom['Classroom']['id']; ?>">modifiant</a>.
-	    </div>
-		<?php endif; ?>
-        
-    </div>
-</div>
+<?php echo $this->element('ClassroomBase'); ?>
 
 <ul class="nav nav-pills">
   <li><?php echo $this->Html->link(__('Élèves'), array('controller' => 'classrooms', 'action' => 'view', $classroom['Classroom']['id'])); ?></li>
@@ -80,7 +8,22 @@
 </ul>
 
 <div class="page-title">
-    <h3><?php echo count($classroom['Evaluation']).' '.__('évaluation(s) associée(s) à cette classe'); ?></h3>
+    <h3>
+        <?php
+            $nbevals = count($classroom['Evaluation']);
+
+            if($nbevals > 1)
+                $title = __('évaluations associées à cette classe');
+            else
+                $title = __('évaluation associée à cette classe');
+
+            if(isset($all))
+                $scope = __('toutes les périodes');
+            else
+                $scope = __('période courante uniquement');
+            echo "$nbevals $title ($scope)";
+        ?>
+    </h3>
     <?php echo $this->Html->link('<i class="icon-plus"></i> '.__('ajouter une évaluation'), '/evaluations/add/classroom_id:'.$classroom['Classroom']['id'], array('class' => 'ontitle btn btn-success', 'escape' => false)); ?>
     <div class="btn-group ontitle">
 	  <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#">
@@ -122,7 +65,7 @@
 					$progress = 0; 
 				}
 			?>
-			<div style="height:10px; margin-top:4px; margin-bottom:0px;" class="progress active"><div class="bar" style="font-size: 10px; vertical-align:top; width: <?php echo $progress; ?>%;"><span style="position:relative; top: -4px;"><?php if(intval($progress) > 10) echo intval($progress).'%'; ?></span></div></div>
+			<div style="height:10px; margin-top:4px; margin-bottom:0px;" class="progress active"><div class="progress-bar" style="font-size: 10px; vertical-align:top; width: <?php echo $progress; ?>%;"><span style="position:relative; top: -5px;"><?php if(intval($progress) > 10) echo intval($progress).'%'; ?></span></div></div>
 		</td>
 		<td class="actions">
 			<div class="btn-group">
@@ -144,4 +87,9 @@
 	</tr>
 <?php endforeach; ?>
 </table>
+<?php else: ?>
+    <div class="alert alert-info">
+        <i class="icon-info-sign icon-3x pull-left"></i>
+        Actuellement, aucune évaluation n'a été associée à cette classe (<?php echo $scope ?>).<br />Vous pouvez ajouter une évaluation en cliquant sur le bouton vert ci-dessus.
+    </div>
 <?php endif; ?>

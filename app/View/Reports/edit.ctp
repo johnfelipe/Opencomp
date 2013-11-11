@@ -6,67 +6,69 @@
 <?php
 
 echo $this->Form->create('Report', array(
-    'class' => 'form-horizontal')
-);
+    'inputDefaults' => array(
+        'div' => 'form-group',
+        'label' => array(
+            'class' => 'col col-md-2 control-label'
+        ),
+        'wrapInput' => 'col col-md-7',
+        'class' => 'form-control'
+    ),
+    'class' => 'form-horizontal'
+));
 
 echo $this->Form->input('id');
 
 echo $this->Form->input('title', array(
     'label' => array(
-        'text' => 'Titre du bulletin',
-        'class' => 'control-label'
+        'text' => 'Titre du bulletin'
     ),
-    'after' => '<span style="font-style: italic; margin-top:10px;" class="help-block"><i class="icon-lightbulb"></i> '.__("Le titre vous permet d'identifier le bulletin mais n'est pas utilisé pour la génération du document").'</span>',
+    'afterInput' => '<span style="font-style: italic; margin-top:10px;" class="help-block"><i class="icon-lightbulb"></i> '.__("Le titre vous permet d'identifier le bulletin mais n'est pas utilisé pour la génération du document").'</span>',
 ));
 
 echo $this->Form->input('period_id', array(
-			'error' => array('multiple' => __('Vous devez sélectionner au moins une période !')),
-	    	'type' => 'select',
-	    	'multiple' => 'checkbox', 
-	    	'options' => $periods,
-	    	'label' => 'Période(s) à générer'
-	    ));
+    'error' => array('multiple' => __('Vous devez sélectionner au moins une période !')),
+    'type' => 'select',
+    'class' => false,
+    'data-placeholder' => 'Cliquez pour choisir les périodes à générer',
+    'multiple' => 'multiple',
+    'class' => 'chzn-select form-control',
+    'options' => $periods,
+    'label' => array(
+        'text' => 'Période(s) à générer'
+    )
+));
 
 echo $this->Form->input('header', array(
     'label' => array(
-        'text' => 'En-tête de première page',
-        'class' => 'control-label'
+        'text' => 'En-tête de première page'
     ),
-    'class' => 'input-xxlarge',
-    'append' => array('<i class="icon-bolt"></i>', array('wrap' => 'a', 'class' => 'btn', 'onclick'=>'$("#ReportHeader").val("Résultats scolaires du ___ trimestre pour #PRENOM# #NOM#");
-')),
-    'after' => '<span style="font-style: italic; margin-top:10px;" class="help-block"><i class="icon-lightbulb"></i> '.__("Vous pouvez utiliser #NOM# et #PRENOM# pour insérer le nom et le prénom de l'élève<br />Par exemple, vous pouvez taper : Résultats scolaires du 1er trimestre pour #PRENOM# #NOM#").'</span>',
+    'afterInput' => '<span style="font-style: italic;" class="help-block"><i class="icon-lightbulb"></i> Vous pouvez utiliser les marqueurs #NOM# et #PRENOM# pour insérer le nom et le prénom de l\'élève</span>'
 ));
 
 echo $this->Form->input('footer', array(
     'label' => array(
-        'text' => 'Pied de page',
-        'class' => 'control-label'
+        'text' => 'Pied de page'
     ),
-    'class' => 'input-xxlarge',
-    'append' => array('<i class="icon-bolt"></i>', array('wrap' => 'a', 'class' => 'btn', 'onclick'=>'$("#ReportFooter").val("Résultats scolaires du ___ trimestre pour #PRENOM# #NOM# - Page ");')),
-    'after' => '<span style="font-style: italic; margin-top:10px;" class="help-block"><i class="icon-lightbulb"></i> '.__("Vous pouvez utiliser #NOM# et #PRENOM# pour insérer le nom et le prénom de l'élève.<br />Le numéro de page courante sera automatiquement inséré en fin de ligne.<br />Par exemple, vous pouvez taper : Résultats scolaire du 1er trimestre pour #PRENOM# #NOM# - Page ").'</span>',
+    'afterInput' => '<span style="font-style: italic;" class="help-block"><i class="icon-lightbulb"></i> Vous pouvez utiliser les marqueurs #NOM# et #PRENOM# pour insérer le nom et le prénom de l\'élève<br />&nbsp;&nbsp;&nbsp;Le numéro de la page est automatiquement inséré en fin de ligne</span>'
 ));
 
 echo $this->Form->input('page_break', array(
     'label' => array(
-        'text' => 'Insérer saut de page avant',
-        'class' => 'control-label'
+        'text' => 'Insérer saut de page avant'
     ),
     'data-placeholder' => 'Cliquez pour choisir les compétences avant lesquelles il faut insérer un saut de page',
     'options' => $competences,
     'multiple' => "multiple",
-    'class' => 'input-xxlarge chzn-select',
-    'after' => '<span style="font-style: italic; margin-top:10px;" class="help-block"><i class="icon-lightbulb"></i> '.__("Dans certains cas, il peut être utile d'insérer des sauts de pages avants certaines catégories de compétences pour améliorer la mise en page.").'</span>',
+    'class' => 'chzn-select form-control',
+    'afterInput' => '<span style="font-style: italic; margin-top:10px;" class="help-block"><i class="icon-lightbulb"></i> '.__("Dans certains cas, il peut être utile d'insérer des sauts de pages avants certaines catégories de compétences pour améliorer la mise en page.").'</span>',
 ));
 
 echo $this->Form->input('duplex_printing', array(
-    'label' => array(
-        'text' => 'Prêt pour le recto-verso',
-        'class' => 'control-label'
-    ),
-    'class' => 'input-xxlarge',
-    'after' => '<span style="font-style: italic; margin-top:30px; margin-left:-17px;" class="help-block"><i class="icon-lightbulb"></i> '.__("Si vous cochez la case, des pages blanches seront insérées automatiquement au PDF pour permettre l'impression recto-vero.").'</span>',
+    'before' => '<label class="col col-md-2 control-label">Prêt pour le recto-verso</label>',
+    'label' => false,
+    'class' => false,
+    'after' => '<span style="font-style: italic; margin-top:30px; padding-left:15px;" class="help-block col-md-offset-2"><i class="icon-lightbulb"></i> '.__("Si vous cochez la case, des pages blanches seront insérées automatiquement au PDF pour permettre l'impression recto-vero.").'</span>'
 ));
 
 echo $this->Form->hidden('classroom_id', array('value' => $classroom_id));
@@ -74,6 +76,11 @@ echo $this->Form->hidden('classroom_id', array('value' => $classroom_id));
 
 ?>
 
-<div class="form-actions">
-     <?php echo $this->Form->button('Enregistrer les modifications', array('type' => 'submit', 'class' => 'btn btn-primary')); ?>        
+<div class="form-group">
+    <?php echo $this->Form->submit('Modifier le bulletin', array(
+        'div' => 'col col-md-9 col-md-offset-2',
+        'class' => 'btn btn-primary'
+    )); ?>
 </div>
+
+<?php echo $this->Form->end(); ?>

@@ -1,12 +1,10 @@
 <div class="page-title">
     <h2><?php echo __('Associer un item travaillé mais non évalué à une période'); ?></h2>
-    <div class="btn-toolbar">
-		<div class="btn-group ontitle">
-			<?php echo $this->Html->link('<i class="icon-resize-full"></i> '.__('Déplier l\'arbre'), '#', array('class' => 'btn', 'escape' => false, 'onclick' => "$('#demo1').jstree('open_all', -1, true);")); ?>
-			<?php echo $this->Html->link('<i class="icon-resize-small"></i> '.__('Replier l\'arbre'), '#', array('class' => 'btn', 'escape' => false, 'onclick' => "$('#demo1').jstree('close_all', -1, true);")); ?>
-		</div>
-		<?php echo $this->Html->link('<i class="icon-arrow-left"></i> '.__('retour aux items non évalués'), '/classrooms/viewunrateditems/'.$this->request->data['Classroom']['classroom_id'], array('class' => 'ontitle btn', 'escape' => false)); ?>
-	</div>
+    <div class="btn-group ontitle">
+        <?php echo $this->Html->link('<i class="icon-resize-full"></i> '.__('Déplier l\'arbre'), '#', array('class' => 'btn btn-default', 'escape' => false, 'onclick' => "$('#demo1').jstree('open_all', -1, true);")); ?>
+        <?php echo $this->Html->link('<i class="icon-resize-small"></i> '.__('Replier l\'arbre'), '#', array('class' => 'btn btn-default', 'escape' => false, 'onclick' => "$('#demo1').jstree('close_all', -1, true);")); ?>
+    </div>
+    <?php echo $this->Html->link('<i class="icon-arrow-left"></i> '.__('retour aux items non évalués'), '/classrooms/viewunrateditems/'.$this->request->data['Classroom']['classroom_id'], array('class' => 'ontitle btn btn-default', 'escape' => false)); ?>
 </div>
 
 <div class="alert alert-info">
@@ -17,10 +15,10 @@
 </div>
 
 <div class="well">
-	<ul class="unstyled">
-		<li><i class="icon-chevron-right"></i><strong>Légende :</strong></li>
+	<ul class="list-unstyled">
+		<li><i class="icon-chevron-right"></i> <strong>Légende :</strong></li>
 		<ul class="unstyled" style="margin-left:35px; margin-top:10px;">
-			<li><span class="label label-important">EN</span> Signale un item extrait des instructions officielles de l'<em>éducation nationale</em> (programmes 2008).</li>
+			<li><span class="label label-danger">EN</span> Signale un item extrait des instructions officielles de l'<em>éducation nationale</em> (programmes 2008).</li>
 			<li><span class="label label-info">ET</span> Signale un item commun à l'ensemble des enseignants de l'<em>établissement</em>.</li>
 			<li><span class="label label-success">PE</span> Signale un item <em>personnel</em> que vous avez ajouté.</li>
 		</ul>

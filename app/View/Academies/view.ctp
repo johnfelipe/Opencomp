@@ -2,7 +2,7 @@
     <div class="page-title">
         <h2><?php echo __('Visualiser une académie'); ?></h2>
         <?php echo $this->Html->link('<i class="icon-pencil"></i> '.__('modifier'), 'edit/'.$academy['Academy']['id'], array('class' => 'ontitle btn btn-primary', 'escape' => false)); ?>
-        <?php echo $this->Html->link('<i class="icon-arrow-left"></i> '.__('lister les académies'), 'index', array('class' => 'ontitle btn btn-default', 'escape' => false)); ?>
+        <?php echo $this->Html->link('<i class="icon-arrow-left"></i> '.__('lister les académies'), '/admin/academies/index', array('class' => 'ontitle btn btn-default', 'escape' => false)); ?>
     </div>
     
 	<dl class="dl-horizontal">

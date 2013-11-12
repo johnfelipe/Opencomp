@@ -1,0 +1,12 @@
+{
+    "name": "Opencomp",
+    "version": "3.0.0",
+    "dependencies": {
+        "jquery": "2",
+        "chosen": "https://github.com/harvesthq/chosen/releases/download/1.0.0/chosen_v1.0.0.zip",
+        "jstree": "v.pre1.0",
+        "bootstrap": "3",
+        "bootstrap-datepicker": "https://github.com/eternicode/bootstrap-datepicker/archive/bs3.zip",
+        "font-awesome": "3.2"
+    }
+}

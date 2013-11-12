@@ -7,17 +7,22 @@
 	</title>
     
     <?php
-		echo $this->Html->css('bootstrap.min');
-		echo $this->Html->css('datepicker');
-		echo $this->Html->css('font-awesome');
-		echo $this->Html->css('../js/chosen/chosen.min.css');
-        echo $this->Html->css('../js/chosen/chosen.bootstrap.css');
-		echo $this->Html->css('jstree');
-		echo $this->Html->css('custom');
+		echo $this->Html->css(array(
+            '../components/bootstrap/dist/css/bootstrap.min',
+            '../components/bootstrap/dist/css/bootstrap-theme.min',
+            '../components/bootstrap-datepicker/css/datepicker3',
+            '../components/font-awesome/css/font-awesome.min',
+            '../components/font-awesome/css/font-awesome-ie7.min',
+            '../components/chosen/chosen.min',
+            'chosen.bootstrap.css',
+            '../components/jstree/themes/default/style',
+		    'opencomp.app'
+        ));
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
-		echo $this->Html->script(array('jquery.js'));
+
+		echo $this->Html->script('../components/jquery/jquery.min');
 	?>
     
     <link href='http://fonts.googleapis.com/css?family=Titillium+Web' rel='stylesheet' type='text/css'>
@@ -105,7 +110,14 @@
     <!-- Placed at the end of the document so the pages load faster -->
     
     <?php 
-    	echo $this->Html->script(array('jquery.jstree.js', 'chosen/chosen.jquery.min.js', 'bootstrap.min.js','bootstrap-datepicker.js', 'bootstrap-datepicker.fr.js', 'custom.js'));
+    	echo $this->Html->script(array(
+            '../components/jstree/jquery.jstree',
+            '../components/chosen/chosen.jquery.min',
+            '../components/bootstrap/dist/js/bootstrap.min',
+            '../components/bootstrap-datepicker/js/bootstrap-datepicker',
+            '../components/bootstrap-datepicker/js/locales/bootstrap-datepicker.fr',
+            'opencomp.app'
+        ));
 	    echo $this->fetch('script');
     ?>
   </body>

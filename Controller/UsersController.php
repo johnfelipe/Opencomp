@@ -26,7 +26,7 @@ class UsersController extends AppController {
 			if(isset($user) && !empty($user)){
 				if(isset($user['User']['yubikeyID']) && !empty($user['User']['yubikeyID'])){
 					if($user['User']['yubikeyID'] == substr($this->request->data['User']['yubikeyOTP'], 0, 12)){
-						 App::import('Vendor','yubico/yubico');
+						 App::import('Vendor','yubico/Yubico');
 						 $this->loadModel('Setting');
 						 $otp = $this->request->data['User']['yubikeyOTP'];
 

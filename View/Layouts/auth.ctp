@@ -2,6 +2,8 @@
 <html lang="fr">
 <head>
     <?php echo $this->Html->charset(); ?>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> <?php echo 'Opencomp | '.$title_for_layout; ?> </title>
     <?php
     echo $this->Html->meta('icon');
@@ -11,7 +13,9 @@
         '../components/font-awesome/css/font-awesome.min',
         'opencomp.auth'
     ));
-    echo $scripts_for_layout;
+    
+    echo $this->Html->script('../components/jquery/jquery.min');
+
     ?>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -36,14 +40,21 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" class="info" data-toggle="tooltip" data-placement="bottom" data-original-title="Cliquez pour signaler une anomalie." onclick="window.open('http://projets.traulle.net/opencomp/issues/new')"><i class="icon-bug"></i> <?php echo __('Problème de connexion ?') ; ?></a></li>
+            	<li class="dropdown">
+                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-question-sign"></i> <?php echo __('Aide et support') ?> <b class="caret"></b></a>
+
+            	<ul class="dropdown-menu">
+                	<li><a href="http://kb.opencomp.fr" target="_blank"><i class="icon-book"></i> <?php echo __('Chercher une solution dans la base de connaissance') ; ?></a></li>
+                	<li><a href="http://projets.opencomp.fr/opencomp/issues/new" target="_blank"><i class="icon-bug"></i> <?php echo __('Signaler une anomalie, demander une fonctionnalité') ; ?></a></li>
+            	</ul>
+            	</li>
             </ul>
         </div><!-- /.nav-collapse -->
     </div><!-- /.container -->
 </div>
 
 <div class="container">
-    <?php echo $this->Html->image("opencomp.png", array("alt" => "Opencomp logo", "class"=>"center")); ?>
+    <?php echo $this->Html->image("opencomp.png", array("alt" => "Opencomp logo", "class"=>"center hidden-xs")); ?>
     <div class="spacer"></div>
     <h3 class="center">Merci de vous identifier</h3>
     <div class="form-signin"><?php echo $this->Session->flash(); ?></div>

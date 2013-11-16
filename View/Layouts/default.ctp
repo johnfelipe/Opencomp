@@ -58,15 +58,18 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
+                    	<li><?php echo $this->Html->link('<i class="icon-dashboard"></i> '.__('Bureau'), '/dashboard', array('escape' => false)); ?></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i> <?php echo __('Référentiels') ?> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><?php echo $this->Html->link('<i class="icon-book"></i> '.__('Instructions officielles'), '/competences', array('escape' => false)); ?></li>
                                 <li><?php echo $this->Html->link('<i class="icon-book"></i> '.__('Livret Personnel de Compétences'), '/lpcnodes', array('escape' => false)); ?></li>
+                            
                             </ul>
+                            </li>
                             <?php if(AuthComponent::user('role') === 'admin'){ ?>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-rocket"></i> <?php echo __('Menu administrateur') ; ?> <b class="caret"></b></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-rocket"></i> <?php echo __('Administration') ; ?> <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><?php echo $this->Html->link('<i class="icon-home"></i> '.__('Gestion des établissements'), '/admin/academies', array('escape' => false)); ?></li>
                                     <li><?php echo $this->Html->link('<i class="icon-user"></i> '.__('Gestion des utilisateurs'), '/admin/users', array('escape' => false)); ?></li>
@@ -74,8 +77,15 @@
                                 </ul>
                             </li>
                             <?php } ?>
-                            <li><a href="#" class="info" data-toggle="tooltip" data-placement="bottom" data-original-title="Cliquez pour signaler une anomalie." onclick="window.open('http://projets.traulle.net/opencomp/issues/new')"><i class="icon-bug"></i> <?php echo __('Feedback') ; ?></a></li>
-                        </li>
+                            <li class="dropdown">
+                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-question-sign"></i> <?php echo __('Aide et support') ?> <b class="caret"></b></a>
+
+            	<ul class="dropdown-menu">
+                	<li><a href="http://kb.opencomp.fr" target="_blank"><i class="icon-book"></i> <?php echo __('Chercher une solution dans la base de connaissance') ; ?></a></li>
+                	<li><a href="http://projets.opencomp.fr/opencomp/issues/new" target="_blank"><i class="icon-bug"></i> <?php echo __('Signaler une anomalie, demander une fonctionnalité') ; ?></a></li>
+            	</ul>
+            	</li>
+                        
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">

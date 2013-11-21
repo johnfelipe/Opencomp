@@ -25,11 +25,11 @@
 			<td><?php echo $item['Item']['title']; ?></td>
 			<td class="actions">
 				<?php if($item['EvaluationsItem']['position'] == 1) $style = 'padding-left: 54px;'; else $style = null; ?>
-				<?php if($item['EvaluationsItem']['position'] != 1) echo $this->Html->link('<i class="icon-arrow-up"></i> '.__('Monter'), '/evaluationsitems/moveup/evaluation_id:'.$item['EvaluationsItem']['evaluation_id'].'/item_id:'.$item['EvaluationsItem']['item_id'], array('escape' => false)); ?>&nbsp;&nbsp;
-				<?php if($item['EvaluationsItem']['position'] != $nbitems) echo $this->Html->link('<i class="icon-arrow-down"></i> '.__('Descendre'), '/evaluationsitems/movedown/evaluation_id:'.$item['EvaluationsItem']['evaluation_id'].'/item_id:'.$item['EvaluationsItem']['item_id'], array('style' => $style, 'escape' => false)); ?>
+				<?php if($item['EvaluationsItem']['position'] != 1) echo $this->Html->link('<i class="icon-arrow-up"></i> '.__('Monter'), '/evaluationsItems/moveup/evaluation_id:'.$item['EvaluationsItem']['evaluation_id'].'/item_id:'.$item['EvaluationsItem']['item_id'], array('escape' => false)); ?>&nbsp;&nbsp;
+				<?php if($item['EvaluationsItem']['position'] != $nbitems) echo $this->Html->link('<i class="icon-arrow-down"></i> '.__('Descendre'), '/evaluationsItems/movedown/evaluation_id:'.$item['EvaluationsItem']['evaluation_id'].'/item_id:'.$item['EvaluationsItem']['item_id'], array('style' => $style, 'escape' => false)); ?>
 			</td>
 			<td class="actions">
-				<?php echo $this->Form->postLink('<i class="icon-trash"></i> '.__('Supprimer'), array('controller' => 'evaluationsitems', 'action' => 'unlinkitem', 'item_id' => $item['EvaluationsItem']['item_id'], 'evaluation_id' => $evaluation['Evaluation']['id']), array('escape' => false), __('Êtes vous sûr(e) de vouloir dissocier cet item de cette évaluation ?', $item['EvaluationsItem']['id'])); ?>
+				<?php echo $this->Form->postLink('<i class="icon-trash"></i> '.__('Supprimer'), array('controller' => 'evaluationsItems', 'action' => 'unlinkitem', 'item_id' => $item['EvaluationsItem']['item_id'], 'evaluation_id' => $evaluation['Evaluation']['id']), array('escape' => false), __('Êtes vous sûr(e) de vouloir dissocier cet item de cette évaluation ?', $item['EvaluationsItem']['id'])); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>

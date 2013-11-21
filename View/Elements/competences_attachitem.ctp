@@ -4,20 +4,23 @@
 
 <a href="#" id="<?php echo $id; ?>" class="jstree-toggle" style="color:grey;"><?php echo($data['Competence']['title']); ?> </a>
 
-<?php if(empty($data['ChildCompetence'])){
-	echo $this->Html->link(
-		' <i class="icon-plus"></i> '.__('nouvel item'), 
-		array(
-			'controller' => 'evaluationsItems',
-			'action' => 'additem',
-			'evaluation_id' => $evaluation_id,
-			'competence_id' => $id
-		), 
-		array(
-			'escape' => false,
-			'style' => 'color:green;'
-		)
-	);
+<?php 
+
+echo $this->Html->link(
+	' <i class="icon-plus"></i> '.__('nouvel item'), 
+	array(
+		'controller' => 'evaluationsItems',
+		'action' => 'additem',
+		'evaluation_id' => $evaluation_id,
+		'competence_id' => $id
+	), 
+	array(
+		'escape' => false,
+		'style' => 'color:green;'
+	)
+);
+
+if(empty($data['ChildCompetence'])){
 	if(!empty($data['Item'])){
 		echo '<ul>';
 		foreach($data['Item'] as $item){			

@@ -13,7 +13,7 @@ Installation
 
 **_<pre>Notez que ce logiciel est actuellement en développement et qu'il peut être instable voir ne pas fonctionner du tout.</pre>_**
 
-Pour installer Opencomp, suivez les indications suivantes :
+*Notez que ces instructions sont principalement a destination des développeurs et des utilisateurs avertis et bidouilleurs. Si vous souhaitez simplement utiliser Opencomp mais que vous éprouvez des difficultés d'installation, sachez que des paquets prêts à l'emploi seront prochainement disponibles. Dans l'intervale, vous pouvez [me contacter](http://blog.opencomp.fr/nous-contacter/).*
 
 ### 1. Télécharger, décompresser, configurer Apache
 

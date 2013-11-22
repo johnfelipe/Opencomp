@@ -34,6 +34,7 @@ Pour installer Opencomp, suivez les indications suivantes :
 
 * Téléchargez et installez Node pour votre Système d'exploitation depuis http://nodejs.org/download/
 * Téléchargez le gestionnaire de dépendances frontend Bower à l'aide de npm `npm install -g bower`
+* Récupérez l'ensemble des dépendances en exécutant `bower install`
 
 ### 4. Créer et configurer la base de données 
 

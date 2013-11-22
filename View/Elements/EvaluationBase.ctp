@@ -25,12 +25,11 @@
                 </dd>
                 <dt><?php echo __('Évalué par'); ?></dt>
                 <dd>
-                    <?php echo $this->Html->link('<i class="icon-user"></i>&nbsp;'.$evaluation['User']['first_name'].'&nbsp;'.$evaluation['User']['name'], array('controller' => 'users', 'action' => 'view', $evaluation['User']['id']), array('escape' => false)); ?>
-                    &nbsp;
+                    <i class="icon-user"></i> <?php echo $evaluation['User']['first_name'].'&nbsp;'.$evaluation['User']['name']; ?>
                 </dd>
                 <dt><?php echo __('Période'); ?></dt>
                 <dd>
-                    <?php echo $this->Html->link($evaluation['Period']['wellnamed'], array('controller' => 'periods', 'action' => 'view', $evaluation['Period']['id'])); ?>
+                    <?php echo $evaluation['Period']['wellnamed']; ?>
                     &nbsp;
                 </dd>
                 <?php if(isset($resultats)): ?>

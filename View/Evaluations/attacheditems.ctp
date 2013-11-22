@@ -15,14 +15,25 @@
 	<table class="table table-stripped table-condensed">
 	<tr>
 		<th><?php echo __('Libellé de l\'item évalué'); ?></th>
-		<th class="actions"><?php echo __('Déplacer').' '; echo $this->Html->link('<i class="icon-question-sign"></i>', '#aboutMoveFunc', array('data-toggle' => 'modal', 'escape' => false)); ?></th>
-		<th class="actions"><?php echo __('Action'); ?></th>
+		<th style="width:175px;" class="actions"><?php echo __('Déplacer').' '; echo $this->Html->link('<i class="icon-question-sign"></i>', '#aboutMoveFunc', array('data-toggle' => 'modal', 'escape' => false)); ?></th>
+		<th style="width:100px;" class="actions"><?php echo __('Action'); ?></th>
 	</tr>
 	<?php
 		$nbitems = count($items);
 		foreach ($items as $item): ?>	
 		<tr>
-			<td><?php echo $item['Item']['title']; ?></td>
+			<td><?php echo $item['Item']['title']; 
+			if($item['Item']['type'] == 3)
+				echo $this->Html->link(' <i class="icon-edit"></i>', '#editItem', 
+				array(
+				'onclick'=>"
+					$('#ItemTitle').val('".$item['Item']['title']."'); 
+					var attr = $('#ItemAttacheditemsForm').attr('action');
+					$('#ItemAttacheditemsForm').attr('action', attr + '/".$item['EvaluationsItem']['item_id']."');
+					$('#ItemEvaluationId').val('".$item['EvaluationsItem']['evaluation_id']."');", 
+				'data-toggle' => 'modal', 
+				'escape' => false)); ?>
+			</td>
 			<td class="actions">
 				<?php if($item['EvaluationsItem']['position'] == 1) $style = 'padding-left: 54px;'; else $style = null; ?>
 				<?php if($item['EvaluationsItem']['position'] != 1) echo $this->Html->link('<i class="icon-arrow-up"></i> '.__('Monter'), '/evaluationsitems/moveup/evaluation_id:'.$item['EvaluationsItem']['evaluation_id'].'/item_id:'.$item['EvaluationsItem']['item_id'], array('escape' => false)); ?>&nbsp;&nbsp;
@@ -54,6 +65,51 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">J'ai bien compris</button>
             </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div class="modal fade" id="editItem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        	<?php
+            echo $this->Form->create('Item', array(
+                'url' => array('controller' => 'items', 'action' => 'editTitle'),
+                'inputDefaults' => array(
+                    'div' => 'form-group',
+                    'label' => array(
+                        'class' => 'col col-md-3 control-label'
+                    ),
+                    'wrapInput' => 'col col-md-6',
+                    'class' => 'form-control'
+                ),
+                'class' => 'form-horizontal'
+            ));
+            ?>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Éditer un item</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-info"><i class="icon-info-sign icon-3x pull-left"></i> Lorsque vous modifiez le libellé d'un item, vos corrections sont répercutées sur toutes les évaluations utilisant l'item.</div>
+                
+                <?php echo $this->Form->input('title', array(
+                        'value' => '',
+                        'label' => array(
+                            'text' => 'Libellé de l\'item'
+                        )
+                    )
+                ); 
+
+                echo $this->Form->hidden('evaluation_id', array('value' => ''));  ?>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <?php echo $this->Form->button('Modifier', array('type'=>'submit','class' => 'btn btn-primary')); ?>
+            </div>
+            <?php echo $this->Form->end(); ?>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

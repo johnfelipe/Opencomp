@@ -64,7 +64,7 @@ $(document).ready(function() {
 	
 	$('.focus').focus();
 	
-	$('.result').change(function(event) {		
+	$('.result').blur(function(event) {		
 		if ($(event.delegateTarget).val() == 'AAA' || $(event.delegateTarget).val() == 'A' || $(event.delegateTarget).val() == 'a') { // Cette condition renvoie « true », le code est donc exécuté
 		    $(event.delegateTarget).val('A');
 		    $(event.delegateTarget).css("background-color", "#e4ffcb");
@@ -81,6 +81,7 @@ $(document).ready(function() {
 			$(event.delegateTarget).val('NE');
 			$(event.delegateTarget).css("background-color", "#e4ffcb");
 		} else if ($(event.delegateTarget).val() == 'ABS' || $(event.delegateTarget).val() == 'abs') {
+			$(event.delegateTarget).val('ABS');
 			$(event.delegateTarget).css("background-color", "#e4ffcb");
 		} else if ($(event.delegateTarget).val() == '') {
 			$(event.delegateTarget).css("background-color", "#e4ffcb");

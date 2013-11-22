@@ -129,12 +129,14 @@ class ResultsController extends AppController {
 		if ($this->request->is('post')) {
 			$i=0;
 			foreach($this->request->data['Results'] as $k => $v){
-				$data[$i]['Result']['pupil_id'] = $pupil_id;
-				$data[$i]['Result']['evaluation_id'] = $evaluation_id;
-				$data[$i]['Result']['item_id'] = $k;
-				$data[$i]['Result']['result'] = $v;
-				
-				$i++;
+				if(isset($v) && !empty($v)){
+					$data[$i]['Result']['pupil_id'] = $pupil_id;
+					$data[$i]['Result']['evaluation_id'] = $evaluation_id;
+					$data[$i]['Result']['item_id'] = $k;
+					$data[$i]['Result']['result'] = $v;
+					
+					$i++;
+				}
 			}
 			
 			$this->Result->create();

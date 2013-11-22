@@ -15,7 +15,7 @@
         		</dd>
         		<dt><?php echo __('Enseignant titulaire'); ?></dt>
         		<dd>
-        			<?php echo $this->Html->link('<i class="icon-user"></i> '.$classroom['User']['first_name'].' '.$classroom['User']['name'], array('controller' => 'users', 'action' => 'view', $classroom['User']['id']), array('escape' => false)); ?>
+        			<i class="icon-user"></i> <?php echo $classroom['User']['first_name'].' '.$classroom['User']['name'] ?>
         			&nbsp;
         		</dd>
         		<dt><?php echo __('Établissement'); ?></dt>

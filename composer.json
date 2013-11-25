@@ -8,11 +8,12 @@
     ],
     "require": {
         "pear-cakephp/cakephp": ">=2.4.0",
-		"cakephp/debug_kit": "2.2.*",
-		"twitter/bootstrap": "v3.0.2",
 		"slywalker/boost_cake": "*",
 		"zendframework/zendpdf": "2.0.*@dev",
 		"dompdf/dompdf": "dev-master"
+    },
+    "require-dev": {
+    	"cakephp/debug_kit": "2.2.*"
     },
     "config": {
         "vendor-dir": "Vendor/"

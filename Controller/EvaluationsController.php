@@ -72,7 +72,7 @@ class EvaluationsController extends AppController {
 		$evaluation = $this->Evaluation->findById($id);		
 		$this->set('evaluation', $evaluation);
 		
-		$this->Evaluation->EvaluationsItem->contain(array('Item.title'));
+		$this->Evaluation->EvaluationsItem->contain(array('Item.title', 'Item.type'));
 		$items = $this->Evaluation->EvaluationsItem->findAllByEvaluationId($id, array(), array('EvaluationsItem.position' => 'asc'));
 		$this->set('items', $items);
 		

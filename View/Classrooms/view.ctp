@@ -48,7 +48,7 @@
 			echo $this->Html->link(
 				'<i class="icon-pencil"></i> Modifier', 
 				array(
-					'controller' => 'classroomspupils', 
+					'controller' => 'classroomsPupils', 
 					'action' => 'edit', 
 					'classroom_id' => $classroom['Classroom']['id'], 
 					$pupil['Pupil']['id']
@@ -60,7 +60,7 @@
 			echo $this->Html->link(
 				'<i class="icon-trash"></i> Supprimer', 
 				array(
-					'controller' => 'classroomspupils', 
+					'controller' => 'classroomsPupils', 
 					'action' => 'unlink', 
 					'classroom_id' => $classroom['Classroom']['id'], 
 					$pupil['Pupil']['id']

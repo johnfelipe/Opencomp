@@ -3,69 +3,20 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "01e3478d02b8d9ebb0b3c11fd9f6f71d",
+    "hash": "58e05c15e4450ff7af9598efc341b8b1",
     "packages": [
         {
-            "name": "cakephp/debug_kit",
-            "version": "2.2.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/cakephp/debug_kit.git",
-                "reference": "0dd9f6cf6250817052b6a7cf2cc0d2d8d7e26e90"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/debug_kit/zipball/0dd9f6cf6250817052b6a7cf2cc0d2d8d7e26e90",
-                "reference": "0dd9f6cf6250817052b6a7cf2cc0d2d8d7e26e90",
-                "shasum": ""
-            },
-            "require": {
-                "composer/installers": "*",
-                "php": ">=5.3.0"
-            },
-            "type": "cakephp-plugin",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2.x-dev"
-                },
-                "installer-name": "DebugKit"
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mark Story",
-                    "homepage": "http://mark-story.com",
-                    "role": "Author"
-                },
-                {
-                    "name": "CakePHP Community",
-                    "homepage": "https://github.com/cakephp/debug_kit/graphs/contributors"
-                }
-            ],
-            "description": "CakePHP Debug Kit",
-            "homepage": "https://github.com/cakephp/debug_kit",
-            "keywords": [
-                "cakephp",
-                "debug",
-                "kit"
-            ],
-            "time": "2013-11-07 18:15:29"
-        },
-        {
             "name": "composer/installers",
-            "version": "v1.0.6",
+            "version": "v1.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "b3bd071ea114a57212c75aa6a2eef5cfe0cc798f"
+                "reference": "d792632d27e1980d921cbbba12eab7b888338d4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/b3bd071ea114a57212c75aa6a2eef5cfe0cc798f",
-                "reference": "b3bd071ea114a57212c75aa6a2eef5cfe0cc798f",
+                "url": "https://api.github.com/repos/composer/installers/zipball/d792632d27e1980d921cbbba12eab7b888338d4c",
+                "reference": "d792632d27e1980d921cbbba12eab7b888338d4c",
                 "shasum": ""
             },
             "replace": {
@@ -108,6 +59,7 @@
                 "agl",
                 "cakephp",
                 "codeigniter",
+                "concrete5",
                 "drupal",
                 "fuelphp",
                 "installer",
@@ -125,7 +77,7 @@
                 "wordpress",
                 "zend"
             ],
-            "time": "2013-08-20 04:37:09"
+            "time": "2013-10-24 16:13:49"
         },
         {
             "name": "dompdf/dompdf",
@@ -133,12 +85,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dompdf/dompdf.git",
-                "reference": "98c741926ef0d2e2bd6086a71ca3ee14775aa74e"
+                "reference": "4d890e0ee9e113812103a8b2c56ec6387f5d086c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dompdf/dompdf/zipball/98c741926ef0d2e2bd6086a71ca3ee14775aa74e",
-                "reference": "98c741926ef0d2e2bd6086a71ca3ee14775aa74e",
+                "url": "https://api.github.com/repos/dompdf/dompdf/zipball/4d890e0ee9e113812103a8b2c56ec6387f5d086c",
+                "reference": "4d890e0ee9e113812103a8b2c56ec6387f5d086c",
                 "shasum": ""
             },
             "require": {
@@ -166,14 +118,14 @@
             ],
             "description": "DOMPDF is a CSS 2.1 compliant HTML to PDF converter",
             "homepage": "https://github.com/dompdf/dompdf",
-            "time": "2013-11-07 02:10:19"
+            "time": "2013-11-16 21:11:00"
         },
         {
             "name": "pear-pear.cakephp.org/CakePHP",
-            "version": "2.4.2",
+            "version": "2.4.3",
             "dist": {
                 "type": "file",
-                "url": "http://pear.cakephp.org/get/CakePHP-2.4.2.tgz",
+                "url": "http://pear.cakephp.org/get/CakePHP-2.4.3.tgz",
                 "reference": null,
                 "shasum": null
             },
@@ -181,7 +133,7 @@
                 "php": ">=5.2.8.0"
             },
             "replace": {
-                "pear-cakephp/cakephp": "== 2.4.2.0"
+                "pear-cakephp/cakephp": "== 2.4.3.0"
             },
             "type": "pear-library",
             "autoload": {
@@ -269,48 +221,6 @@
                 "twitter"
             ],
             "time": "2013-10-18 06:20:39"
-        },
-        {
-            "name": "twitter/bootstrap",
-            "version": "v3.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "3887f540b978d593f433bfef15888bc2d103de72"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/3887f540b978d593f433bfef15888bc2d103de72",
-                "reference": "3887f540b978d593f433bfef15888bc2d103de72",
-                "shasum": ""
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0.x-dev"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Jacob Thornton",
-                    "email": "jacobthornton@gmail.com"
-                },
-                {
-                    "name": "Mark Otto",
-                    "email": "markdotto@gmail.com"
-                }
-            ],
-            "description": "Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.",
-            "homepage": "http://getbootstrap.com",
-            "keywords": [
-                "bootstrap",
-                "css"
-            ],
-            "time": "2013-11-06 21:19:18"
         },
         {
             "name": "zendframework/zend-memory",
@@ -443,7 +353,55 @@
         }
     ],
     "packages-dev": [
-
+        {
+            "name": "cakephp/debug_kit",
+            "version": "2.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cakephp/debug_kit.git",
+                "reference": "0dd9f6cf6250817052b6a7cf2cc0d2d8d7e26e90"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cakephp/debug_kit/zipball/0dd9f6cf6250817052b6a7cf2cc0d2d8d7e26e90",
+                "reference": "0dd9f6cf6250817052b6a7cf2cc0d2d8d7e26e90",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "*",
+                "php": ">=5.3.0"
+            },
+            "type": "cakephp-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2.x-dev"
+                },
+                "installer-name": "DebugKit"
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Story",
+                    "homepage": "http://mark-story.com",
+                    "role": "Author"
+                },
+                {
+                    "name": "CakePHP Community",
+                    "homepage": "https://github.com/cakephp/debug_kit/graphs/contributors"
+                }
+            ],
+            "description": "CakePHP Debug Kit",
+            "homepage": "https://github.com/cakephp/debug_kit",
+            "keywords": [
+                "cakephp",
+                "debug",
+                "kit"
+            ],
+            "time": "2013-11-07 18:15:29"
+        }
     ],
     "aliases": [
 

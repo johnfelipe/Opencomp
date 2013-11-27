@@ -119,8 +119,6 @@ class ClassroomsPupilsController extends AppController {
 			    	$this->ClassroomsPupil->delete($association);
 			}
 			
-			//$this->ClassroomsPupil->set('classroom_id', $classroom_id);
-			
 			if ($this->ClassroomsPupil->saveAll($this->request->data)) {
 				$this->Session->setFlash(__('The pupil has been saved'));
 				$this->redirect(array('controller' => 'classrooms', 'action' => 'view', $classroom_id));

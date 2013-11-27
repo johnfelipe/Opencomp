@@ -252,8 +252,6 @@ class ResultsController extends AppController {
 
 		if ($output_type == 'pdf') {
 			$this->set('output_type', 'pdf');
-			//Configure::write('debug',0);
-			//$this->response->type('pdf');
 			$this->layout = 'pdf';
 		}elseif ($output_type == 'html') {
 			$this->layout = 'pdf';
@@ -313,8 +311,7 @@ class ResultsController extends AppController {
 	
 	function concat_bul(){
 		$this->layout = 'ajax';
-		//debug($this->request->data);
-				
+			
 		$pdfMerged = new ZendPdf\PdfDocument();
 
 		foreach($this->request->data['pupils'] as $pupil_id){

@@ -207,9 +207,8 @@ class Evaluation extends AppModel {
 			 'conditions' => array('Evaluation.id' => $evaluation_id),
 	         'order' => array('EvaluationsItem.position'),
 	    ));
-	    //debug($items);
+
 	    return $items;
-	
 	}
 	
 	public function findPupilsByLevelsInClassroom($id_classroom){

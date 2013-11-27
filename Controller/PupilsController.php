@@ -123,7 +123,6 @@ class PupilsController extends AppController {
         }
 
         if(file_exists('files/import_be1d_'.$classroom_id.'.csv')){
-            $row = 1;
             if (($handle = fopen('files/import_be1d_'.$classroom_id.'.csv', 'r')) !== FALSE) {
                 $i = 0;
 

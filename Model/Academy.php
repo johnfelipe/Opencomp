@@ -8,17 +8,17 @@ App::uses('AppModel', 'Model');
   *
   * @category Model
   * @package  Opencomp
-  * @author   Jean Traullé <jtraulle@gmail.com>
+  * @author   Jean TraullÃ© <jtraulle@gmail.com>
   * @license  http://www.opensource.org/licenses/agpl-v3 The Affero GNU General Public License
   * @link     http://www.opencomp.fr
   */
 
 /**
- * Modèle de gestion des académies.
+ * ModÃ¨le de gestion des acadÃ©mies.
  *
  * @category Model
  * @package  Opencomp
- * @author   Jean Traullé <jtraulle@gmail.com>
+ * @author   Jean TraullÃ© <jtraulle@gmail.com>
  * @license  http://www.opensource.org/licenses/agpl-v3 The Affero GNU General Public License
  * @link     http://www.opencomp.fr
  */

@@ -1,5 +1,8 @@
 {
-    "name": "opencomp",
+    "name": "jtraulle/Opencomp",
+    "description": "Application de gestion d'acquisition de compétences",
+    "type": "project",
+    "license": "AGPL-3.0",
     "repositories": [
         {
             "type": "pear",

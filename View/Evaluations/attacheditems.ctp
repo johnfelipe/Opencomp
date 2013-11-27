@@ -27,7 +27,7 @@
 				echo $this->Html->link(' <i class="icon-edit"></i>', '#editItem', 
 				array(
 				'onclick'=>"
-					$('#ItemTitle').val('".$item['Item']['title']."'); 
+					$('#ItemTitle').val('".addslashes(html_entity_decode($item['Item']['title'], ENT_QUOTES))."'); 
 					var attr = $('#ItemAttacheditemsForm').attr('action');
 					$('#ItemAttacheditemsForm').attr('action', attr + '/".$item['EvaluationsItem']['item_id']."');
 					$('#ItemEvaluationId').val('".$item['EvaluationsItem']['evaluation_id']."');", 

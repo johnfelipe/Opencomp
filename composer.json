@@ -11,7 +11,7 @@
     ],
     "require": {
         "pear-cakephp/cakephp": ">=2.4.0",
-		"slywalker/boost_cake": "*",
+		"slywalker/boost_cake": "1.*",
 		"zendframework/zendpdf": "2.0.*@dev",
 		"dompdf/dompdf": "dev-master"
     },

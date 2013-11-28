@@ -67,8 +67,6 @@ class ResultsController extends AppController {
     }
 	
 	public function add(){
-		//@TODO tester d'abord si un résultat a été déjà saisi pour cette évaluation et cet élève.
-	
 		//On vérifie qu'un paramètre nommé evaluation_id a été fourni et qu'il existe.
 		if(isset($this->request->params['named']['evaluation_id'])) {
        		$evaluation_id = intval($this->request->params['named']['evaluation_id']);

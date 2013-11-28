@@ -107,28 +107,14 @@ class ClassroomsController extends AppController {
 		
 		if(isset($this->request->params['named']['periods']) && $this->request->params['named']['periods'] == 'all') {
 			$this->Classroom->contain(array(
-				'Evaluation.created DESC', 
-				'Evaluation.unrated=0', 
-				'Evaluation.User', 
-				'Evaluation.Result', 
-				'Evaluation.Pupil', 
-				'Evaluation.Item', 
-				'User', 
-				'Establishment', 
-				'Year'
+				'Evaluation.created DESC', 'Evaluation.unrated=0', 'Evaluation.User', 'Evaluation.Result', 
+				'Evaluation.Pupil', 'Evaluation.Item', 'User', 'Establishment', 'Year'
 			));
 		}else{
 			$this->Classroom->contain(array(
-				'Evaluation.created DESC', 
-				'Evaluation.period_id='.$current_period, 
-				'Evaluation.unrated=0', 
-				'Evaluation.User', 
-				'Evaluation.Result', 
-				'Evaluation.Pupil', 
-				'Evaluation.Item', 
-				'User', 
-				'Establishment', 
-				'Year'
+				'Evaluation.created DESC', 'Evaluation.period_id='.$current_period, 'Evaluation.unrated=0', 
+				'Evaluation.User', 'Evaluation.Result', 'Evaluation.Pupil', 'Evaluation.Item', 'User', 
+				'Establishment', 'Year'
 			));
 		}
 		

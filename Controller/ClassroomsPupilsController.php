@@ -99,13 +99,11 @@ class ClassroomsPupilsController extends AppController {
 		} else {
 			throw new NotFoundException(__('You must provide a classroom_id in order to edit this pupil !'));
 		}
-       
 		
 		if ($this->request->is('post') || $this->request->is('put')) {
 			
-			//Si aucune erreur n'a été rencontré durant la validation du formulaire,
-			//on commence par supprimer toutes le niveau précédemment associé à l'élève 
-			//pour cette classe.
+			//Si aucune erreur n'a été rencontré durant la validation du formulaire, on commence 
+			//par supprimer toutes le niveau précédemment associé à l'élève pour cette classe.
 			if(empty($this->validationErrors)){
 				$to_delete = $this->ClassroomsPupil->find('list', array(
 			        'fields' => array('ClassroomsPupil.id'),

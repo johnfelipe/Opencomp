@@ -66,8 +66,7 @@ class EvaluationsItemsController extends AppController {
 	    }			
 	}
 	
-	public function additem(){
-	
+	public function additem(){	
 		$this->set('title_for_layout', __('Ajouter un item'));
 		
 		//On vérifie qu'un paramètre nommé evaluation_id a été fourni et qu'il existe.
@@ -103,13 +102,7 @@ class EvaluationsItemsController extends AppController {
 	    ));
 	    $this->set('eval', $eval);
 		
-		$path = $this->EvaluationsItem->Item->Competence->getPath($competence_id);
-		$mypath = '';
-		foreach($path as $competence){
-			$mypath .= $competence['Competence']['title'].' <i class="icon-chevron-right"></i> ';
-		}
-		$mypath = substr($mypath, 0, -36);
-		$this->set('path', $mypath);
+		$this->set('path', $this->_tabPathToString($this->EvaluationsItem->Item->Competence->getPath($competence_id)));
 		
 		if ($this->request->is('post')) {			
 			$lastItemPosition = $this->EvaluationsItem->find('count', array(
@@ -139,6 +132,16 @@ class EvaluationsItemsController extends AppController {
 			}
 		}
 		
+	}
+	
+	private function _tabPathToString($path){
+	    $mypath = '';
+	    foreach($path as $competence){
+	    	$mypath .= $competence['Competence']['title'].' <i class="icon-chevron-right"></i> ';
+	    }
+	    $mypath = substr($mypath, 0, -36);
+	    
+	    return $mypath;
 	}
 	
 	public function addunrateditem(){
@@ -171,13 +174,7 @@ class EvaluationsItemsController extends AppController {
 		$levels = $this->EvaluationsItem->Item->Level->find('list', array('recursive' => 0));
 		$this->set('levels', $levels);
 		
-		$path = $this->EvaluationsItem->Item->Competence->getPath($competence_id);
-		$mypath = '';
-		foreach($path as $competence){
-			$mypath .= $competence['Competence']['title'].' <i class="icon-chevron-right"></i> ';
-		}
-		$mypath = substr($mypath, 0, -36);
-		$this->set('path', $mypath);
+		$this->set('path', $this->_tabPathToString($this->EvaluationsItem->Item->Competence->getPath($competence_id)));
 		
 		if ($this->request->is('post')) {	
 		
@@ -257,12 +254,10 @@ class EvaluationsItemsController extends AppController {
 	public function moveup(){
 		//On vérifie qu'un paramètre nommé evaluation_id a été fourni et qu'il existe.
 		if(isset($this->request->params['named']['evaluation_id'])) {
-       		$evaluation_id = intval($this->request->params['named']['evaluation_id']);
-       		$this->set('evaluation_id', $evaluation_id);
-       		$this->EvaluationsItem->Evaluation->id = $evaluation_id;
-			if (!$this->EvaluationsItem->Evaluation->exists()) {
+       		$this->EvaluationsItem->Evaluation->id = intval($this->request->params['named']['evaluation_id']);
+       		$this->set('evaluation_id', $this->EvaluationsItem->Evaluation->id);
+			if (!$this->EvaluationsItem->Evaluation->exists())
 				throw new NotFoundException(__('The evaluation_id provided does not exist !'));
-			}
 		} else {
 			throw new NotFoundException(__('You must provide a evaluation_id in order to attach an item to this test !'));
 		}
@@ -272,9 +267,8 @@ class EvaluationsItemsController extends AppController {
        		$item_id = intval($this->request->params['named']['item_id']);
        		$this->set('item_id', $item_id);
        		$this->EvaluationsItem->Item->id = $item_id;
-			if (!$this->EvaluationsItem->Item->exists()) {
+			if (!$this->EvaluationsItem->Item->exists())
 				throw new NotFoundException(__('The item_id provided does not exist !'));
-			}
 		} else {
 			throw new NotFoundException(__('You must provide an item_id in order to attach an item to this test !'));
 		}
@@ -310,12 +304,10 @@ class EvaluationsItemsController extends AppController {
 	public function movedown(){
 		//On vérifie qu'un paramètre nommé evaluation_id a été fourni et qu'il existe.
 		if(isset($this->request->params['named']['evaluation_id'])) {
-       		$evaluation_id = intval($this->request->params['named']['evaluation_id']);
-       		$this->set('evaluation_id', $evaluation_id);
-       		$this->EvaluationsItem->Evaluation->id = $evaluation_id;
-			if (!$this->EvaluationsItem->Evaluation->exists()) {
+       		$this->EvaluationsItem->Evaluation->id = intval($this->request->params['named']['evaluation_id']);
+       		$this->set('evaluation_id', $this->EvaluationsItem->Evaluation->id);
+			if (!$this->EvaluationsItem->Evaluation->exists())
 				throw new NotFoundException(__('The evaluation_id provided does not exist !'));
-			}
 		} else {
 			throw new NotFoundException(__('You must provide a evaluation_id in order to attach an item to this test !'));
 		}
@@ -325,9 +317,8 @@ class EvaluationsItemsController extends AppController {
        		$item_id = intval($this->request->params['named']['item_id']);
        		$this->set('item_id', $item_id);
        		$this->EvaluationsItem->Item->id = $item_id;
-			if (!$this->EvaluationsItem->Item->exists()) {
+			if (!$this->EvaluationsItem->Item->exists())
 				throw new NotFoundException(__('The item_id provided does not exist !'));
-			}
 		} else {
 			throw new NotFoundException(__('You must provide an item_id in order to attach an item to this test !'));
 		}

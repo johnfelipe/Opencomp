@@ -28,9 +28,8 @@ class CustomTreeBehavior extends TreeBehavior {
 	public function generateTreeListWithDepth(Model $Model, $conditions = null, $keyPath = null, $valuePath = null, $spacer = '_', $recursive = null) {
 		$overrideRecursive = $recursive;
 		extract($this->settings[$Model->alias]);
-		if (!is_null($overrideRecursive)) {
+		if (!is_null($overrideRecursive))
 			$recursive = $overrideRecursive;
-		}
 
 		if ($keyPath == null && $valuePath == null && $Model->hasField($Model->displayField)) {
 			$fields = array($Model->primaryKey, $Model->displayField, $left, $right);
@@ -38,20 +37,18 @@ class CustomTreeBehavior extends TreeBehavior {
 			$fields = null;
 		}
 
-		if ($keyPath == null) {
+		if ($keyPath == null)
 			$keyPath = '{n}.' . $Model->alias . '.' . $Model->primaryKey;
-		}
 
 		if ($valuePath == null) {
 			$valuePath = array('%s-%s', '{n}.depth', '{n}.' . $Model->alias . '.' . $Model->displayField);
-
 		} elseif (is_string($valuePath)) {
 			$valuePath = array('%s-%s', '{n}.depth', $valuePath);
-
 		} else {
 			$valuePath[0] = '{' . (count($valuePath) - 1) . '}' . $valuePath[0];
 			$valuePath[] = '{n}.depth';
 		}
+		
 		$order = $Model->alias . '.' . $left . ' asc';
 		$results = $Model->find('all', compact('conditions', 'fields', 'order', 'recursive'));
 		$stack = array();

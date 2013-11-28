@@ -13,7 +13,7 @@
         "pear-cakephp/cakephp": ">=2.4.0",
 		"slywalker/boost_cake": "1.*",
 		"zendframework/zendpdf": "2.0.*@dev",
-		"dompdf/dompdf": "dev-master"
+		"dompdf/dompdf": "dev-master#e80756aa25331e873bbfdab2fa38b9d55cd63835"
     },
     "require-dev": {
     	"cakephp/debug_kit": "2.2.*"

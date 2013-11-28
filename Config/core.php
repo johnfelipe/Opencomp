@@ -82,19 +82,6 @@
 	Configure::write('App.encoding', 'UTF-8');
 
 /**
- * To configure CakePHP *not* to use mod_rewrite and to
- * use CakePHP pretty URLs, remove these .htaccess
- * files:
- *
- * /.htaccess
- * /app/.htaccess
- * /app/webroot/.htaccess
- *
- * And uncomment the App.baseUrl below:
- */
-	//Configure::write('App.baseUrl', env('SCRIPT_NAME'));
-
-/**
  * Uncomment the define below to use CakePHP prefix routes.
  *
  * The value of the define determines the names of the routes
@@ -111,23 +98,6 @@
  *
  */
 	Configure::write('Routing.prefixes', array('admin'));
-
-/**
- * Turn off all caching application-wide.
- *
- */
-	//Configure::write('Cache.disable', true);
-
-/**
- * Enable cache checking.
- *
- * If set to true, for view caching you must still use the controller
- * public $cacheAction inside your controllers to define caching settings.
- * You can either set it controller-wide by setting public $cacheAction = true,
- * or in each action using $this->cacheAction = true.
- *
- */
-	//Configure::write('Cache.check', true);
 
 /**
  * Defines the default error type when using the log() function. Used for
@@ -192,44 +162,11 @@
 	Configure::write('Security.cipherSeed', '76859309657562145455121214546607453542496749683645');
 
 /**
- * Apply timestamps with the last modified time to static assets (js, css, images).
- * Will append a querystring parameter containing the time the file was modified. This is
- * useful for invalidating browser caches.
- *
- * Set to `true` to apply timestamps when debug > 0. Set to 'force' to always enable
- * timestamping regardless of debug value.
- */
-	//Configure::write('Asset.timestamp', true);
-
-/**
- * Compress CSS output by removing comments, whitespace, repeating tags, etc.
- * This requires a/var/cache directory to be writable by the web server for caching.
- * and /vendors/csspp/csspp.php
- *
- * To use, prefix the CSS link URL with '/ccss/' instead of '/css/' or use HtmlHelper::css().
- */
-	//Configure::write('Asset.filter.css', 'css.php');
-
-/**
- * Plug in your own custom JavaScript compressor by dropping a script in your webroot to handle the
- * output, and setting the config below to the name of the script.
- *
- * To use, prefix your JavaScript link URLs with '/cjs/' instead of '/js/' or use JavaScriptHelper::link().
- */
-	//Configure::write('Asset.filter.js', 'custom_javascript_output_filter.php');
-
-/**
  * The classname and database used in CakePHP's
  * access control lists.
  */
 	Configure::write('Acl.classname', 'DbAcl');
 	Configure::write('Acl.database', 'default');
-
-/**
- * Uncomment this line and correct your server timezone to fix 
- * any date & time related errors.
- */
-	//date_default_timezone_set('UTC');
 
 /**
  * Pick the caching engine to use.  If APC is enabled use it.

@@ -320,10 +320,11 @@ class ResultsController extends AppController {
 	      $OldPdf = ZendPdf\PdfDocument::load("files/".$this->request->data['classroom_id']."_".str_replace(',','',$this->request->data['period_id'])."_".$pupil_id.".pdf");
 	
 	      // Clone each page and add to merged PDF
-	      for($i=0; $i<sizeof($OldPdf->pages); ++$i){
-		         $page = clone $OldPdf->pages[$i];
-		         $pdfMerged->pages[] = $page;
-		      }
+	      $pages = count($OldPdf->pages);
+	      for($i=0; $i<$pages; ++$i){
+	         $page = clone $OldPdf->pages[$i];
+	         $pdfMerged->pages[] = $page;
+	      }
 		}
 	   
 		// Save changes to PDF

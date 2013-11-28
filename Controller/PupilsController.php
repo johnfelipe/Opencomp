@@ -115,9 +115,8 @@ class PupilsController extends AppController {
             $this->set('classroom_id', $classroom_id);
             $this->loadModel('Classroom');
             $this->Classroom->id = $classroom_id;
-            if (!$this->Classroom->exists()) {
+            if (!$this->Classroom->exists())
                 throw new NotFoundException(__('The classroom_id provided does not exist !'));
-            }
         } else {
             throw new NotFoundException(__('You must provide a classroom_id in order to add a test to this classroom !'));
         }
@@ -153,23 +152,27 @@ class PupilsController extends AppController {
         }
 
         if(isset($this->request->params['named']['step']) && $this->request->params['named']['step'] == 'go') {
-            $datas = array();
-            foreach($import as $pupil){
-                $data = array(
-                    'Pupil' => array('name' => $pupil['nom'],'first_name' => $pupil['prenom'],'sex' => $pupil['sexe'],'birthday' => $pupil['datebase']),
-                    'ClassroomsPupil' => array(array('classroom_id' => $classroom_id, 'level_id' => $pupil['niveaubase']))
-                );
-                array_push($datas,$data);
-            }
-            if($this->Pupil->saveMany($datas, array('deep' => true, 'atomic' => true))){
-                $this->Session->setFlash(__('Les élèves ont été correctement importés.'), 'flash_success');
-                $this->redirect(array('controller' => 'classrooms', 'action' => 'view', $classroom_id));
-                unlink('/files/import_be1d_'.$classroom_id.'.csv');
-            }else{
-                unlink('/files/import_be1d_'.$classroom_id.'.csv');
-                $this->Session->setFlash(__('Une erreur est survenue lors de l\'import'), 'flash_error');
-                $this->redirect(array('controller' => 'pupils', 'action' => 'parseimport', 'classroom_id' => $classroom_id));
-            }
+            $this->_runImport($import);
+        }
+    }
+    
+    private function _runImport($import){
+        $datas = array();
+        foreach($import as $pupil){
+            $data = array(
+                'Pupil' => array('name' => $pupil['nom'],'first_name' => $pupil['prenom'],'sex' => $pupil['sexe'],'birthday' => $pupil['datebase']),
+                'ClassroomsPupil' => array(array('classroom_id' => $classroom_id, 'level_id' => $pupil['niveaubase']))
+            );
+            array_push($datas,$data);
+        }
+        if($this->Pupil->saveMany($datas, array('deep' => true, 'atomic' => true))){
+            $this->Session->setFlash(__('Les élèves ont été correctement importés.'), 'flash_success');
+            $this->redirect(array('controller' => 'classrooms', 'action' => 'view', $classroom_id));
+            unlink('/files/import_be1d_'.$classroom_id.'.csv');
+        }else{
+            unlink('/files/import_be1d_'.$classroom_id.'.csv');
+            $this->Session->setFlash(__('Une erreur est survenue lors de l\'import'), 'flash_error');
+            $this->redirect(array('controller' => 'pupils', 'action' => 'parseimport', 'classroom_id' => $classroom_id));
         }
     }
 

@@ -286,13 +286,8 @@ class EvaluationsItemsController extends AppController {
 			}else{
 				$secondItemToEdit = $this->EvaluationsItem->findByEvaluationIdAndPosition($evaluation_id, $itemToEdit['EvaluationsItem']['position']-1);
 				
-				$this->EvaluationsItem->read(null, $itemToEdit['EvaluationsItem']['id']);
-				$this->EvaluationsItem->set('position', $itemToEdit['EvaluationsItem']['position']-1);
-				$this->EvaluationsItem->save();
-				
-				$this->EvaluationsItem->read(null, $secondItemToEdit['EvaluationsItem']['id']);
-				$this->EvaluationsItem->set('position', $secondItemToEdit['EvaluationsItem']['position']+1);
-				$this->EvaluationsItem->save();
+				$this->_updatePositionItem($itemToEdit['EvaluationsItem']['id'], $itemToEdit['EvaluationsItem']['position']-1);
+				$this->_updatePositionItem($secondItemToEdit['EvaluationsItem']['id'], $secondItemToEdit['EvaluationsItem']['position']+1);
 				
 				$this->redirect(array(
 			    'controller'    => 'evaluations',
@@ -339,19 +334,20 @@ class EvaluationsItemsController extends AppController {
 			}else{
 				$secondItemToEdit = $this->EvaluationsItem->findByEvaluationIdAndPosition($evaluation_id, $itemToEdit['EvaluationsItem']['position']+1);
 				
-				$this->EvaluationsItem->read(null, $itemToEdit['EvaluationsItem']['id']);
-				$this->EvaluationsItem->set('position', $itemToEdit['EvaluationsItem']['position']+1);
-				$this->EvaluationsItem->save();
-				
-				$this->EvaluationsItem->read(null, $secondItemToEdit['EvaluationsItem']['id']);
-				$this->EvaluationsItem->set('position', $secondItemToEdit['EvaluationsItem']['position']-1);
-				$this->EvaluationsItem->save();
+				$this->_updatePositionItem($itemToEdit['EvaluationsItem']['id'], $itemToEdit['EvaluationsItem']['position']+1);
+				$this->_updatePositionItem($secondItemToEdit['EvaluationsItem']['id'], $secondItemToEdit['EvaluationsItem']['position']-1);
 				
 				$this->redirect(array(
 			    'controller'    => 'evaluations',
 			    'action'        => 'attacheditems', $evaluation_id));
 			}
 		}
+	}
+	
+	private function _updatePositionItem($itemId, $newPosition){
+    	$this->EvaluationsItem->read(null, $itemId);
+    	$this->EvaluationsItem->set('position', $newPosition);
+    	$this->EvaluationsItem->save();
 	}
 	
 	public function unlinkitem(){

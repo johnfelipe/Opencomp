@@ -16,7 +16,8 @@
 		"dompdf/dompdf": "dev-master"
     },
     "require-dev": {
-    	"cakephp/debug_kit": "2.2.*"
+    	"cakephp/debug_kit": "2.2.*",
+        "phpunit/phpunit": "3.7.*"
     },
     "config": {
         "vendor-dir": "Vendor/"

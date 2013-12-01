@@ -18,6 +18,7 @@ before_script:
       'persistent' => false,
     );
     }" > Config/database.php
+  - composer install --dev
 
 script:
   - Console/cake test AllTests --stderr

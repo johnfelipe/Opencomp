@@ -31,3 +31,7 @@ INSERT INTO `users` (`id`, `username`, `password`, `first_name`, `name`, `email`
 * Éditez les informations de connexion à la base de données mysql présentes dans le fichier `app\config\database.php` (ligne 84).
 * Les identifiants de connexion par défaut sont **admin** pour l'identifiant et **testons** pour le mot de passe.
 * Rapportez vos suggestions et avis sur [le gestionnaire de demandes du projet](https://github.com/jtraulle/Opencomp/issues/new).
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jtraulle/opencomp/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+

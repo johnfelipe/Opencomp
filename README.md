@@ -53,6 +53,8 @@ Licence
 
 >La licence initiale Affero GPL était destinée à assurer aux utilisateurs d'une application web un accès à ses sources. L'Affero GPL version 3 étend cet objectif : elle s'applique à tous les logiciels en réseaux, donc elle s'applique bien aussi aux programmes comme les serveurs de jeux. Les termes supplémentaires sont aussi plus flexibles, donc si quelqu'un utilise des sources sous AGPL dans un programme sans interface réseau, il n'aurait qu'à fournir les sources de la même façon que dans la GPL. En rendant les deux licences compatibles, les développeurs de logiciels seront en mesure de renforcer leur gauche d'auteur tout en capitalisant sur les portions de code mûres à leur disposition sous licence GPL. (_D'après http://www.gnu.org/licenses/quick-guide-gplv3.fr.html_)
 
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jtraulle/opencomp/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
 <pre>Ce programme est distribué dans l'espoir qu'il sera utile, mais SANS AUCUNE GARANTIE ; 
 sans même la garantie implicite de COMMERCIALISATION ou D’ADAPTATION A UN OBJET PARTICULIER. 
 

@@ -4,7 +4,7 @@
   <li><?php echo $this->Html->link(__('Élèves'), array('controller' => 'classrooms', 'action' => 'view', $classroom['Classroom']['id'])); ?></li>
   <li><?php echo $this->Html->link(__('Évaluations'), array('controller' => 'classrooms', 'action' => 'viewtests', $classroom['Classroom']['id'])); ?></li>
   <li><?php echo $this->Html->link(__('Items non évalués'), array('controller' => 'classrooms', 'action' => 'viewunrateditems', $classroom['Classroom']['id'])); ?></li>
-  <li class="active"><?php echo $this->Html->link(__('Bulletins'), array('controller' => 'results', 'action' => 'parambul', $classroom['Classroom']['id'])); ?></li>
+  <li class="active"><?php echo $this->Html->link(__('Bulletins'), array('controller' => 'classrooms', 'action' => 'viewreports', $classroom['Classroom']['id'])); ?></li>
 </ul>
 
 <div class="page-title">
@@ -22,7 +22,7 @@
 <tr>
 	<th><?php echo __('Titre'); ?></th>
 	<th><?php echo __('Période(s) associée(s)'); ?></th>
-	<th style="width:300px;" class="actions"><?php echo __('Actions'); ?></th>
+	<th style="width:500px;" class="actions"><?php echo __('Actions'); ?></th>
 </tr>
 <?php
 	$i = 0;
@@ -38,6 +38,8 @@
 		</td>		
 		<td class="actions">
 			<?php echo $this->Html->link('<i class="icon-magic"></i> '.__('Générer'), array('controller' => 'results', 'action' => 'viewbul', $report['id']), array('escape' => false)); ?>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<?php echo $this->Html->link('<i class="icon-bar-chart"></i> '.__('Analyser les résultats'), array('controller' => 'results', 'action' => 'analyseresults', $report['id']), array('escape' => false)); ?>
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			<?php echo $this->Html->link('<i class="icon-pencil"></i> '.__('Modifier'), array('controller' => 'reports', 'action' => 'edit', $report['id']), array('escape' => false)); ?>
 			&nbsp;&nbsp;&nbsp;&nbsp;

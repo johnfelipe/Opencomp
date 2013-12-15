@@ -348,4 +348,85 @@ class ResultsController extends AppController {
 		unlink('files/'.$filename);
 	}
 	
+	public function analyseresults($id = null) {
+		//On charge le modèle report et on récupère les infos du bulletin à générer.
+		$this->loadModel('Report');
+		$this->Report->id = $id;
+		if (!$this->Report->exists()) {
+			throw new NotFoundException(__('The report_id provided does not exist !'));
+		}
+		$report = $this->Report->find('first', array(
+			'conditions' => array('Report.id' => $id)
+		));
+		$this->set('report', $report);
+		
+		$results = $this->Result->find('all', array(
+			'fields' => array('result'),
+			'order' => array('Pupil.name', 'Pupil.first_name'),
+			'conditions' => array(
+				'Evaluation.period_id' => $report['Report']['period_id'],
+				'Evaluation.classroom_id' => $report['Classroom']['id']
+			),
+			'contain' => array(
+				'Evaluation',
+				'Pupil.id',
+				'Pupil.first_name',
+				'Pupil.name'
+			)
+		));
+		
+		foreach($results as $result){
+			$stats[$result['Pupil']['id']]['first_name'] = $result['Pupil']['first_name'];
+			$stats[$result['Pupil']['id']]['name'] = $result['Pupil']['name'];
+			
+			if(isset($stats[$result['Pupil']['id']]['totalresults']))
+				$stats[$result['Pupil']['id']]['totalresults'] += 1;
+			else
+				$stats[$result['Pupil']['id']]['totalresults'] = 1;
+			
+			switch($result['Result']['result']){
+				case 'A':
+			        if(isset($stats[$result['Pupil']['id']]['numberA'])) 
+			        	$stats[$result['Pupil']['id']]['numberA'] += 1;
+			        else	
+			        	$stats[$result['Pupil']['id']]['numberA'] = 1;
+			        break;
+			    case 'B':
+			        if(isset($stats[$result['Pupil']['id']]['numberB'])) 
+			        	$stats[$result['Pupil']['id']]['numberB'] += 1;
+			        else	
+			        	$stats[$result['Pupil']['id']]['numberB'] = 1;
+			        break;
+			    case 'C':
+			        if(isset($stats[$result['Pupil']['id']]['numberC'])) 
+			        	$stats[$result['Pupil']['id']]['numberC'] += 1;
+			        else	
+			        	$stats[$result['Pupil']['id']]['numberC'] = 1;
+			        break;
+			    case 'D':
+			        if(isset($stats[$result['Pupil']['id']]['numberD'])) 
+			        	$stats[$result['Pupil']['id']]['numberD'] += 1;
+			        else	
+			        	$stats[$result['Pupil']['id']]['numberD'] = 1;
+			        break;
+			}
+		}
+		
+		foreach($stats as $id_pupil => $stat){
+		
+			if(!isset($stats[$id_pupil]['numberA'])) $stats[$id_pupil]['numberA'] = 0;
+			if(!isset($stats[$id_pupil]['numberB'])) $stats[$id_pupil]['numberB'] = 0;
+			if(!isset($stats[$id_pupil]['numberC'])) $stats[$id_pupil]['numberC'] = 0;
+			if(!isset($stats[$id_pupil]['numberD'])) $stats[$id_pupil]['numberD'] = 0;
+		
+			$stats[$id_pupil]['percentA'] = $stats[$id_pupil]['numberA'] * 100 / $stats[$id_pupil]['totalresults'];
+			$stats[$id_pupil]['percentB'] = $stats[$id_pupil]['numberB'] * 100 / $stats[$id_pupil]['totalresults'];
+			$stats[$id_pupil]['percentC'] = $stats[$id_pupil]['numberC'] * 100 / $stats[$id_pupil]['totalresults'];
+			$stats[$id_pupil]['percentD'] = $stats[$id_pupil]['numberD'] * 100 / $stats[$id_pupil]['totalresults'];
+		}
+		
+		$this->set('results', $stats);
+
+	}
+	
 }

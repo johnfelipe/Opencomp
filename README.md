@@ -11,7 +11,7 @@ Opencomp souhaite proposer aux enseignants du primaire qui évaluent les élève
 Installation
 ------------
 
-**_<pre>Notez que ce logiciel est actuellement en développement et qu'il peut être instable voir ne pas fonctionner du tout.</pre>_**
+**_<pre>/!\ Ce logiciel étant actuellement en développement actif, il peut être instable.</pre>_**
 
 *Notez que ces instructions sont principalement a destination des développeurs et des utilisateurs avertis et bidouilleurs. Si vous souhaitez simplement utiliser Opencomp mais que vous éprouvez des difficultés d'installation, sachez que des paquets prêts à l'emploi seront prochainement disponibles. Dans l'intervale, vous pouvez [me contacter](http://blog.opencomp.fr/nous-contacter/).*
 
@@ -30,7 +30,7 @@ Installation
 
 ### 3. Installer les dépendances frontend (Bower)
 
-*Il s'agit des librairies Javascript et CSS utilisées pour la mise en forme, l'interactivité et les styles de l'application*
+*Il s'agit des librairies Javascript et CSS utilisées pour l'interactivité et les styles de l'application*
 
 * Téléchargez et installez Node pour votre Système d'exploitation depuis http://nodejs.org/download/
 * Téléchargez le gestionnaire de dépendances frontend Bower à l'aide de npm `npm install -g bower`
@@ -49,13 +49,13 @@ Installation
 Licence
 -------
 
-**Opencomp est distribué sous licence _GNU Affero General Public Licence v3_**
-
->La licence initiale Affero GPL était destinée à assurer aux utilisateurs d'une application web un accès à ses sources. L'Affero GPL version 3 étend cet objectif : elle s'applique à tous les logiciels en réseaux, donc elle s'applique bien aussi aux programmes comme les serveurs de jeux. Les termes supplémentaires sont aussi plus flexibles, donc si quelqu'un utilise des sources sous AGPL dans un programme sans interface réseau, il n'aurait qu'à fournir les sources de la même façon que dans la GPL. En rendant les deux licences compatibles, les développeurs de logiciels seront en mesure de renforcer leur gauche d'auteur tout en capitalisant sur les portions de code mûres à leur disposition sous licence GPL. (_D'après http://www.gnu.org/licenses/quick-guide-gplv3.fr.html_)
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jtraulle/opencomp/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
 <pre>Ce programme est distribué dans l'espoir qu'il sera utile, mais SANS AUCUNE GARANTIE ; 
 sans même la garantie implicite de COMMERCIALISATION ou D’ADAPTATION A UN OBJET PARTICULIER. 
 
 Pour plus d'informations, reportez vous au fichier LICENCE.txt de l'archive.</pre>
+
+**Opencomp est distribué sous licence _GNU Affero General Public Licence v3_**
+
+>La licence initiale Affero GPL était destinée à assurer aux utilisateurs d'une application web un accès à ses sources. L'Affero GPL version 3 étend cet objectif : elle s'applique à tous les logiciels en réseaux, donc elle s'applique bien aussi aux programmes comme les serveurs de jeux. Les termes supplémentaires sont aussi plus flexibles, donc si quelqu'un utilise des sources sous AGPL dans un programme sans interface réseau, il n'aurait qu'à fournir les sources de la même façon que dans la GPL. En rendant les deux licences compatibles, les développeurs de logiciels seront en mesure de renforcer leur gauche d'auteur tout en capitalisant sur les portions de code mûres à leur disposition sous licence GPL. <br />(_D'après http://www.gnu.org/licenses/quick-guide-gplv3.fr.html_)
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jtraulle/opencomp/trend.png)](https://bitdeli.com/free "Bitdeli Badge")

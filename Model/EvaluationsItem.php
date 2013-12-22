@@ -32,4 +32,13 @@ class EvaluationsItem extends AppModel {
 			'order' => ''
 		)
 	);
+
+    public function isItemAlreadyAttachedToEvaluation($evaluation_id, $item_id){
+        return $this->find('first', array(
+            'conditions' => array(
+                'EvaluationsItem.evaluation_id' => $evaluation_id,
+                'EvaluationsItem.item_id' => $item_id
+            )
+        ));
+    }
 }

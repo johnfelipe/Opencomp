@@ -1,5 +1,6 @@
 <?php
 App::uses('AppController', 'Controller');
+
 /**
  * Results Controller
  *
@@ -9,16 +10,7 @@ class ResultsController extends AppController {
 
 	public function selectpupil(){
 		//On vérifie qu'un paramètre nommé evaluation_id a été fourni et qu'il existe.
-		if(isset($this->request->params['named']['evaluation_id'])) {
-       		$evaluation_id = intval($this->request->params['named']['evaluation_id']);
-       		$this->set('evaluation_id', $evaluation_id);
-       		$this->Result->Evaluation->id = $evaluation_id;
-			if (!$this->Result->Evaluation->exists()) {
-				throw new NotFoundException(__('The evaluation_id provided does not exist !'));
-			}
-		} else {
-			throw new NotFoundException(__('You must provide a evaluation_id in order to enter results for items !'));
-		}
+        $this->CheckParams->checkForNamedParam('Evaluation','evaluation_id', $this->request->params['named']['evaluation_id']);
 		
 		if ($this->request->is('post')) {
 			$pupil_id = intval($this->request->data['Result']['pupil_id']);
@@ -26,32 +18,26 @@ class ResultsController extends AppController {
 			if (!$this->Result->Pupil->exists()) {
 				$this->Session->setFlash(__('Le code barre élève que vous avez flashé est inconnu !'), 'flash_error');
 			} else {
-				$this->redirect(array('action' => 'add', 'evaluation_id' => $evaluation_id, 'pupil_id' => $pupil_id));
+				$this->redirect(array(
+                    'action' => 'add',
+                    'evaluation_id' => $this->request->params['named']['evaluation_id'],
+                    'pupil_id' => $pupil_id
+                ));
 			}
 		}
 	}
 
     public function selectpupilmanual(){
         //On vérifie qu'un paramètre nommé evaluation_id a été fourni et qu'il existe.
-        if(isset($this->request->params['named']['evaluation_id'])) {
-            $evaluation_id = intval($this->request->params['named']['evaluation_id']);
-            $this->set('evaluation_id', $evaluation_id);
-            $this->Result->Evaluation->id = $evaluation_id;
-            if (!$this->Result->Evaluation->exists()) {
-                throw new NotFoundException(__('The evaluation_id provided does not exist !'));
-            }
-        } else {
-            throw new NotFoundException(__('You must provide a evaluation_id in order to enter results for items !'));
-        }
+        $this->CheckParams->checkForNamedParam('Evaluation','evaluation_id', $this->request->params['named']['evaluation_id']);
 
         if ($this->request->is('post')) {
             $pupil_id = intval($this->request->data['Result']['pupil_id']);
-            $this->Result->Pupil->id = $pupil_id;
-            if (!$this->Result->Pupil->exists()) {
-                $this->Session->setFlash(__('Le code barre élève que vous avez flashé est inconnu !'), 'flash_error');
-            } else {
-                $this->redirect(array('action' => 'add', 'evaluation_id' => $evaluation_id, 'pupil_id' => $pupil_id,'manual' => 'true'));
-            }
+            $this->redirect(array(
+                'action' => 'add',
+                'evaluation_id' => $this->request->params['named']['evaluation_id'],
+                'pupil_id' => $pupil_id,'manual' => 'true'
+            ));
         }
 
         //On récupère le champs virtuel de Pupil et on le redéclare dans EvaluationsPupil
@@ -68,32 +54,13 @@ class ResultsController extends AppController {
 	
 	public function add(){
 		//On vérifie qu'un paramètre nommé evaluation_id a été fourni et qu'il existe.
-		if(isset($this->request->params['named']['evaluation_id'])) {
-       		$evaluation_id = intval($this->request->params['named']['evaluation_id']);
-       		$this->set('evaluation_id', $evaluation_id);
-       		$this->Result->Evaluation->id = $evaluation_id;
-			if (!$this->Result->Evaluation->exists()) {
-				throw new NotFoundException(__('The evaluation_id provided does not exist !'));
-			}
-		} else {
-			throw new NotFoundException(__('You must provide a evaluation_id in order to enter results for items !'));
-		}
+        $this->CheckParams->checkForNamedParam('Evaluation','evaluation_id', $this->request->params['named']['evaluation_id']);
 
-        if(isset($this->request->params['named']['manual']) && $this->request->params['named']['manual'] == true) {
+        if(isset($this->request->params['named']['manual']) && $this->request->params['named']['manual'] == true)
             $this->set('manual', 'manual');
-        }
-		
-		if(isset($this->request->params['named']['pupil_id'])) {
-       		$pupil_id = intval($this->request->params['named']['pupil_id']);
-       		$this->set('pupil_id', $pupil_id);
-       		$this->Result->Pupil->id = $pupil_id;
-			if (!$this->Result->Pupil->exists()) {
-				throw new NotFoundException(__('The pupil_id provided does not exist !'));
-			}
-		} else {
-			throw new NotFoundException(__('You must provide a pupil_id in order to enter results for items !'));
-		}
-		
+
+        $this->CheckParams->checkForNamedParam('Pupil','pupil_id', $this->request->params['named']['pupil_id']);
+
 		$hasItems = $this->Result->Evaluation->EvaluationsItem->find('all', array(
 	        'conditions' => array('evaluation_id' => $evaluation_id),
 	        'recursive' => 0
@@ -277,10 +244,7 @@ class ResultsController extends AppController {
 	
 		if(empty($items)){
 			$this->Session->setFlash(__('Aucun résultat n\'a été saisi pour cet élève', 'flash_error'));
-			$this->redirect(array(
-			    'controller'    => 'results',
-			    'action'        => 'bul'
-			));
+			$this->redirect(array('controller' => 'results', 'action' => 'bul'));
 		}
 			
 		$this->set('items', $items);

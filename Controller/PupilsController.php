@@ -8,31 +8,6 @@ App::uses('AppController', 'Controller');
 class PupilsController extends AppController {
 
 /**
- * index method
- *
- * @return void
- */
-	public function index() {
-		$this->Pupil->recursive = 0;
-		$this->set('pupils', $this->paginate());
-	}
-
-/**
- * view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function view($id = null) {
-		$this->Pupil->id = $id;
-		if (!$this->Pupil->exists()) {
-			throw new NotFoundException(__('Invalid pupil'));
-		}
-		$this->set('pupil', $this->Pupil->read(null, $id));
-	}
-
-/**
  * add method
  *
  * @return void
@@ -60,17 +35,7 @@ class PupilsController extends AppController {
      */
     public function import() {
         //On vérifie qu'un paramètre nommé classroom_id a été fourni et qu'il existe.
-        if(isset($this->request->params['named']['classroom_id'])) {
-            $classroom_id = intval($this->request->params['named']['classroom_id']);
-            $this->set('classroom_id', $classroom_id);
-            $this->loadModel('Classroom');
-            $this->Classroom->id = $classroom_id;
-            if (!$this->Classroom->exists()) {
-                throw new NotFoundException(__('The classroom_id provided does not exist !'));
-            }
-        } else {
-            throw new NotFoundException(__('You must provide a classroom_id in order to add a test to this classroom !'));
-        }
+        $this->CheckParams->checkForNamedParam('Classroom','classroom_id', $this->request->params['named']['classroom_id']);
 
         if(isset($this->request->params['named']['step']) && $this->request->params['named']['step'] == 'muf') {
             if(!empty($_FILES)){
@@ -110,16 +75,7 @@ class PupilsController extends AppController {
 
     public function parseimport(){
         //On vérifie qu'un paramètre nommé classroom_id a été fourni et qu'il existe.
-        if(isset($this->request->params['named']['classroom_id'])) {
-            $classroom_id = intval($this->request->params['named']['classroom_id']);
-            $this->set('classroom_id', $classroom_id);
-            $this->loadModel('Classroom');
-            $this->Classroom->id = $classroom_id;
-            if (!$this->Classroom->exists())
-                throw new NotFoundException(__('The classroom_id provided does not exist !'));
-        } else {
-            throw new NotFoundException(__('You must provide a classroom_id in order to add a test to this classroom !'));
-        }
+        $this->CheckParams->checkForNamedParam('Classroom','classroom_id', $this->request->params['named']['classroom_id']);
 
         if(file_exists('files/import_be1d_'.$classroom_id.'.csv')){
             if (($handle = fopen('files/import_be1d_'.$classroom_id.'.csv', 'r')) !== FALSE) {

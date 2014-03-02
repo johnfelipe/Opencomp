@@ -22,7 +22,7 @@
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 
-		echo $this->Html->script('../components/jquery/jquery.min');
+		echo $this->Html->script('../components/jquery/dist/jquery.min');
 	?>
     
     <link href='https://fonts.googleapis.com/css?family=Titillium+Web' rel='stylesheet' type='text/css'>

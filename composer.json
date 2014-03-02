@@ -13,8 +13,8 @@
         "pear-cakephp/cakephp": "2.*",
 		"slywalker/boost_cake": "1.*",
 		"zendframework/zendpdf": "2.*",
-		"enygma/yubikey": "dev-master#72713487f4af0bfa65be45d19d755ee430d2237f",
-		"dompdf/dompdf": "dev-master#4d890e0ee9e113812103a8b2c56ec6387f5d086c"
+		"enygma/yubikey": "1.0",
+		"dompdf/dompdf": "0.6.*"
     },
     "require-dev": {
     	"cakephp/debug_kit": "2.2.*",

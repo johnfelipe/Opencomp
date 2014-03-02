@@ -14,7 +14,7 @@
         'opencomp.auth'
     ));
     
-    echo $this->Html->script('../components/jquery/jquery.min');
+    echo $this->Html->script('../components/jquery/dist/jquery.min');
 
     ?>
 

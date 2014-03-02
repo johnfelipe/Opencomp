@@ -1,10 +1,10 @@
 $(document).ready(function() {
 
-    $(".alert").alert();
+    $('.alert').alert();
     
     $('.info').tooltip();
     
-    $(".chzn-select").chosen();
+    $('.chzn-select').chosen();
     
     $('.startdate').datepicker({
         weekStart: 1,

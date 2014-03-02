@@ -35,7 +35,7 @@ class PupilsController extends AppController {
      */
     public function import() {
         //On vérifie qu'un paramètre nommé classroom_id a été fourni et qu'il existe.
-        $this->CheckParams->checkForNamedParam('Classroom','classroom_id', $this->request->params['named']['classroom_id']);
+        $classroom_id = $this->CheckParams->checkForNamedParam('Classroom','classroom_id', $this->request->params['named']['classroom_id']);
 
         if(isset($this->request->params['named']['step']) && $this->request->params['named']['step'] == 'muf') {
             if(!empty($_FILES)){
@@ -75,7 +75,7 @@ class PupilsController extends AppController {
 
     public function parseimport(){
         //On vérifie qu'un paramètre nommé classroom_id a été fourni et qu'il existe.
-        $this->CheckParams->checkForNamedParam('Classroom','classroom_id', $this->request->params['named']['classroom_id']);
+        $classroom_id = $this->CheckParams->checkForNamedParam('Classroom','classroom_id', $this->request->params['named']['classroom_id']);
 
         if(file_exists('files/import_be1d_'.$classroom_id.'.csv')){
             if (($handle = fopen('files/import_be1d_'.$classroom_id.'.csv', 'r')) !== FALSE) {

@@ -10,7 +10,7 @@ class ResultsController extends AppController {
 
 	public function selectpupil(){
 		//On vérifie qu'un paramètre nommé evaluation_id a été fourni et qu'il existe.
-        $this->CheckParams->checkForNamedParam('Evaluation','evaluation_id', $this->request->params['named']['evaluation_id']);
+        $evaluation_id = $this->CheckParams->checkForNamedParam('Evaluation','evaluation_id', $this->request->params['named']['evaluation_id']);
 		
 		if ($this->request->is('post')) {
 			$pupil_id = intval($this->request->data['Result']['pupil_id']);
@@ -29,7 +29,7 @@ class ResultsController extends AppController {
 
     public function selectpupilmanual(){
         //On vérifie qu'un paramètre nommé evaluation_id a été fourni et qu'il existe.
-        $this->CheckParams->checkForNamedParam('Evaluation','evaluation_id', $this->request->params['named']['evaluation_id']);
+        $evaluation_id = $this->CheckParams->checkForNamedParam('Evaluation','evaluation_id', $this->request->params['named']['evaluation_id']);
 
         if ($this->request->is('post')) {
             $pupil_id = intval($this->request->data['Result']['pupil_id']);
@@ -54,12 +54,12 @@ class ResultsController extends AppController {
 	
 	public function add(){
 		//On vérifie qu'un paramètre nommé evaluation_id a été fourni et qu'il existe.
-        $this->CheckParams->checkForNamedParam('Evaluation','evaluation_id', $this->request->params['named']['evaluation_id']);
+        $evaluation_id = $this->CheckParams->checkForNamedParam('Evaluation','evaluation_id', $this->request->params['named']['evaluation_id']);
 
         if(isset($this->request->params['named']['manual']) && $this->request->params['named']['manual'] == true)
             $this->set('manual', 'manual');
 
-        $this->CheckParams->checkForNamedParam('Pupil','pupil_id', $this->request->params['named']['pupil_id']);
+        $pupil_id = $this->CheckParams->checkForNamedParam('Pupil','pupil_id', $this->request->params['named']['pupil_id']);
 
 		$hasItems = $this->Result->Evaluation->EvaluationsItem->find('all', array(
 	        'conditions' => array('evaluation_id' => $evaluation_id),

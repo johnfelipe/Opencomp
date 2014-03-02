@@ -22,5 +22,7 @@ class CheckParamsComponent extends Component {
             $this->controller->Session->setFlash(__('Vous devez passer un paramètre à cette méthode !'), 'flash_error');
             $this->controller->redirect($this->controller->referer());
         }
+
+        return $id;
     }
 }

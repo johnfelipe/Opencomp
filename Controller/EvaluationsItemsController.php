@@ -9,8 +9,8 @@ class EvaluationsItemsController extends AppController {
 
 	public function attachitem(){
 		//On vérifie que les paramètres nommés evaluation_id et item_id ont été fournis et qu'ils existent.
-        $this->CheckParams->checkForNamedParam('Evaluation','evaluation_id', $this->request->params['named']['evaluation_id']);
-        $this->CheckParams->checkForNamedParam('Item','item_id', $this->request->params['named']['item_id']);
+        $evaluation_id = $this->CheckParams->checkForNamedParam('Evaluation','evaluation_id', $this->request->params['named']['evaluation_id']);
+        $item_id = $this->CheckParams->checkForNamedParam('Item','item_id', $this->request->params['named']['item_id']);
 
 	    if($this->EvaluationsItem->isItemAlreadyAttachedToEvaluation($this->request->params['named']['evaluation_id'],$this->request->params['named']['item_id'])){
 		    $this->Session->setFlash(__('Impossible d\'ajouter cet item à cette évaluation, il y est déjà associé.'), 'flash_error');
@@ -44,8 +44,8 @@ class EvaluationsItemsController extends AppController {
 		$this->set('title_for_layout', __('Ajouter un item'));
 		
 		//On vérifie que les paramètres nommés evaluation_id et competence_id ont été fournis et qu'ils existent.
-        $this->CheckParams->checkForNamedParam('Evaluation','evaluation_id', $this->request->params['named']['evaluation_id']);
-        $this->CheckParams->checkForNamedParam('Competence','competence_id', $this->request->params['named']['competence_id']);
+        $evaluation_id = $this->CheckParams->checkForNamedParam('Evaluation','evaluation_id', $this->request->params['named']['evaluation_id']);
+        $competence_id = $this->CheckParams->checkForNamedParam('Competence','competence_id', $this->request->params['named']['competence_id']);
 
 		$levels = $this->EvaluationsItem->Item->Level->find('list', array('recursive' => 0));
 		$this->set('levels', $levels);
@@ -100,8 +100,8 @@ class EvaluationsItemsController extends AppController {
 		$this->set('title_for_layout', __('Ajouter un item non évalué'));
 
         //On vérifie que les paramètres nommés period_id et competence_id ont été fournis et qu'ils existent.
-        $this->CheckParams->checkForNamedParam('Period','period_id', $this->request->params['named']['period_id']);
-        $this->CheckParams->checkForNamedParam('Competence','competence_id', $this->request->params['named']['competence_id']);
+        $period_id = $this->CheckParams->checkForNamedParam('Period','period_id', $this->request->params['named']['period_id']);
+        $competence_id = $this->CheckParams->checkForNamedParam('Competence','competence_id', $this->request->params['named']['competence_id']);
 		
 		$levels = $this->EvaluationsItem->Item->Level->find('list', array('recursive' => 0));
 		$this->set('levels', $levels);
@@ -167,8 +167,8 @@ class EvaluationsItemsController extends AppController {
 	
 	public function moveup(){
 		//On vérifie que les paramètres nommés evaluation_id et item_id ont été fournis et qu'ils existent.
-        $this->CheckParams->checkForNamedParam('Evaluation','evaluation_id', $this->request->params['named']['evaluation_id']);
-        $this->CheckParams->checkForNamedParam('Item','item_id', $this->request->params['named']['item_id']);
+        $evaluation_id = $this->CheckParams->checkForNamedParam('Evaluation','evaluation_id', $this->request->params['named']['evaluation_id']);
+        $item_id = $this->CheckParams->checkForNamedParam('Item','item_id', $this->request->params['named']['item_id']);
 
 		$itemToEdit = $this->EvaluationsItem->findByEvaluationIdAndItemId($evaluation_id, $item_id);
 		
@@ -191,9 +191,9 @@ class EvaluationsItemsController extends AppController {
 	
 	public function movedown(){
         //On vérifie que les paramètres nommés evaluation_id et item_id ont été fournis et qu'ils existent.
-        $this->CheckParams->checkForNamedParam('Evaluation','evaluation_id', $this->request->params['named']['evaluation_id']);
-        $this->CheckParams->checkForNamedParam('Item','item_id', $this->request->params['named']['item_id']);
-		
+        $evaluation_id = $this->CheckParams->checkForNamedParam('Evaluation','evaluation_id', $this->request->params['named']['evaluation_id']);
+        $item_id = $this->CheckParams->checkForNamedParam('Item','item_id', $this->request->params['named']['item_id']);
+
 		$itemToEdit = $this->EvaluationsItem->findByEvaluationIdAndItemId($evaluation_id, $item_id);
 		
 		if(empty($itemToEdit)){
@@ -224,8 +224,8 @@ class EvaluationsItemsController extends AppController {
 	
 	public function unlinkitem(){
         //On vérifie que les paramètres nommés evaluation_id et item_id ont été fournis et qu'ils existent.
-        $this->CheckParams->checkForNamedParam('Evaluation','evaluation_id', $this->request->params['named']['evaluation_id']);
-        $this->CheckParams->checkForNamedParam('Item','item_id', $this->request->params['named']['item_id']);
+        $evaluation_id = $this->CheckParams->checkForNamedParam('Evaluation','evaluation_id', $this->request->params['named']['evaluation_id']);
+        $item_id = $this->CheckParams->checkForNamedParam('Item','item_id', $this->request->params['named']['item_id']);
 		
 		$association = $this->EvaluationsItem->find('first', array(
 	        'conditions' => array('EvaluationsItem.evaluation_id' => $evaluation_id, 'EvaluationsItem.item_id' => $item_id)
@@ -233,6 +233,7 @@ class EvaluationsItemsController extends AppController {
 	    
 	    if($association){
 	    	$this->EvaluationsItem->delete($association['EvaluationsItem']['id']);
+	    	$this->EvaluationsItem->renumberItemsEvaluation($evaluation_id, $association['EvaluationsItem']['position']);
 	    	
 	    	$this->Session->setFlash(__('L\'item a été correctement dissocié de cette évaluation.'), 'flash_success');
 			$this->redirect(array('controller' => 'evaluations', 'action' => 'attacheditems', $evaluation_id));
@@ -241,5 +242,4 @@ class EvaluationsItemsController extends AppController {
 			$this->redirect(array('controller' => 'evaluations', 'action' => 'attacheditems', $evaluation_id));
 	    }
 	}
-
 }

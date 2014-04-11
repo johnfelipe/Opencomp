@@ -1,3 +1,7 @@
+<audio autoplay>
+    <source src="/img/success.mp3" type="audio/mpeg">
+</audio>
+
 <div class="page-title">
     <h2><?php echo __('<span class="flash">Flashez</span> l\'élève dont vous souhaitez saisir le résultat'); ?></h2>
     <?php echo $this->Html->link('<i class="icon-ok"></i> '.__('J\'ai terminé la saisie'), '/evaluations/manageresults/'.$evaluation_id, array('class' => 'ontitle btn btn-success', 'escape' => false)); ?>

@@ -1,6 +1,6 @@
 <div class="page-title">
-    <h2><?php echo __('Añadir un Colegio'); ?></h2>
-    <?php echo $this->Html->link('<i class="icon-arrow-left"></i> '.__('Volver a los colegios'), 'index', array('class' => 'ontitle btn btn-default', 'escape' => false)); ?>
+    <h2><?php echo __('Ajouter une académie'); ?></h2>
+    <?php echo $this->Html->link('<i class="icon-arrow-left"></i> '.__('retour aux académies'), 'index', array('class' => 'ontitle btn btn-default', 'escape' => false)); ?>
 </div>
 
 <?php 
@@ -19,23 +19,23 @@ echo $this->Form->create('Academy', array(
 
 echo $this->Form->input('name', array(
     'label' => array(
-        'text' => 'Nombre del Colegio'
+        'text' => 'Nom de l\'académie'
     )
 )); 
 
 echo $this->Form->input('type', array(
     'type' => 'select',
-    'options' => array('0'=>'Académie','1'=>'Rector Adjunto'),
+    'options' => array('0'=>'Académie','1'=>'Sous-rectorat'),
     'label' => array(
-        'text' => 'Tipo de Colegio'
+        'text' => 'Type d\'académie'
     )
 )); 
 
 echo $this->Form->input('User', array(
     'class'=>'chzn-select form-control',
-    'data-placeholder'=>'Añadir un responsable ...',
+    'data-placeholder'=>'Ajoutez un responsable ...',
     'label' => array(
-        'text' => 'Responsables del Colgeio'
+        'text' => 'Responsable(s) de l\'académie'
         )
     )
 );
@@ -43,7 +43,7 @@ echo $this->Form->input('User', array(
 ?>
 
 <div class="form-group">
-    <?php echo $this->Form->submit('Guardar cambios', array(
+    <?php echo $this->Form->submit('Enregistrer les modifications', array(
         'div' => 'col col-md-9 col-md-offset-2',
         'class' => 'btn btn-primary'
     )); ?>
